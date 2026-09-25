@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Grade viva | @daanylemos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"Adv";src:url(fontes/Advercase-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+:root{--gelo:#F4F2EE;--papel:#FFFFFF;--grafite:#292929;--tinta:#3A2A2F;--suave:#7a6f73;--linha:#E4DFD8;--mag:#8B083F;--bordo:#6d0632;--verde:#1f8a5b;--ambar:#a8690f}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--gelo);color:var(--tinta);font-family:Poppins,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{background-image:repeating-linear-gradient(0deg,rgba(60,40,30,.03) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(60,40,30,.025) 0 1px,transparent 1px 5px)}
+button{font-family:inherit}
+.wrap{max-width:560px;margin:0 auto;padding:0 0 90px}
+/* topo do perfil */
+.perfil{padding:18px 16px 10px;display:grid;grid-template-columns:86px 1fr;gap:16px;align-items:center}
+.av{width:86px;height:86px;border-radius:50%;background:var(--grafite) url(selo.png) center/78% no-repeat;box-shadow:0 0 0 3px var(--gelo),0 0 0 5px var(--mag)}
+.perfil h1{font-family:Adv;font-size:30px;line-height:1;margin:0;color:var(--grafite)}
+.perfil p{margin:4px 0 0;font-size:13px;color:var(--suave)}
+.nums{display:flex;gap:18px;margin-top:8px;font-size:13px}
+.nums b{display:block;font-size:17px;color:var(--grafite)}
+.abas{position:sticky;top:0;z-index:5;display:grid;grid-template-columns:1fr 1fr;background:rgba(244,242,238,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--linha)}
+.abas button{border:0;background:none;padding:13px 0;font-size:14px;font-weight:600;color:var(--suave);border-bottom:2px solid transparent;cursor:pointer}
+.abas button[aria-selected="true"]{color:var(--grafite);border-color:var(--grafite)}
+/* grade */
+.grade{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.tile{position:relative;aspect-ratio:3/4;overflow:hidden;background:#e9e5df;cursor:pointer;border:0;padding:0}
+.tile img,.tile video{width:100%;height:100%;object-fit:cover;display:block}
+.tile .meta{position:absolute;left:0;right:0;bottom:0;padding:18px 6px 5px;background:linear-gradient(transparent,rgba(20,15,15,.62));color:#fff;font-size:10px;line-height:1.25;text-align:left}
+.tile .meta b{font-weight:600}
+.tile .st{position:absolute;top:5px;right:5px;font-size:9px;font-weight:700;letter-spacing:.04em;padding:3px 6px;border-radius:5px;background:rgba(255,255,255,.9);color:var(--grafite)}
+.st.aprovado,.st.agendado,.st.publicado{background:var(--verde);color:#fff}
+.st.ajuste_pedido{background:var(--ambar);color:#fff}
+.tile.vazio{display:flex;flex-direction:column;justify-content:center;padding:10px;background:var(--papel);border:1px dashed #cfc7bd;text-align:left}
+.tile.vazio .t{font-family:Adv;font-size:15px;line-height:1.05;color:var(--grafite)}
+.tile.vazio .d{font-size:10px;color:var(--suave);margin-top:8px}
+.icone{position:absolute;top:6px;left:6px;width:16px;height:16px;opacity:.95;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+.destaque{box-shadow:inset 0 0 0 3px var(--mag)}
+/* login */
+.login{max-width:420px;margin:12vh auto 0;padding:0 16px;text-align:center}
+.login h1{font-family:Adv;font-size:44px;line-height:.95;color:var(--grafite);margin:0 0 10px}
+.login p{color:var(--suave);font-size:14px;margin:0 0 22px}
+.login input{width:100%;padding:15px 16px;border-radius:14px;border:1px solid var(--linha);font:inherit;font-size:16px;background:var(--papel)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;padding:14px 18px;font-weight:700;font-size:15px;cursor:pointer}
+.btn.acao{background:linear-gradient(180deg,#a10d4b,var(--mag));color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 10px 24px -8px rgba(139,8,63,.55)}
+.btn.sec{background:transparent;color:var(--grafite);border:1.5px solid var(--grafite)}
+.btn.full{width:100%;margin-top:12px}
+.msg{font-size:13px;margin-top:12px;color:var(--suave);min-height:18px}
+/* modal */
+.modal{position:fixed;inset:0;z-index:20;background:rgba(20,16,16,.78);display:none;overflow-y:auto}
+.modal.on{display:block}
+.folha{max-width:560px;margin:0 auto;background:var(--gelo);min-height:100vh}
+.folha header{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--linha);position:sticky;top:0;background:rgba(244,242,238,.95);backdrop-filter:blur(8px);z-index:2}
+.folha header .x{margin-left:auto;border:0;background:none;font-size:26px;line-height:1;cursor:pointer;color:var(--grafite)}
+.folha header b{font-size:14px}
+.carrossel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory}
+.carrossel>*{flex:0 0 100%;scroll-snap-align:start;aspect-ratio:3/4;width:100%;object-fit:cover;background:#ddd}
+.pontos{display:flex;justify-content:center;gap:5px;padding:10px 0}
+.pontos i{width:6px;height:6px;border-radius:50%;background:#cfc7bd}
+.pontos i.on{background:var(--mag)}
+.corpo{padding:4px 16px 24px}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;background:var(--papel);border:1px solid var(--linha)}
+.leg{white-space:pre-wrap;font-size:14px;line-height:1.55;background:var(--papel);border-radius:14px;padding:14px;margin:12px 0;box-shadow:0 1px 2px rgba(0,0,0,.05),0 10px 24px -18px rgba(0,0,0,.35)}
+.obs{white-space:pre-wrap;font-size:12px;color:var(--suave);margin:8px 0 16px}
+.acoes{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+textarea{width:100%;min-height:96px;border-radius:12px;border:1px solid var(--linha);padding:12px;font:inherit;font-size:15px;margin-top:10px;display:none}
+textarea.on{display:block}
+/* acompanhamento */
+.painel{padding:14px 16px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kpi{background:var(--papel);border-radius:14px;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.kpi b{display:block;font-family:Adv;font-size:26px;color:var(--grafite);line-height:1}
+.kpi span{font-size:11px;color:var(--suave)}
+h2{font-family:Adv;font-size:24px;color:var(--grafite);margin:24px 0 10px}
+.linha{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;background:var(--papel);border-radius:12px;padding:8px;margin-bottom:6px}
+.linha img{width:44px;height:58px;object-fit:cover;border-radius:6px}
+.linha .n{font-size:11px;color:var(--suave)}
+.linha.top{box-shadow:inset 0 0 0 2px var(--mag)}
+.tag{display:inline-block;background:var(--bordo);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-left:6px}
+.barra{height:8px;background:#e7e2db;border-radius:9px;overflow:hidden;margin-top:4px}
+.barra i{display:block;height:100%;background:var(--grafite)}
+.tarefa{background:var(--papel);border-radius:12px;padding:10px 12px;margin-bottom:6px;font-size:14px}
+.tarefa small{display:block;color:var(--suave);font-size:11px;margin-top:3px}
+.vazio-txt{color:var(--suave);font-size:13px;background:var(--papel);border-radius:12px;padding:14px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="folha" id="folha"></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SB = supabase.createClient("https://veogbuoxtbpaxoqvuakr.supabase.co", "sb_publishable_2j7Vv_Ifmmu8Dtozr8F44w_HyZlH4xX", {auth:{persistSession:true,detectSessionInUrl:true}});
+const app = document.getElementById("app"), modal = document.getElementById("modal"), folha = document.getElementById("folha");
+const STATUS = {ideia:"Ideia",copy_escrita:"Copy escrita",copy_aprovada:"Copy aprovada",arte_pronta:"Para aprovar",ajuste_pedido:"Ajuste pedido",aprovado:"Aprovado",agendado:"Agendado",publicado:"Publicado"};
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const dataBR = d => d ? d.split("-").reverse().slice(0,2).join("/") : "";
+let DADOS = null, URLS = {}, aba = "grade";
+
+function telaLogin(msg){
+  app.innerHTML = `<div class="login"><h1>Grade viva</h1><p>Só a Dani entra aqui. Coloque o seu e-mail e o link de acesso chega na sua caixa de entrada.</p>
+  <form id="f"><input id="email" type="email" required autocomplete="email" placeholder="seu e-mail" value="daniellelemosmkt@gmail.com">
+  <button class="btn acao full" type="submit">Quero ver a minha grade</button></form><div class="msg" id="m">${esc(msg||"")}</div></div>`;
+  document.getElementById("f").onsubmit = async e => {
+    e.preventDefault(); const m = document.getElementById("m"); m.textContent = "Enviando o link...";
+    const { error } = await SB.auth.signInWithOtp({ email: document.getElementById("email").value.trim(), options: { emailRedirectTo: location.origin + location.pathname, shouldCreateUser: true } });
+    m.textContent = error ? "Não consegui enviar agora: " + error.message : "Pronto. Abra o e-mail e toque no link (pode cair no spam).";
+  };
+}
+
+async function assinar(paths){
+  const falta = paths.filter(p => !URLS[p]);
+  for (let i = 0; i < falta.length; i += 100) {
+    const { data } = await SB.storage.from("dlestudio-grade").createSignedUrls(falta.slice(i, i + 100), 3600 * 6);
+    (data || []).forEach(d => { if (d.signedUrl) URLS[d.path] = d.signedUrl; });
+  }
+}
+
+async function carregar(){
+  const { data, error } = await SB.rpc("dlestudio_grade");
+  if (error) { telaLogin(/negado/.test(error.message) ? "Esse e-mail não tem acesso à grade." : "Erro ao carregar: " + error.message); return; }
+  DADOS = data;
+  const capas = [];
+  (DADOS.conteudos || []).forEach(c => { const m = c.midia || []; if (m[0]) capas.push(m[0].path); });
+  await assinar(capas);
+  render();
+}
+
+function tileHTML(c){
+  const m = c.midia || [], capa = m[0];
+  const topo = c._top ? " destaque" : "";
+  if (!capa) return `<button class="tile vazio" data-id="${c.id}"><span class="t">${esc(c.titulo)}</span><span class="d">${dataBR(c.data_pub)} · ${esc(c.linha||"")}<br>${esc(STATUS[c.status]||c.status)}</span></button>`;
+  const u = URLS[capa.path] || "";
+  const midia = capa.tipo === "video" ? `<video src="${u}" muted autoplay loop playsinline></video>` : `<img src="${u}" alt="" loading="lazy">`;
+  const ic = m.length > 1 ? `<svg class="icone" viewBox="0 0 24 24" fill="#fff"><path d="M4 7h11a2 2 0 0 1 2 2v11H6a2 2 0 0 1-2-2zM8 3h11a2 2 0 0 1 2 2v11h-2V5H8z"/></svg>` : "";
+  return `<button class="tile${topo}" data-id="${c.id}">${midia}${ic}<span class="st ${c.status}">${esc(STATUS[c.status]||c.status)}</span><span class="meta"><b>${dataBR(c.data_pub)}</b> · ${esc(c.linha||"")}</span></button>`;
+}
+
+function render(){
+  const cs = DADOS.conteudos || [];
+  const seg = (DADOS.perfil || []).slice(-1)[0];
+  const pub = cs.filter(c => c.status === "publicado").length;
+  const med = media(cs);
+  cs.forEach(c => c._top = c.metricas && med && score(c.metricas) > med * 1.2);
+  app.innerHTML = `<div class="wrap">
+    <section class="perfil"><div class="av"></div><div><h1>daanylemos</h1><p>Grade viva: aprovação e acompanhamento</p>
+    <div class="nums"><span><b>${cs.length}</b>posts no calendário</span><span><b>${pub}</b>publicados</span><span><b>${seg ? seg.seguidores ?? "—" : "—"}</b>seguidores</span></div></div></section>
+    <nav class="abas" role="tablist"><button role="tab" data-aba="grade" aria-selected="${aba==="grade"}">Grade</button><button role="tab" data-aba="acomp" aria-selected="${aba==="acomp"}">Acompanhamento</button></nav>
+    <div id="conteudo">${aba === "grade" ? `<div class="grade">${cs.map(tileHTML).join("")}</div>` : acompHTML()}</div></div>`;
+  app.querySelectorAll("[data-aba]").forEach(b => b.onclick = () => { aba = b.dataset.aba; render(); });
+  app.querySelectorAll(".tile").forEach(t => t.onclick = () => abrir(t.dataset.id));
+}
+
+const score = m => (m.curtidas||0) + 3*(m.comentarios||0) + 4*(m.salvamentos||0) + 4*(m.compartilhamentos||0);
+function media(cs){ const v = cs.filter(c => c.metricas).map(c => score(c.metricas)); return v.length ? v.reduce((a,b)=>a+b,0)/v.length : 0; }
+
+function acompHTML(){
+  const cs = (DADOS.conteudos || []).filter(c => c.metricas);
+  const tot = k => cs.reduce((a,c) => a + (c.metricas[k]||0), 0);
+  const perfil = DADOS.perfil || [];
+  const ultimo = perfil.slice(-1)[0], primeiro = perfil[0];
+  const leads = DADOS.leads_por_isca || [], maxL = Math.max(1, ...leads.map(l => l.total));
+  const ordenados = [...cs].sort((a,b) => score(b.metricas) - score(a.metricas));
+  return `<div class="painel">
+   <div class="cards"><div class="kpi"><b>${ultimo ? ultimo.seguidores ?? "—" : "—"}</b><span>seguidores${ultimo && primeiro && ultimo.seguidores && primeiro.seguidores ? ` (${ultimo.seguidores-primeiro.seguidores>=0?"+":""}${ultimo.seguidores-primeiro.seguidores} no período)` : ""}</span></div>
+   <div class="kpi"><b>${tot("alcance")}</b><span>alcance somado</span></div><div class="kpi"><b>${DADOS.leads_total||0}</b><span>cadastros nas iscas</span></div></div>
+   <h2>Posts publicados</h2>
+   ${ordenados.length ? ordenados.map(c => { const m = c.metricas, capa = (c.midia||[])[0];
+      return `<div class="linha${c._top?" top":""}">${capa && URLS[capa.path] ? `<img src="${URLS[capa.path]}" alt="">` : `<div></div>`}<div><b style="font-size:13px">${esc(c.titulo)}</b>${c._top?`<span class="tag">acima da média</span>`:""}<div class="n">${dataBR(c.data_pub)} · alcance ${m.alcance??"—"} · curtidas ${m.curtidas??"—"} · comentários ${m.comentarios??"—"} · salvamentos ${m.salvamentos??"—"} · compartilhamentos ${m.compartilhamentos??"—"}</div></div><div></div></div>`; }).join("")
+     : `<div class="vazio-txt">Os números aparecem aqui depois que os posts forem publicados. Eles são puxados do Metricool uma vez por dia.</div>`}
+   <h2>Cadastros por isca</h2>
+   ${leads.length ? leads.map(l => `<div class="tarefa"><b>${esc(l.isca)}</b> · ${l.total}<div class="barra"><i style="width:${l.total/maxL*100}%"></i></div></div>`).join("") : `<div class="vazio-txt">Nenhum cadastro ainda.</div>`}
+   <h2>Tarefas que o público quer tirar das costas</h2>
+   ${(DADOS.tarefas||[]).length ? DADOS.tarefas.map(t => `<div class="tarefa">${esc(t.tarefa)}<small>${esc(t.profissao||"")} · ${esc(t.origem||"")} · ${t.criado_em ? new Date(t.criado_em).toLocaleDateString("pt-BR") : ""}</small></div>`).join("") : `<div class="vazio-txt">Quando as pessoas escreverem nas páginas das iscas, as tarefas aparecem aqui como banco de pautas.</div>`}
+  </div>`;
+}
+
+async function abrir(id){
+  const c = DADOS.conteudos.find(x => x.id === id); if (!c) return;
+  const m = c.midia || [];
+  await assinar(m.map(x => x.path));
+  const slides = m.map(x => x.tipo === "video" ? `<video src="${URLS[x.path]||""}" muted autoplay loop playsinline></video>` : `<img src="${URLS[x.path]||""}" alt="">`).join("");
+  const podeDecidir = !["agendado","publicado"].includes(c.status);
+  folha.innerHTML = `<header><b>${dataBR(c.data_pub)} · ${esc(c.linha||"")}</b><span class="pill">${esc(STATUS[c.status]||c.status)}</span><button class="x" aria-label="Fechar">×</button></header>
+    ${m.length ? `<div class="carrossel" id="car">${slides}</div><div class="pontos" id="pt">${m.map((_,i)=>`<i class="${i?"":"on"}"></i>`).join("")}</div>` : `<div class="corpo"><p class="vazio-txt">Arte ainda não produzida.</p></div>`}
+    <div class="corpo"><h2 style="margin-top:6px">${esc(c.titulo)}</h2>
+    ${c.legenda ? `<div class="leg">${esc(c.legenda)}</div>` : `<p class="vazio-txt">Legenda ainda não escrita.</p>`}
+    ${podeDecidir && m.length ? `<div class="acoes"><button class="btn acao" id="ap">Aprovar este post</button><button class="btn sec" id="aj">Pedir ajuste</button></div>
+    <textarea id="txt" placeholder="O que você quer mudar? Escreva do seu jeito."></textarea><button class="btn acao full" id="env" style="display:none">Enviar o ajuste</button><div class="msg" id="mm"></div>` : ""}
+    ${c.observacoes ? `<div class="obs">${esc(c.observacoes)}</div>` : ""}</div>`;
+  modal.classList.add("on"); document.body.style.overflow = "hidden";
+  folha.querySelector(".x").onclick = fechar;
+  const car = document.getElementById("car");
+  if (car) car.onscroll = () => { const i = Math.round(car.scrollLeft / car.clientWidth); document.querySelectorAll("#pt i").forEach((p,k) => p.classList.toggle("on", k===i)); };
+  const ap = document.getElementById("ap"), aj = document.getElementById("aj"), txt = document.getElementById("txt"), env = document.getElementById("env"), mm = document.getElementById("mm");
+  if (ap) ap.onclick = () => decidir(c.id, "aprovar", null, mm);
+  if (aj) aj.onclick = () => { txt.classList.add("on"); env.style.display = "flex"; txt.focus(); };
+  if (env) env.onclick = () => { if (!txt.value.trim()) { mm.textContent = "Escreva o ajuste antes de enviar."; return; } decidir(c.id, "ajuste", txt.value.trim(), mm); };
+}
+async function decidir(id, acao, texto, mm){
+  mm.textContent = "Salvando...";
+  const { error } = await SB.rpc("dlestudio_grade_decidir", { p_id: id, p_acao: acao, p_texto: texto });
+  if (error) { mm.textContent = "Não salvou: " + error.message; return; }
+  mm.textContent = acao === "aprovar" ? "Aprovado. Ele entra na fila de agendamento e eu te pergunto antes de agendar." : "Ajuste enviado. Eu refaço e te aviso.";
+  setTimeout(async () => { fechar(); await carregar(); }, 1200);
+}
+function fechar(){ modal.classList.remove("on"); document.body.style.overflow = ""; }
+modal.onclick = e => { if (e.target === modal) fechar(); };
+
+SB.auth.onAuthStateChange((ev, s) => { if (s && !DADOS) carregar(); });
+SB.auth.getSession().then(({ data }) => { if (data.session) carregar(); else telaLogin(); });
+</script>
+</body>
+</html>
