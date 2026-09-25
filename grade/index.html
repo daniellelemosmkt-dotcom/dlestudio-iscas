@@ -106,7 +106,7 @@ function telaLogin(msg){
   document.getElementById("f").onsubmit = async e => {
     e.preventDefault(); const m = document.getElementById("m"); m.textContent = "Enviando o link...";
     const { error } = await SB.auth.signInWithOtp({ email: document.getElementById("email").value.trim(), options: { emailRedirectTo: location.origin + location.pathname, shouldCreateUser: true } });
-    m.textContent = error ? "Não consegui enviar agora: " + error.message : "Pronto. Chegou um e-mail em inglês do Supabase (\"Confirm your signup\" ou \"Your Magic Link\"; pode cair no spam). Abra neste mesmo celular e toque no link: a grade abre sozinha.";
+    m.textContent = error ? "Não consegui enviar agora: " + error.message : "Pronto. Abra o e-mail que acabou de chegar do Supabase (em inglês; pode cair no spam) e toque no link em até 1 hora. Atenção: o Gmail junta todos esses e-mails numa conversa só; use o ÚLTIMO, o de agora. Os antigos não funcionam mais.";
   };
 }
 
@@ -210,7 +210,9 @@ function fechar(){ modal.classList.remove("on"); document.body.style.overflow = 
 modal.onclick = e => { if (e.target === modal) fechar(); };
 
 SB.auth.onAuthStateChange((ev, s) => { if (s && !DADOS) carregar(); });
-SB.auth.getSession().then(({ data }) => { if (data.session) carregar(); else telaLogin(); });
+const ERRO_LINK = new URLSearchParams(location.hash.slice(1)).get("error_code") || new URLSearchParams(location.search).get("error_code");
+if (ERRO_LINK) history.replaceState(null, "", location.pathname);
+SB.auth.getSession().then(({ data }) => { if (data.session) carregar(); else telaLogin(ERRO_LINK ? "Esse link já tinha vencido (cada link vale 1 hora e só funciona uma vez). Apague os e-mails antigos do Supabase, toque no botão abaixo e abra só o e-mail que chegar agora." : ""); });
 </script>
 </body>
 </html>
