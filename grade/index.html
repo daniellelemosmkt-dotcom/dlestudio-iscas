@@ -100,13 +100,13 @@ const dataBR = d => d ? d.split("-").reverse().slice(0,2).join("/") : "";
 let DADOS = null, URLS = {}, aba = "grade";
 
 function telaLogin(msg){
-  app.innerHTML = `<div class="login"><h1>Grade viva</h1><p>Só a Dani entra aqui. Coloque o seu e-mail e o link de acesso chega na sua caixa de entrada.</p>
+  app.innerHTML = `<div class="login"><h1>Grade viva</h1><p>Só a Dani entra aqui. Coloque o seu e-mail e o link de acesso chega na sua caixa de entrada. Depois da primeira vez, este aparelho fica lembrando de você.</p>
   <form id="f"><input id="email" type="email" required autocomplete="email" placeholder="seu e-mail" value="daniellelemosmkt@gmail.com">
   <button class="btn acao full" type="submit">Quero ver a minha grade</button></form><div class="msg" id="m">${esc(msg||"")}</div></div>`;
   document.getElementById("f").onsubmit = async e => {
     e.preventDefault(); const m = document.getElementById("m"); m.textContent = "Enviando o link...";
     const { error } = await SB.auth.signInWithOtp({ email: document.getElementById("email").value.trim(), options: { emailRedirectTo: location.origin + location.pathname, shouldCreateUser: true } });
-    m.textContent = error ? "Não consegui enviar agora: " + error.message : "Pronto. Abra o e-mail e toque no link (pode cair no spam).";
+    m.textContent = error ? "Não consegui enviar agora: " + error.message : "Pronto. Chegou um e-mail em inglês do Supabase (\"Confirm your signup\" ou \"Your Magic Link\"; pode cair no spam). Abra neste mesmo celular e toque no link: a grade abre sozinha.";
   };
 }
 
