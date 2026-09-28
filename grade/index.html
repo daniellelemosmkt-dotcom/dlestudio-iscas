@@ -133,7 +133,7 @@ function tileHTML(c){
   const topo = c._top ? " destaque" : "";
   if (!capa) return `<button class="tile vazio" data-id="${c.id}"><span class="t">${esc(c.titulo)}</span><span class="d">${dataBR(c.data_pub)} · ${esc(c.linha||"")}<br>${esc(STATUS[c.status]||c.status)}</span></button>`;
   const u = URLS[capa.path] || "";
-  const midia = capa.tipo === "video" ? `<video src="${u}" muted autoplay loop playsinline></video>` : `<img src="${u}" alt="" loading="lazy">`;
+  const midia = capa.tipo === "video" ? `<video src="${u}#t=0.8" muted playsinline preload="metadata"></video>` : `<img src="${u}" alt="" loading="lazy" decoding="async">`;
   const ic = m.length > 1 ? `<svg class="icone" viewBox="0 0 24 24" fill="#fff"><path d="M4 7h11a2 2 0 0 1 2 2v11H6a2 2 0 0 1-2-2zM8 3h11a2 2 0 0 1 2 2v11h-2V5H8z"/></svg>` : "";
   return `<button class="tile${topo}" data-id="${c.id}">${midia}${ic}<span class="st ${c.status}">${esc(STATUS[c.status]||c.status)}</span><span class="meta"><b>${dataBR(c.data_pub)}</b> · ${esc(c.linha||"")}</span></button>`;
 }
@@ -181,7 +181,7 @@ async function abrir(id){
   const c = DADOS.conteudos.find(x => x.id === id); if (!c) return;
   const m = c.midia || [];
   await assinar(m.map(x => x.path));
-  const slides = m.map(x => x.tipo === "video" ? `<video src="${URLS[x.path]||""}" muted autoplay loop playsinline></video>` : `<img src="${URLS[x.path]||""}" alt="">`).join("");
+  const slides = m.map((x,i) => x.tipo === "video" ? `<video data-src="${URLS[x.path]||""}" muted loop playsinline preload="none"></video>` : `<img ${i<2?"src":"data-src"}="${URLS[x.path]||""}" alt="" decoding="async">`).join("");
   const podeDecidir = !["agendado","publicado"].includes(c.status);
   folha.innerHTML = `<header><b>${dataBR(c.data_pub)} · ${esc(c.linha||"")}</b><span class="pill">${esc(STATUS[c.status]||c.status)}</span><button class="x" aria-label="Fechar">×</button></header>
     ${m.length ? `<div class="carrossel" id="car">${slides}</div><div class="pontos" id="pt">${m.map((_,i)=>`<i class="${i?"":"on"}"></i>`).join("")}</div>` : `<div class="corpo"><p class="vazio-txt">Arte ainda não produzida.</p></div>`}
@@ -193,7 +193,10 @@ async function abrir(id){
   modal.classList.add("on"); document.body.style.overflow = "hidden";
   folha.querySelector(".x").onclick = fechar;
   const car = document.getElementById("car");
-  if (car) car.onscroll = () => { const i = Math.round(car.scrollLeft / car.clientWidth); document.querySelectorAll("#pt i").forEach((p,k) => p.classList.toggle("on", k===i)); };
+  const ver = i => { const els = car ? [...car.children] : [];
+    els.forEach((el,k) => { if (Math.abs(k-i) <= 1 && el.dataset.src && !el.getAttribute("src")) el.src = el.dataset.src;
+      if (el.tagName === "VIDEO") { if (k === i) { el.play && el.play().catch(()=>{}); } else { el.pause && el.pause(); } } }); };
+  if (car) { ver(0); car.onscroll = () => { const i = Math.round(car.scrollLeft / car.clientWidth); document.querySelectorAll("#pt i").forEach((p,k) => p.classList.toggle("on", k===i)); ver(i); }; }
   const ap = document.getElementById("ap"), aj = document.getElementById("aj"), txt = document.getElementById("txt"), env = document.getElementById("env"), mm = document.getElementById("mm");
   if (ap) ap.onclick = () => decidir(c.id, "aprovar", null, mm);
   if (aj) aj.onclick = () => { txt.classList.add("on"); env.style.display = "flex"; txt.focus(); };
@@ -206,7 +209,7 @@ async function decidir(id, acao, texto, mm){
   mm.textContent = acao === "aprovar" ? "Aprovado. Ele entra na fila de agendamento e eu te pergunto antes de agendar." : "Ajuste enviado. Eu refaço e te aviso.";
   setTimeout(async () => { fechar(); await carregar(); }, 1200);
 }
-function fechar(){ modal.classList.remove("on"); document.body.style.overflow = ""; }
+function fechar(){ modal.classList.remove("on"); document.body.style.overflow = ""; folha.querySelectorAll("video").forEach(v => { v.pause(); v.removeAttribute("src"); v.load(); }); }
 modal.onclick = e => { if (e.target === modal) fechar(); };
 
 SB.auth.onAuthStateChange((ev, s) => { if (s && !DADOS) carregar(); });
