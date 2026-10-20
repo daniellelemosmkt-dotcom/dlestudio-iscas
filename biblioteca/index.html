@@ -198,6 +198,39 @@ details.ref>summary small{display:block;font:400 14px var(--txt);color:var(--sua
 .ref-corpo{padding:0 22px 22px;display:flex;flex-direction:column;gap:14px}
 @media (max-width:560px){details.ref>summary{padding:17px}.ref-corpo{padding:0 17px 18px}.cartao{padding:20px 17px}}
 
+/* telas recriadas do app, para ela comparar com a dela */
+.tela{background:#fff;border:1px solid #D9D2CC;border-radius:16px;overflow:hidden;box-shadow:0 20px 44px rgba(41,41,41,.14);font-family:"Segoe UI",var(--txt);min-width:0;font-size:13.5px;color:#2C2A2B}
+.tela-barra{display:flex;align-items:center;gap:7px;padding:10px 13px;background:#ECE8E3;border-bottom:1px solid #DFD8D2}
+.tela-barra i{width:9px;height:9px;border-radius:50%;background:#CFC6BF;flex:none}
+.tela-barra span{margin-left:8px;font-size:12px;color:#6B6266;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tela-corpo{padding:15px}
+.tela-legenda{font-size:12.5px;color:var(--suave);text-align:center;margin-top:7px}
+.tela-cols{display:grid;grid-template-columns:148px 1fr;gap:0;min-height:170px}
+.tela-lado{background:#F7F4F0;border-right:1px solid #E7E1DB;padding:12px 10px;display:flex;flex-direction:column;gap:2px;font-size:12.5px}
+.tela-lado .gr{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:#9A8F93;margin:9px 0 3px;font-weight:600}
+.tela-lado b{display:block;padding:6px 9px;border-radius:7px;font-weight:400;color:#4B4448}
+.tela-lado b.on{background:var(--mag);color:#fff;font-weight:600}
+.tela-main{padding:14px 16px;display:flex;flex-direction:column;gap:11px;min-width:0}
+.tela-abas{display:flex;gap:16px;border-bottom:1px solid #E7E1DB;padding-bottom:7px;font-size:13px;color:#8A8084}
+.tela-abas b{color:#2C2A2B;border-bottom:2px solid var(--graf);padding-bottom:7px;margin-bottom:-8px}
+.tela-linha{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #F0EBE6}
+.tela-linha:last-child{border-bottom:0}
+.tela-bt{background:var(--graf);color:#fff;border-radius:8px;padding:7px 13px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.tela-bt.claro{background:#fff;color:#2C2A2B;border:1px solid #D9D2CC}
+.tela-bt.mag{background:var(--mag)}
+.tela-campo{border:1px solid #D9D2CC;border-radius:8px;padding:9px 11px;font-size:13px;color:#2C2A2B;background:#fff}
+.tela-campo.vazio{color:#A69EA1}
+.tela-rot{font-size:11.5px;color:#6B6266;font-weight:600;margin-bottom:4px}
+.tela-dica{font-size:11.5px;color:#8A8084;margin-top:3px}
+.tela-radio{display:flex;align-items:center;gap:8px;padding:7px 0;font-size:13px}
+.tela-radio .bola{width:15px;height:15px;border-radius:50%;border:2px solid #C5BCC0;flex:none}
+.tela-radio .bola.on{border-color:var(--mag);background:radial-gradient(circle,var(--mag) 0 45%,#fff 46%)}
+.tela-det{font-size:10.5px;background:#E4F1E8;color:var(--verde);border-radius:5px;padding:2px 7px;font-weight:600;white-space:nowrap}
+.tela-ok{color:var(--verde);font-weight:700}
+.tela-chip{display:inline-block;font-size:10.5px;background:#EFEBE6;color:#6B6266;border-radius:5px;padding:2px 7px;font-weight:600}
+.tela-passos{display:flex;flex-direction:column;gap:14px}
+@media (max-width:560px){.tela-cols{grid-template-columns:1fr}.tela-lado{border-right:0;border-bottom:1px solid #E7E1DB;flex-direction:row;flex-wrap:wrap;gap:4px}.tela-lado .gr{width:100%;margin:4px 0 0}.tela-lado b{padding:5px 8px}}
+
 /* glossário */
 .glos{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
 .glos div{background:var(--gelo);border-radius:14px;padding:13px 15px;font-size:14.5px;line-height:1.45}
@@ -247,6 +280,7 @@ footer .cap{letter-spacing:.14em;text-transform:uppercase;font-size:12.5px}
 <div class="barra so-dentro">
   <nav>
     <a href="#trilha">A trilha</a>
+    <a href="#conectores">Conectores</a>
     <a href="#prompts">Todos os prompts</a>
     <a href="#plugins">Os plugins</a>
     <a href="#atalhos">Atalhos</a>
@@ -939,6 +973,160 @@ Separe em quatro listas, com esses quatro títulos. Se alguma coisa você supôs
         <div class="pedido-top"><span class="q"><b>Socorro, quebrou</b><small>Quando a tela do sistema der erro</small></span><button class="copiar" type="button">Copiar</button></div>
 <pre>A tela do Meu Funcionário deu erro. Confere os arquivos da pasta dados, acha o que está escrito errado e conserta. Depois me diga em uma frase o que estava acontecendo.</pre>
       </div>
+    </div>
+  </details>
+
+  <!-- CONECTORES -->
+  <details class="ref" id="conectores">
+    <summary>Ligar um conector, clique por clique<small>Com as telas do app recriadas, para você comparar com a sua</small></summary>
+    <div class="ref-corpo">
+      <p>Conector é o cabo que liga o Claude num app seu. Tem dois tipos, e o caminho é diferente em cada um.</p>
+
+      <div class="dest" style="margin:0">
+        <span class="tag">Como saber qual é qual</span>
+        <p><b>Do diretório:</b> você pesquisa o nome e clica em Conectar. É o caso do Gmail, do Google Agenda, do Drive e do Metricool.</p>
+        <p><b>Personalizado:</b> você cola um endereço. É o caso do Meta Ads, da Apify e do Composio.</p>
+        <p class="nota">A uazapi não é conector. Ela entra pelo arquivo <code>whatsapp.json</code>, no passo 4 da trilha.</p>
+      </div>
+
+      <h4>Caminho A · o conector que já está pronto na lista</h4>
+      <div class="tela-passos">
+        <div>
+          <div class="tela">
+            <div class="tela-barra"><i></i><i></i><i></i><span>Claude · Configurações</span></div>
+            <div class="tela-cols">
+              <div class="tela-lado">
+                <span class="gr">Configurações</span>
+                <b>Geral</b><b>Conta</b><b>Privacidade</b><b>Cobrança</b><b>Uso</b><b>Recursos</b>
+                <span class="gr">Personalização</span>
+                <b>Skills</b><b class="on">Conectores</b><b>Plugins</b>
+              </div>
+              <div class="tela-main">
+                <div class="tela-abas"><b>Meus</b><span>Descobrir</span></div>
+                <div class="tela-linha"><span>Pesquisar: <b>Metricool</b></span><span class="tela-bt">+ Adicionar ⌄</span></div>
+                <div class="tela-linha"><span>Gmail</span><span class="tela-ok">✓</span></div>
+                <div class="tela-linha"><span>Google Agenda</span><span class="tela-ok">✓</span></div>
+                <div class="tela-linha"><span><b>Metricool</b></span><span class="tela-bt mag">Conectar</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="tela-legenda">Tela recriada. A sua pode ter cores diferentes, o lugar é o mesmo.</p>
+        </div>
+      </div>
+      <ol>
+        <li>No Claude, clique no <b>seu nome</b>, no canto de baixo da barra da esquerda, e em <b>Configurações</b>.</li>
+        <li>Na coluna da esquerda, em <b>Personalização</b>, clique em <b>Conectores</b>.</li>
+        <li>Vá na aba <b>Descobrir</b> e pesquise o nome do serviço.</li>
+        <li>Clique em <b>Conectar</b>. Abre a página do serviço para você entrar na sua conta.</li>
+        <li>Depois de entrar, você volta para o Claude e ele aparece com um <b>✓</b>.</li>
+      </ol>
+
+      <h4>Caminho B · o conector personalizado, colando um endereço</h4>
+      <p>São cinco telas. Siga uma por uma e compare com a sua.</p>
+
+      <div class="tela-passos">
+        <div>
+          <p class="tela-rot">Tela 1 · abra o menu de adicionar</p>
+          <div class="tela">
+            <div class="tela-barra"><i></i><i></i><i></i><span>Claude · Configurações › Conectores</span></div>
+            <div class="tela-corpo">
+              <div class="tela-abas"><b>Meus</b><span>Descobrir</span></div>
+              <div class="tela-linha" style="border-bottom:0"><span></span><span class="tela-bt">+ Adicionar ⌄</span></div>
+              <div style="border:1px solid #D9D2CC;border-radius:10px;padding:9px 12px;background:#fff;max-width:280px;margin-left:auto;box-shadow:0 8px 20px rgba(41,41,41,.12)">
+                <b>Adicionar conector personalizado</b>
+              </div>
+            </div>
+          </div>
+          <p class="tela-legenda">Clique no botão preto <b>+ Adicionar</b> e depois em <b>Adicionar conector personalizado</b>.</p>
+        </div>
+
+        <div>
+          <p class="tela-rot">Tela 2 · o nome e o endereço</p>
+          <div class="tela">
+            <div class="tela-barra"><i></i><i></i><i></i><span>Adicionar conector personalizado · Etapa 1 de 2</span></div>
+            <div class="tela-corpo" style="display:flex;flex-direction:column;gap:12px">
+              <div><p class="tela-rot">Nome</p><div class="tela-campo">Meta Ads</div><p class="tela-dica">Exibido na lista de conectores.</p></div>
+              <div><p class="tela-rot">URL do servidor MCP</p><div class="tela-campo">o endereço da tabela abaixo</div><p class="tela-dica">O endereço HTTPS onde o servidor aceita requisições MCP.</p></div>
+              <div style="display:flex;gap:9px;justify-content:flex-end"><span class="tela-bt claro">Cancelar</span><span class="tela-bt">Continuar</span></div>
+            </div>
+          </div>
+          <p class="tela-legenda">Em <b>Nome</b>, o nome do serviço. Em <b>URL</b>, o endereço da tabela mais abaixo.</p>
+        </div>
+
+        <div>
+          <p class="tela-rot">Tela 3 · não mexa em nada aqui</p>
+          <div class="tela">
+            <div class="tela-barra"><i></i><i></i><i></i><span>Adicionar conector personalizado · Etapa 2 de 2</span></div>
+            <div class="tela-corpo" style="display:flex;flex-direction:column;gap:6px">
+              <p class="tela-rot">Autenticação</p>
+              <div class="tela-radio"><span class="bola on"></span><span>Entrar agora</span><span class="tela-det">Detectado</span></div>
+              <div class="tela-radio"><span class="bola"></span><span>Fazer login quando necessário</span></div>
+              <div class="tela-radio"><span class="bola"></span><span>Sem login</span></div>
+              <p class="tela-rot" style="margin-top:8px">Cliente OAuth</p>
+              <div class="tela-radio"><span class="bola on"></span><span>Usar a identidade publicada do Claude</span><span class="tela-det">Detectado</span></div>
+              <div style="display:flex;gap:9px;justify-content:flex-end;margin-top:8px"><span class="tela-bt claro">Voltar</span><span class="tela-bt">Adicionar</span></div>
+            </div>
+          </div>
+          <p class="tela-legenda">Deixe marcado o que vem com a etiqueta <b>Detectado</b> e clique em <b>Adicionar</b>. Não precisa de cabeçalho.</p>
+        </div>
+
+        <div>
+          <p class="tela-rot">Tela 4 · entre na sua conta</p>
+          <div class="tela">
+            <div class="tela-barra"><i></i><i></i><i></i><span>Claude · Configurações › Conectores › Meta Ads</span></div>
+            <div class="tela-corpo" style="display:flex;flex-direction:column;gap:11px">
+              <p>Você ainda não está conectado a <b>Meta Ads</b>.</p>
+              <div><span class="tela-bt mag">Vincular</span></div>
+            </div>
+          </div>
+          <p class="tela-legenda">Clique em <b>Vincular</b>. Abre a página do serviço para você entrar e permitir.</p>
+        </div>
+
+        <div>
+          <p class="tela-rot">Tela 5 · ficou assim</p>
+          <div class="tela">
+            <div class="tela-barra"><i></i><i></i><i></i><span>Claude · Configurações › Conectores</span></div>
+            <div class="tela-corpo">
+              <div class="tela-abas"><b>Meus</b><span>Descobrir</span></div>
+              <div class="tela-linha"><span><b>Meta Ads</b> <span class="tela-chip">Personalizado</span></span><span class="tela-ok">✓</span></div>
+              <div class="tela-linha"><span><b>Metricool</b></span><span class="tela-ok">✓</span></div>
+              <div class="tela-linha"><span>Gmail</span><span class="tela-ok">✓</span></div>
+            </div>
+          </div>
+          <p class="tela-legenda">Ele aparece com a etiqueta <b>Personalizado</b> e um <b>✓</b>. Pronto, está ligado.</p>
+        </div>
+      </div>
+
+      <div class="dest" style="margin:0">
+        <span class="tag aviso">Apareceu "Já existe um conector com esta URL"?</span>
+        <p>Você já adicionou esse serviço antes. Procure o nome dele na lista da aba <b>Meus</b> e clique em <b>Vincular</b>.</p>
+      </div>
+
+      <h4>Os endereços, para copiar</h4>
+      <div class="rolo">
+        <table>
+          <thead><tr><th>serviço</th><th>como entra</th><th>o que você cola</th><th>para que serve</th></tr></thead>
+          <tbody>
+            <tr><td><b>Metricool</b></td><td>Pronto na lista. Pesquise e clique em <b>Conectar</b></td><td><span class="nota">não precisa colar nada</span></td><td>Agendar post, ver as suas métricas e o melhor horário</td></tr>
+            <tr><td><b>Meta Ads</b></td><td>Personalizado</td><td><code>https://mcp.facebook.com/ads</code></td><td>Planejar, criar e acompanhar anúncio no Instagram e no Facebook</td></tr>
+            <tr><td><b>mLabs</b></td><td>Personalizado</td><td><code>https://mcp.mlabs.io/mcp</code></td><td>Para quem já usa mLabs: rascunho, link de aprovação da cliente, agendamento e relatório</td></tr>
+            <tr><td><b>Apify</b></td><td>Personalizado</td><td><code>https://mcp.apify.com</code></td><td>Ler perfil de concorrente, comentários de um post e avaliações do Google</td></tr>
+            <tr><td><b>Composio</b></td><td>Personalizado</td><td><code>https://connect.composio.dev/mcp</code></td><td>Ligar Trello, Google Sheets, Canva e agendadores de uma vez</td></tr>
+            <tr><td><b>Gmail, Agenda, Drive</b></td><td>Prontos na lista. Clique em <b>Conectar</b></td><td><span class="nota">não precisa colar nada</span></td><td>A sua agenda, os seus e-mails e os seus arquivos</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="nota">O endereço vai sem barra no fim, exatamente como está escrito. O Meta Ads está em fase aberta de testes, então pode ser que a sua conta ainda entre em fila.</p>
+
+      <div class="dest" style="margin:0">
+        <span class="tag aviso">Antes de ligar o Meta Ads, leia</span>
+        <p>Ele lê a sua conta de anúncios e também <b>cria</b> campanha, conjunto e anúncio. Na hora de permitir, você escolhe o nível: só leitura, ou leitura e criação.</p>
+        <p><b>A regra da casa:</b> tudo o que ele criar nasce pausado e você vê antes. Quem aperta o play é você, com teto de verba na conta. Isso vale mesmo que ele diga que já está tudo certo.</p>
+      </div>
+
+      <h4>Para usar depois de ligar</h4>
+      <p>Na caixa de mensagem do chat ou do Cowork, clique no <b>+</b>, depois em <b>Conectores</b>, e confira se ele está ligado. Na aba Code, ele já entra sozinho.</p>
+      <p class="nota">Se você está no plano de graça do Claude, dá para ter só um conector personalizado por vez. No Pro, que é o seu, não tem esse limite.</p>
     </div>
   </details>
 
