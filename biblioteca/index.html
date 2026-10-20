@@ -904,9 +904,13 @@ f.addEventListener("submit",async ev=>{ev.preventDefault();erro.textContent="";
  if(!d.nome||!d.email||!d.whatsapp||!d.instagram||!d.profissao){erro.textContent="Preencha todos os campos.";return}
  const bt=f.querySelector("[type=submit]");bt.disabled=true;bt.textContent="Abrindo...";
  const PREVIA=!/dlestudio\.com\.br$/.test(location.hostname);
- let r=null;try{r=await fetch(FN,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(d)})}catch(e){}
- const ok=r&&r.ok;
- if(!ok&&!PREVIA){erro.textContent=(r&&r.status===400)?"Confere o WhatsApp (com DDD) e o e-mail.":"Não consegui abrir agora. Tenta de novo em alguns segundos.";bt.disabled=false;bt.textContent="Abrir a biblioteca";return}
+ function enviar(){const c=new AbortController();const t=setTimeout(()=>c.abort(),6000);
+  return fetch(FN,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(d),signal:c.signal})
+   .then(x=>{clearTimeout(t);return x}).catch(()=>{clearTimeout(t);return null})}
+ if(PREVIA){enviar();liberar();document.getElementById("indice").scrollIntoView({behavior:"smooth"});
+  bt.disabled=false;bt.textContent="Abrir a biblioteca";return}
+ const r=await enviar();
+ if(!(r&&r.ok)){erro.textContent=(r&&r.status===400)?"Confere o WhatsApp (com DDD) e o e-mail.":"Não consegui abrir agora. Tenta de novo em alguns segundos.";bt.disabled=false;bt.textContent="Abrir a biblioteca";return}
  liberar();document.getElementById("indice").scrollIntoView({behavior:"smooth"});
  bt.disabled=false;bt.textContent="Abrir a biblioteca";});
 
