@@ -48,9 +48,8 @@ header.topo h1 span{color:var(--acesa)}
 header.topo p{color:#D9C9CF;max-width:34em;margin:18px 0 0;font-size:clamp(16px,2vw,19px)}
 
 /* portão */
-body:not(.liberado) .so-dentro{display:none}
-body.liberado .portao{display:none}
-.portao{padding-block:40px 20px}
+.portao{padding-block:28px 4px}
+.portao.pronto .caixa-cad{border-color:#BEDCC7;background:#F3FAF5}
 .caixa-cad{background:var(--branco);border:1px solid var(--linha);border-radius:24px;box-shadow:var(--sombra);padding:28px 24px;display:flex;flex-direction:column;gap:14px;max-width:560px;margin:0 auto}
 .caixa-cad p.sub{color:var(--suave);font-size:15px}
 .caixa-cad label{display:flex;flex-direction:column;gap:6px;font:600 14px var(--txt)}
@@ -67,8 +66,8 @@ body.liberado .portao{display:none}
 
 /* barra de navegação */
 .barra{position:sticky;top:0;z-index:40;background:rgba(244,242,238,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);
-  margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));display:none}
-body.liberado .barra{display:block}
+  margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)))}
+.barra{display:block}
 .barra nav{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;max-width:900px;margin:0 auto;scrollbar-width:thin;
   overscroll-behavior-x:contain;scroll-behavior:auto}
 .barra a{flex:none;text-decoration:none;font:600 13.5px var(--txt);color:var(--suave);background:var(--branco);
@@ -255,25 +254,30 @@ footer .cap{letter-spacing:.14em;text-transform:uppercase;font-size:12.5px}
 
 <section class="portao">
   <div class="wrap">
-    <form class="caixa-cad" id="fcad" novalidate>
-      <h3 style="font-family:var(--disp);font-size:26px">Esta biblioteca é só da turma</h3>
-      <p class="sub">Preencha uma vez e o acesso fica guardado neste aparelho. Serve também para qualquer outro material que eu liberar.</p>
-      <label>Seu nome<input name="nome" autocomplete="name" required></label>
-      <label>E-mail<input name="email" type="email" autocomplete="email" required></label>
-      <label>WhatsApp com DDD<input name="whatsapp" inputmode="tel" autocomplete="tel" required></label>
-      <label>Seu @ do Instagram<input name="instagram" autocapitalize="none" required></label>
-      <label>Você trabalha com<select name="profissao" required>
-        <option value="" selected disabled>Escolha uma opção</option>
-        <option value="social_media">Social media ou marketing</option>
-        <option value="saude">Saúde</option>
-        <option value="negocio">Negócio próprio</option>
-        <option value="outro">Outra área</option>
-      </select></label>
-      <input class="hp" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <p class="erro" id="erro" role="alert"></p>
-      <button type="submit" class="botao">Abrir a biblioteca</button>
-      <p class="privacidade">Seus dados ficam comigo. Nada de spam.</p>
-    </form>
+    <details class="caixa-cad" id="caixaCad" style="gap:0;padding:0">
+      <summary style="cursor:pointer;padding:18px 22px;font:600 15.5px var(--txt);display:flex;justify-content:space-between;align-items:center;gap:12px;list-style:none">
+        <span id="rotuloCad">Me diz quem você é, para eu saber quem está usando</span>
+        <span style="color:var(--mag);font-size:22px;flex:none">+</span>
+      </summary>
+      <form id="fcad" novalidate style="padding:0 22px 22px;display:flex;flex-direction:column;gap:14px">
+        <p class="sub">Leva vinte segundos e é opcional. A biblioteca já está aberta aqui embaixo.</p>
+        <label>Seu nome<input name="nome" autocomplete="name"></label>
+        <label>E-mail<input name="email" type="email" autocomplete="email"></label>
+        <label>WhatsApp com DDD<input name="whatsapp" inputmode="tel" autocomplete="tel"></label>
+        <label>Seu @ do Instagram<input name="instagram" autocapitalize="none"></label>
+        <label>Você trabalha com<select name="profissao">
+          <option value="" selected disabled>Escolha uma opção</option>
+          <option value="social_media">Social media ou marketing</option>
+          <option value="saude">Saúde</option>
+          <option value="negocio">Negócio próprio</option>
+          <option value="outro">Outra área</option>
+        </select></label>
+        <input class="hp" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="erro" id="erro" role="alert"></p>
+        <button type="submit" class="botao">Pronto, pode guardar</button>
+        <p class="privacidade">Seus dados ficam comigo. Nada de spam.</p>
+      </form>
+    </details>
   </div>
 </section>
 
@@ -1490,23 +1494,24 @@ Separe em quatro listas, com esses quatro títulos. Se alguma coisa você supôs
 const FN="https://veogbuoxtbpaxoqvuakr.supabase.co/functions/v1/lead-isca-dlestudio";
 const MC=new URLSearchParams(location.search).get("mc")||"";
 const f=document.getElementById("fcad"),erro=document.getElementById("erro");
-function liberar(){document.body.classList.add("liberado");try{localStorage.setItem("dl_cadastro","1")}catch(e){}}
-try{if(localStorage.getItem("dl_cadastro")==="1")liberar()}catch(e){}
-if(!document.body.classList.contains("liberado")&&MC){fetch(FN+"?mc="+encodeURIComponent(MC)).then(r=>r.json()).then(d=>{if(d.existe)liberar()}).catch(()=>{})}
-f.addEventListener("submit",async ev=>{ev.preventDefault();erro.textContent="";
+const caixa=document.getElementById("caixaCad"),rotulo=document.getElementById("rotuloCad");
+/* O cadastro é opcional e NUNCA esconde a biblioteca. Se o servidor de leads cair, a aluna
+   continua lendo tudo. Travar a turma dez minutos antes da aula não vale um e-mail. */
+function jaDisse(){caixa.classList.add("pronto");caixa.open=false;rotulo.textContent="Obrigada, já guardei os seus dados";
+  try{localStorage.setItem("dl_cadastro","1")}catch(e){}}
+try{if(localStorage.getItem("dl_cadastro")==="1")jaDisse()}catch(e){}
+if(f) f.addEventListener("submit",async ev=>{ev.preventDefault();erro.textContent="";
  const d=Object.fromEntries(new FormData(f));d.origem=ORIGEM;d.mc=MC;
- if(!d.nome||!d.email||!d.whatsapp||!d.instagram||!d.profissao){erro.textContent="Preencha todos os campos.";return}
- const bt=f.querySelector("[type=submit]");bt.disabled=true;bt.textContent="Abrindo...";
- const PREVIA=!/dlestudio\.com\.br$/.test(location.hostname);
- function enviar(){const c=new AbortController();const t=setTimeout(()=>c.abort(),6000);
-  return fetch(FN,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(d),signal:c.signal})
-   .then(x=>{clearTimeout(t);return x}).catch(()=>{clearTimeout(t);return null})}
- if(PREVIA){enviar();liberar();document.getElementById("trilha").scrollIntoView({behavior:"smooth"});
-  bt.disabled=false;bt.textContent="Abrir a biblioteca";return}
- const r=await enviar();
- if(!(r&&r.ok)){erro.textContent=(r&&r.status===400)?"Confere o WhatsApp (com DDD) e o e-mail.":"Não consegui abrir agora. Tenta de novo em alguns segundos.";bt.disabled=false;bt.textContent="Abrir a biblioteca";return}
- liberar();document.getElementById("trilha").scrollIntoView({behavior:"smooth"});
- bt.disabled=false;bt.textContent="Abrir a biblioteca";});
+ if(!d.nome||!d.email){erro.textContent="Preciso pelo menos do seu nome e do seu e-mail.";return}
+ const bt=f.querySelector("[type=submit]");bt.disabled=true;bt.textContent="Guardando...";
+ const c=new AbortController(),t=setTimeout(()=>c.abort(),6000);
+ let r=null;
+ try{r=await fetch(FN,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(d),signal:c.signal})}catch(e){}
+ clearTimeout(t);
+ bt.disabled=false;bt.textContent="Pronto, pode guardar";
+ if(r&&r.status===400){erro.textContent="Confere o WhatsApp (com DDD) e o e-mail.";return}
+ /* Deu erro de rede? Não importa para ela. Agradece e segue. */
+ jaDisse();});
 
 /* copiar */
 document.addEventListener("click",ev=>{
