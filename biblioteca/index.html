@@ -198,6 +198,7 @@ tr:last-child td{border-bottom:0}
 
 <div class="barra so-dentro">
   <nav>
+    <a href="#sistema">O seu sistema</a>
     <a href="#comecar">Comece por aqui</a>
     <a href="#instalar">Instalar</a>
     <a href="#plugins">Os plugins oficiais</a>
@@ -212,16 +213,113 @@ tr:last-child td{border-bottom:0}
 <section class="secao" id="indice" style="padding-top:44px">
   <div class="secao-cab">
     <p class="eyebrow">O que tem aqui dentro</p>
-    <h2>Seis blocos, nessa ordem</h2>
-    <p class="lead">Não precisa ler tudo de uma vez. Entre pelo que você quer resolver agora.</p>
+    <h2>Sete blocos, nessa ordem</h2>
+    <p class="lead">Não precisa ler tudo de uma vez. Entre pelo que você quer resolver agora. Se é a primeira vez aqui, comece pelo zero: baixe o seu sistema.</p>
   </div>
   <div class="indice">
+    <a href="#sistema"><span class="n">0</span><b>O seu sistema</b><small>Meu Funcionário: baixe, instale e comece a preencher hoje</small></a>
     <a href="#comecar"><span class="n">1</span><b>Comece por aqui</b><small>App e Code: o que faz o quê, e as três palavras do dia a dia</small></a>
     <a href="#instalar"><span class="n">2</span><b>Instalar</b><small>Skill e plugin, clique por clique, com o nome real de cada tela</small></a>
     <a href="#plugins"><span class="n">3</span><b>Os plugins oficiais</b><small>O que cada um faz, e de onde ele tira o dado</small></a>
     <a href="#achar"><span class="n">4</span><b>Onde achar</b><small>Os endereços oficiais e as skills que entregam arquivo pronto</small></a>
     <a href="#atalhos"><span class="n">5</span><b>Atalhos</b><small>O que muda o dia, e onde cada um funciona</small></a>
     <a href="#regras"><span class="n">6</span><b>Segurança</b><small>As duas regras que valem para sempre</small></a>
+  </div>
+</section>
+
+<!-- ========== 0 · O SEU SISTEMA ========== -->
+<section class="secao" id="sistema">
+  <div class="secao-cab">
+    <p class="eyebrow">Baixe agora</p>
+    <h2>Meu Funcionário</h2>
+    <p class="lead">O seu sistema, para instalar hoje. Ele chega vazio e vai enchendo conforme você conversa com o Claude. É o mesmo arquivo que vira a sua plataforma no ar, na semana 4.</p>
+  </div>
+
+  <div class="dest escuro">
+    <span class="tag">O que você vai ter</span>
+    <p class="frase-forte">Um lugar só com os seus leads, os seus resultados, o seu Instagram, o seu planejamento e os conteúdos esperando o seu sim.</p>
+  </div>
+
+  <div class="cartao">
+    <div class="passo"><span class="n">1</span><div class="co">
+      <h3>Baixe e guarde</h3>
+      <p>Baixe o arquivo e descompacte numa pasta que você ache depois, tipo Documentos. Pode manter o nome <code>meu-funcionario</code>.</p>
+      <p><a class="botao" href="arquivos/meu-funcionario.zip" download>Baixar o Meu Funcionário</a></p>
+    </div></div>
+  </div>
+
+  <div class="cartao">
+    <div class="passo"><span class="n">2</span><div class="co">
+      <h3>Abra para ver</h3>
+      <p>Dois cliques no arquivo <code>index.html</code>. Ele abre no seu navegador. Vai estar vazio, e cada tela diz o que fazer para encher.</p>
+    </div></div>
+  </div>
+
+  <div class="cartao">
+    <div class="passo"><span class="n">3</span><div class="co">
+      <h3>Apresente você ao seu funcionário</h3>
+      <p>Abra o Claude, vá na aba <b>Code</b>, aponte para essa pasta e cole o pedido abaixo. Ele pergunta uma coisa por vez e escreve tudo no seu lugar.</p>
+      <div class="pedido">
+        <div class="pedido-top"><b>O primeiro pedido</b><button class="copiar" type="button">Copiar o pedido</button></div>
+<pre>Você é o meu funcionário e esta pasta é o nosso sistema. Vamos começar pelo começo: me conhecer.
+
+Faça assim:
+1. Leia o arquivo CLAUDE.md desta pasta antes de qualquer coisa.
+2. Me faça UMA pergunta por vez, curta, em português simples, e espere a minha resposta antes da próxima. Comece por: o que eu faço, para quem, o que eu vendo e quanto custa, como a venda acontece hoje, e o que eu nunca faço.
+3. A cada resposta minha, escreva você o texto no meu lugar, com as minhas palavras, e me mostre para eu dizer sim ou corrigir.
+4. Quando terminarmos, grave tudo em dados/negocio.js, respeitando os campos que já estão lá, e me avise para eu recarregar a tela.
+
+Não me deixe nada para preencher sozinha. Se faltar informação, pergunte, não invente. Nunca escreva senha, chave ou token em nenhum arquivo.</pre>
+      </div>
+      <p class="nota">Quando ele avisar, volte no navegador e aperte F5. A tela estará preenchida.</p>
+    </div></div>
+  </div>
+
+  <div class="cartao">
+    <h3>As onze telas</h3>
+    <div class="rolo">
+      <table>
+        <thead><tr><th>tela</th><th>para que serve</th></tr></thead>
+        <tbody>
+          <tr><td><b>Hoje</b></td><td>O que está esperando por você agora. Ela se monta sozinha a partir das outras</td></tr>
+          <tr><td><b>Meus leads</b></td><td>Cada pessoa interessada, em quadro, da primeira conversa até o sim</td></tr>
+          <tr><td><b>Meus resultados</b></td><td>O dinheiro, somado a partir dos leads. Você não digita nada duas vezes</td></tr>
+          <tr><td><b>Minhas redes</b></td><td>As redes que você usa, como elas estão hoje</td></tr>
+          <tr><td><b>Meu Instagram</b></td><td>O seu perfil como ele é, o gráfico de crescimento e o diagnóstico do Claude</td></tr>
+          <tr><td><b>Meu planejamento</b></td><td>A sua meta, e as ações que levam até ela, separadas entre o que é dele e o que é seu</td></tr>
+          <tr><td><b>Conteúdos para aprovar</b></td><td>A grade do que ele preparou, cada um com o motivo de existir. Você abre, lê a legenda e decide</td></tr>
+          <tr><td><b>Meu dia</b></td><td>Tarefas e compromissos</td></tr>
+          <tr><td><b>Meu negócio</b></td><td>Quem você atende e o que você vende. A base de tudo</td></tr>
+          <tr><td><b>Minha marca</b></td><td>Cores, fontes e o seu jeito de falar</td></tr>
+          <tr><td><b>Meu cérebro</b></td><td>As suas ideias, e tudo o que você já instalou</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mao">Preencha Meu negócio e Minha marca primeiro.</p>
+    <p class="nota">São essas duas que fazem o resto deixar de ser genérico. Tudo o que ele escrever antes disso vai ser chute bonito.</p>
+  </div>
+
+  <div class="grade g2">
+    <div class="cartao">
+      <h3>Onde os seus dados ficam</h3>
+      <p>Na pasta <code>dados</code>, em arquivos de texto comuns, no seu computador. Nada vai para a internet.</p>
+      <p class="nota">Para guardar uma cópia segura, peça ao Claude para pôr essa pasta num repositório <b>privado</b> do GitHub.</p>
+    </div>
+    <div class="cartao">
+      <h3>Se alguma coisa quebrar</h3>
+      <p>Não tente consertar na mão. Cole isto e deixe com ele.</p>
+      <div class="pedido">
+        <div class="pedido-top"><b>Consertar</b><button class="copiar" type="button">Copiar</button></div>
+<pre>A tela do Meu Funcionário deu erro. Confere os arquivos da pasta dados, acha o que está escrito errado e conserta. Depois me diga em uma frase o que estava acontecendo.</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="dest">
+    <span class="tag">O que vem nas próximas semanas</span>
+    <p><b>Semana 2:</b> conectores. O Instagram e a agenda passam a encher as telas sozinhos.</p>
+    <p><b>Semana 3:</b> o WhatsApp. Lead novo entra no quadro sem você digitar.</p>
+    <p><b>Semana 4:</b> banco de dados e link próprio. O sistema sai do seu computador e vai para a internet, só seu.</p>
   </div>
 </section>
 
