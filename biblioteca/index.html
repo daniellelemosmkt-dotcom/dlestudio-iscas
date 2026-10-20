@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Biblioteca da Turma Fundadora | Modo Automático</title>
-<meta name="description" content="A referência da Turma Fundadora do Modo Automático: instalar skill e plugin, os plugins oficiais, atalhos e as regras de segurança.">
+<meta name="description" content="A trilha da Turma Fundadora: baixe o seu sistema, ligue o seu WhatsApp e saia com o seu funcionário trabalhando.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#160E11">
 <link rel="icon" href="../img/selo-dl-magenta.webp" type="image/webp">
@@ -19,93 +19,117 @@
   --disp:"Advercase","Playfair Display",Georgia,serif;
   --txt:"Poppins","Segoe UI",Arial,sans-serif;
   --mao:"Caveat Brush","Comic Sans MS",cursive;
-  --sombra:0 18px 40px rgba(41,41,41,.08);
+  --sombra:0 14px 34px rgba(41,41,41,.07);
   color-scheme:light;
 }
 *,*::before,*::after{box-sizing:border-box}
-html{background:var(--gelo);scroll-behavior:smooth;scroll-padding-top:86px;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--gelo);color:var(--graf);font:400 17px/1.62 var(--txt);-webkit-font-smoothing:antialiased;
+html{background:var(--gelo);-webkit-text-size-adjust:100%;scroll-padding-top:118px}
+body{margin:0;background:var(--gelo);color:var(--graf);font:400 16.5px/1.62 var(--txt);-webkit-font-smoothing:antialiased;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 img{max-width:100%}
 b{font-weight:600}
 a{color:var(--mag)}
+p{margin:0;overflow-wrap:break-word}
+li{overflow-wrap:break-word}
 :focus-visible{outline:3px solid var(--mag);outline-offset:3px;border-radius:6px}
-.wrap{max-width:880px;margin:0 auto}
-
-/* tipografia, com peso de verdade entre os níveis */
-.eyebrow{margin:0;font:600 13px/1.2 var(--txt);letter-spacing:.14em;text-transform:uppercase;color:var(--mag)}
-h1{font:400 clamp(44px,8.6vw,76px)/1 var(--disp);margin:14px 0 0;text-wrap:balance}
-h2{font:400 clamp(32px,5.4vw,50px)/1.02 var(--disp);margin:0;text-wrap:balance}
-h3{font:400 clamp(23px,3vw,28px)/1.1 var(--disp);margin:0}
-h4{font:600 17px/1.35 var(--txt);margin:0}
-p{margin:0}
-.lead{font-size:clamp(17px,2.1vw,20px);line-height:1.5;max-width:36em;color:var(--suave)}
-.mao{font-family:var(--mao);color:var(--mag);font-size:26px;line-height:1.15}
-.hl{background:var(--mag);color:var(--branco);padding:0 .16em .05em;border-radius:.14em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+h1,h2,h3{margin:0;font-family:var(--disp);font-weight:400;text-wrap:balance}
+h4{margin:0;font:600 17px var(--txt)}
 code{font:500 .88em ui-monospace,"Cascadia Code",Consolas,monospace;background:var(--pessego);color:var(--mag);border-radius:5px;padding:2px 6px;word-break:break-word}
+.wrap{max-width:900px;margin:0 auto}
 
-/* topo escuro, igual ao da página de acesso do kit */
-header.topo{background:var(--noite);color:#fff;border-radius:0 0 30px 30px;padding:40px 26px 38px;
+/* topo */
+header.topo{background:var(--noite);color:#fff;border-radius:0 0 30px 30px;padding:38px 26px 36px;
   margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)))}
-header.topo .in{max-width:880px;margin:0 auto}
+header.topo .in{max-width:900px;margin:0 auto}
+.eyebrow{margin:0;font:600 12.5px var(--txt);letter-spacing:.15em;text-transform:uppercase;color:var(--mag)}
 header.topo .eyebrow{color:var(--acesa)}
+header.topo h1{font-size:clamp(42px,8.4vw,72px);line-height:1;margin:14px 0 0}
 header.topo h1 span{color:var(--acesa)}
 header.topo p{color:#D9C9CF;max-width:34em;margin:18px 0 0;font-size:clamp(16px,2vw,19px)}
-header.topo .selo{width:38px;height:38px;margin-bottom:18px;opacity:.95}
 
-/* portão de cadastro */
+/* portão */
 body:not(.liberado) .so-dentro{display:none}
 body.liberado .portao{display:none}
 .portao{padding-block:40px 20px}
 .caixa-cad{background:var(--branco);border:1px solid var(--linha);border-radius:24px;box-shadow:var(--sombra);padding:28px 24px;display:flex;flex-direction:column;gap:14px;max-width:560px;margin:0 auto}
-.caixa-cad h3{margin-bottom:2px}
 .caixa-cad p.sub{color:var(--suave);font-size:15px}
 .caixa-cad label{display:flex;flex-direction:column;gap:6px;font:600 14px var(--txt)}
 .caixa-cad input,.caixa-cad select{font:400 16px var(--txt);color:var(--graf);background:#fff;border:1px solid var(--linha);border-radius:12px;padding:13px 14px;min-height:48px}
-.caixa-cad .opc{color:var(--suave);font-weight:400}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
-.erro{color:#A4122F;font-size:14px;min-height:1px;margin:0}
+.erro{color:#A4122F;font-size:14px;min-height:1px}
+.privacidade{font-size:13px;color:var(--suave);text-align:center}
 .botao{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--mag);color:var(--branco);text-decoration:none;border:0;cursor:pointer;
   font:600 16px/1 var(--txt);padding:16px 22px;border-radius:14px;min-height:52px}
 .botao:hover{background:#73063A}
 .botao[disabled]{opacity:.6;cursor:default}
-.privacidade{font-size:13px;color:var(--suave);text-align:center}
-
-/* índice */
-.indice{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:26px}
-.indice a{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;text-decoration:none;color:var(--graf);
-  background:var(--branco);border:1px solid var(--linha);border-radius:20px;padding:18px 20px;box-shadow:var(--sombra)}
-.indice .n{grid-row:1 / span 2;width:44px;height:44px;border-radius:50%;background:var(--pessego);color:var(--mag);
-  display:grid;place-items:center;font:400 22px/1 var(--disp)}
-.indice b{font:600 16px var(--txt);align-self:end}
-.indice small{color:var(--suave);font-size:13.5px;line-height:1.4}
-.indice a:hover{border-color:#CDBFB6}
+.botao.claro{background:var(--branco);color:var(--graf);border:1px solid var(--linha)}
+.botao.claro:hover{background:#fff;border-color:#CDBFB6}
 
 /* barra de navegação */
-.barra{position:sticky;top:0;z-index:30;background:rgba(244,242,238,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);
+.barra{position:sticky;top:0;z-index:40;background:rgba(244,242,238,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);
   margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));display:none}
 body.liberado .barra{display:block}
-.barra nav{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;max-width:880px;margin:0 auto;scrollbar-width:thin}
+.barra nav{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;max-width:900px;margin:0 auto;scrollbar-width:thin;
+  overscroll-behavior-x:contain;scroll-behavior:auto}
 .barra a{flex:none;text-decoration:none;font:600 13.5px var(--txt);color:var(--suave);background:var(--branco);
   border:1px solid var(--linha);border-radius:999px;padding:8px 15px;white-space:nowrap}
 .barra a.at{background:var(--mag);border-color:var(--mag);color:var(--branco)}
+.progresso{max-width:900px;margin:0 auto;padding:0 16px 10px;display:flex;align-items:center;gap:12px}
+.progresso .trilhoP{flex:1;height:8px;border-radius:999px;background:var(--linha);overflow:hidden}
+.progresso .trilhoP i{display:block;height:100%;width:0;background:var(--mag);border-radius:999px;transition:width .3s}
+.progresso span{font:600 12.5px var(--txt);color:var(--suave);white-space:nowrap}
 
-/* seções e cartões */
-.secao{padding-block:64px 4px;scroll-margin-top:86px}
-.secao-cab{display:flex;flex-direction:column;gap:12px;margin-bottom:30px;max-width:40em}
-.cartao{background:var(--branco);border:1px solid var(--linha);border-radius:24px;box-shadow:var(--sombra);padding:26px 24px;display:flex;flex-direction:column;gap:14px;margin-bottom:16px;min-width:0}
+/* seções */
+.secao{padding-block:56px 4px;scroll-margin-top:118px}
+.secao-cab{display:flex;flex-direction:column;gap:11px;margin-bottom:26px;max-width:40em}
+.secao-cab h2{font-size:clamp(32px,5.4vw,50px);line-height:1.02}
+.secao-cab p{color:var(--suave)}
+.cartao{background:var(--branco);border:1px solid var(--linha);border-radius:22px;box-shadow:var(--sombra);padding:24px;display:flex;flex-direction:column;gap:14px;margin-bottom:16px;min-width:0}
+.cartao h3{font-size:22px}
 .grade{display:grid;gap:16px;margin-bottom:16px}
 .g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
 .grade .cartao{margin-bottom:0}
-.cartao ul,.cartao ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px}
-.cartao li{min-width:0}
-li,p{overflow-wrap:break-word}
+.cartao ul,.cartao ol,.passo ul,.passo ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px}
 
-/* passo numerado */
-.passo{display:grid;grid-template-columns:52px 1fr;gap:18px;align-items:start}
-.passo .n{width:52px;height:52px;border-radius:50%;background:var(--pessego);color:var(--mag);display:grid;place-items:center;font:400 26px/1 var(--disp)}
-.passo .co{display:flex;flex-direction:column;gap:12px;min-width:0}
-@media (max-width:560px){.passo{grid-template-columns:1fr;gap:12px}}
+/* o resultado prometido */
+.saida{background:var(--pessego);border-radius:22px;padding:24px;margin-bottom:16px}
+.saida h3{font-size:clamp(23px,3.4vw,30px);margin-bottom:14px}
+.saida ol{margin:0;padding-left:0;list-style:none;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.saida li{display:flex;gap:11px;align-items:flex-start;font-size:15.5px;line-height:1.45}
+.saida li .tick{flex:none;width:24px;height:24px;border-radius:50%;background:var(--mag);color:#fff;display:grid;place-items:center;font-size:13px;margin-top:2px}
+
+/* passo da trilha */
+.passo{background:var(--branco);border:1px solid var(--linha);border-radius:22px;box-shadow:var(--sombra);margin-bottom:18px;overflow:hidden;scroll-margin-top:118px}
+.passo.feito{border-color:#BEDCC7}
+.passo-cab{display:grid;grid-template-columns:62px 1fr auto;gap:16px;align-items:center;padding:20px 22px;cursor:pointer;background:none;border:0;width:100%;text-align:left;font:inherit;color:inherit}
+.passo-cab:hover{background:#FDFCFB}
+.passo-cab .n{width:62px;height:62px;border-radius:50%;background:var(--pessego);color:var(--mag);display:grid;place-items:center;font:400 30px/1 var(--disp)}
+.passo.feito .passo-cab .n{background:#E4F1E8;color:var(--verde)}
+.passo-cab .tit{display:flex;flex-direction:column;gap:3px;min-width:0}
+.passo-cab .tit b{font:400 clamp(21px,3vw,27px)/1.1 var(--disp)}
+.passo-cab .tit small{color:var(--suave);font-size:14px;line-height:1.4}
+.passo-cab .seta{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--linha);display:grid;place-items:center;font-size:15px;color:var(--suave);transition:transform .2s}
+.passo[open] .passo-cab .seta{transform:rotate(180deg)}
+.passo-corpo{padding:0 22px 22px;display:flex;flex-direction:column;gap:14px}
+.passo:not([open]) .passo-corpo{display:none}
+@media (max-width:560px){.passo-cab{grid-template-columns:48px 1fr auto;gap:12px;padding:16px}.passo-cab .n{width:48px;height:48px;font-size:24px}.passo-corpo{padding:0 16px 18px}}
+
+.sai{background:#E4F1E8;border-radius:14px;padding:14px 16px;display:flex;gap:11px;align-items:flex-start}
+.sai .r{font:600 11px var(--txt);letter-spacing:.11em;text-transform:uppercase;color:var(--verde);display:block;margin-bottom:4px}
+.sai .tick{flex:none;width:24px;height:24px;border-radius:50%;background:var(--verde);color:#fff;display:grid;place-items:center;font-size:13px}
+
+.marcar{display:flex;align-items:center;gap:11px;font:600 15px var(--txt);background:none;border:1px dashed #CDBFB6;border-radius:14px;padding:13px 16px;cursor:pointer;color:var(--suave);width:100%;text-align:left;min-height:52px}
+.marcar:hover{border-color:var(--mag);color:var(--graf)}
+.marcar .cx{flex:none;width:24px;height:24px;border-radius:7px;border:2px solid #CDBFB6;display:grid;place-items:center;font-size:14px;color:transparent}
+.passo.feito .marcar{border-style:solid;border-color:var(--verde);color:var(--verde)}
+.passo.feito .marcar .cx{background:var(--verde);border-color:var(--verde);color:#fff}
+
+/* mini passos dentro de um passo */
+.mini{display:grid;grid-template-columns:38px 1fr;gap:14px;align-items:start}
+.mini .mn{width:38px;height:38px;border-radius:50%;background:var(--gelo);border:1px solid var(--linha);color:var(--mag);display:grid;place-items:center;font:600 15px var(--txt)}
+.mini .mc{display:flex;flex-direction:column;gap:10px;min-width:0}
+@media (max-width:560px){.mini{grid-template-columns:1fr;gap:8px}}
 
 /* caminho de tela */
 .caminho{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:15px}
@@ -113,33 +137,38 @@ li,p{overflow-wrap:break-word}
 .caminho span{color:var(--suave)}
 
 /* etiquetas */
-.tag{display:inline-block;background:var(--pessego);color:var(--mag);font:600 12px/1 var(--txt);letter-spacing:.06em;text-transform:uppercase;padding:7px 12px;border-radius:999px;white-space:nowrap}
-.tag.esc{background:var(--graf);color:var(--branco)}
-.tag.ok{background:transparent;box-shadow:inset 0 0 0 1px var(--verde);color:var(--verde)}
-.tag.aviso{background:transparent;box-shadow:inset 0 0 0 1px var(--areia);color:var(--areia)}
+.tag{display:inline-block;background:var(--pessego);color:var(--mag);font:600 11.5px var(--txt);letter-spacing:.05em;text-transform:uppercase;padding:6px 11px;border-radius:999px;white-space:nowrap}
+.tag.esc{background:var(--graf);color:#fff}
+.tag.ok{background:#E4F1E8;color:var(--verde)}
+.tag.aviso{background:#FAEFDA;color:var(--areia)}
+.tag.neutra{background:#EFEBE6;color:var(--suave)}
 .tags{display:flex;flex-wrap:wrap;gap:7px}
 
 /* destaque */
-.dest{background:var(--pessego);border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
-.dest .frase-forte{font:400 clamp(21px,3.2vw,28px)/1.18 var(--disp);color:var(--graf)}
+.dest{background:var(--pessego);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:11px;margin-bottom:16px}
 .dest.escuro{background:var(--noite);color:#fff}
+.dest.escuro p{color:#D9C9CF}
 .dest.escuro .frase-forte{color:#fff}
 .dest.escuro .tag{background:var(--acesa);color:#fff}
-.dest.escuro p{color:#D9C9CF}
+.dest.perigo{background:#F7E4E8}
+.frase-forte{font:400 clamp(21px,3.2vw,28px)/1.18 var(--disp);color:var(--graf)}
 .nota{color:var(--suave);font-size:15px}
+.mao{font-family:var(--mao);color:var(--mag);font-size:26px;line-height:1.15}
 
 /* prompt */
-.pedido{background:var(--noite);color:#F4F2EE;border-radius:18px;padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+.pedido{background:var(--noite);color:#F4F2EE;border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:11px}
 .pedido-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.pedido-top b{font:600 12.5px var(--txt);letter-spacing:.12em;text-transform:uppercase;color:var(--acesa)}
-.pedido pre{margin:0;white-space:pre-wrap;font:400 15px/1.6 var(--txt);overflow-x:auto}
-.copiar{flex:none;font:600 14px var(--txt);background:var(--acesa);color:#fff;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;min-height:42px}
+.pedido-top .q{display:flex;flex-direction:column;gap:2px;min-width:0}
+.pedido-top b{font:600 12.5px var(--txt);letter-spacing:.11em;text-transform:uppercase;color:var(--acesa)}
+.pedido-top small{font-size:12.5px;color:#A9989E}
+.pedido pre{margin:0;white-space:pre-wrap;font:400 14.5px/1.6 var(--txt);overflow-x:auto}
+.copiar{flex:none;font:600 13.5px var(--txt);background:var(--acesa);color:#fff;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;min-height:42px}
 .copiar:hover{background:#C91F65}
 
 /* tabela */
-.rolo{overflow-x:auto;border:1px solid var(--linha);border-radius:18px;background:var(--branco)}
+.rolo{overflow-x:auto;border:1px solid var(--linha);border-radius:16px;background:var(--branco)}
 table{border-collapse:collapse;width:100%;min-width:560px}
-th,td{text-align:left;padding:13px 15px;border-bottom:1px solid var(--linha);font-size:15px;vertical-align:top;line-height:1.5}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--linha);font-size:15px;vertical-align:top;line-height:1.5}
 th{font:600 11.5px var(--txt);letter-spacing:.12em;text-transform:uppercase;color:var(--suave);background:#F7F4F0}
 tr:last-child td{border-bottom:0}
 .fonte{display:inline-block;font:600 10.5px var(--txt);letter-spacing:.07em;text-transform:uppercase;border-radius:5px;padding:3px 8px;margin-bottom:6px;white-space:nowrap}
@@ -147,19 +176,38 @@ tr:last-child td{border-bottom:0}
 .f-arquivo{background:#FAEFDA;color:var(--areia)}
 .f-conector{background:var(--pessego);color:var(--mag)}
 
-/* links oficiais */
-.links{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-bottom:16px}
-.links a{display:flex;flex-direction:column;gap:5px;text-decoration:none;background:var(--branco);border:1px solid var(--linha);border-radius:20px;padding:20px;box-shadow:var(--sombra)}
-.links a b{color:var(--graf);font:600 17px var(--txt)}
-.links a .url{color:var(--mag);font:600 13.5px var(--txt);word-break:break-all}
-.links a small{color:var(--suave);font-size:14px;line-height:1.45}
-.links a:hover{border-color:#CDBFB6}
+/* baixar */
+.baixar{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.baixar a{display:flex;flex-direction:column;gap:4px;text-decoration:none;background:var(--gelo);border:1px solid var(--linha);border-radius:16px;padding:16px 18px}
+.baixar a b{color:var(--graf);font:600 16px var(--txt)}
+.baixar a small{color:var(--suave);font-size:13.5px;line-height:1.4}
+.baixar a:hover{border-color:var(--mag);background:#fff}
+.links{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.links a{display:flex;flex-direction:column;gap:4px;text-decoration:none;background:var(--branco);border:1px solid var(--linha);border-radius:18px;padding:18px;box-shadow:var(--sombra)}
+.links a b{color:var(--graf);font:600 16px var(--txt)}
+.links a .url{color:var(--mag);font:600 13px var(--txt);word-break:break-all}
+.links a small{color:var(--suave);font-size:13.5px;line-height:1.45}
 
-.rodape{display:flex;flex-direction:column;align-items:center;gap:12px;padding-block:66px 46px;color:var(--suave);font-size:13px;text-align:center}
-.rodape img{width:72px}
-.rodape .linha-cap{letter-spacing:.14em;text-transform:uppercase}
-@media (max-width:640px){body{font-size:16px}.secao{padding-block:52px 4px}.cartao{padding:22px 18px}th,td{padding:11px 12px}}
-@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
+/* consulta, em sanfona */
+details.ref{background:var(--branco);border:1px solid var(--linha);border-radius:20px;box-shadow:var(--sombra);margin-bottom:14px;overflow:hidden}
+details.ref>summary{cursor:pointer;padding:20px 22px;font:400 clamp(21px,3vw,26px)/1.1 var(--disp);display:flex;justify-content:space-between;align-items:center;gap:14px;list-style:none}
+details.ref>summary::-webkit-details-marker{display:none}
+details.ref>summary::after{content:"+";font-family:var(--txt);font-weight:600;font-size:22px;color:var(--mag);flex:none}
+details.ref[open]>summary::after{content:"−"}
+details.ref>summary small{display:block;font:400 14px var(--txt);color:var(--suave);margin-top:4px}
+.ref-corpo{padding:0 22px 22px;display:flex;flex-direction:column;gap:14px}
+@media (max-width:560px){details.ref>summary{padding:17px}.ref-corpo{padding:0 17px 18px}.cartao{padding:20px 17px}}
+
+/* glossário */
+.glos{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.glos div{background:var(--gelo);border-radius:14px;padding:13px 15px;font-size:14.5px;line-height:1.45}
+.glos b{display:block;color:var(--mag);font-size:15px;margin-bottom:2px}
+
+footer{background:var(--branco);border-top:1px solid var(--linha);padding:34px 0 46px;color:var(--suave);font-size:14px;text-align:center;
+  margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)))}
+footer img{width:68px;margin-bottom:10px}
+footer .cap{letter-spacing:.14em;text-transform:uppercase;font-size:12.5px}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01s!important}}
 </style>
 </head>
 <body>
@@ -168,14 +216,14 @@ tr:last-child td{border-bottom:0}
   <div class="in">
     <p class="eyebrow">Modo Automático · Turma Fundadora</p>
     <h1>Biblioteca <span>da turma</span></h1>
-    <p>Tudo o que foi mostrado na aula, para você consultar depois, na hora em que precisar. Cada passo tem um pedido pronto: você copia, cola no Claude, e ele conduz, perguntando uma coisa por vez.</p>
+    <p>Comece pelo passo 1 e siga a ordem. Cada passo diz exatamente o que fazer, e no fim você sai com o seu funcionário trabalhando.</p>
   </div>
 </header>
 
 <section class="portao">
   <div class="wrap">
     <form class="caixa-cad" id="fcad" novalidate>
-      <h3>Esta biblioteca é só da turma</h3>
+      <h3 style="font-family:var(--disp);font-size:26px">Esta biblioteca é só da turma</h3>
       <p class="sub">Preencha uma vez e o acesso fica guardado neste aparelho. Serve também para qualquer outro material que eu liberar.</p>
       <label>Seu nome<input name="nome" autocomplete="name" required></label>
       <label>E-mail<input name="email" type="email" autocomplete="email" required></label>
@@ -198,69 +246,85 @@ tr:last-child td{border-bottom:0}
 
 <div class="barra so-dentro">
   <nav>
-    <a href="#sistema">O seu sistema</a>
-    <a href="#comecar">Comece por aqui</a>
-    <a href="#instalar">Instalar</a>
-    <a href="#plugins">Os plugins oficiais</a>
-    <a href="#achar">Onde achar</a>
+    <a href="#trilha">A trilha</a>
+    <a href="#prompts">Todos os prompts</a>
+    <a href="#plugins">Os plugins</a>
     <a href="#atalhos">Atalhos</a>
-    <a href="#regras">Segurança</a>
+    <a href="#glossario">Glossário</a>
+    <a href="#seguranca">Segurança</a>
   </nav>
+  <div class="progresso"><span id="contaPassos">0 de 7</span><div class="trilhoP"><i id="barraP"></i></div></div>
 </div>
 
 <main class="wrap so-dentro">
 
-<section class="secao" id="indice" style="padding-top:44px">
+<!-- ================= O QUE VOCÊ GANHA ================= -->
+<section class="secao" id="trilha" style="padding-top:40px">
   <div class="secao-cab">
-    <p class="eyebrow">O que tem aqui dentro</p>
-    <h2>Sete blocos, nessa ordem</h2>
-    <p class="lead">Não precisa ler tudo de uma vez. Entre pelo que você quer resolver agora. Se é a primeira vez aqui, comece pelo zero: baixe o seu sistema.</p>
+    <p class="eyebrow">Comece aqui</p>
+    <h2>Siga a ordem dos blocos</h2>
+    <p>Cada bloco abre e mostra o que fazer, clique por clique, com o pedido pronto para copiar. Marque quando terminar e passe para o próximo. Não pule.</p>
   </div>
-  <div class="indice">
-    <a href="#sistema"><span class="n">0</span><b>O seu sistema</b><small>Meu Funcionário: baixe, instale e comece a preencher hoje</small></a>
-    <a href="#comecar"><span class="n">1</span><b>Comece por aqui</b><small>App e Code: o que faz o quê, e as três palavras do dia a dia</small></a>
-    <a href="#instalar"><span class="n">2</span><b>Instalar</b><small>Skill e plugin, clique por clique, com o nome real de cada tela</small></a>
-    <a href="#plugins"><span class="n">3</span><b>Os plugins oficiais</b><small>O que cada um faz, e de onde ele tira o dado</small></a>
-    <a href="#achar"><span class="n">4</span><b>Onde achar</b><small>Os endereços oficiais e as skills que entregam arquivo pronto</small></a>
-    <a href="#atalhos"><span class="n">5</span><b>Atalhos</b><small>O que muda o dia, e onde cada um funciona</small></a>
-    <a href="#regras"><span class="n">6</span><b>Segurança</b><small>As duas regras que valem para sempre</small></a>
-  </div>
-</section>
 
-<!-- ========== 0 · O SEU SISTEMA ========== -->
-<section class="secao" id="sistema">
-  <div class="secao-cab">
-    <p class="eyebrow">Baixe agora</p>
-    <h2>Meu Funcionário</h2>
-    <p class="lead">O seu sistema, para instalar hoje. Ele chega vazio e vai enchendo conforme você conversa com o Claude. É o mesmo arquivo que vira a sua plataforma no ar, na semana 4.</p>
+  <div class="saida">
+    <h3>No fim você sai com isso</h3>
+    <ol>
+      <li><span class="tick">✓</span><span>O <b>seu sistema aberto</b> no seu computador, com os seus dados dentro</span></li>
+      <li><span class="tick">✓</span><span>Um Claude que <b>conhece o seu negócio</b> e escreve no seu tom</span></li>
+      <li><span class="tick">✓</span><span>O <b>seu WhatsApp ligado</b>, com ele falando com você no seu número</span></li>
+      <li><span class="tick">✓</span><span><b>Quatro rotinas rodando sozinhas</b>: bom dia, plantão, fechamento e arrumação</span></li>
+    </ol>
   </div>
 
   <div class="dest escuro">
-    <span class="tag">O que você vai ter</span>
-    <p class="frase-forte">Um lugar só com os seus leads, os seus resultados, o seu Instagram, o seu planejamento e os conteúdos esperando o seu sim.</p>
+    <span class="tag">A regra que vale para tudo</span>
+    <p class="frase-forte">Você não precisa saber fazer. Em cada passo, quem faz é ele: você copia o pedido, cola, e vai respondendo.</p>
+    <p>Se ele travar, cole o pedido de socorro que está no fim de cada bloco. Se precisar do seu login, ele para e diz exatamente onde clicar.</p>
   </div>
 
-  <div class="cartao">
-    <div class="passo"><span class="n">1</span><div class="co">
-      <h3>Baixe e guarde</h3>
-      <p>Baixe o arquivo e descompacte numa pasta que você ache depois, tipo Documentos. Pode manter o nome <code>meu-funcionario</code>.</p>
-      <p><a class="botao" href="arquivos/meu-funcionario.zip" download>Baixar o Meu Funcionário</a></p>
-    </div></div>
-  </div>
+  <!-- ===== PASSO 1 ===== -->
+  <details class="passo" id="p1" data-passo="1" open>
+    <summary class="passo-cab"><span class="n">1</span>
+      <span class="tit"><b>Baixe o seu sistema</b><small>5 minutos · a tela onde tudo vai aparecer</small></span>
+      <span class="seta">▾</span></summary>
+    <div class="passo-corpo">
+      <p>O Meu Funcionário é uma tela que abre no seu navegador e mostra os seus leads, o seu dinheiro, o seu Instagram, os conteúdos esperando o seu sim e o seu WhatsApp. Ele chega vazio de propósito.</p>
 
-  <div class="cartao">
-    <div class="passo"><span class="n">2</span><div class="co">
-      <h3>Abra para ver</h3>
-      <p>Dois cliques no arquivo <code>index.html</code>. Ele abre no seu navegador. Vai estar vazio, e cada tela diz o que fazer para encher.</p>
-    </div></div>
-  </div>
+      <div class="mini"><span class="mn">1</span><div class="mc">
+        <h4>Baixe e descompacte</h4>
+        <p>Guarde numa pasta que você ache depois, tipo Documentos. Pode manter o nome <code>meu-funcionario</code>.</p>
+        <p><a class="botao" href="arquivos/meu-funcionario.zip" download>Baixar o Meu Funcionário</a></p>
+      </div></div>
 
-  <div class="cartao">
-    <div class="passo"><span class="n">3</span><div class="co">
-      <h3>Apresente você ao seu funcionário</h3>
-      <p>Abra o Claude, vá na aba <b>Code</b>, aponte para essa pasta e cole o pedido abaixo. Ele pergunta uma coisa por vez e escreve tudo no seu lugar.</p>
-      <div class="pedido">
-        <div class="pedido-top"><b>O primeiro pedido</b><button class="copiar" type="button">Copiar o pedido</button></div>
+      <div class="mini"><span class="mn">2</span><div class="mc">
+        <h4>Abra para ver</h4>
+        <p>Dois cliques no arquivo <code>index.html</code>. Ele abre no navegador, vazio, com doze telas no menu da esquerda.</p>
+      </div></div>
+
+      <div class="mini"><span class="mn">3</span><div class="mc">
+        <h4>Aponte o Claude para essa pasta</h4>
+        <p>Abra o Claude no computador, vá na aba <b>Code</b> e escolha essa pasta como o projeto. É dali que ele vai preencher tudo.</p>
+        <p class="nota">Se ele perguntar se pode confiar na pasta, diga que sim. A pasta é sua.</p>
+      </div></div>
+
+      <div class="sai"><span class="tick">✓</span><div><span class="r">Você sai deste passo com</span>A tela aberta no seu computador e o Claude apontado para a pasta.</div></div>
+      <button class="marcar" type="button"><span class="cx">✓</span>Já fiz este passo</button>
+    </div>
+  </details>
+
+  <!-- ===== PASSO 2 ===== -->
+  <details class="passo" id="p2" data-passo="2">
+    <summary class="passo-cab"><span class="n">2</span>
+      <span class="tit"><b>Deixe ele te conhecer</b><small>20 minutos · é o passo que faz tudo deixar de ser genérico</small></span>
+      <span class="seta">▾</span></summary>
+    <div class="passo-corpo">
+      <p>Enquanto ele não souber quem você é, tudo o que ele escrever vai ser chute bonito. Este passo resolve isso de uma vez.</p>
+
+      <div class="mini"><span class="mn">1</span><div class="mc">
+        <h4>Conte o seu negócio</h4>
+        <p>Cole o pedido abaixo na aba Code. Ele pergunta uma coisa por vez e escreve tudo no seu lugar.</p>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>O primeiro pedido</b><small>Cole na aba Code</small></span><button class="copiar" type="button">Copiar</button></div>
 <pre>Você é o meu funcionário e esta pasta é o nosso sistema. Vamos começar pelo começo: me conhecer.
 
 Faça assim:
@@ -270,723 +334,787 @@ Faça assim:
 4. Quando terminarmos, grave tudo em dados/negocio.js, respeitando os campos que já estão lá, e me avise para eu recarregar a tela.
 
 Não me deixe nada para preencher sozinha. Se faltar informação, pergunte, não invente. Nunca escreva senha, chave ou token em nenhum arquivo.</pre>
+        </div>
+        <p class="nota">Quando ele avisar, volte no navegador e aperte F5. A tela Meu negócio estará preenchida.</p>
+      </div></div>
+
+      <div class="mini"><span class="mn">2</span><div class="mc">
+        <h4>Ensine o seu jeito de falar</h4>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>A sua marca</b><small>Cole na aba Code</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Agora vamos escrever a minha marca. Conduza você e escreva tudo no meu lugar.
+
+1. Me faça UMA pergunta por vez: que cores eu já uso, que fontes, como eu falo com o meu cliente, que palavras eu uso sempre, que palavras eu nunca uso, e o que não pode aparecer na minha arte nem no meu texto.
+2. Se eu disser que não tenho cor nem fonte definidas, não me deixe sem nada: proponha uma paleta e duas fontes que combinem com o meu negócio, me mostre e pergunte se eu gosto.
+3. Me peça dois ou três perfis que eu acho bonitos e pergunte o que eu gosto em cada um.
+4. Grave em dados/marca.js, com o código de cada cor.
+5. No fim, escreva uma frase que resuma o meu jeito de falar, para eu colar em qualquer lugar.
+
+Não use palavra de designer sem explicar na mesma frase.</pre>
+        </div>
+      </div></div>
+
+      <div class="mini"><span class="mn">3</span><div class="mc">
+        <h4>Toda correção sua vira regra</h4>
+        <p>Sempre que ele errar o seu tom, não corrija duas vezes. Mande isto:</p>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Correção vira regra</b><small>Sempre que você corrigir</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Anote isso como regra no meu CLAUDE.md, para não repetir: [escreva aqui o que você corrigiu].</pre>
+        </div>
+      </div></div>
+
+      <div class="mini"><span class="mn">4</span><div class="mc">
+        <h4>Se você quiser o cérebro completo</h4>
+        <p>O plugin Cérebro monta seis documentos sobre você, com uma entrevista mais longa. Baixe o da sua área e peça a entrevista.</p>
+        <div class="baixar">
+          <a href="../materiais/arquivos/cerebro-marketing.zip" download><b>Cérebro · Marketing</b><small>social media, designer, editora, agência</small></a>
+          <a href="../materiais/arquivos/cerebro-liberais.zip" download><b>Cérebro · Liberais</b><small>advogada, consultora, arquiteta</small></a>
+          <a href="../materiais/arquivos/cerebro-saude.zip" download><b>Cérebro · Saúde</b><small>a gestão da sua marca, sem dado de paciente</small></a>
+        </div>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Entrevista do cérebro</b><small>Depois de instalar o plugin</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Quero que você me conheça para trabalhar do meu jeito.
+Use o plugin Cérebro e monte o meu cérebro:
+1. Me faça 10 perguntas, uma de cada vez, e espere a minha resposta antes da próxima.
+2. Pergunte quem eu sou, o que eu faço, para quem, como eu falo e o que eu nunca faço.
+3. Me peça 3 mensagens reais que eu já mandei para clientes, para aprender o meu tom.
+4. No final, salve tudo na pasta cerebro deste projeto e me mostre um resumo de cada arquivo para eu corrigir.</pre>
+        </div>
+      </div></div>
+
+      <div class="sai"><span class="tick">✓</span><div><span class="r">Você sai deste passo com</span>As telas Meu negócio e Minha marca preenchidas, e ele escrevendo no seu tom.</div></div>
+      <button class="marcar" type="button"><span class="cx">✓</span>Já fiz este passo</button>
+    </div>
+  </details>
+
+  <!-- ===== PASSO 3 ===== -->
+  <details class="passo" id="p3" data-passo="3">
+    <summary class="passo-cab"><span class="n">3</span>
+      <span class="tit"><b>Dê ferramentas a ele</b><small>10 minutos · ele instala, você só confirma</small></span>
+      <span class="seta">▾</span></summary>
+    <div class="passo-corpo">
+      <p>Plugin é uma caixa de receitas prontas. Skill é uma receita só. Você não precisa escolher no escuro: o pedido abaixo faz ele escolher e instalar por você.</p>
+
+      <div class="mini"><span class="mn">1</span><div class="mc">
+        <h4>Deixe ele instalar</h4>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Instale para mim</b><small>Cole na aba Code</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Quero os plugins e as skills oficiais que servem para o meu trabalho. Você escolhe e instala, eu não quero decidir no escuro.
+
+1. Leia o meu negócio em dados/negocio.js.
+2. Me diga, em uma linha cada, quais plugins oficiais fazem sentido para mim e por quê. No máximo quatro.
+3. Instale esses plugins e também as skills oficiais de documento, que são as que entregam Word, PDF, apresentação e planilha prontos.
+4. Se algum passo precisar de mim, pare e me diga exatamente onde clicar, com o nome do botão em português.
+5. No fim, liste o que ficou instalado e me dê um pedido pronto, com as minhas palavras, para eu testar um deles na hora.
+6. Grave essa lista em dados/cerebro.js, no campo plugins.
+
+Não instale nada de terceiro sem me avisar antes.</pre>
+        </div>
+      </div></div>
+
+      <div class="mini"><span class="mn">2</span><div class="mc">
+        <h4>Se você preferir instalar clicando</h4>
+        <div class="caminho"><i>Configurações</i><span>›</span><i>Personalização</i><span>›</span><i>Plugins</i><span>›</span><i>aba Descobrir</i><span>›</span><i>+ no cartão</i></div>
+        <p>A aba <b>Descobrir</b> abre na seção <b>Para você</b>, com os plugins oficiais em cartões. Clique no <b>+</b> do cartão. No cartão em destaque, o botão escrito é <b>Adicionar</b>. É só isso, não tem endereço para colar.</p>
+        <p class="nota">A aba <b>Meus</b> é o que você já tem. O botão <b>+ Adicionar</b> do canto só serve para plugin que não está na vitrine.</p>
+      </div></div>
+
+      <div class="mini"><span class="mn">3</span><div class="mc">
+        <h4>A permissão que faz ele entregar arquivo</h4>
+        <div class="caminho"><i>Configurações</i><span>›</span><i>Recursos</i></div>
+        <p>É onde mora a permissão de executar código e criar arquivo. No plano Pro ela normalmente já vem ligada, então você não precisa mexer. Está escrito aqui só para o caso de uma skill de documento não entregar o arquivo.</p>
+      </div></div>
+
+      <div class="sai"><span class="tick">✓</span><div><span class="r">Você sai deste passo com</span>Os plugins certos instalados e um arquivo pronto feito por ele, para você ver funcionando.</div></div>
+      <button class="marcar" type="button"><span class="cx">✓</span>Já fiz este passo</button>
+    </div>
+  </details>
+
+  <!-- ===== PASSO 4 ===== -->
+  <details class="passo" id="p4" data-passo="4">
+    <summary class="passo-cab"><span class="n">4</span>
+      <span class="tit"><b>Ligue o seu WhatsApp</b><small>20 minutos · R$ 29,90 por mês · é aqui que ele vira funcionário</small></span>
+      <span class="seta">▾</span></summary>
+    <div class="passo-corpo">
+      <p>Ele passa a falar com você no seu próprio número. A ligação é pela uazapi, e não usa conector: entra por um arquivo que você mesma cria.</p>
+
+      <div class="dest perigo">
+        <span class="tag" style="background:#A4122F;color:#fff">Saúde e advocacia, leia antes</span>
+        <p>Use só para mandar resumos para você mesma, num número secundário. Não conecte o número que conversa com pacientes ou clientes. A conexão não é oficial e o WhatsApp pode bloquear números.</p>
       </div>
-      <p class="nota">Quando ele avisar, volte no navegador e aperte F5. A tela estará preenchida.</p>
-    </div></div>
+
+      <div class="mini"><span class="mn">1</span><div class="mc">
+        <h4>Contrate a sua instância</h4>
+        <p>Entre em <a href="https://uazapi.dev" target="_blank" rel="noopener">uazapi.dev</a>, clique em <b>Assinar</b> e escolha o plano de 1 instância, R$ 29,90 por mês. O painel se chama uazapiGO.</p>
+      </div></div>
+
+      <div class="mini"><span class="mn">2</span><div class="mc">
+        <h4>Clique em Nova Instância</h4>
+        <p>No painel, clique no botão azul <b>Nova Instância</b>, à direita. Dê o nome <code>meu-funcionario</code>. O QR code aparece.</p>
+      </div></div>
+
+      <div class="mini"><span class="mn">3</span><div class="mc">
+        <h4>Leia o QR code com o celular</h4>
+        <p>No celular: <b>WhatsApp › Aparelhos conectados › Conectar um aparelho</b>. Aponte a câmera para o QR code do painel. A instância fica conectada.</p>
+      </div></div>
+
+      <div class="mini"><span class="mn">4</span><div class="mc">
+        <h4>Copie o Server URL e o token da instância</h4>
+        <p>O <b>Server URL</b> fica no topo do painel. O <b>token da instância</b> fica dentro da instância que você criou. Deixe o painel aberto, você vai usar os dois agora.</p>
+        <div class="dest perigo" style="margin:0">
+          <p><b>Não é o Admin Token.</b> Ele controla a conta inteira. O seu funcionário usa só o token da instância.</p>
+          <p>O token é a chave do seu WhatsApp. Não cole em conversa nenhuma, nem com o Claude. Ele vai ler a chave de um arquivo que você cria no próximo passo.</p>
+        </div>
+      </div></div>
+
+      <div class="mini"><span class="mn">5</span><div class="mc">
+        <h4>Guarde a chave num arquivo, você mesma</h4>
+        <p>Abra o Bloco de Notas. No Mac, o TextEdit, em <b>Formatar › Converter em texto simples</b>. Copie o modelo, cole e troque o que está entre colchetes.</p>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Modelo do whatsapp.json</b><small>Cole no Bloco de Notas, nunca no Claude</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>{
+  "servidor": "[cole o Server URL]",
+  "token": "[cole o token da instância]",
+  "meu_numero": "[55 + DDD + número, só números]"
+}</pre>
+        </div>
+        <ul>
+          <li><b>Arquivo › Salvar como.</b></li>
+          <li>Em <b>Tipo</b>, escolha <b>Todos os arquivos</b>. Senão ele vira <code>whatsapp.json.txt</code> e não funciona.</li>
+          <li>Nome: <code>whatsapp.json</code>. Pasta: a mesma do <code>meu-funcionario</code>.</li>
+        </ul>
+      </div></div>
+
+      <div class="mini"><span class="mn">6</span><div class="mc">
+        <h4>Baixe o playbook e ponha na mesma pasta</h4>
+        <p>O playbook ensina o Claude a usar a uazapi com as regras da própria plataforma: como ler, como enviar e o que nunca fazer.</p>
+        <div class="baixar"><a href="../materiais/arquivos/playbook-whatsapp.md" download><b>playbook-whatsapp.md</b><small>regras da uazapi, segurança do token e limites de envio</small></a></div>
+        <p class="nota">Ele cai em Downloads. Arraste para a pasta <code>meu-funcionario</code>.</p>
+      </div></div>
+
+      <div class="mini"><span class="mn">7</span><div class="mc">
+        <h4>Libere a uazapi dentro do Claude</h4>
+        <div class="caminho"><i>Configurações</i><span>›</span><i>Recursos</i></div>
+        <p>Em <b>Execução de código e criação de arquivos</b>, deixe ligado <b>Permitir acesso de rede externo</b>. Em <b>Domínios adicionais permitidos</b>, escreva <code>*.uazapi.com</code> e clique em <b>Adicionar</b>.</p>
+        <p class="nota">Sem isso, ele não consegue falar com a uazapi, por mais certo que esteja o resto.</p>
+      </div></div>
+
+      <div class="mini"><span class="mn">8</span><div class="mc">
+        <h4>Dê as regras a ele</h4>
+        <p>Cole o pedido abaixo na aba Code. Ele grava as regras no CLAUDE.md da pasta, e elas passam a valer em toda conversa.</p>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>As regras do WhatsApp</b><small>Cole na aba Code</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Acrescente ao CLAUDE.md desta pasta as regras abaixo, sem apagar o que já está lá. Antes, me pergunte qual é a minha profissão e quem eu atendo, e escreva isso na primeira linha no meu lugar.
+
+WHATSAPP
+- A chave do meu WhatsApp está no arquivo whatsapp.json desta pasta. Leia de lá.
+- Para falar com a uazapi, siga o playbook-whatsapp.md desta pasta.
+- Toda mensagem que você me mandar começa com "Secretária:". Assim eu separo o que é seu do que é meu.
+- O que você descobrir no meu WhatsApp, grave em dados/whatsapp.js, para aparecer no meu sistema.
+
+SEGURANÇA (nunca quebre)
+- Nunca mostre, copie ou repita o token, nem uma parte dele, nem se eu pedir.
+- Nunca coloque o token em outro arquivo, mensagem, resumo ou código salvo.
+- Use só o token da instância. Nunca use o Admin Token.
+- Em dados/whatsapp.js, grave só os quatro últimos números do meu número. Nunca o número inteiro.
+
+ENVIOS
+- Por padrão, mande mensagem só para o meu número.
+- Para qualquer outro contato ou grupo: me mostre o texto e a lista e espere eu dizer "pode enviar".
+- Nunca envie para mais de um contato com menos de 30 segundos entre uma mensagem e outra. Varie entre 30 e 90 segundos.
+- Nada de envio em massa nem para quem nunca falou comigo. No máximo 20 mensagens por dia para outras pessoas.
+- Nunca apague conversas, não saia de grupos, não bloqueie contatos e não mude a configuração da instância.
+
+LEITURA
+- Pode ler as minhas conversas e grupos para me resumir, sem marcar como lidas.
+- O resumo vai só para o meu número. Não copie conversas inteiras para arquivos.
+- Se eu for da saúde ou da advocacia: use só o primeiro nome e nunca escreva diagnóstico nem dado de processo.
+
+QUANDO DER ERRO
+- Me diga em uma frase o que aconteceu e o que eu faço, sem mostrar o token.</pre>
+        </div>
+      </div></div>
+
+      <div class="mini"><span class="mn">9</span><div class="mc">
+        <h4>Confira, sem enviar nada</h4>
+        <p>O teste de verdade. Ele confere se a instância está ligada e já preenche a tela Meu WhatsApp do seu sistema.</p>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>A conferência</b><small>Cole na aba Code</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Vamos conferir se o meu WhatsApp está ligado. Use o whatsapp.json e o playbook desta pasta e NÃO envie nenhuma mensagem.
+
+1. Veja se a instância está conectada e me diga só os quatro últimos números do número ligado.
+2. Liste os grupos de que eu participo, com o nome e quantas pessoas.
+3. Liste as conversas que estão esperando resposta minha: só o primeiro nome, o que a pessoa pediu e o que ela espera de mim.
+4. Grave tudo isso em dados/whatsapp.js, com ligado igual a true, e me avise para eu recarregar a tela do sistema.
+
+Nunca escreva o token nem o meu número inteiro em arquivo nenhum.</pre>
+        </div>
+        <p class="nota">Recarregue o sistema. A tela <b>Meu WhatsApp</b> e o alto da tela <b>Hoje</b> já aparecem preenchidos.</p>
+      </div></div>
+
+      <div class="mini"><span class="mn">10</span><div class="mc">
+        <h4>Agora sim, ela diz oi</h4>
+        <p>A mensagem chega na conversa com o seu próprio número. No WhatsApp ela aparece como <b>Você</b>.</p>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Teste de envio</b><small>Cole na aba Code</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Agora mande para o meu número, e só para ele, esta mensagem:
+"Secretária: Oi! A partir de hoje eu falo com você por aqui. Pode me pedir coisas nesta conversa."
+Depois me diga se deu certo.</pre>
+        </div>
+      </div></div>
+
+      <div class="cartao" style="margin:0">
+        <h3>Deu errado?</h3>
+        <div class="rolo">
+          <table>
+            <thead><tr><th>o que aconteceu</th><th>o que fazer</th></tr></thead>
+            <tbody>
+              <tr><td><b>Não chegou nada</b></td><td>Veja no painel se a instância está conectada. Se caiu, leia o QR code de novo</td></tr>
+              <tr><td><b>Erro 401</b></td><td>Quase sempre é o Admin Token no lugar do token da instância, ou o Server URL errado. Corrija no whatsapp.json</td></tr>
+              <tr><td><b>Ele não acha o arquivo</b></td><td>Confira se o nome ficou <code>whatsapp.json</code> e não <code>whatsapp.json.txt</code>, e se está na pasta do projeto</td></tr>
+              <tr><td><b>Diz que não consegue acessar a uazapi</b></td><td>Volte no 7: Configurações › Recursos › Domínios adicionais permitidos precisa ter <code>*.uazapi.com</code>, com o acesso de rede externo ligado</td></tr>
+              <tr><td><b>Número errado</b></td><td>Só números, com 55 e DDD</td></tr>
+              <tr><td><b>Desconectou sozinho</b></td><td>O celular ficou dias sem internet ou saiu de Aparelhos conectados. Leia o QR code de novo</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="sai"><span class="tick">✓</span><div><span class="r">Você sai deste passo com</span>Uma mensagem da sua secretária chegando no seu WhatsApp, e a tela Meu WhatsApp preenchida.</div></div>
+      <button class="marcar" type="button"><span class="cx">✓</span>Já fiz este passo</button>
+    </div>
+  </details>
+
+  <!-- ===== PASSO 5 ===== -->
+  <details class="passo" id="p5" data-passo="5">
+    <summary class="passo-cab"><span class="n">5</span>
+      <span class="tit"><b>Ligue as suas ferramentas</b><small>15 minutos · agenda, e-mail, Drive e o resto</small></span>
+      <span class="seta">▾</span></summary>
+    <div class="passo-corpo">
+      <p>Conector é o cabo que liga o Claude num app seu. Sem conector ligado, ele não enxerga a sua agenda nem o seu e-mail, por mais que você peça.</p>
+
+      <div class="mini"><span class="mn">1</span><div class="mc">
+        <h4>Deixe ele dizer o que você precisa</h4>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Que conectores eu preciso</b><small>Cole na aba Code</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Leia o meu negócio em dados/negocio.js e me diga quais conectores eu preciso ligar, em ordem de importância, no máximo cinco.
+
+Para cada um:
+1. Diga em uma linha o que ele passa a enxergar e o que isso resolve no meu dia.
+2. Me dê o caminho de tela em passos numerados, com o nome dos botões em português.
+3. Avise se ele é de login simples ou se precisa de conector personalizado com link.
+
+Depois espere eu ligar o primeiro e me perguntar o próximo. Uma coisa por vez.
+Grave a lista do que eu ligar em dados/cerebro.js, no campo conectores.</pre>
+        </div>
+      </div></div>
+
+      <div class="mini"><span class="mn">2</span><div class="mc">
+        <h4>Os de clique, que são a maioria</h4>
+        <div class="caminho"><i>Configurações</i><span>›</span><i>Personalização</i><span>›</span><i>Conectores</i><span>›</span><i>Conectar</i></div>
+        <p>Gmail, Google Agenda e Google Drive estão prontos na lista. Clique em <b>Conectar</b>, entre na sua conta e pronto. É esse login que só você pode fazer.</p>
+      </div></div>
+
+      <div class="mini"><span class="mn">3</span><div class="mc">
+        <h4>Os que pedem um link, com a Apify e o Composio</h4>
+        <p>Serve para serviço que não está na lista. A uazapi não usa isto: ela entra pelo arquivo, no passo 4.</p>
+        <ul>
+          <li><b>Configurações › Personalização › Conectores.</b></li>
+          <li>Botão preto <b>+ Adicionar</b>, depois <b>Adicionar conector personalizado</b>.</li>
+          <li>Em <b>Nome</b>, o nome do serviço. Em <b>URL do servidor MCP</b>, o link da tabela abaixo. Clique em <b>Continuar</b>.</li>
+          <li>Na <b>Etapa 2 de 2</b>, não mexa em nada: deixe o que vem com a etiqueta <b>Detectado</b>. Clique em <b>Adicionar</b>.</li>
+          <li>Aparece "Você ainda não está conectado". Clique em <b>Vincular</b> e entre na conta do serviço.</li>
+        </ul>
+        <div class="rolo">
+          <table>
+            <thead><tr><th>serviço</th><th>para que serve</th><th>o link que você cola</th></tr></thead>
+            <tbody>
+              <tr><td><b>Apify</b></td><td>Robôs que leem a internet por você: comentários de um post, posts dos perfis que você acompanha, avaliações do Google. Conta grátis com US$ 5 por mês</td><td><code>https://mcp.apify.com</code></td></tr>
+              <tr><td><b>Composio</b></td><td>Uma tomada que liga centenas de apps de uma vez: Canva, Trello, Google Sheets, agendadores. Conta grátis</td><td><code>https://connect.composio.dev/mcp</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="nota">Apareceu "Já existe um conector com esta URL"? Você já adicionou antes. Procure o nome na lista e clique em <b>Vincular</b>.</p>
+        <p class="nota">Na Apify o site é em inglês: <b>Sign up</b> é cadastrar, <b>Sign in</b> é entrar, <b>Allow</b> e <b>Authorize</b> são permitir, <b>Actor</b> é robô.</p>
+      </div></div>
+
+      <div class="mini"><span class="mn">4</span><div class="mc">
+        <h4>Três pedidos para usar no mesmo dia</h4>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Comentários viram pauta</b><small>Com a Apify ligada</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Use a Apify para ler os comentários deste post do Instagram: [link do post].
+Separe em dúvidas, elogios e pedidos.
+Para cada dúvida, escreva uma resposta curta no meu tom.
+No fim, me dê 3 ideias de conteúdo que saem dessas dúvidas, e grave em dados/cerebro.js, no campo ideias.</pre>
+        </div>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Avaliações do Google</b><small>Com a Apify ligada</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Use a Apify para ler as avaliações do Google Maps de [nome do consultório ou da empresa, cidade].
+Me diga o que as pessoas mais elogiam e o que mais reclamam.
+Escreva uma resposta educada para as 5 avaliações mais recentes que estão sem resposta.
+[Saúde: nas respostas, não confirme que a pessoa é paciente e não fale de tratamento.]</pre>
+        </div>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Um pedido em outro app</b><small>Com o Composio ligado</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Use o Composio para [salvar esta lista numa planilha do Google Sheets / criar um card no Trello com as tarefas desta reunião / ver os meus posts agendados].
+Antes de criar ou mudar qualquer coisa, me mostre o que vai fazer e espere o meu ok.</pre>
+        </div>
+      </div></div>
+
+      <div class="sai"><span class="tick">✓</span><div><span class="r">Você sai deste passo com</span>Ele lendo a sua agenda e o seu e-mail, e pelo menos um robô trabalhando para você.</div></div>
+      <button class="marcar" type="button"><span class="cx">✓</span>Já fiz este passo</button>
+    </div>
+  </details>
+
+  <!-- ===== PASSO 6 ===== -->
+  <details class="passo" id="p6" data-passo="6">
+    <summary class="passo-cab"><span class="n">6</span>
+      <span class="tit"><b>Ponha ele para trabalhar sozinho</b><small>20 minutos · quatro rotinas, e você para de lembrar das coisas</small></span>
+      <span class="seta">▾</span></summary>
+    <div class="passo-corpo">
+      <div class="dest">
+        <span class="tag">A regra de ouro deste passo</span>
+        <p><b>Teste primeiro, programe depois.</b> Cada rotina tem dois pedidos: um que roda agora, na sua frente, e outro que transforma em tarefa programada. Nunca programe nada que você não viu funcionar.</p>
+      </div>
+
+      <div class="mini"><span class="mn">1</span><div class="mc">
+        <h4>O bom dia</h4>
+        <p>Toda manhã, no seu WhatsApp: a sua agenda, os e-mails que pedem resposta e as suas tarefas.</p>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Bom dia: teste agora</b><small>Cole na aba Code</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Faça agora o meu bom dia, como teste.
+Leia:
+- a minha agenda de hoje no Google Agenda;
+- os e-mails não lidos do Gmail que pedem resposta;
+- as tarefas abertas em dados/dia.js.
+Mande no meu WhatsApp neste modelo (o conteúdo abaixo é só exemplo, não invente nada):
+
+Secretária: Bom dia! Quinta, 09/10
+
+AGENDA
+10h Reunião com a Ana (Meet)
+15h Gravação do Reels
+
+E-MAILS QUE PEDEM RESPOSTA
+- Clínica Vida: pediu a proposta até hoje
+
+TAREFAS DE HOJE
+- Ligar para o contador
+
+A COISA QUE NÃO PODE PASSAR
+Enviar a proposta antes do meio-dia.
+
+Se uma parte estiver vazia, escreva "nada hoje".</pre>
+        </div>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Bom dia: programar</b><small>Depois que o teste der certo</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Deu certo. Transforme o bom dia numa tarefa programada para [todo dia, de segunda a sexta, às 7h]. Depois grave essa rotina em dados/whatsapp.js, no campo rotinas.</pre>
+        </div>
+      </div></div>
+
+      <div class="mini"><span class="mn">2</span><div class="mc">
+        <h4>O plantão</h4>
+        <p>De hora em hora, ele lê o que você mandou para o seu próprio número e resolve. É assim que você manda tarefa para ele pelo WhatsApp.</p>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Plantão: teste agora</b><small>Cole na aba Code</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Faça agora o plantão do WhatsApp, como teste.
+1. Leia a minha conversa com o meu próprio número desde o último plantão. O horário do último plantão fica no arquivo plantao.json desta pasta. Se ele não existir, leia só as últimas 3 horas.
+2. Ignore as mensagens que começam com "Secretária:" (são suas).
+3. Para cada pedido meu, faça o que der:
+   - lembrete ou tarefa: anote em dados/dia.js, com data;
+   - compromisso: crie no meu Google Agenda e anote em dados/dia.js;
+   - responder um e-mail: deixe um rascunho no Gmail, nunca envie;
+   - pergunta sobre a minha agenda, os meus e-mails ou as minhas tarefas: responda.
+4. Nunca mande mensagem para outra pessoa e nunca apague nada. Se o pedido for isso, me pergunte antes.
+5. Me responda no WhatsApp, começando com "Secretária:", dizendo em uma linha o que você fez em cada pedido.
+6. Salve no plantao.json o horário de agora, e registre o que você fez em dados/dia.js, no campo oQueOFuncionarioFez.
+Se não houver pedido novo, não mande nada.</pre>
+        </div>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Plantão: programar</b><small>Depois que o teste der certo</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Deu certo. Transforme o plantão numa tarefa programada [de hora em hora, das 8h às 20h]. Fora desse horário, não faça nada. Grave a rotina em dados/whatsapp.js.</pre>
+        </div>
+      </div></div>
+
+      <div class="mini"><span class="mn">3</span><div class="mc">
+        <h4>O fechamento do dia</h4>
+        <p>No fim da tarde: quem ficou esperando você, o que você prometeu e o que fazer primeiro amanhã.</p>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Fechamento: teste agora</b><small>Cole na aba Code</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Faça agora o fechamento do dia, como teste.
+Leia as conversas de hoje no meu WhatsApp, sem marcar como lidas, e as tarefas em dados/dia.js.
+Mande no meu WhatsApp neste modelo (o conteúdo abaixo é só exemplo, não invente nada):
+
+Secretária: Fechamento de quinta, 09/10
+
+ESPERANDO VOCÊ
+1. Marina: pediu o orçamento do pacote mensal. Espera o valor.
+2. Paulo: quer remarcar para sexta. Espera você confirmar o horário.
+
+VOCÊ PROMETEU
+- Mandar o relatório para a Clínica Vida até amanhã.
+
+RESOLVIDO HOJE
+- Ana aprovou o post de sábado.
+
+AMANHÃ, PRIMEIRO
+Responder a Marina antes das 10h.
+
+Regras:
+- Em ESPERANDO VOCÊ: o primeiro nome, o que a pessoa pediu e o que ela espera de mim. Do mais urgente para o menos urgente.
+- O que eu prometi para alguém também entra em dados/dia.js, com o prazo.
+- Grave a lista de quem está esperando em dados/whatsapp.js, no campo esperando.
+- Não liste grupos nem conversas sem pedido. Parte vazia sai da mensagem.</pre>
+        </div>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Fechamento: versão saúde e advocacia</b><small>Use no lugar do de cima</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Faça agora o fechamento do dia, como teste, sem ler as minhas conversas.
+Leia a minha agenda de amanhã no Google Agenda e as tarefas em dados/dia.js.
+Mande no meu WhatsApp, começando com "Secretária:", o que ficou aberto hoje e como está o meu dia de amanhã, por horário. Use só o primeiro nome das pessoas.</pre>
+        </div>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Fechamento: programar</b><small>Depois que o teste der certo</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Deu certo. Transforme o fechamento numa tarefa programada para [todo dia, de segunda a sexta, às 19h]. Grave a rotina em dados/whatsapp.js.</pre>
+        </div>
+      </div></div>
+
+      <div class="mini"><span class="mn">4</span><div class="mc">
+        <h4>A arrumação da semana</h4>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Arrumação: teste agora</b><small>Cole na aba Code</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Faça agora a arrumação da semana, como teste.
+1. Organize os arquivos soltos da minha pasta [Downloads] em pastas por assunto dentro de Documentos, com nome no padrão ANO-MÊS-DIA_assunto. Não apague nada. O que você não souber onde vai, coloque na pasta "Para revisar".
+2. No Gmail, separe os e-mails da semana que precisam de resposta e deixe um rascunho em cada um, no meu tom. Não envie nenhum.
+3. Me mande no WhatsApp neste modelo (o conteúdo abaixo é só exemplo):
+
+Secretária: Arrumação da semana
+- 23 arquivos da pasta Downloads organizados em Documentos
+- 4 foram para a pasta "Para revisar"
+- 5 rascunhos prontos no Gmail: Clínica Vida, Ana, Paulo, contador e banco
+Confira os rascunhos antes de enviar.</pre>
+        </div>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Arrumação: programar</b><small>Depois que o teste der certo</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Deu certo. Transforme a arrumação numa tarefa programada para [toda sexta, às 17h]. Grave a rotina em dados/whatsapp.js.</pre>
+        </div>
+      </div></div>
+
+      <div class="mini"><span class="mn">5</span><div class="mc">
+        <h4>E a sua própria rotina</h4>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Monte a sua rotina</b><small>Cole na aba Code</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Crie uma tarefa programada neste projeto:
+- Quando: [todo dia às 18h]
+- O que fazer: [escreva o que você quer que ele faça]
+- Para onde mandar: o meu WhatsApp, começando com "Secretária:", numa mensagem curta e com o mais importante primeiro.
+Antes de programar, rode uma vez agora e me mostre o resultado.</pre>
+        </div>
+      </div></div>
+
+      <div class="dest">
+        <span class="tag aviso">A diferença que confunde todo mundo</span>
+        <p>Tarefa programada no computador <b>precisa do computador ligado</b> na hora marcada. Se você quer que rode com o notebook fechado, isso é nuvem, e é assunto da semana 3.</p>
+      </div>
+
+      <div class="sai"><span class="tick">✓</span><div><span class="r">Você sai deste passo com</span>Quatro rotinas programadas, e a tela Meu WhatsApp mostrando todas elas ligadas.</div></div>
+      <button class="marcar" type="button"><span class="cx">✓</span>Já fiz este passo</button>
+    </div>
+  </details>
+
+  <!-- ===== PASSO 7 ===== -->
+  <details class="passo" id="p7" data-passo="7">
+    <summary class="passo-cab"><span class="n">7</span>
+      <span class="tit"><b>Guarde tudo em lugar seguro</b><small>10 minutos · para não perder o que você acabou de construir</small></span>
+      <span class="seta">▾</span></summary>
+    <div class="passo-corpo">
+      <p>Tudo o que você construiu está numa pasta do seu computador. Se o computador pifar, some. Este passo resolve isso, e é também o começo da plataforma da semana 4.</p>
+
+      <div class="mini"><span class="mn">1</span><div class="mc">
+        <h4>Deixe ele guardar no GitHub, privado</h4>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Guardar a minha pasta</b><small>Cole na aba Code</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Quero guardar esta pasta em lugar seguro, num repositório PRIVADO do GitHub. Conduza você, do começo ao fim.
+
+1. Antes de qualquer coisa, me explique em duas frases o que vai acontecer.
+2. Crie ou corrija o arquivo .gitignore para que o whatsapp.json e qualquer arquivo com chave NUNCA sejam enviados. Me mostre o que ficou de fora e por quê.
+3. Confira se tem alguma chave, token ou senha escrita em algum arquivo que vai subir. Se tiver, pare e me avise antes de continuar. Não escreva o valor do segredo na sua resposta.
+4. Se eu ainda não tiver conta no GitHub, me diga em passos numerados como criar, um passo por vez.
+5. Crie o repositório privado, envie a pasta e me dê o endereço dele.
+6. Me diga, em uma frase, o que eu faço daqui para frente toda vez que mudar alguma coisa.</pre>
+        </div>
+      </div></div>
+
+      <div class="mini"><span class="mn">2</span><div class="mc">
+        <h4>Confira que você não vazou nada</h4>
+        <div class="pedido">
+          <div class="pedido-top"><span class="q"><b>Varredura de chave</b><small>Cole na aba Code</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Procure nesta pasta qualquer coisa que pareça chave de API, token, senha ou credencial. Me mostre em lista: o arquivo, a linha, e que tipo de segredo parece ser. Não escreva o valor do segredo na sua resposta.
+
+Depois me diga quais desses arquivos estão indo para o GitHub hoje e quais não estão. Se algum segredo estiver indo, me diga em passos numerados o que eu faço agora, na ordem, começando por trocar a chave na ferramenta de origem.</pre>
+        </div>
+      </div></div>
+
+      <div class="sai"><span class="tick">✓</span><div><span class="r">Você sai deste passo com</span>Uma cópia segura de tudo, num repositório privado só seu, e a certeza de que nenhuma chave escapou.</div></div>
+      <button class="marcar" type="button"><span class="cx">✓</span>Já fiz este passo</button>
+    </div>
+  </details>
+
+  <div class="dest escuro" id="fim">
+    <span class="tag">Terminou a trilha</span>
+    <p class="frase-forte">Agora você tem um funcionário: ele conhece o seu negócio, fala com você no seu WhatsApp e trabalha enquanto você dorme.</p>
+    <p>O que vem abaixo é consulta. Você não precisa ler agora, só quando precisar.</p>
+  </div>
+</section>
+
+<!-- ================= CONSULTA ================= -->
+<section class="secao" id="consulta">
+  <div class="secao-cab">
+    <p class="eyebrow">Para consultar depois</p>
+    <h2>Quando você esquecer</h2>
+    <p>Abra só o que você precisa. Nada daqui é obrigatório para terminar a trilha.</p>
   </div>
 
-  <div class="cartao">
-    <h3>As onze telas</h3>
-    <div class="rolo">
-      <table>
-        <thead><tr><th>tela</th><th>para que serve</th></tr></thead>
-        <tbody>
-          <tr><td><b>Hoje</b></td><td>O que está esperando por você agora. Ela se monta sozinha a partir das outras</td></tr>
-          <tr><td><b>Meus leads</b></td><td>Cada pessoa interessada, em quadro, da primeira conversa até o sim</td></tr>
-          <tr><td><b>Meus resultados</b></td><td>O dinheiro, somado a partir dos leads. Você não digita nada duas vezes</td></tr>
-          <tr><td><b>Minhas redes</b></td><td>As redes que você usa, como elas estão hoje</td></tr>
-          <tr><td><b>Meu Instagram</b></td><td>O seu perfil como ele é, o gráfico de crescimento e o diagnóstico do Claude</td></tr>
-          <tr><td><b>Meu planejamento</b></td><td>A sua meta, e as ações que levam até ela, separadas entre o que é dele e o que é seu</td></tr>
-          <tr><td><b>Conteúdos para aprovar</b></td><td>A grade do que ele preparou, cada um com o motivo de existir. Você abre, lê a legenda e decide</td></tr>
-          <tr><td><b>Meu dia</b></td><td>Tarefas e compromissos</td></tr>
-          <tr><td><b>Meu negócio</b></td><td>Quem você atende e o que você vende. A base de tudo</td></tr>
-          <tr><td><b>Minha marca</b></td><td>Cores, fontes e o seu jeito de falar</td></tr>
-          <tr><td><b>Meu cérebro</b></td><td>As suas ideias, e tudo o que você já instalou</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="mao">Preencha Meu negócio e Minha marca primeiro.</p>
-    <p class="nota">São essas duas que fazem o resto deixar de ser genérico. Tudo o que ele escrever antes disso vai ser chute bonito.</p>
-  </div>
+  <!-- TODOS OS PROMPTS -->
+  <details class="ref" id="prompts">
+    <summary>Todos os prompts<small>Tudo o que está na trilha, junto, mais os avulsos do dia a dia</small></summary>
+    <div class="ref-corpo">
+      <p class="nota">Os pedidos de cada passo estão lá em cima, dentro do passo. Aqui ficam os que não pertencem a passo nenhum e servem a qualquer hora.</p>
 
-  <div class="grade g2">
-    <div class="cartao">
-      <h3>Onde os seus dados ficam</h3>
-      <p>Na pasta <code>dados</code>, em arquivos de texto comuns, no seu computador. Nada vai para a internet.</p>
-      <p class="nota">Para guardar uma cópia segura, peça ao Claude para pôr essa pasta num repositório <b>privado</b> do GitHub.</p>
-    </div>
-    <div class="cartao">
-      <h3>Se alguma coisa quebrar</h3>
-      <p>Não tente consertar na mão. Cole isto e deixe com ele.</p>
       <div class="pedido">
-        <div class="pedido-top"><b>Consertar</b><button class="copiar" type="button">Copiar</button></div>
-<pre>A tela do Meu Funcionário deu erro. Confere os arquivos da pasta dados, acha o que está escrito errado e conserta. Depois me diga em uma frase o que estava acontecendo.</pre>
+        <div class="pedido-top"><span class="q"><b>Pedido completo</b><small>O formato que sempre funciona</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Sou [nutricionista] e atendo [mulheres de 40+].
+Escreva 3 respostas para quem pergunta "quanto custa a consulta?" no WhatsApp.
+Mensagens curtas, acolhedoras, que expliquem o valor antes do preço.
+No meu tom: "Oi, Ana! Que bom que você chegou até aqui..."</pre>
       </div>
-    </div>
-  </div>
 
-  <div class="dest">
-    <span class="tag">O que vem nas próximas semanas</span>
-    <p><b>Semana 2:</b> conectores. O Instagram e a agenda passam a encher as telas sozinhos.</p>
-    <p><b>Semana 3:</b> o WhatsApp. Lead novo entra no quadro sem você digitar.</p>
-    <p><b>Semana 4:</b> banco de dados e link próprio. O sistema sai do seu computador e vai para a internet, só seu.</p>
-  </div>
-</section>
-
-<!-- ========== 1 · COMECE POR AQUI ========== -->
-<section class="secao" id="comecar">
-  <div class="secao-cab">
-    <p class="eyebrow">Bloco 1 · antes de tudo</p>
-    <h2>App e Code: duas mesas, o mesmo Claude</h2>
-    <p class="lead">É a mesma conta nos dois. O que muda é o que cada um tem em cima da mesa.</p>
-  </div>
-
-  <div class="dest escuro">
-    <span class="tag">A frase que resolve a dúvida</span>
-    <p class="frase-forte">No app, ele liga nas suas ferramentas. No Code, ele mexe no computador.</p>
-  </div>
-
-  <div class="grade g2">
-    <div class="cartao">
-      <span class="tag">O app do Claude</span>
-      <h3>Onde ele se conecta</h3>
-      <p class="nota">O chat e o Cowork, que hoje são a mesma coisa.</p>
-      <h4>O que só existe aqui</h4>
-      <ul>
-        <li><b>Conector por login:</b> Instagram, Drive, agenda, mLabs, Meta Ads. Você clica, autoriza e pronto.</li>
-        <li><b>Navegador interno:</b> ele abre o site e olha junto com você.</li>
-        <li><b>Tarefa e rotina com botão</b>, sem escrever código.</li>
-        <li><b>Configurações › Personalização</b>, onde você instala skill e plugin clicando.</li>
-      </ul>
-      <h4>O que não tem</h4>
-      <p>Terminal, comando e GitHub. Para publicar uma página no ar ou mexer em repositório, não é aqui.</p>
-    </div>
-    <div class="cartao">
-      <span class="tag esc">A aba Code</span>
-      <h3>Onde ele constrói</h3>
-      <p class="nota">O Claude Code, que é o Claude com as mãos.</p>
-      <h4>O que só existe aqui</h4>
-      <ul>
-        <li><b>Terminal:</b> ele roda comando de verdade na sua máquina.</li>
-        <li><b>GitHub:</b> cria repositório, guarda versão e publica.</li>
-        <li><b>Banco e automação:</b> Supabase, script e chave guardada em arquivo protegido.</li>
-        <li><b>Subagente:</b> um ajudante para o trabalho braçal.</li>
-      </ul>
-      <h4>O que não tem</h4>
-      <p>Os conectores por login do app, e a rotina com botão.</p>
-    </div>
-  </div>
-
-  <div class="cartao">
-    <h3>A pergunta que decide, e só ela</h3>
-    <ul>
-      <li>Precisa de ferramenta de fora ligada, tipo Instagram, Drive, agenda ou Ads? Então é no <b>app</b>.</li>
-      <li>Precisa mexer em arquivo, repositório ou banco, ou pôr alguma coisa no ar? Então é no <b>Code</b>.</li>
-      <li>Só pensar, escrever e decidir funciona igual nos dois. Não troque de lugar por causa disso.</li>
-    </ul>
-    <p><b>O exemplo que fecha a dúvida:</b> ver os comentários do seu Instagram é no app, porque precisa do Instagram ligado. Criar o repositório do seu cérebro é no Code, porque precisa mexer no GitHub. Escrever o texto do cérebro é nos dois, igual.</p>
-  </div>
-
-  <div class="cartao">
-    <h3>As três palavras, de uma vez</h3>
-    <ul>
-      <li><b>Skill</b> é uma receita. Ensina o Claude a fazer uma coisa bem feita, tipo montar planilha, montar PDF ou escrever no tom da sua marca.</li>
-      <li><b>Plugin</b> é uma caixa de receitas. Vem com várias skills e comandos juntos.</li>
-      <li><b>Conector</b> é um cabo. Liga o Claude a uma ferramenta de fora, com o seu login.</li>
-    </ul>
-    <p class="mao">Você não precisa decorar comando nenhum.</p>
-    <p class="nota">Peça em português e a skill entra sozinha quando o assunto é o dela.</p>
-  </div>
-
-  <div class="cartao">
-    <h3>Não sabe onde fazer o que você quer fazer?</h3>
-    <p>Cole o pedido abaixo. Ele pergunta o que você quer e responde se é no app ou no Code, com o caminho.</p>
-    <div class="pedido">
-      <div class="pedido-top"><b>Onde eu faço isso</b><button class="copiar" type="button">Copiar o pedido</button></div>
-<pre>Eu estou aprendendo a usar você e não sei se o que eu quero fazer é no app do Claude ou na aba Code. Conduza você, não me deixe nada para descobrir sozinha.
-
-1. Me pergunte, em uma frase simples, o que eu quero fazer. Espere a minha resposta.
-2. Se faltar alguma informação, me faça UMA pergunta por vez, curta, e espere a resposta antes da próxima.
-3. No fim, me diga: é no app ou na aba Code, por quê, e qual é o primeiro clique ou o primeiro comando. Escreva o passo a passo no meu lugar, numerado, com o nome real dos botões em português.
-4. Se o que eu quero precisar de alguma coisa ligada por conector, diga qual e como eu ligo.
-
-Não use palavra técnica sem explicar na mesma frase.</pre>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 2 · INSTALAR ========== -->
-<section class="secao" id="instalar">
-  <div class="secao-cab">
-    <p class="eyebrow">Bloco 2 · passo a passo</p>
-    <h2>Instalar skill e plugin</h2>
-    <p class="lead">Os nomes aqui são os que aparecem no app em português. Se na sua versão aparecer diferente, o lugar é o mesmo.</p>
-  </div>
-
-  <div class="dest">
-    <span class="tag">O resumo</span>
-    <p class="frase-forte">Instalar plugin oficial são 4 cliques. Você não precisa de endereço de GitHub nenhum.</p>
-  </div>
-
-  <div class="cartao">
-    <div class="passo"><span class="n">1</span><div class="co">
-      <h3>Chegar na tela</h3>
-      <div class="caminho"><i>Configurações</i><span>›</span><i>Personalização</i><span>›</span><i>Plugins</i></div>
-      <p>Na lateral das Configurações, lá embaixo, tem o bloco <b>Personalização</b>, com três telas: <b>Skills</b>, <b>Conectores</b> e <b>Plugins</b>. É a sua casa para tudo o que é instalado.</p>
-      <p class="nota">Na mesma lateral, mais acima, ficam Geral, Conta, Privacidade, Cobrança, Uso, Recursos, Memória, Design systems, Reflexão, Tempo e foco, Claude Code e Claude in Chrome.</p>
-    </div></div>
-  </div>
-
-  <div class="cartao">
-    <div class="passo"><span class="n">2</span><div class="co">
-      <h3>Entender a tela de Plugins</h3>
-      <p>Ela tem duas abas no topo e um botão preto <b>+ Adicionar</b> no canto direito.</p>
-      <ul>
-        <li><b>Meus:</b> o que você já tem. Vem separado em quatro seções: <i>Neste projeto</i>, <i>Criado por você</i>, <i>Da Anthropic e parceiros</i>, e <i>Dos marketplaces que você adicionou</i>.</li>
-        <li><b>Descobrir:</b> a vitrine. É aqui que estão os plugins oficiais, e é aqui que você instala.</li>
-      </ul>
-      <p class="nota">O botão <b>+ Adicionar</b> do canto não serve para os plugins oficiais. Ele é para plugin que não está na vitrine, e está explicado no fim deste bloco, em Casos especiais.</p>
-    </div></div>
-  </div>
-
-  <div class="cartao">
-    <div class="passo"><span class="n">3</span><div class="co">
-      <h3>Instalar, dentro de Descobrir</h3>
-      <div class="caminho"><i>aba Descobrir</i><span>›</span><i>seção Para você</i><span>›</span><i>+ no cartão</i></div>
-      <p>A aba Descobrir abre na seção <b>Para você</b>, com os plugins oficiais em cartões: Productivity, Marketing, Engineering, Finance, Product Management, Sales, e Data em destaque no topo. Mais embaixo tem <b>Novos plugins</b>, e um link <b>Mostrar tudo</b> para ver a lista inteira.</p>
-      <p>Para instalar, clique no <b>+</b> do cartão. No cartão em destaque, o botão escrito é <b>Adicionar</b>. É só isso: não tem confirmação, não tem endereço para colar.</p>
-      <p class="nota">O mesmo vale para skill e para conector, cada uma na sua tela. Em conector, o botão final é <b>Conectar</b>, porque ele pede o seu login da ferramenta.</p>
-    </div></div>
-  </div>
-
-  <div class="cartao">
-    <div class="passo"><span class="n">4</span><div class="co">
-      <h3>Usar o que você instalou</h3>
-      <p>Ela passa a aparecer na aba <b>Meus</b>, e funciona nos três lugares: no chat, no Cowork e na aba Code, desde que seja a mesma conta do Claude. Instalou uma vez, serve nos três.</p>
-      <p>Para usar, digite <code>/</code> na caixa de mensagem e escolha na lista. Ou simplesmente peça em português.</p>
-      <p class="nota">Skill instalada pela vitrine é somente leitura: dá para usar, não dá para editar. Se você quiser mudar como ela funciona, baixe uma cópia, altere e envie como sua.</p>
-    </div></div>
-  </div>
-
-  <div class="cartao">
-    <h3>A permissão que faz as skills entregarem arquivo</h3>
-    <div class="caminho"><i>Configurações</i><span>›</span><i>Recursos</i></div>
-    <p>É aqui que mora a permissão de <b>executar código e criar arquivo</b>, que é o que faz as skills de Word, PDF, apresentação e planilha entregarem o arquivo pronto.</p>
-    <p class="nota">No plano Pro ela normalmente já vem ligada, então você não precisa mexer em nada. Está escrito aqui só para você saber onde fica, caso uma skill de documento não entregue o arquivo.</p>
-  </div>
-
-  <div class="cartao">
-    <h3>Travou em algum passo?</h3>
-    <p>Cole o pedido abaixo na conversa. Ele vai perguntando e consertando com você, um passo por vez.</p>
-    <div class="pedido">
-      <div class="pedido-top"><b>Me guie na instalação</b><button class="copiar" type="button">Copiar o pedido</button></div>
-<pre>Eu quero instalar um plugin oficial no meu Claude e preciso que você me guie clique por clique. Conduza você, do começo ao fim.
-
-Faça assim:
-1. Me faça UMA pergunta por vez e espere a minha resposta antes da próxima. Comece perguntando qual é o meu trabalho e o que mais me toma tempo hoje.
-2. Com a minha resposta, você escolhe por mim qual plugin oficial instalar primeiro, e me diz em duas frases por que esse.
-3. Me dê o caminho de tela em passos numerados, com o nome dos botões em português, um passo por vez. Depois de cada passo, me pergunte se deu certo e espere eu responder.
-4. Se eu disser que o botão está com outro nome na minha tela, me peça para descrever o que eu estou vendo e me dê o próximo passo a partir disso.
-5. No fim, me dê um pedido pronto, escrito com as minhas palavras, para eu testar o plugin na hora.
-
-Não me deixe nada para preencher sozinha. Se faltar informação, pergunte, não invente.</pre>
-    </div>
-  </div>
-
-  <div class="secao-cab" style="margin-top:40px">
-    <p class="eyebrow">Casos especiais</p>
-    <h3 style="font-size:clamp(26px,4vw,36px)">Quando o que você quer não está na vitrine</h3>
-    <p class="nota">Nada daqui é necessário para os plugins oficiais. Isto é para o dia em que alguém te mandar um plugin ou uma skill de fora.</p>
-  </div>
-
-  <div class="dest">
-    <span class="tag">De onde sai o texto que você cola</span>
-    <p>Quando um plugin não está na aba Descobrir, você adiciona a prateleira dele colando um texto assim: <code>anthropics/knowledge-work-plugins</code>. Esse texto sai do próprio endereço do GitHub. Olhe a barra do navegador:</p>
-    <p style="font-family:var(--disp);font-size:clamp(19px,3.2vw,26px);line-height:1.2">github.com/<b style="color:var(--mag);font-weight:400">anthropics</b>/<b style="color:var(--mag);font-weight:400">knowledge-work-plugins</b></p>
-    <p>O que vem depois de <code>github.com/</code> é o que se cola: o <b>nome do dono</b>, uma barra, e o <b>nome do repositório</b>. Nada mais, sem <code>https</code> e sem barra no fim.</p>
-    <p class="nota">Jeito à prova de erro: abra o repositório no navegador, copie o endereço inteiro da barra e cole. O app também entende o endereço completo.</p>
-  </div>
-
-  <div class="cartao">
-    <h3>Caso 1 · adicionar uma prateleira inteira</h3>
-    <ol>
-      <li>Abra o repositório no navegador e copie o que vem depois de <code>github.com/</code>.</li>
-      <li>No app: <b>Configurações › Personalização › Plugins</b>.</li>
-      <li>Clique no <b>+ Adicionar</b> do canto direito e escolha a opção de <b>adicionar um marketplace</b>. Marketplace é a palavra que o app usa para prateleira.</li>
-      <li>Cole o texto e confirme.</li>
-      <li>Os plugins daquela prateleira passam a aparecer, e você instala o que quiser. Eles ficam em <b>Meus</b>, na seção <i>Dos marketplaces que você adicionou</i>.</li>
-    </ol>
-    <p><b>A diferença entre as duas coisas:</b> adicionar o marketplace é cadastrar a loja. Instalar é pegar o produto da prateleira.</p>
-  </div>
-
-  <div class="grade g2">
-    <div class="cartao">
-      <h3>Caso 2 · um plugin em arquivo</h3>
-      <ol>
-        <li><b>Configurações › Personalização › Plugins › + Adicionar</b>, e escolha enviar um plugin.</li>
-        <li>Mande o arquivo <b>.zip</b>. Dentro dele precisa existir a pasta <code>.claude-plugin</code> com o arquivo <code>plugin.json</code>.</li>
-      </ol>
-    </div>
-    <div class="cartao">
-      <h3>Caso 3 · uma skill avulsa</h3>
-      <ol>
-        <li>No GitHub, entre <b>na pasta daquela skill</b>, não no repositório inteiro. A pasta certa é a que tem um arquivo <code>SKILL.md</code> dentro.</li>
-        <li>Baixe essa pasta e compacte em <b>.zip</b>. O nome da pasta tem que ser igual ao nome da skill.</li>
-        <li>No app: <b>Configurações › Personalização › Skills › +</b>, criar skill, e escolher a opção de <b>carregar</b> uma skill.</li>
-        <li>Envie o .zip. Ela aparece na lista, já ligada.</li>
-      </ol>
-    </div>
-  </div>
-
-  <div class="cartao">
-    <h3>Caso 4 · instalar pela aba Code, por comando</h3>
-    <p>No Code você não tem menu de tela, tem a caixa de mensagem. A mesma vitrine abre por comando: digite <code>/plugin</code> e dê Enter. Abre uma lista navegável com as setas do teclado.</p>
-    <div class="pedido">
-      <div class="pedido-top"><b>Instalar o marketing pela aba Code</b><button class="copiar" type="button">Copiar</button></div>
-<pre>/plugin marketplace add anthropics/knowledge-work-plugins
-/plugin install marketing@knowledge-work-plugins</pre>
-    </div>
-    <p>A primeira linha diz "passe a conhecer esta prateleira". A segunda diz "instale este plugin desta prateleira". O que vem depois do <code>@</code> é o nome da prateleira, não um e-mail.</p>
-    <p class="nota">Você não precisa disto. O que você instalar clicando, na aba Descobrir, já aparece na aba Code também.</p>
-  </div>
-
-  <div class="dest">
-    <span class="tag aviso">O aviso que não dá para pular</span>
-    <p>A Anthropic faz curadoria só do que está na vitrine. O que você instala por link de fora ou por arquivo .zip <b>não passou por ninguém</b>. É código de estranho entrando na sua máquina.</p>
-    <p>Existe uma verificação automática de segurança para skill e plugin de terceiro, mas ela é recurso de plano Enterprise, em beta. No plano Pro, que é o seu, não tem ninguém verificando.</p>
-    <p><b>A regra:</b> antes de instalar skill de terceiro, abra o arquivo <code>SKILL.md</code> e leia. Se estiver pedindo chave, token ou acesso que não faz sentido para o que ela promete, não instale.</p>
-    <div class="pedido">
-      <div class="pedido-top"><b>Ler o SKILL.md por mim</b><button class="copiar" type="button">Copiar o pedido</button></div>
-<pre>Eu quero instalar uma skill que não é oficial e preciso saber se é segura antes.
-
-1. Me peça o endereço da skill no GitHub, ou o arquivo SKILL.md, e espere eu mandar.
-2. Leia o arquivo e me responda em português simples, em lista: o que essa skill faz, que acesso ela pede, se ela pede chave, token ou senha, e se ela manda alguma coisa minha para fora do meu computador.
-3. No fim, me diga em uma frase: instalar ou não instalar, e por quê.
-4. Se eu não souber onde achar o SKILL.md, me explique onde clicar, passo por passo, e espere eu responder a cada passo.
-
-Não suavize. Se tiver alguma coisa estranha, me diga com todas as letras.</pre>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 3 · PLUGINS ========== -->
-<section class="secao" id="plugins">
-  <div class="secao-cab">
-    <p class="eyebrow">Bloco 3 · o que tem dentro de cada um</p>
-    <h2>Os plugins oficiais, por dentro</h2>
-    <p class="lead">Em cada comando está escrito de onde ele tira o dado. É isso que decide se ele funciona para você hoje, ou só depois que você ligar alguma coisa.</p>
-  </div>
-
-  <div class="dest escuro">
-    <span class="tag">A regra que explica todos de uma vez</span>
-    <p class="frase-forte">O Claude só enxerga o que você escreve, o que você anexa e o que está ligado por conector.</p>
-    <p>Se o dado não está em nenhuma das três, ele não tem de onde tirar. E se responder mesmo assim, inventou. Por isso cada linha das tabelas tem uma etiqueta:</p>
-    <div class="tags">
-      <span class="fonte f-sozinho">funciona sem nada ligado</span>
-      <span class="fonte f-arquivo">precisa de arquivo anexado</span>
-      <span class="fonte f-conector">precisa de conector</span>
-    </div>
-  </div>
-
-  <div class="cartao">
-    <div class="tags"><span class="tag esc">marketing</span><span class="tag">7 comandos</span><span class="tag">5 skills</span><span class="tag ok">funciona sem conector</span></div>
-    <h3>Conteúdo, campanha e relatório</h3>
-    <div class="rolo">
-      <table>
-        <thead><tr><th>comando</th><th>o que faz</th><th>de onde vem o dado</th></tr></thead>
-        <tbody>
-          <tr><td><code>/draft-content</code></td><td>rascunha post, newsletter, página de venda, release e case</td><td><span class="fonte f-sozinho">sem nada ligado</span> Sai da cabeça dele mais o que você contar. Fica bom mesmo quando você anexa o cérebro da marca</td></tr>
-          <tr><td><code>/campaign-plan</code></td><td>briefing de campanha com canais, calendário e métricas</td><td><span class="fonte f-sozinho">sem nada ligado</span> Do que você contar: objetivo, verba e prazo</td></tr>
-          <tr><td><code>/brand-review</code></td><td>confere um texto contra a voz da marca</td><td><span class="fonte f-arquivo">arquivo anexado</span> Do texto que você colar e do guia de marca que você anexar</td></tr>
-          <tr><td><code>/competitive-brief</code></td><td>compara o seu posicionamento com o dos concorrentes</td><td><span class="fonte f-sozinho">sem nada ligado</span> Da busca na web. Com Ahrefs ou Similarweb ligado, ele pega número real</td></tr>
-          <tr><td><code>/performance-report</code></td><td>relatório de métricas com recomendação do que mudar</td><td><span class="fonte f-conector">conector ou arquivo</span> Três caminhos: você exporta o CSV do Instagram, do Meta Ads ou do mLabs e anexa; ou liga um conector que leia a conta; ou cola os números na mão. Sem uma dessas três, ele não tem de onde puxar</td></tr>
-          <tr><td><code>/seo-audit</code></td><td>palavra-chave, on-page, lacuna de conteúdo e parte técnica</td><td><span class="fonte f-sozinho">sem nada ligado</span> Do site que você indicar, lido na web. Com Ahrefs ou Similarweb ligado, fica melhor</td></tr>
-          <tr><td><code>/email-sequence</code></td><td>sequência de boas-vindas, nutrição e recuperação</td><td><span class="fonte f-sozinho">sem nada ligado</span> Do que você contar. Com Klaviyo ligado, ele olha o que já existe</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p><b>As skills que disparam sozinhas:</b> <code>content-creation</code>, <code>campaign-planning</code>, <code>brand-voice</code>, <code>competitive-analysis</code> e <code>performance-analytics</code>.</p>
-    <p class="nota"><b>Conectores que ele aproveita, nenhum obrigatório:</b> Slack, Canva, Figma, HubSpot, Notion, Ahrefs, Similarweb, Klaviyo, Supermetrics e Amplitude. Vale qualquer conector da mesma categoria: se você usa mLabs em vez de Supermetrics, serve igual.</p>
-    <div class="pedido">
-      <div class="pedido-top"><b>Voz da marca, com ele conduzindo</b><button class="copiar" type="button">Copiar o pedido</button></div>
-<pre>Eu quero usar o plugin de marketing para conferir se um texto meu está no tom da minha marca. Conduza você, do começo ao fim.
-
-1. Me peça o texto que eu quero conferir e espere eu colar.
-2. Se você ainda não conhece o tom da minha marca, me faça UMA pergunta por vez sobre como eu falo: que palavras eu uso, que palavras eu nunca uso, se eu falo mais formal ou mais próxima, e com quem eu estou falando. Espere a resposta antes da próxima pergunta.
-3. Com as minhas respostas, escreva você o meu guia de tom de voz, com as minhas palavras, e me mostre para eu só dizer sim ou corrigir.
-4. Depois rode /brand-review com esse guia e me devolva, em lista: cada trecho que fugiu do meu tom e como ficaria reescrito.
-5. No fim, me entregue o texto inteiro já corrigido, pronto para copiar.
-
-Não me deixe nada para preencher sozinha.</pre>
-    </div>
-  </div>
-
-  <div class="cartao">
-    <div class="tags"><span class="tag esc">sales</span><span class="tag">36 skills</span><span class="tag aviso">rende muito mais com conector</span></div>
-    <h3>Prospecção, reunião e carteira</h3>
-    <p>É o maior de todos. Ele não tem comandos: tem 36 skills chamadas pelo nome, assim: <code>/sales:call-prep</code>. Elas se dividem em cinco famílias.</p>
-
-    <h4>1 · o seu dia</h4>
-    <div class="rolo">
-      <table>
-        <thead><tr><th>skill</th><th>em português</th><th>de onde vem o dado</th></tr></thead>
-        <tbody>
-          <tr><td><code>setup</code></td><td>configura o plugin na primeira vez</td><td><span class="fonte f-sozinho">sem nada ligado</span> Perguntas a você</td></tr>
-          <tr><td><code>daily-briefing</code></td><td>o resumo do seu dia comercial</td><td><span class="fonte f-conector">conector</span> Agenda e e-mail ligados. Sem isso, você cola a lista do dia</td></tr>
-          <tr><td><code>call-prep</code></td><td>prepara a reunião de amanhã</td><td><span class="fonte f-conector">conector</span> Agenda e CRM ligados, mais busca na web. Sem conector, você diz com quem é e ele pesquisa</td></tr>
-          <tr><td><code>call-summary</code></td><td>resumo do que foi falado na ligação</td><td><span class="fonte f-arquivo">arquivo anexado</span> Você baixa a transcrição do Meet ou do Zoom e anexa. Com gravador ligado (Gong, Fireflies, Zoom, Otter), ele busca sozinho</td></tr>
-          <tr><td><code>inbox-sweep</code></td><td>varre a caixa de entrada atrás do que ficou sem resposta</td><td><span class="fonte f-conector">conector</span> Só com Gmail ou Outlook ligado. Sem isso, não tem o que varrer</td></tr>
-          <tr><td><code>schedule-meeting</code></td><td>marca a reunião</td><td><span class="fonte f-conector">conector</span> Agenda ligada</td></tr>
-          <tr><td><code>log-activity</code></td><td>registra o que aconteceu com aquele cliente</td><td><span class="fonte f-arquivo">arquivo ou CRM</span> CRM ligado, ou um arquivo seu</td></tr>
-          <tr><td><code>end-of-day</code> e <code>weekly-wrap</code></td><td>fechamento do dia e da semana</td><td><span class="fonte f-arquivo">o que já foi registrado</span> O que foi registrado durante o período</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h4>2 · contas e prospecção</h4>
-    <p><code>account-research</code> pesquisa a empresa · <code>account-context</code> junta tudo o que já se sabe daquela conta · <code>stakeholder-map</code> mostra quem decide e quem influencia · <code>draft-outreach</code> escreve a abordagem · <code>lead-triage</code> separa lead bom de lead ruim · <code>route-lead</code> manda para a pessoa certa · <code>account-tiering</code> põe cliente em A, B e C · <code>account-plan</code> faz o plano para crescer naquela conta · <code>expansion-whitespace</code> mostra o que dá para vender a mais.</p>
-    <p class="nota"><span class="fonte f-sozinho">sem nada ligado</span> <code>draft-outreach</code>, <code>lead-triage</code> e <code>account-research</code> funcionam com o que você colar. <span class="fonte f-conector">conector</span> O resto rende de verdade com CRM ligado.</p>
-
-    <h4>3 · negociação</h4>
-    <p><code>deal-review</code> revisa a negociação · <code>deal-advance-gap</code> diz o que falta para avançar · <code>deal-signals</code> mostra sinal de que vai fechar ou esfriar · <code>deal-slip-scenario</code> simula o atraso · <code>close-plan</code> monta o plano para fechar · <code>handle-objection</code> responde à objeção · <code>competitive-intelligence</code> olha o concorrente naquela negociação · <code>create-an-asset</code> monta o material para mandar · <code>update-opportunity</code> atualiza no CRM.</p>
-    <p class="nota"><span class="fonte f-sozinho">sem nada ligado</span> <code>handle-objection</code> e <code>create-an-asset</code> servem hoje, sem nada ligado. <span class="fonte f-conector">conector</span> O resto é vida de CRM.</p>
-
-    <h4>4 · funil e previsão</h4>
-    <p><code>pipeline-review</code> · <code>crm-hygiene-check</code> · <code>forecast</code> · <code>team-pipeline</code> · <code>rep-context</code> · <code>win-loss-review</code>.</p>
-    <p class="nota"><span class="fonte f-conector">conector ou planilha</span> Tudo isso lê o funil. Só faz sentido com CRM ligado, ou com a sua planilha de funil anexada.</p>
-
-    <h4>5 · carteira de clientes</h4>
-    <p><code>customer-health</code> mostra quem está bem e quem está sumindo · <code>customer-voice</code> mostra o que os clientes estão dizendo · <code>renewal-radar</code> mostra quem vence e precisa renovar.</p>
-    <p class="nota"><span class="fonte f-arquivo">arquivo anexado</span> O <code>renewal-radar</code> é o mais útil para quem tem agência, e funciona com a sua planilha de contratos anexada.</p>
-
-    <p><b>O que ele precisa para brilhar:</b> ele não entra no perfil de ninguém sozinho. Os conectores que o repositório cita são CRM (HubSpot, Close, Salesforce), e-mail e agenda (Gmail, Google Agenda, Calendly, Microsoft 365), gravador de reunião (Gong, Fireflies, Zoom, Otter), enriquecimento de dados (Clay, ZoomInfo, Apollo, Lusha, Crunchbase) e chat (Slack, Teams).</p>
-    <div class="pedido">
-      <div class="pedido-top"><b>Preparar uma reunião sem nada ligado</b><button class="copiar" type="button">Copiar o pedido</button></div>
-<pre>Eu tenho uma reunião de venda chegando e quero chegar preparada. Use o plugin sales. Conduza você e não me deixe nada para preencher.
-
-1. Me faça UMA pergunta por vez e espere a resposta: com quem é a reunião, o que essa pessoa ou empresa faz, como ela chegou até mim, o que eu quero vender e quanto eu pretendo cobrar.
-2. Pesquise na web o que der para saber sobre essa pessoa ou empresa e me diga o que você achou, separando o que é fato do que é suposição.
-3. Rode /sales:call-prep e me entregue: as perguntas que eu devo fazer, as objeções que eu devo esperar com a resposta de cada uma, e a proposta que eu devo levar.
-4. No fim, escreva a mensagem de confirmação que eu mando para essa pessoa antes da reunião.
-
-Escreva tudo no meu lugar. Se faltar informação, pergunte, não invente.</pre>
-    </div>
-  </div>
-
-  <div class="cartao">
-    <div class="tags"><span class="tag esc">data</span><span class="tag">6 comandos</span><span class="tag ok">funciona com planilha anexada</span></div>
-    <h3>Número, gráfico e painel</h3>
-    <div class="rolo">
-      <table>
-        <thead><tr><th>comando</th><th>o que faz</th><th>de onde vem o dado</th></tr></thead>
-        <tbody>
-          <tr><td><code>/analyze</code></td><td>responde pergunta sobre os seus dados</td><td><span class="fonte f-arquivo">arquivo anexado</span> CSV ou Excel que você sobe, ou números colados</td></tr>
-          <tr><td><code>/explore-data</code></td><td>faz o perfil da base e aponta erro e furo de qualidade</td><td><span class="fonte f-arquivo">arquivo anexado</span> A planilha que você subir</td></tr>
-          <tr><td><code>/write-query</code></td><td>escreve a consulta SQL</td><td><span class="fonte f-sozinho">sem nada ligado</span> Da descrição que você der da tabela</td></tr>
-          <tr><td><code>/create-viz</code></td><td>faz os gráficos</td><td><span class="fonte f-arquivo">arquivo anexado</span> Os dados que você subir</td></tr>
-          <tr><td><code>/build-dashboard</code></td><td>monta um painel que abre no navegador</td><td><span class="fonte f-arquivo">arquivo anexado</span> Os dados que você subir</td></tr>
-          <tr><td><code>/validate</code></td><td>revisa a própria análise antes de você mandar para a cliente</td><td><span class="fonte f-sozinho">sem nada ligado</span> A análise que ele mesmo fez</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p><b>Precisa de conector?</b> Não. Dá para subir CSV ou Excel, ou colar o resultado. Conector de banco e de BI é para quem tem.</p>
-    <div class="pedido">
-      <div class="pedido-top"><b>Relatório de cliente pela planilha</b><button class="copiar" type="button">Copiar o pedido</button></div>
-<pre>Eu quero transformar a planilha de resultados do mês em um relatório que a minha cliente entenda. Use o plugin data. Conduza você, do começo ao fim.
-
-1. Me peça para anexar a planilha e espere eu anexar.
-2. Olhe os dados e me faça UMA pergunta por vez, só o que você realmente precisa saber: o que essa cliente vende, o que ela considera sucesso e com quem eu estou comparando. Espere a resposta antes da próxima.
-3. Rode /explore-data e me avise se tiver erro, buraco ou número estranho na planilha, antes de analisar.
-4. Rode /build-dashboard e monte o painel com os números que importam para essa cliente, e escreva, embaixo de cada número, uma frase em português simples dizendo o que ele significa.
-5. Rode /validate e me diga se alguma conclusão sua não se sustenta nos dados.
-6. No fim, escreva o texto que eu mando para a cliente junto com o painel.
-
-Não invente número. Se um dado não estiver na planilha, diga que não está.</pre>
-    </div>
-  </div>
-
-  <div class="cartao">
-    <div class="tags"><span class="tag esc">productivity</span><span class="tag">3 comandos</span><span class="tag">2 skills</span><span class="tag ok">funciona sem conector</span></div>
-    <h3>Tarefa, memória e painel</h3>
-    <div class="rolo">
-      <table>
-        <thead><tr><th>comando</th><th>o que faz</th><th>de onde vem o dado</th></tr></thead>
-        <tbody>
-          <tr><td><code>/start</code></td><td>cria a estrutura: <code>TASKS.md</code>, <code>CLAUDE.md</code>, uma pasta <code>memory/</code> e um painel <code>dashboard.html</code></td><td><span class="fonte f-sozinho">sem nada ligado</span> Perguntas a você, e tudo fica em arquivo na sua máquina</td></tr>
-          <tr><td><code>/update</code></td><td>limpa o que travou e sincroniza com as ferramentas ligadas</td><td><span class="fonte f-sozinho">sem nada ligado</span> Os seus arquivos de tarefa</td></tr>
-          <tr><td><code>/update --comprehensive</code></td><td>varre e-mail, agenda e chat procurando pendência esquecida</td><td><span class="fonte f-conector">conector</span> Precisa de e-mail, agenda e chat ligados</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p><b>As skills:</b> <code>memory-management</code> guarda memória em duas camadas e <code>task-management</code> mantém a tarefa em arquivo.</p>
-    <p class="mao">Se for instalar um só, instale este.</p>
-    <p class="nota">O <code>/start</code> dele já entrega, de graça, uma versão pequena de uma plataforma sua: lista de tarefas, memória e painel.</p>
-    <div class="pedido">
-      <div class="pedido-top"><b>Montar a sua base de trabalho</b><button class="copiar" type="button">Copiar o pedido</button></div>
-<pre>Quero montar a minha base de trabalho com o plugin productivity. Conduza você, do começo ao fim, e escreva tudo no meu lugar.
-
-1. Rode /start nesta pasta e me explique, em duas frases, o que você vai criar antes de criar.
-2. Depois, me faça UMA pergunta por vez para preencher o CLAUDE.md com as minhas regras: o que eu faço, como eu gosto que você me responda, o que você nunca deve fazer sem me perguntar e quais são os meus horários. Espere a minha resposta antes da próxima pergunta.
-3. A cada resposta minha, escreva o texto você, com as minhas palavras, e me mostre para eu dizer sim ou corrigir.
-4. Depois me faça UMA pergunta por vez sobre o que está aberto no meu trabalho hoje e vá montando o TASKS.md você mesmo, até eu dizer que acabou.
-5. No fim, abra o painel e me mostre como ficou.
-
-Nunca escreva senha, chave ou token em nenhum arquivo.</pre>
-    </div>
-  </div>
-
-  <div class="cartao">
-    <div class="tags"><span class="tag esc">customer-support</span><span class="tag">5 comandos</span><span class="tag ok">o básico funciona sem conector</span></div>
-    <h3>O que chega, e como responder</h3>
-    <div class="rolo">
-      <table>
-        <thead><tr><th>comando</th><th>o que faz</th><th>de onde vem o dado</th></tr></thead>
-        <tbody>
-          <tr><td><code>/triage</code></td><td>classifica o atendimento, dá prioridade de P1 a P4 e encaminha</td><td><span class="fonte f-sozinho">sem nada ligado</span> A mensagem que você colar</td></tr>
-          <tr><td><code>/research</code></td><td>pesquisa em várias fontes sobre a dúvida do cliente</td><td><span class="fonte f-conector">conector</span> Intercom, HubSpot, Slack e Notion ligados</td></tr>
-          <tr><td><code>/draft-response</code></td><td>escreve a resposta ao cliente</td><td><span class="fonte f-sozinho">sem nada ligado</span> A mensagem que você colar</td></tr>
-          <tr><td><code>/escalate</code></td><td>monta o pacote para passar o caso adiante</td><td><span class="fonte f-sozinho">sem nada ligado</span> O histórico que você colar</td></tr>
-          <tr><td><code>/kb-article</code></td><td>transforma caso resolvido em artigo de ajuda</td><td><span class="fonte f-sozinho">sem nada ligado</span> O caso que você contar</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="nota">Para quem atende cliente, paciente ou escritório, este é o plugin do dia a dia: classificar o que chega e responder no tom certo. Sem dado sensível dentro.</p>
-    <div class="pedido">
-      <div class="pedido-top"><b>Responder uma mensagem difícil</b><button class="copiar" type="button">Copiar o pedido</button></div>
-<pre>Chegou uma mensagem de cliente e eu não sei como responder. Use o plugin customer-support. Conduza você.
-
-1. Me peça para colar a mensagem, sem o nome e sem nenhum dado pessoal de quem mandou. Espere eu colar.
-2. Rode /triage e me diga a prioridade e o que essa pessoa realmente está pedindo, por trás do que ela escreveu.
-3. Me faça UMA pergunta por vez sobre o contexto que falta, e espere a resposta antes da próxima.
-4. Rode /draft-response e me escreva três versões da resposta: uma curta, uma completa e uma para o caso de a pessoa estar irritada. Escreva no meu tom, não no tom de empresa.
-5. Me diga qual das três você indicaria e por quê.
-
-Não escreva nada que eu não possa cumprir. Se eu precisar prometer prazo, me pergunte qual prazo é real.</pre>
-    </div>
-  </div>
-
-  <div class="cartao">
-    <div class="tags"><span class="tag esc">enterprise-search</span><span class="tag">2 comandos</span><span class="tag aviso">sem conector não faz nada</span></div>
-    <h3>Achar o que sumiu</h3>
-    <div class="rolo">
-      <table>
-        <thead><tr><th>comando</th><th>o que faz</th><th>de onde vem o dado</th></tr></thead>
-        <tbody>
-          <tr><td><code>/search</code></td><td>busca em todas as fontes ligadas de uma vez, com filtro tipo <code>from:</code>, <code>in:</code> e <code>after:</code></td><td><span class="fonte f-conector">conector</span> E-mail, Drive, chat ou Notion ligados</td></tr>
-          <tr><td><code>/digest</code></td><td>resumo do período, com <code>--daily</code> ou <code>--weekly</code></td><td><span class="fonte f-conector">conector</span> As mesmas fontes ligadas</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p><b>Seja realista:</b> este só serve depois que você ligar e-mail, Drive, chat ou Notion. Sem fonte ligada, não tem onde buscar.</p>
-    <div class="pedido">
-      <div class="pedido-top"><b>Achar o que ficou perdido</b><button class="copiar" type="button">Copiar o pedido</button></div>
-<pre>Eu perdi uma informação no meio do meu e-mail e dos meus arquivos e preciso achar. Use o plugin enterprise-search. Conduza você.
-
-1. Primeiro me diga quais fontes eu já tenho ligadas no Claude. Se não tiver nenhuma, me explique em passos numerados como ligar o meu e-mail e o meu Drive, um passo por vez, esperando eu confirmar cada um.
-2. Depois me faça UMA pergunta por vez para eu lembrar do que eu estou procurando: era e-mail ou arquivo, com quem, mais ou menos quando, e que palavra devia aparecer. Espere a resposta antes da próxima.
-3. Monte você a busca com os filtros certos, rode, e me mostre os resultados em lista, do mais provável para o menos.
-4. Se não achar, mude a busca sozinho e tente de novo, duas vezes, antes de desistir.</pre>
-    </div>
-  </div>
-
-  <div class="cartao">
-    <div class="tags"><span class="tag esc">cowork-plugin-management</span><span class="tag">2 skills</span><span class="tag ok">não precisa de nada ligado</span></div>
-    <h3>O seu próprio plugin</h3>
-    <div class="rolo">
-      <table>
-        <thead><tr><th>skill</th><th>o que faz</th><th>de onde vem o dado</th></tr></thead>
-        <tbody>
-          <tr><td><code>create-cowork-plugin</code></td><td>cria um plugin novo, seu</td><td><span class="fonte f-sozinho">sem nada ligado</span> Perguntas a você sobre o seu jeito de trabalhar</td></tr>
-          <tr><td><code>cowork-plugin-customizer</code></td><td>personaliza um plugin que já existe</td><td><span class="fonte f-sozinho">sem nada ligado</span> O plugin instalado mais o que você pedir</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p>É com isto que você chega a ter o seu próprio plugin, com o seu jeito de trabalhar dentro.</p>
-    <div class="pedido">
-      <div class="pedido-top"><b>Transformar o seu processo em plugin</b><button class="copiar" type="button">Copiar o pedido</button></div>
-<pre>Eu quero transformar o meu jeito de trabalhar em um plugin meu. Use o cowork-plugin-management. Conduza você, do começo ao fim, e escreva tudo no meu lugar.
-
-1. Me faça UMA pergunta por vez sobre um processo que eu repito toda semana: qual é esse processo, qual é o primeiro passo, o que vem depois, onde eu costumo travar e como eu sei que ficou pronto. Espere a minha resposta antes da próxima pergunta.
-2. A cada resposta, escreva você o passo como ele vai ficar dentro do plugin e me mostre para eu dizer sim ou corrigir.
-3. Quando terminarmos, crie o plugin, me diga o nome dele e como eu chamo ele na conversa.
-4. Depois me dê um exemplo de uso, com as minhas palavras, para eu testar na hora.
-
-Não deixe nada em branco para eu preencher. Se faltar informação, pergunte.</pre>
-    </div>
-  </div>
-
-  <div class="cartao">
-    <h3>Os outros que existem na mesma vitrine</h3>
-    <p>Além desses sete, a vitrine oficial também tem <b>legal</b>, <b>finance</b>, <b>product-management</b>, <b>bio-research</b>, <b>small-business</b>, <b>design</b>, <b>engineering</b>, <b>human-resources</b> e <b>operations</b>.</p>
-    <p class="nota">Esses não foram abertos por dentro na aula 1. A parte jurídica do <b>legal</b> é de direito americano, então vale olhar com cuidado antes de usar no Brasil.</p>
-  </div>
-</section>
-
-<!-- ========== 4 · ONDE ACHAR ========== -->
-<section class="secao" id="achar">
-  <div class="secao-cab">
-    <p class="eyebrow">Bloco 4 · os endereços oficiais</p>
-    <h2>Onde achar skill e plugin de graça</h2>
-    <p class="lead">Estes dois são da própria Anthropic. É de onde vem tudo o que está nesta página.</p>
-  </div>
-
-  <div class="links">
-    <a href="https://github.com/anthropics/knowledge-work-plugins" target="_blank" rel="noopener">
-      <b>Plugins oficiais de trabalho</b>
-      <span class="url">github.com/anthropics/knowledge-work-plugins</span>
-      <small>marketing, sales, data, productivity, customer-support, enterprise-search, cowork-plugin-management e os outros.</small>
-    </a>
-    <a href="https://github.com/anthropics/skills" target="_blank" rel="noopener">
-      <b>Skills oficiais</b>
-      <span class="url">github.com/anthropics/skills</span>
-      <small>Inclui as skills de documento: docx, pdf, pptx e xlsx.</small>
-    </a>
-  </div>
-
-  <div class="cartao">
-    <div class="tags"><span class="tag">docx · Word</span><span class="tag">pdf</span><span class="tag">pptx · apresentação</span><span class="tag">xlsx · planilha</span></div>
-    <h3>As skills de documento</h3>
-    <p>São elas que fazem o Claude entregar o arquivo pronto, em vez de texto na tela. Com a permissão de executar código e criar arquivo ligada em <b>Configurações › Recursos</b>, ele usa sozinho quando faz sentido, sem você pedir pelo nome.</p>
-    <div class="pedido">
-      <div class="pedido-top"><b>Instalar pela aba Code</b><button class="copiar" type="button">Copiar</button></div>
-<pre>/plugin marketplace add anthropics/skills
-/plugin install document-skills@anthropic-agent-skills</pre>
-    </div>
-    <div class="pedido">
-      <div class="pedido-top"><b>Testar na hora, com uma coisa sua</b><button class="copiar" type="button">Copiar o pedido</button></div>
-<pre>Quero testar se as skills de documento estão funcionando, montando uma coisa que eu realmente uso. Conduza você.
-
-1. Me faça UMA pergunta por vez e espere a resposta: que documento eu mais repito no meu trabalho, para quem ele vai, o que essa pessoa precisa ver primeiro e o que não pode faltar.
-2. Com as minhas respostas, escreva você o conteúdo inteiro, com as minhas palavras, e me mostre antes de gerar o arquivo.
-3. Depois que eu aprovar, me entregue o arquivo pronto, no formato certo para esse uso, e me diga onde ele foi salvo.
-4. Se o arquivo não for gerado, me diga o que está faltando e como eu ligo isso, em passos numerados.
-
-Não me deixe nada para preencher sozinha.</pre>
-    </div>
-  </div>
-
-  <div class="dest">
-    <span class="tag aviso">Listas da comunidade</span>
-    <p>Existem listas de skills feitas por outras pessoas, que você acha procurando por <i>awesome claude skills</i>. Elas não são oficiais e não passaram por revisão de ninguém.</p>
-    <p><b>Antes de instalar qualquer coisa dessas listas:</b> abra o arquivo <code>SKILL.md</code> e leia, ou use o pedido de conferir o SKILL.md, que está no bloco de instalação.</p>
-  </div>
-</section>
-
-<!-- ========== 5 · ATALHOS ========== -->
-<section class="secao" id="atalhos">
-  <div class="secao-cab">
-    <p class="eyebrow">Bloco 5 · o que muda o dia</p>
-    <h2>Atalhos, com o lugar de cada um</h2>
-    <p class="lead">A coluna da direita diz onde cada um funciona: no app (chat e Cowork) ou na aba Code.</p>
-  </div>
-
-  <div class="rolo" style="margin-bottom:16px">
-    <table>
-      <thead><tr><th>atalho</th><th>o que faz</th><th>onde funciona</th></tr></thead>
-      <tbody>
-        <tr><td><code>/</code></td><td>Abre a lista de tudo o que ele sabe fazer ali: as skills instaladas, os comandos dos plugins e os comandos do próprio app. Você não precisa decorar nada</td><td><b>App e Code</b></td></tr>
-        <tr><td><code>@</code></td><td>Puxa um arquivo ou uma pasta para dentro da conversa sem você colar nada. Digite <code>@</code> e comece a escrever o nome, que ele vai filtrando</td><td><b>Code.</b> No app, vale para arquivo e projeto</td></tr>
-        <tr><td><code>/plugin</code></td><td>Abre, dentro da caixa de mensagem, a mesma vitrine que na tela fica em Personalização › Plugins</td><td><b>Só no Code.</b> No app é pela tela</td></tr>
-        <tr><td><code>/clear</code></td><td>Limpa a memória da conversa e começa do zero, sem perder o projeto. Use quando ele estiver confuso ou quando você mudar de assunto</td><td><b>Só no Code.</b> No app, abra uma conversa nova</td></tr>
-        <tr><td><b>Modo plano</b></td><td>Ele escreve o plano e espera o seu sim antes de mexer em qualquer arquivo. É o cinto de segurança de quem tem medo de estragar</td><td><b>Só no Code</b></td></tr>
-        <tr><td><b>Subagente</b></td><td>Manda o trabalho braçal para um ajudante, em vez de gastar a conversa principal com isso. É o que faz o seu limite de uso durar mais</td><td><b>Code.</b> No app, como tarefa</td></tr>
-        <tr><td><code>CLAUDE.md</code></td><td>Um arquivo de texto na pasta do projeto. Tudo o que está escrito nele vale sempre, em toda conversa daquele projeto, sem você repetir</td><td><b>App e Code</b></td></tr>
-        <tr><td><b>Arrastar e colar</b></td><td>Arrastar o arquivo para dentro da conversa, e colar print direto com Ctrl+V</td><td><b>App e Code</b></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="grade g2">
-    <div class="cartao">
-      <h3>Por que o subagente importa tanto</h3>
-      <p>Buscar arquivo, ler log e conferir coisa gasta o mesmo limite que pensar. Quando você manda isso para um ajudante, a sua conversa principal fica livre para decisão, e o seu plano rende muito mais.</p>
       <div class="pedido">
-        <div class="pedido-top"><b>Mandar o braçal para um ajudante</b><button class="copiar" type="button">Copiar</button></div>
-<pre>Manda um subagente procurar, nesta pasta, em que arquivo está o meu tom de voz. Me traga só o caminho do arquivo e um resumo de três linhas do que está escrito nele. Não me mostre o conteúdo inteiro.</pre>
+        <div class="pedido-top"><span class="q"><b>Economizar o seu limite</b><small>Antes de uma tarefa grande</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Antes de começar, divida esta tarefa em etapas.
+Use um modelo mais simples para ler e resumir os arquivos e deixe só a decisão e o texto final para o modelo mais forte.
+Me mostre o plano antes de executar.</pre>
       </div>
-    </div>
-    <div class="cartao">
-      <h3>Quando ele parece que piorou</h3>
-      <p>Não é ele piorando, é a conversa ficando longa demais. Limpe e recomece com o essencial.</p>
+
       <div class="pedido">
-        <div class="pedido-top"><b>Recomeçar sem perder o fio</b><button class="copiar" type="button">Copiar</button></div>
-<pre>Antes de eu limpar esta conversa, escreva um resumo dela para eu colar na próxima: o que eu estou tentando fazer, o que já ficou decidido, o que já está pronto e qual é o próximo passo. Escreva em lista curta, no meu lugar, pronto para copiar.</pre>
+        <div class="pedido-top"><span class="q"><b>Achar os arquivos de uma tarefa</b><small>Com o Drive ligado</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Procure no meu Drive tudo o que eu preciso para [o relatório da cliente X]. Me mande a lista com os links e diga o que estiver faltando.</pre>
       </div>
-    </div>
-  </div>
 
-  <div class="cartao">
-    <h3>O CLAUDE.md, que é o que mais economiza tempo</h3>
-    <p>É onde mora a regra que ele não pode esquecer. Você escreve uma vez e vale em toda conversa daquele projeto.</p>
-    <div class="pedido">
-      <div class="pedido-top"><b>Montar o seu CLAUDE.md do zero</b><button class="copiar" type="button">Copiar o pedido</button></div>
-<pre>Quero criar o arquivo CLAUDE.md deste projeto, que é onde ficam as regras que você nunca pode esquecer. Conduza você e escreva tudo no meu lugar.
+      <div class="pedido">
+        <div class="pedido-top"><span class="q"><b>Reunião vira tarefas</b><small>Anexe a transcrição</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Leia a transcrição desta reunião. Me devolva: as decisões, as tarefas com responsável e prazo e uma mensagem curta para eu mandar para a cliente.</pre>
+      </div>
 
-1. Me faça UMA pergunta por vez, curta, em português simples, e espere a minha resposta antes da próxima: o que é este projeto, quem eu atendo, como eu quero que você fale comigo, que palavras eu nunca uso, o que você nunca pode fazer sem me perguntar, e onde ficam os meus arquivos importantes.
-2. A cada resposta minha, escreva você o trecho do arquivo, com as minhas palavras, e me mostre para eu dizer sim ou corrigir.
-3. No fim, salve o arquivo CLAUDE.md na pasta deste projeto e me mostre como ele ficou inteiro.
-4. Me diga, em duas frases, o que muda a partir de agora.
+      <div class="pedido">
+        <div class="pedido-top"><span class="q"><b>Respostas prontas</b><small>Para o que mais perguntam</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Estas são as 10 perguntas que mais chegam no meu WhatsApp: [cole aqui]. Escreva uma resposta para cada uma, no meu tom, curta e acolhedora.</pre>
+      </div>
 
-Nunca escreva senha, chave ou token dentro dele.</pre>
-    </div>
-  </div>
-</section>
+      <div class="pedido">
+        <div class="pedido-top"><span class="q"><b>Contas e prazos</b><small>Com o Gmail ligado</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Leia os e-mails desta semana com boletos, cobranças e prazos. Monte a lista do que vence até sexta, com valor e data.</pre>
+      </div>
 
-<!-- ========== 6 · REGRAS ========== -->
-<section class="secao" id="regras">
-  <div class="secao-cab">
-    <p class="eyebrow">Bloco 6 · isto vale sempre</p>
-    <h2>As duas regras de segurança</h2>
-    <p class="lead">Elas se repetem em todas as aulas, porque são as que protegem você depois que o curso acabar.</p>
-  </div>
+      <div class="pedido">
+        <div class="pedido-top"><span class="q"><b>Uma tarefa num site</b><small>No painel do Claude no Chrome</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Entre no site [endereço do site] (eu já estou logada) e [baixe o relatório de setembro / copie a tabela desta página para uma planilha / compare o preço deste produto em 3 lojas].
+Não digite senha, não pague nada e não envie formulário sem me perguntar.</pre>
+      </div>
 
-  <div class="dest escuro">
-    <span class="tag">Regra 1</span>
-    <p class="frase-forte">Chave e token nunca passam pelo chat e nunca entram em repositório público.</p>
-    <p>Chave mora em um arquivo de configuração protegido na sua máquina, e o Claude lê dali. Em automação, ela vai como <i>segredo</i> do repositório, nunca escrita no código.</p>
-  </div>
+      <div class="pedido">
+        <div class="pedido-top"><span class="q"><b>Perfis que você acompanha</b><small>Com a Apify ligada</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>Use a Apify para ver os posts dos últimos 30 dias destes perfis do Instagram: [@perfil1, @perfil2, @perfil3].
+Me mostre os 5 posts com mais comentários: link, assunto e o gancho da capa.
+Não copie o texto deles. Me diga o que dá para adaptar para o meu público.</pre>
+      </div>
 
-  <div class="rolo" style="margin-bottom:16px">
-    <table>
-      <thead><tr><th>o nome</th><th>o que é</th></tr></thead>
-      <tbody>
-        <tr><td><b>Chave de API</b></td><td>A senha que liga um programa no outro. Nunca no chat, nunca em código publicado</td></tr>
-        <tr><td><b>Arquivo .env</b></td><td>O arquivo na sua máquina onde as chaves ficam guardadas, fora do código</td></tr>
-        <tr><td><b>.gitignore</b></td><td>A lista do que o GitHub nunca envia. É aqui que o <code>.env</code> entra</td></tr>
-        <tr><td><b>Repositório privado</b></td><td>Só quem você autorizar vê. Não substitui guardar a chave em lugar seguro</td></tr>
-        <tr><td><b>RLS no Supabase</b></td><td>A regra dentro do banco que diz quem lê e escreve cada linha. Sem RLS, qualquer pessoa com a chave pública lê a tabela inteira</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="cartao">
-    <h3>Conferir se você vazou alguma chave</h3>
-    <div class="pedido">
-      <div class="pedido-top"><b>Varredura de chave</b><button class="copiar" type="button">Copiar o pedido</button></div>
-<pre>Quero ter certeza de que eu não deixei nenhuma chave, senha ou token exposto. Conduza você, do começo ao fim.
-
-1. Procure nesta pasta e nos arquivos dela qualquer coisa que pareça chave de API, token, senha ou credencial. Me mostre em lista: o arquivo, a linha, e que tipo de segredo parece ser. Não escreva o valor do segredo na sua resposta.
-2. Me diga quais desses arquivos estão indo para o GitHub hoje e quais não estão.
-3. Se algum segredo estiver indo para o GitHub, me diga em passos numerados o que eu faço agora, na ordem, começando por trocar a chave na ferramenta de origem.
-4. Depois crie ou corrija o arquivo .gitignore para que isso não aconteça de novo, e me mostre o que você mudou.
-5. Me explique, em duas frases, o que estava errado, para eu não repetir.</pre>
-    </div>
-  </div>
-
-  <div class="dest escuro">
-    <span class="tag">Regra 2</span>
-    <p class="frase-forte">Ele só enxerga o que você escreve, o que você anexa e o que está ligado por conector.</p>
-    <p>Se o dado não está em nenhuma das três, ele não tem de onde tirar. Se responder mesmo assim, inventou.</p>
-    <p><b>O outro lado dela:</b> tudo o que você escreve, anexa ou liga, ele vê. Então dado de paciente, dado sigiloso de processo e documento de cliente que você não tem autorização para compartilhar não entram em lugar nenhum.</p>
-  </div>
-
-  <div class="cartao">
-    <h3>Saber se ele sabe mesmo, ou se inventou</h3>
-    <p>Cole isto sempre que a resposta parecer boa demais.</p>
-    <div class="pedido">
-      <div class="pedido-top"><b>De onde você tirou isso</b><button class="copiar" type="button">Copiar o pedido</button></div>
+      <div class="pedido">
+        <div class="pedido-top"><span class="q"><b>De onde você tirou isso</b><small>Quando a resposta parecer boa demais</small></span><button class="copiar" type="button">Copiar</button></div>
 <pre>Sobre o que você acabou de me responder, me diga, item por item: o que veio de um arquivo que eu te mandei, o que veio de uma ferramenta ligada, o que veio de uma busca na internet com o link, e o que veio do seu conhecimento geral sem fonte.
 
 Separe em quatro listas, com esses quatro títulos. Se alguma coisa você supôs, diga que supôs, com todas as letras. Não suavize e não complete buraco com suposição.</pre>
+      </div>
+
+      <div class="pedido">
+        <div class="pedido-top"><span class="q"><b>Socorro, quebrou</b><small>Quando a tela do sistema der erro</small></span><button class="copiar" type="button">Copiar</button></div>
+<pre>A tela do Meu Funcionário deu erro. Confere os arquivos da pasta dados, acha o que está escrito errado e conserta. Depois me diga em uma frase o que estava acontecendo.</pre>
+      </div>
     </div>
-  </div>
+  </details>
+
+  <!-- PLUGINS -->
+  <details class="ref" id="plugins">
+    <summary>Os plugins oficiais, por dentro<small>O que cada comando faz, e de onde ele tira o dado</small></summary>
+    <div class="ref-corpo">
+      <div class="dest" style="margin:0">
+        <span class="tag">A regra que explica todos de uma vez</span>
+        <p class="frase-forte">Ele só enxerga o que você escreve, o que você anexa e o que está ligado por conector.</p>
+        <p>Se o dado não está em nenhuma das três, ele não tem de onde tirar. E se responder mesmo assim, inventou.</p>
+        <div class="tags">
+          <span class="fonte f-sozinho">funciona sem nada ligado</span>
+          <span class="fonte f-arquivo">precisa de arquivo anexado</span>
+          <span class="fonte f-conector">precisa de conector</span>
+        </div>
+      </div>
+
+      <h4>marketing</h4>
+      <div class="rolo">
+        <table>
+          <thead><tr><th>comando</th><th>o que faz</th><th>de onde vem o dado</th></tr></thead>
+          <tbody>
+            <tr><td><code>/draft-content</code></td><td>rascunha post, newsletter, página de venda, release e case</td><td><span class="fonte f-sozinho">sem nada ligado</span> Da cabeça dele mais o que você contar. Fica bom mesmo com o seu cérebro anexado</td></tr>
+            <tr><td><code>/campaign-plan</code></td><td>briefing de campanha com canais, calendário e métricas</td><td><span class="fonte f-sozinho">sem nada ligado</span> Do que você contar: objetivo, verba e prazo</td></tr>
+            <tr><td><code>/brand-review</code></td><td>confere um texto contra a voz da marca</td><td><span class="fonte f-arquivo">arquivo anexado</span> Do texto que você colar e do guia de marca</td></tr>
+            <tr><td><code>/competitive-brief</code></td><td>compara o seu posicionamento com o dos concorrentes</td><td><span class="fonte f-sozinho">sem nada ligado</span> Da busca na web</td></tr>
+            <tr><td><code>/performance-report</code></td><td>relatório de métricas com recomendação do que mudar</td><td><span class="fonte f-conector">conector ou arquivo</span> Você exporta o CSV e anexa, ou liga um conector que leia a conta, ou cola os números. Sem uma dessas três, não tem de onde puxar</td></tr>
+            <tr><td><code>/seo-audit</code></td><td>palavra-chave, on-page, lacuna de conteúdo e parte técnica</td><td><span class="fonte f-sozinho">sem nada ligado</span> Do site que você indicar</td></tr>
+            <tr><td><code>/email-sequence</code></td><td>sequência de boas-vindas, nutrição e recuperação</td><td><span class="fonte f-sozinho">sem nada ligado</span> Do que você contar</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>data</h4>
+      <div class="rolo">
+        <table>
+          <thead><tr><th>comando</th><th>o que faz</th><th>de onde vem o dado</th></tr></thead>
+          <tbody>
+            <tr><td><code>/analyze</code></td><td>responde pergunta sobre os seus dados</td><td><span class="fonte f-arquivo">arquivo anexado</span> CSV ou Excel que você sobe</td></tr>
+            <tr><td><code>/explore-data</code></td><td>faz o perfil da base e aponta erro e furo de qualidade</td><td><span class="fonte f-arquivo">arquivo anexado</span> A planilha que você subir</td></tr>
+            <tr><td><code>/create-viz</code></td><td>faz os gráficos</td><td><span class="fonte f-arquivo">arquivo anexado</span> Os dados que você subir</td></tr>
+            <tr><td><code>/build-dashboard</code></td><td>monta um painel que abre no navegador</td><td><span class="fonte f-arquivo">arquivo anexado</span> Os dados que você subir</td></tr>
+            <tr><td><code>/validate</code></td><td>revisa a própria análise antes de você mandar para a cliente</td><td><span class="fonte f-sozinho">sem nada ligado</span> A análise que ele mesmo fez</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>productivity</h4>
+      <p><code>/start</code> cria a estrutura de tarefa, memória e painel · <code>/update</code> limpa o que travou · <code>/update --comprehensive</code> varre e-mail, agenda e chat procurando pendência esquecida (este precisa de conector).</p>
+
+      <h4>customer-support</h4>
+      <p><code>/triage</code> classifica e prioriza · <code>/draft-response</code> escreve a resposta · <code>/escalate</code> monta o pacote para passar adiante · <code>/kb-article</code> transforma caso resolvido em artigo · <code>/research</code> pesquisa em várias fontes, e este precisa de conector.</p>
+
+      <h4>sales</h4>
+      <p>Trinta e seis skills, chamadas pelo nome, assim: <code>/sales:call-prep</code>. As que funcionam hoje sem nada ligado: <code>draft-outreach</code>, <code>lead-triage</code>, <code>account-research</code>, <code>handle-objection</code> e <code>create-an-asset</code>. O resto rende de verdade com CRM e agenda ligados.</p>
+
+      <h4>enterprise-search</h4>
+      <p><code>/search</code> busca em todas as fontes ligadas de uma vez · <code>/digest</code> faz o resumo do período. <b>Sem conector, este não faz nada.</b></p>
+
+      <h4>cowork-plugin-management</h4>
+      <p>É com ele que você chega a ter o seu próprio plugin, com o seu jeito de trabalhar dentro.</p>
+
+      <div class="links">
+        <a href="https://github.com/anthropics/knowledge-work-plugins" target="_blank" rel="noopener">
+          <b>Plugins oficiais de trabalho</b><span class="url">github.com/anthropics/knowledge-work-plugins</span>
+          <small>Todos eles, com o que vem dentro de cada um.</small></a>
+        <a href="https://github.com/anthropics/skills" target="_blank" rel="noopener">
+          <b>Skills oficiais</b><span class="url">github.com/anthropics/skills</span>
+          <small>Inclui docx, pdf, pptx e xlsx, as que entregam arquivo pronto.</small></a>
+      </div>
+    </div>
+  </details>
+
+  <!-- ATALHOS -->
+  <details class="ref" id="atalhos">
+    <summary>Atalhos do dia a dia<small>O que digitar, e onde cada um funciona</small></summary>
+    <div class="ref-corpo">
+      <div class="rolo">
+        <table>
+          <thead><tr><th>atalho</th><th>o que faz</th><th>onde funciona</th></tr></thead>
+          <tbody>
+            <tr><td><code>/</code></td><td>Abre a lista de tudo o que ele sabe fazer ali. Você não precisa decorar nada</td><td><b>App e Code</b></td></tr>
+            <tr><td><code>@</code></td><td>Puxa um arquivo ou uma pasta para dentro da conversa sem você colar nada</td><td><b>Code.</b> No app, para arquivo e projeto</td></tr>
+            <tr><td><code>/plugin</code></td><td>Abre a vitrine de plugins dentro da caixa de mensagem</td><td><b>Só no Code</b></td></tr>
+            <tr><td><code>/clear</code></td><td>Limpa a memória da conversa e começa do zero, sem perder o projeto</td><td><b>Só no Code.</b> No app, abra conversa nova</td></tr>
+            <tr><td><b>Modo plano</b></td><td>Ele escreve o plano e espera o seu sim antes de mexer em qualquer arquivo</td><td><b>Só no Code</b></td></tr>
+            <tr><td><b>Subagente</b></td><td>Manda o trabalho braçal para um ajudante. É o que faz o seu limite de uso durar mais</td><td><b>Code.</b> No app, como tarefa</td></tr>
+            <tr><td><code>CLAUDE.md</code></td><td>O arquivo com as regras que valem em toda conversa daquele projeto</td><td><b>App e Code</b></td></tr>
+            <tr><td><b>Arrastar e colar</b></td><td>Arrastar arquivo para a conversa, e colar print com Ctrl+V</td><td><b>App e Code</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="dest" style="margin:0">
+        <span class="tag">App e Code, em uma frase</span>
+        <p class="frase-forte">No app, ele liga nas suas ferramentas. No Code, ele mexe no computador.</p>
+        <p>Ver os comentários do seu Instagram é no app, porque precisa do Instagram ligado. Guardar a sua pasta no GitHub é no Code. Escrever é igual nos dois.</p>
+      </div>
+    </div>
+  </details>
+
+  <!-- GLOSSÁRIO -->
+  <details class="ref" id="glossario">
+    <summary>Glossário<small>As palavras que aparecem nas aulas, uma linha cada</small></summary>
+    <div class="ref-corpo">
+      <div class="glos">
+        <div><b>Chat</b>A conversa com o Claude. Para perguntar, escrever, ler um arquivo.</div>
+        <div><b>Projeto</b>Uma pasta com as suas instruções. Toda conversa dentro dele já sabe quem você é.</div>
+        <div><b>CLAUDE.md</b>O arquivo com as regras fixas que ele segue em toda conversa daquele projeto.</div>
+        <div><b>Cowork</b>O Claude no app do computador, mexendo nas suas pastas e fazendo tarefas.</div>
+        <div><b>Claude no Chrome</b>O Claude clicando e preenchendo sites por você.</div>
+        <div><b>Claude Code</b>O Claude para construir: páginas, painéis, sistemas.</div>
+        <div><b>Conector (MCP)</b>O cabo que liga o Claude nos seus apps: agenda, Gmail, Drive.</div>
+        <div><b>Conector personalizado</b>Um conector que você adiciona colando um link, como a Apify e o Composio.</div>
+        <div><b>API</b>A porta de serviço de um app. Foi por ela, na uazapi, que o WhatsApp foi ligado.</div>
+        <div><b>Skill</b>Uma receita. Você ensina uma vez e ele segue sempre.</div>
+        <div><b>Plugin</b>Uma caixa com várias receitas.</div>
+        <div><b>Playbook</b>Um manual que você põe na pasta para ele consultar, como o do WhatsApp.</div>
+        <div><b>Tarefa programada</b>Um despertador: na hora marcada, ele faz sozinho.</div>
+        <div><b>Plantão</b>A rotina que lê o que você mandou para o seu número e responde.</div>
+        <div><b>Agente</b>Um funcionário que faz a tarefa inteira, às vezes com ajudantes.</div>
+        <div><b>Subagente</b>O ajudante para onde ele manda o trabalho braçal, para o seu limite durar mais.</div>
+        <div><b>Haiku, Sonnet, Opus</b>O rápido e econômico, o do dia a dia e o sênior para o difícil.</div>
+        <div><b>Limite de uso</b>Quanto você pode usar no período. Veja em Configurações › Uso.</div>
+        <div><b>Conversa temporária</b>Não fica salva. Boa para assunto sensível.</div>
+        <div><b>Cérebro</b>Os documentos que fazem o Claude te conhecer.</div>
+        <div><b>Instância</b>A ligação de um número de WhatsApp na uazapi.</div>
+        <div><b>Server URL</b>O endereço do seu servidor. Fica no topo do painel uazapiGO.</div>
+        <div><b>Token da instância</b>A chave do seu WhatsApp. Não é o Admin Token. Mora só no whatsapp.json.</div>
+        <div><b>Apify</b>Robôs que leem sites por você: comentários, perfis, avaliações do Google.</div>
+        <div><b>Composio</b>Uma tomada que liga centenas de apps no Claude de uma vez.</div>
+        <div><b>Supabase</b>O arquivo de planilhas de um sistema. É o da semana 4.</div>
+        <div><b>GitHub</b>O Drive das páginas e dos códigos. Serve para guardar e para publicar.</div>
+        <div><b>Repositório</b>A pasta do seu projeto dentro do GitHub, com todo o histórico guardado.</div>
+      </div>
+    </div>
+  </details>
+
+  <!-- SEGURANÇA -->
+  <details class="ref" id="seguranca" open>
+    <summary>Segurança<small>As duas regras que valem para sempre</small></summary>
+    <div class="ref-corpo">
+      <div class="dest escuro" style="margin:0">
+        <span class="tag">Regra 1</span>
+        <p class="frase-forte">Chave e token nunca passam pelo chat e nunca entram em repositório público.</p>
+        <p>Chave mora em arquivo protegido na sua máquina, e ele lê dali. Em automação, vai como segredo do repositório, nunca escrita no código.</p>
+      </div>
+      <div class="dest escuro" style="margin:0">
+        <span class="tag">Regra 2</span>
+        <p class="frase-forte">Ele só enxerga o que você escreve, o que você anexa e o que está ligado por conector.</p>
+        <p>O outro lado dela: tudo o que você escreve, anexa ou liga, ele vê. Então dado de paciente, dado sigiloso de processo e documento de cliente que você não tem autorização para compartilhar não entram em lugar nenhum.</p>
+      </div>
+      <div class="rolo">
+        <table>
+          <thead><tr><th>o nome</th><th>o que é</th></tr></thead>
+          <tbody>
+            <tr><td><b>Chave de API</b></td><td>A senha que liga um programa no outro. Nunca no chat, nunca em código publicado</td></tr>
+            <tr><td><b>Arquivo .env</b></td><td>O arquivo na sua máquina onde as chaves ficam guardadas, fora do código</td></tr>
+            <tr><td><b>.gitignore</b></td><td>A lista do que o GitHub nunca envia. É aqui que o <code>whatsapp.json</code> entra</td></tr>
+            <tr><td><b>Repositório privado</b></td><td>Só quem você autorizar vê. Não substitui guardar a chave em lugar seguro</td></tr>
+            <tr><td><b>RLS no Supabase</b></td><td>A regra dentro do banco que diz quem lê e escreve cada linha. Sem ela, qualquer pessoa com a chave pública lê a tabela inteira</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
 </section>
 
-<footer class="rodape so-dentro">
-  <img src="../img/selo-dl-magenta.webp" alt="DL Estúdio" width="72" height="72">
-  <p class="linha-cap">Modo Automático · Turma Fundadora</p>
-  <p>Esta biblioteca cresce a cada aula. Guarde o link.</p>
-  <p class="nota" style="max-width:34em">Aula 1 em 20 de outubro de 2026. Os limites e os nomes de tela mudam com o tempo: se alguma coisa aqui não bater com o que você está vendo, confie na sua tela.</p>
+</main>
+
+<footer class="so-dentro">
+  <div class="wrap">
+    <img src="../img/selo-dl-magenta.webp" alt="DL Estúdio" width="68" height="68">
+    <p class="cap">Modo Automático · Turma Fundadora</p>
+    <p class="nota" style="max-width:34em;margin:8px auto 0">Esta biblioteca cresce a cada aula. Guarde o link. Se alguma coisa aqui não bater com o que você está vendo na sua tela, confie na sua tela e me avise no grupo.</p>
+  </div>
 </footer>
 
 <script>const ORIGEM="biblioteca";</script>
@@ -1005,27 +1133,82 @@ f.addEventListener("submit",async ev=>{ev.preventDefault();erro.textContent="";
  function enviar(){const c=new AbortController();const t=setTimeout(()=>c.abort(),6000);
   return fetch(FN,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(d),signal:c.signal})
    .then(x=>{clearTimeout(t);return x}).catch(()=>{clearTimeout(t);return null})}
- if(PREVIA){enviar();liberar();document.getElementById("indice").scrollIntoView({behavior:"smooth"});
+ if(PREVIA){enviar();liberar();document.getElementById("trilha").scrollIntoView({behavior:"smooth"});
   bt.disabled=false;bt.textContent="Abrir a biblioteca";return}
  const r=await enviar();
  if(!(r&&r.ok)){erro.textContent=(r&&r.status===400)?"Confere o WhatsApp (com DDD) e o e-mail.":"Não consegui abrir agora. Tenta de novo em alguns segundos.";bt.disabled=false;bt.textContent="Abrir a biblioteca";return}
- liberar();document.getElementById("indice").scrollIntoView({behavior:"smooth"});
+ liberar();document.getElementById("trilha").scrollIntoView({behavior:"smooth"});
  bt.disabled=false;bt.textContent="Abrir a biblioteca";});
 
-document.querySelectorAll('.copiar').forEach(b=>b.addEventListener('click',()=>{
-  const pre=b.closest('.pedido').querySelector('pre');
+/* copiar */
+document.addEventListener("click",ev=>{
+  const b=ev.target.closest(".copiar"); if(!b) return;
+  const pre=b.closest(".pedido").querySelector("pre");
   const rotulo=b.textContent;
-  const ok=()=>{b.textContent='Copiado';setTimeout(()=>b.textContent=rotulo,1800)};
-  const sel=()=>{const r=document.createRange();r.selectNodeContents(pre);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selecionado'};
+  const ok=()=>{b.textContent="Copiado";setTimeout(()=>b.textContent=rotulo,1800)};
+  const sel=()=>{const r=document.createRange();r.selectNodeContents(pre);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Selecionado"};
   try{navigator.clipboard.writeText(pre.innerText).then(ok,sel)}catch(e){sel()}
-}));
+});
 
-const links=[...document.querySelectorAll('.barra a')];
+/* progresso dos passos */
+const passos=[...document.querySelectorAll(".passo")];
+function lerFeitos(){try{return JSON.parse(localStorage.getItem("dl_trilha")||"[]")}catch(e){return[]}}
+function salvarFeitos(a){try{localStorage.setItem("dl_trilha",JSON.stringify(a))}catch(e){}}
+function pintar(){
+  const feitos=lerFeitos();
+  passos.forEach(p=>p.classList.toggle("feito",feitos.indexOf(p.dataset.passo)>=0));
+  const n=feitos.length,t=passos.length;
+  document.getElementById("contaPassos").textContent=n+" de "+t;
+  document.getElementById("barraP").style.width=(n/t*100)+"%";
+  passos.forEach(p=>{
+    const b=p.querySelector(".marcar");
+    if(b) b.lastChild.textContent=p.classList.contains("feito")?"Feito":"Já fiz este passo";
+  });
+}
+passos.forEach(p=>{
+  const b=p.querySelector(".marcar"); if(!b) return;
+  b.addEventListener("click",()=>{
+    const feitos=lerFeitos(), id=p.dataset.passo, i=feitos.indexOf(id);
+    if(i>=0) feitos.splice(i,1); else feitos.push(id);
+    salvarFeitos(feitos); pintar();
+    if(i<0){
+      const prox=passos[passos.indexOf(p)+1];
+      if(prox){ p.open=false; prox.open=true; prox.scrollIntoView({block:"start"}); }
+      else document.getElementById("fim").scrollIntoView({block:"center"});
+    }
+  });
+});
+pintar();
+/* abre o primeiro passo que ainda falta */
+(function(){
+  const feitos=lerFeitos();
+  if(!feitos.length) return;
+  const falta=passos.find(p=>feitos.indexOf(p.dataset.passo)<0);
+  passos.forEach(p=>{p.open=false});
+  if(falta) falta.open=true;
+})();
+
+/* barra: marca onde você está, sem mexer na página */
+const links=[...document.querySelectorAll(".barra a")];
+const trilho=document.querySelector(".barra nav");
+function centralizar(a){
+  if(!trilho) return;
+  const max=trilho.scrollWidth-trilho.clientWidth;
+  if(max<=0) return;
+  const alvo=a.offsetLeft-(trilho.clientWidth-a.offsetWidth)/2;
+  trilho.scrollLeft=Math.max(0,Math.min(alvo,max));
+}
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>{
-  const on=a.getAttribute('href')==='#'+e.target.id;
-  a.classList.toggle('at',on);if(on)a.scrollIntoView({inline:'center',block:'nearest'});
-})}),{rootMargin:'-25% 0px -65% 0px'});
-links.forEach(a=>{const s=document.querySelector(a.getAttribute('href'));if(s)io.observe(s)});
+  const on=a.getAttribute("href")==="#"+e.target.id;
+  if(on&&!a.classList.contains("at")) centralizar(a);
+  a.classList.toggle("at",on);
+})}),{rootMargin:"-20% 0px -70% 0px"});
+links.forEach(a=>{const s=document.querySelector(a.getAttribute("href"));if(s)io.observe(s)});
+/* um clique numa aba de consulta abre a sanfona */
+links.forEach(a=>a.addEventListener("click",()=>{
+  const alvo=document.querySelector(a.getAttribute("href"));
+  if(alvo&&alvo.tagName==="DETAILS") alvo.open=true;
+}));
 </script>
 </body>
 </html>
