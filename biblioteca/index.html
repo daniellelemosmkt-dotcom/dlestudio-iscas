@@ -117,7 +117,8 @@ footer a{color:var(--pessego)}
 
 .biblio{display:grid;gap:26px;align-items:start}
 @media(min-width:900px){.biblio{grid-template-columns:270px 1fr;gap:38px}}
-.estante{display:grid;gap:8px;position:sticky;top:18px}
+.estante{display:grid;gap:8px}
+@media(min-width:900px){.estante{position:sticky;top:18px}}
 .aba{display:flex;gap:12px;align-items:center;width:100%;text-align:left;cursor:pointer;
   background:var(--branco);border:1px solid var(--linha);border-radius:14px;padding:14px 16px;font:600 15px/1.2 var(--txt);color:var(--graf)}
 .aba small{display:block;font:400 13px/1.3 var(--txt);color:var(--suave);margin-top:3px}
@@ -140,6 +141,16 @@ footer a{color:var(--pessego)}
 .tranca .cad{font-size:34px}
 .tranca h3{font:400 clamp(22px,3.2vw,30px)/1.15 var(--disp);margin-top:12px}
 .tranca p{color:var(--suave);margin-top:12px;max-width:34em;margin-left:auto;margin-right:auto}
+.vid{border-radius:14px;overflow:hidden;background:var(--noite);aspect-ratio:9/16}
+.vid video,.vid img{width:100%;height:100%;object-fit:cover;display:block}
+.dupla{display:grid;gap:12px;margin-top:16px}
+@media(min-width:560px){.dupla{grid-template-columns:1fr 1fr}}
+.dupla figure{margin:0}
+.dupla figcaption{font:600 12px/1.3 var(--txt);letter-spacing:.1em;text-transform:uppercase;color:var(--suave);margin-top:9px;text-align:center}
+.dupla .depois figcaption{color:var(--mag)}
+.parede{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:9px;margin-top:16px}
+.parede .vid{border-radius:10px}
+.amostra{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:4px}
 .tranca .palavra{display:inline-block;margin-top:16px;background:var(--mag);color:#fff;border-radius:999px;padding:11px 20px;font:600 15px/1 var(--txt);letter-spacing:.06em}
 </style>
 
@@ -189,7 +200,7 @@ footer a{color:var(--pessego)}
       <button class="aba" role="tab" id="t-roteiro" data-aba="roteiro" aria-selected="false"><span class="ico">✦</span><span>ROTEIRO<small>Transformar uma dica em história</small></span></button>
       <button class="aba" role="tab" id="t-outlier" data-aba="outlier" aria-selected="false"><span class="ico">✕</span><span>OUTLIER<small>Desmontar um post fora da curva</small></span></button>
       <button class="aba" role="tab" id="t-sprint" data-aba="sprint" aria-selected="false"><span class="ico">✕</span><span>SPRINT<small>Acompanhar um experimento de crescimento</small></span></button>
-      <button class="aba" role="tab" id="t-editor" data-aba="editor" aria-selected="false"><span class="ico">✕</span><span>EDITOR<small>O sistema de edição funcionando</small></span></button>
+      <button class="aba" role="tab" id="t-editor" data-aba="editor" aria-selected="false"><span class="ico">✦</span><span>EDITOR<small>O sistema de edição funcionando</small></span></button>
       <button class="aba" role="tab" id="t-zero" data-aba="zero" aria-selected="false"><span class="ico">✕</span><span>ZERO<small>Por onde começar no Claude</small></span></button>
     </div>
     <div>
@@ -282,15 +293,31 @@ Se algo acontecer depois deste post, qual continuação nasce naturalmente?
       </div>
     </section>
     <section class="painel" id="p-editor" role="tabpanel" hidden>
-      <span class="quando">Abre nas semanas do Kit</span>
+      <span class="quando">Material pronto</span>
       <h2>EDITOR</h2>
       <p class="sub" style="margin-top:6px">O sistema de edição funcionando</p>
-<div class="tranca">
-        <div class="cad">🔒</div>
-        <h3>Esta porta ainda não abriu</h3>
-        <p>Abre nas semanas do Kit. Quando abrir, a palavra aparece no post e você entra por aqui mesmo, sem se cadastrar de novo.</p>
-        <span class="palavra">EDITOR</span>
+<p>Eu gravo no celular, mando o arquivo e vou fazer outra coisa. O corte, a legenda, a manchete e o efeito saem prontos, na minha identidade. A decisão do que entra continua minha: o que mudou é que eu parei de perder a madrugada arrastando bloquinho na timeline.</p>
+
+      <h3 style="font:600 12px/1 var(--txt);letter-spacing:.14em;text-transform:uppercase;color:var(--mag);margin-top:26px">O mesmo vídeo, antes e depois</h3>
+      <div class="dupla">
+        <figure><div class="vid"><video src="moldes/real-bruto.mp4" poster="moldes/real-bruto.jpg" muted loop playsinline preload="none" controls></video></div><figcaption>o que eu gravei</figcaption></figure>
+        <figure class="depois"><div class="vid"><video src="moldes/real-editado.mp4" poster="moldes/real-editado.jpg" muted loop playsinline preload="none" controls></video></div><figcaption>o que voltou pronto</figcaption></figure>
       </div>
+
+      <h3 style="font:600 12px/1 var(--txt);letter-spacing:.14em;text-transform:uppercase;color:var(--mag);margin-top:30px">Mesmo efeito, identidade diferente</h3>
+      <p>Esta é a parte que eu não sabia que importava tanto: o sistema lê a sua marca em vez de devolver molde igual para todo mundo. O efeito é o mesmo nos dois, as cores e a tipografia não.</p>
+      <div class="dupla">
+        <figure><div class="vid"><video src="moldes/pull-back-reveal.mp4" poster="moldes/pull-back-reveal.jpg" muted loop playsinline preload="none"></video></div><figcaption><span class="amostra" style="background:#4A63C8"></span>padrão</figcaption></figure>
+        <figure class="depois"><div class="vid"><video src="moldes/marca-pull-back-reveal.mp4" poster="moldes/marca-pull-back-reveal.jpg" muted loop playsinline preload="none"></video></div><figcaption><span class="amostra" style="background:#8B083F"></span>com a minha marca</figcaption></figure>
+      </div>
+
+      <h3 style="font:600 12px/1 var(--txt);letter-spacing:.14em;text-transform:uppercase;color:var(--mag);margin-top:30px">Um efeito para cada tipo de vídeo</h3>
+      <p>Estes são os que já estão rodando aqui. Cada um serve a um tipo de conteúdo: lista, prova de tela, manchete, dado, conversa.</p>
+      <div class="parede"><div class="vid"><video src="moldes/tpl-cartoes-3d.mp4" poster="moldes/tpl-cartoes-3d.jpg" muted loop playsinline preload="none"></video></div><div class="vid"><video src="moldes/tpl-chart-grow.mp4" poster="moldes/tpl-chart-grow.jpg" muted loop playsinline preload="none"></video></div><div class="vid"><video src="moldes/tpl-checklist.mp4" poster="moldes/tpl-checklist.jpg" muted loop playsinline preload="none"></video></div><div class="vid"><video src="moldes/tpl-conversa-perguntas.mp4" poster="moldes/tpl-conversa-perguntas.jpg" muted loop playsinline preload="none"></video></div><div class="vid"><video src="moldes/tpl-couch-wall-feed.mp4" poster="moldes/tpl-couch-wall-feed.jpg" muted loop playsinline preload="none"></video></div><div class="vid"><video src="moldes/tpl-couch-wall-grade.mp4" poster="moldes/tpl-couch-wall-grade.jpg" muted loop playsinline preload="none"></video></div><div class="vid"><video src="moldes/tpl-cover-story.mp4" poster="moldes/tpl-cover-story.jpg" muted loop playsinline preload="none"></video></div><div class="vid"><video src="moldes/tpl-documento-3d.mp4" poster="moldes/tpl-documento-3d.jpg" muted loop playsinline preload="none"></video></div><div class="vid"><video src="moldes/tpl-doodle-boil.mp4" poster="moldes/tpl-doodle-boil.jpg" muted loop playsinline preload="none"></video></div><div class="vid"><video src="moldes/tpl-frame-break.mp4" poster="moldes/tpl-frame-break.jpg" muted loop playsinline preload="none"></video></div><div class="vid"><video src="moldes/tpl-headline-wall.mp4" poster="moldes/tpl-headline-wall.jpg" muted loop playsinline preload="none"></video></div><div class="vid"><video src="moldes/tpl-holograma-perfil.mp4" poster="moldes/tpl-holograma-perfil.jpg" muted loop playsinline preload="none"></video></div><div class="vid"><video src="moldes/tpl-orbit.mp4" poster="moldes/tpl-orbit.jpg" muted loop playsinline preload="none"></video></div><div class="vid"><video src="moldes/tpl-painel-dados.mp4" poster="moldes/tpl-painel-dados.jpg" muted loop playsinline preload="none"></video></div><div class="vid"><video src="moldes/tpl-paper-cut.mp4" poster="moldes/tpl-paper-cut.jpg" muted loop playsinline preload="none"></video></div><div class="vid"><video src="moldes/tpl-phone-mockup.mp4" poster="moldes/tpl-phone-mockup.jpg" muted loop playsinline preload="none"></video></div><div class="vid"><video src="moldes/tpl-pull-back-reveal.mp4" poster="moldes/tpl-pull-back-reveal.jpg" muted loop playsinline preload="none"></video></div><div class="vid"><video src="moldes/tpl-ui-world.mp4" poster="moldes/tpl-ui-world.jpg" muted loop playsinline preload="none"></video></div></div>
+
+      <div class="atalho" style="margin-top:22px"><b>Para ser justa com você:</b> isso não edita sozinho e não substitui quem sabe o que está fazendo. Quando eu joguei um bruto cru, sem dizer nada, a manchete saiu no lugar errado. Quem decide o que o vídeo precisa continua sendo você: o sistema executa.</div>
+
+      <p style="margin-top:20px">O Kit inteiro, com todos os efeitos e a instalação guiada, eu mostro no direct de quem pede. É só me chamar lá.</p>
     </section>
     <section class="painel" id="p-zero" role="tabpanel" hidden>
       <span class="quando">Abre quando a audiência pedir base</span>
@@ -328,7 +355,7 @@ Se algo acontecer depois deste post, qual continuação nasce naturalmente?
 const ORIGEM="biblioteca";
 const FN="https://veogbuoxtbpaxoqvuakr.supabase.co/functions/v1/lead-isca-dlestudio";
 const ABAS=["diario","roteiro","outlier","sprint","editor","zero"];
-const COM_MATERIAL=["diario","roteiro"];
+const COM_MATERIAL=["diario","roteiro","editor"];
 const q=new URLSearchParams(location.search);
 const MC=q.get("mc")||"";
 const aviso=document.querySelector(".aviso"),f=document.getElementById("fcad"),erro=document.getElementById("erro");

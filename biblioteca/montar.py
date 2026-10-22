@@ -32,7 +32,8 @@ CSS_BASE = CSS_BASE.replace(re.search(r"src:url\((data:font/woff2;base64,[^)]+)\
 CSS_EXTRA = """
 .biblio{display:grid;gap:26px;align-items:start}
 @media(min-width:900px){.biblio{grid-template-columns:270px 1fr;gap:38px}}
-.estante{display:grid;gap:8px;position:sticky;top:18px}
+.estante{display:grid;gap:8px}
+@media(min-width:900px){.estante{position:sticky;top:18px}}
 .aba{display:flex;gap:12px;align-items:center;width:100%;text-align:left;cursor:pointer;
   background:var(--branco);border:1px solid var(--linha);border-radius:14px;padding:14px 16px;font:600 15px/1.2 var(--txt);color:var(--graf)}
 .aba small{display:block;font:400 13px/1.3 var(--txt);color:var(--suave);margin-top:3px}
@@ -55,8 +56,49 @@ CSS_EXTRA = """
 .tranca .cad{font-size:34px}
 .tranca h3{font:400 clamp(22px,3.2vw,30px)/1.15 var(--disp);margin-top:12px}
 .tranca p{color:var(--suave);margin-top:12px;max-width:34em;margin-left:auto;margin-right:auto}
+.vid{border-radius:14px;overflow:hidden;background:var(--noite);aspect-ratio:9/16}
+.vid video,.vid img{width:100%;height:100%;object-fit:cover;display:block}
+.dupla{display:grid;gap:12px;margin-top:16px}
+@media(min-width:560px){.dupla{grid-template-columns:1fr 1fr}}
+.dupla figure{margin:0}
+.dupla figcaption{font:600 12px/1.3 var(--txt);letter-spacing:.1em;text-transform:uppercase;color:var(--suave);margin-top:9px;text-align:center}
+.dupla .depois figcaption{color:var(--mag)}
+.parede{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:9px;margin-top:16px}
+.parede .vid{border-radius:10px}
+.amostra{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:4px}
 .tranca .palavra{display:inline-block;margin-top:16px;background:var(--mag);color:#fff;border-radius:999px;padding:11px 20px;font:600 15px/1 var(--txt);letter-spacing:.06em}
 """
+
+EDITOR_HTML = """<p>Eu gravo no celular, mando o arquivo e vou fazer outra coisa. O corte, a legenda, a manchete e o efeito saem prontos, na minha identidade. A decisão do que entra continua minha: o que mudou é que eu parei de perder a madrugada arrastando bloquinho na timeline.</p>
+
+      <h3 style="font:600 12px/1 var(--txt);letter-spacing:.14em;text-transform:uppercase;color:var(--mag);margin-top:26px">O mesmo vídeo, antes e depois</h3>
+      <div class="dupla">
+        <figure><div class="vid"><video src="moldes/real-bruto.mp4" poster="moldes/real-bruto.jpg" muted loop playsinline preload="none" controls></video></div><figcaption>o que eu gravei</figcaption></figure>
+        <figure class="depois"><div class="vid"><video src="moldes/real-editado.mp4" poster="moldes/real-editado.jpg" muted loop playsinline preload="none" controls></video></div><figcaption>o que voltou pronto</figcaption></figure>
+      </div>
+
+      <h3 style="font:600 12px/1 var(--txt);letter-spacing:.14em;text-transform:uppercase;color:var(--mag);margin-top:30px">Mesmo efeito, identidade diferente</h3>
+      <p>Esta é a parte que eu não sabia que importava tanto: o sistema lê a sua marca em vez de devolver molde igual para todo mundo. O efeito é o mesmo nos dois, as cores e a tipografia não.</p>
+      <div class="dupla">
+        <figure><div class="vid"><video src="moldes/pull-back-reveal.mp4" poster="moldes/pull-back-reveal.jpg" muted loop playsinline preload="none"></video></div><figcaption><span class="amostra" style="background:#4A63C8"></span>padrão</figcaption></figure>
+        <figure class="depois"><div class="vid"><video src="moldes/marca-pull-back-reveal.mp4" poster="moldes/marca-pull-back-reveal.jpg" muted loop playsinline preload="none"></video></div><figcaption><span class="amostra" style="background:#8B083F"></span>com a minha marca</figcaption></figure>
+      </div>
+
+      <h3 style="font:600 12px/1 var(--txt);letter-spacing:.14em;text-transform:uppercase;color:var(--mag);margin-top:30px">Um efeito para cada tipo de vídeo</h3>
+      <p>Estes são os que já estão rodando aqui. Cada um serve a um tipo de conteúdo: lista, prova de tela, manchete, dado, conversa.</p>
+      <div class="parede">__PAREDE__</div>
+
+      <div class="atalho" style="margin-top:22px"><b>Para ser justa com você:</b> isso não edita sozinho e não substitui quem sabe o que está fazendo. Quando eu joguei um bruto cru, sem dizer nada, a manchete saiu no lugar errado. Quem decide o que o vídeo precisa continua sendo você: o sistema executa.</div>
+
+      <p style="margin-top:20px">O Kit inteiro, com todos os efeitos e a instalação guiada, eu mostro no direct de quem pede. É só me chamar lá.</p>"""
+
+# A parede e montada a partir dos arquivos que existem DE VERDADE em moldes/,
+# para a pagina nunca prometer efeito que nao esta la.
+PAREDE = sorted(q.stem for q in (AQUI / "moldes").glob("tpl-*.mp4"))
+EDITOR_HTML = EDITOR_HTML.replace("__PAREDE__", "".join(
+    f'<div class="vid"><video src="moldes/{n}.mp4" poster="moldes/{n}.jpg" muted loop playsinline preload="none"></video></div>'
+    for n in PAREDE))
+assert PAREDE, "nenhuma previa em moldes/: a aba EDITOR ficaria sem a parede"
 
 # As seis familias. 'conteudo' None = aba existe mas ainda nao tem material escrito.
 ABAS = [
@@ -73,7 +115,7 @@ ABAS = [
     {"id": "sprint", "nome": "SPRINT", "resumo": "Acompanhar um experimento de crescimento",
      "quando": "Abre quando o carrossel de medição sair", "conteudo": None},
     {"id": "editor", "nome": "EDITOR", "resumo": "O sistema de edição funcionando",
-     "quando": "Abre nas semanas do Kit", "conteudo": None},
+     "quando": "Material pronto", "conteudo": EDITOR_HTML},
     {"id": "zero", "nome": "ZERO", "resumo": "Por onde começar no Claude",
      "quando": "Abre quando a audiência pedir base", "conteudo": None},
 ]
@@ -265,7 +307,7 @@ HTML = f"""<!doctype html>
 const ORIGEM="biblioteca";
 const FN="https://veogbuoxtbpaxoqvuakr.supabase.co/functions/v1/lead-isca-dlestudio";
 const ABAS=["diario","roteiro","outlier","sprint","editor","zero"];
-const COM_MATERIAL=["diario","roteiro"];
+const COM_MATERIAL=["diario","roteiro","editor"];
 const q=new URLSearchParams(location.search);
 const MC=q.get("mc")||"";
 const aviso=document.querySelector(".aviso"),f=document.getElementById("fcad"),erro=document.getElementById("erro");
