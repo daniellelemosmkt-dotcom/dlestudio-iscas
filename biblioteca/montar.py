@@ -63,8 +63,10 @@ CSS_EXTRA = """
 .dupla figure{margin:0}
 .dupla figcaption{font:600 12px/1.3 var(--txt);letter-spacing:.1em;text-transform:uppercase;color:var(--suave);margin-top:9px;text-align:center}
 .dupla .depois figcaption{color:var(--mag)}
-.parede{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:9px;margin-top:16px}
+.parede{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-top:16px}
+.parede figure{margin:0}
 .parede .vid{border-radius:10px}
+.parede figcaption{font:500 12px/1.3 var(--txt);color:var(--suave);margin-top:6px;text-align:center}
 .amostra{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:4px}
 .tranca .palavra{display:inline-block;margin-top:16px;background:var(--mag);color:#fff;border-radius:999px;padding:11px 20px;font:600 15px/1 var(--txt);letter-spacing:.06em}
 """
@@ -85,7 +87,7 @@ EDITOR_HTML = """<p>Eu gravo no celular, mando o arquivo e vou fazer outra coisa
       </div>
 
       <h3 style="font:600 12px/1 var(--txt);letter-spacing:.14em;text-transform:uppercase;color:var(--mag);margin-top:30px">Um efeito para cada tipo de vídeo</h3>
-      <p>Estes são os que já estão rodando aqui. Cada um serve a um tipo de conteúdo: lista, prova de tela, manchete, dado, conversa.</p>
+      <p>Todos estes já estão com a minha identidade aplicada: as cores, a tipografia, o jeito. Cada um serve a um tipo de conteúdo, de lista a prova de tela, manchete, dado e conversa.</p>
       <div class="parede">__PAREDE__</div>
 
       <div class="atalho" style="margin-top:22px"><b>Para ser justa com você:</b> isso não edita sozinho e não substitui quem sabe o que está fazendo. Quando eu joguei um bruto cru, sem dizer nada, a manchete saiu no lugar errado. Quem decide o que o vídeo precisa continua sendo você: o sistema executa.</div>
@@ -94,11 +96,12 @@ EDITOR_HTML = """<p>Eu gravo no celular, mando o arquivo e vou fazer outra coisa
 
 # A parede e montada a partir dos arquivos que existem DE VERDADE em moldes/,
 # para a pagina nunca prometer efeito que nao esta la.
-PAREDE = sorted(q.stem for q in (AQUI / "moldes").glob("tpl-*.mp4"))
+PAREDE = sorted(q.stem for q in (AQUI / "previas").glob("*.mp4"))
+assert PAREDE, "nenhuma previa em previas/: a aba EDITOR ficaria sem a parede"
 EDITOR_HTML = EDITOR_HTML.replace("__PAREDE__", "".join(
-    f'<div class="vid"><video src="moldes/{n}.mp4" poster="moldes/{n}.jpg" muted loop playsinline preload="none"></video></div>'
+    f'<figure><div class="vid"><video src="previas/{n}.mp4" poster="previas/{n}.jpg" '
+    f'muted loop playsinline preload="none"></video></div><figcaption>{n.replace("-", " ")}</figcaption></figure>'
     for n in PAREDE))
-assert PAREDE, "nenhuma previa em moldes/: a aba EDITOR ficaria sem a parede"
 
 # As seis familias. 'conteudo' None = aba existe mas ainda nao tem material escrito.
 ABAS = [
