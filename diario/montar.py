@@ -256,7 +256,9 @@ def minutos(html):
 
 
 def monta_capitulo(c, proximo):
-    corpo, p, saida = c["corpo"].strip(), 0, []
+    # o numero do topico sai do titulo e vira etiqueta: <h3>1. Titulo</h3> -> <h3><b>1</b>Titulo</h3>
+    corpo = re.sub(r"<h3>(\d+)\.\s*", r"<h3><b>\1</b>", c["corpo"])
+    corpo, p, saida = corpo.strip(), 0, []
     margens = dict(c["margens"])
     for linha in corpo.split("\n"):
         saida.append(linha)
@@ -373,7 +375,13 @@ body.liberado .porta{{display:none}}
 .cap-linha{{font:600 11px/1.5 var(--txt);letter-spacing:.11em;text-transform:uppercase;color:var(--tinta-3)}}
 .cap-linha span{{color:var(--margem);margin:0 4px}}
 .capitulo h2{{font:400 clamp(26px,4.2vw,38px)/1.12 var(--disp);letter-spacing:-.01em;margin-top:12px}}
-.capitulo h3{{font:400 clamp(21px,3vw,27px)/1.2 var(--disp);margin-top:38px}}
+/* cada topico comeca com um fio no papel e a etiqueta do numero, para a troca de assunto
+   ficar visivel mesmo para quem esta so passando o olho */
+.capitulo h3{{display:flex;gap:12px;align-items:center;font:400 clamp(21px,3vw,27px)/1.25 var(--disp);
+  margin-top:54px;padding-top:30px;border-top:1px solid var(--margem)}}
+.capitulo h3 b{{flex:0 0 auto;align-self:flex-start;margin-top:.18em;background:var(--mag);color:#fff;
+  border-radius:8px;padding:6px 11px;font:600 13px/1 var(--txt);letter-spacing:.02em}}
+.capitulo h3:first-of-type{{margin-top:44px}}
 .capitulo h4{{font:600 15px/1.35 var(--txt);margin-bottom:4px}}
 .capitulo p{{margin-top:16px}}
 .capitulo ul{{margin:14px 0 0;padding-left:20px}}

@@ -86,7 +86,13 @@ body.liberado .porta{display:none}
 .cap-linha{font:600 11px/1.5 var(--txt);letter-spacing:.11em;text-transform:uppercase;color:var(--tinta-3)}
 .cap-linha span{color:var(--margem);margin:0 4px}
 .capitulo h2{font:400 clamp(26px,4.2vw,38px)/1.12 var(--disp);letter-spacing:-.01em;margin-top:12px}
-.capitulo h3{font:400 clamp(21px,3vw,27px)/1.2 var(--disp);margin-top:38px}
+/* cada topico comeca com um fio no papel e a etiqueta do numero, para a troca de assunto
+   ficar visivel mesmo para quem esta so passando o olho */
+.capitulo h3{display:flex;gap:12px;align-items:center;font:400 clamp(21px,3vw,27px)/1.25 var(--disp);
+  margin-top:54px;padding-top:30px;border-top:1px solid var(--margem)}
+.capitulo h3 b{flex:0 0 auto;align-self:flex-start;margin-top:.18em;background:var(--mag);color:#fff;
+  border-radius:8px;padding:6px 11px;font:600 13px/1 var(--txt);letter-spacing:.02em}
+.capitulo h3:first-of-type{margin-top:44px}
 .capitulo h4{font:600 15px/1.35 var(--txt);margin-bottom:4px}
 .capitulo p{margin-top:16px}
 .capitulo ul{margin:14px 0 0;padding-left:20px}
@@ -244,7 +250,7 @@ footer .wrap{padding-block:18px 42px;display:flex;flex-wrap:wrap;gap:8px 20px;ju
     
 <p><b>Isto não é uma promessa de resultado.</b> É o mapa do experimento que eu estou executando no meu próprio perfil. A ideia é documentar o processo, medir o que realmente acontece e ir mudando a estratégia com base em dados, não em opinião.</p>
 
-<h3>1. A mudança principal</h3>
+<h3><b>1</b>A mudança principal</h3>
 <p>Durante muito tempo eu tratei conteúdo assim: <mark>qual dica eu vou ensinar hoje?</mark></p>
 <aside class="margem">isso aqui é o combinado comigo mesma</aside>
 <p>Só que comecei a estudar perfis que estavam crescendo muito mais rápido e percebi um padrão.</p>
@@ -256,7 +262,7 @@ footer .wrap{padding-block:18px 42px;display:flex;flex-wrap:wrap;gap:8px 20px;ju
   <p class="pequeno">A pergunta que eu quero deixar na cabeça de quem me encontra é: “o que vai acontecer com isso?”</p>
 </div>
 
-<h3>2. O experimento</h3>
+<h3><b>2</b>O experimento</h3>
 <p>Ponto de partida: <b>3.883 seguidores</b>. Destino: <b>20.000 seguidores</b>. Prazo: <b>16 semanas</b>.</p>
 <p>O meu conteúdo vai girar em torno de uma história principal:</p>
 <div class="bloco"><span>A história que eu vou contar</span>
@@ -264,7 +270,7 @@ footer .wrap{padding-block:18px 42px;display:flex;flex-wrap:wrap;gap:8px 20px;ju
 </div>
 <p>Isso cria três coisas ao mesmo tempo: um destino concreto, uma pergunta que ainda não tem resposta, e um motivo para acompanhar o processo.</p>
 
-<h3>3. O que eu vou publicar</h3>
+<h3><b>3</b>O que eu vou publicar</h3>
 <p>Não vou abandonar conteúdo educativo. <mark>Eu só vou mudar a ordem.</mark></p>
 <p>Antes eu escolhia o assunto, explicava e pedia para a pessoa fazer alguma coisa. Agora eu começo contando o que aconteceu, mostro o problema, mostro a prova, conto o que descobri e só então digo o que fazer.</p>
 <p>Os conteúdos vão cair principalmente em quatro grupos.</p>
@@ -275,7 +281,7 @@ footer .wrap{padding-block:18px 42px;display:flex;flex-wrap:wrap;gap:8px 20px;ju
   <div><b>D</b><div><h4>Os bastidores humanos</h4><p>Nem todo conteúdo precisa ensinar. Também entram dúvidas, decisões, coisas que me irritaram, erros, opiniões, situações da rotina, coisas que eu achava e mudei de ideia, e pequenos bastidores que fazem alguém conhecer a pessoa por trás do trabalho.</p></div></div>
 </div>
 
-<h3>4. A estrutura dos vídeos</h3>
+<h3><b>4</b>A estrutura dos vídeos</h3>
 <p>A estrutura que eu estou usando como base é esta:</p>
 <div class="passos">
   <div><div><b>Cena</b>Quem eu sou ou onde eu estou, de um jeito que a pessoa consiga imaginar.</div></div>
@@ -286,14 +292,14 @@ footer .wrap{padding-block:18px 42px;display:flex;flex-wrap:wrap;gap:8px 20px;ju
   <div><div><b>O convite</b>O que a pessoa pode fazer agora, ligado à curiosidade que o vídeo abriu.</div></div>
 </div>
 
-<h3>5. Por que eu acho que isso pode funcionar</h3>
+<h3><b>5</b>Por que eu acho que isso pode funcionar</h3>
 <p>Não porque “história funciona melhor”. Porque essa estrutura resolve quatro problemas do conteúdo comum.</p>
 <p><b>Problema 1: muita dica e pouca explicação de por que aquilo importa.</b> Quando o conteúdo começa pela história, a pessoa entende por que deveria se importar antes de receber a explicação.</p>
 <p><b>Problema 2: todo post parece começar do zero.</b> Quando existe uma série, um conteúdo aumenta o valor do próximo.</p>
 <p><b>Problema 3: a pessoa aprende e vai embora.</b> Quando existe uma pergunta aberta, existe mais motivo para seguir.</p>
 <p><b>Problema 4: o criador precisa inventar assunto todos os dias.</b> <mark>Quando você documenta o que já está vivendo, o próprio trabalho começa a produzir pauta.</mark></p>
 
-<h3>6. O que eu vou medir</h3>
+<h3><b>6</b>O que eu vou medir</h3>
 <p>Eu não vou usar curtida como principal sinal de sucesso. Quero acompanhar:</p>
 <ul><li>quantas pessoas que ainda não me seguem viram o conteúdo;</li><li>visitas ao perfil;</li><li>seguidores gerados por conteúdo;</li><li>compartilhamentos;</li><li>comentários;</li><li>conversas no direct que começaram por causa dos materiais;</li><li>quais conteúdos fazem a pessoa pedir continuação;</li><li>quais jeitos de fazer o vídeo deram certo mais de uma vez.</li></ul>
 <div class="metodo"><span>O meu método</span>
@@ -301,7 +307,7 @@ footer .wrap{padding-block:18px 42px;display:flex;flex-wrap:wrap;gap:8px 20px;ju
   <p class="pequeno">É essa pergunta que decide se um conteúdo valeu, não o número de curtidas.</p>
 </div>
 
-<h3>7. Como vou decidir o que repetir</h3>
+<h3><b>7</b>Como vou decidir o que repetir</h3>
 <p>Quando um conteúdo se destacar, eu não vou abandonar a ideia no dia seguinte. Vou olhar por partes o que aconteceu: o que o vídeo prometeu, como começou, qual foi o problema, qual prova apareceu, onde estava a virada, qual foi o convite, e que comentários se repetiram.</p>
 <p><mark>Depois eu mantenho o jeito de fazer e troco a história que eu conto.</mark></p>
 <div class="bloco"><span>Exemplo</span>
@@ -309,7 +315,7 @@ footer .wrap{padding-block:18px 42px;display:flex;flex-wrap:wrap;gap:8px 20px;ju
   <p><b>Repetir</b> “começar com uma situação do dia a dia, mostrar o problema escondido que trava tudo, provar que ele existe e terminar dizendo o que isso causa”.</p>
 </div>
 
-<h3>8. O papel das iscas</h3>
+<h3><b>8</b>O papel das iscas</h3>
 <p>Nessas 16 semanas eu quero que quem comenta passe a conversar comigo no direct. Mas o material que eu ofereço tem que ser a continuação do vídeo.</p>
 <div class="bloco"><span>Exemplo do que eu não quero fazer</span>
   <p>“Comenta GUIA que eu mando um PDF aleatório.”</p>
@@ -321,7 +327,7 @@ footer .wrap{padding-block:18px 42px;display:flex;flex-wrap:wrap;gap:8px 20px;ju
 </div>
 <p><b>MAPA</b>, este material que você está lendo. <b>OUTLIER</b>, uma ficha para estudar um post que bombou muito mais que o normal, sem copiar o tema dele. <b>SPRINT</b>, uma tabela para você acompanhar o seu próprio experimento de crescimento. <b>EDITOR</b>, demonstração de como um sistema de edição com Claude funciona. <b>ROTEIRO</b>, um passo a passo para transformar uma história sua em vídeo falado, daqueles em que você só conversa com a câmera.</p>
 
-<h3>9. Como adaptar para outros nichos</h3>
+<h3><b>9</b>Como adaptar para outros nichos</h3>
 <p>A estratégia não depende de falar sobre marketing ou IA. Ela só precisa de:</p>
 <div class="metodo"><span>O meu método</span>
   <p>Uma pessoa + uma situação real + um destino + uma história ainda aberta.</p>
@@ -341,7 +347,7 @@ footer .wrap{padding-block:18px 42px;display:flex;flex-wrap:wrap;gap:8px 20px;ju
 <div class="depois"><span class="rot">Pode ser</span>Quero construir meu próximo produto só a partir do que a audiência pedir durante as próximas semanas.</div></div>
 </div>
 
-<h3>10. Estrutura para você gravar o seu primeiro conteúdo nesse estilo</h3>
+<h3><b>10</b>Estrutura para você gravar o seu primeiro conteúdo nesse estilo</h3>
 <p>Preencha estas sete linhas. O que sair daqui já é o roteiro do seu primeiro vídeo da série.</p>
 <div class="ficha">
   <div><b>Eu sou</b><i></i><em>quem você é, numa cena concreta</em></div>
@@ -364,13 +370,13 @@ A pergunta que eu deixo aberta é [será que ela consegue o quê?].</pre>
   <p>“Sou social media e cuido de 8 clientes. Toda segunda eu ainda começo o dia procurando informação espalhada em WhatsApp, Drive e reunião. Quero passar 30 dias reconstruindo esse processo até abrir a semana sabendo exatamente o que precisa da minha decisão. Vou mostrar o que funcionar e o que continuar me dando trabalho.”</p>
 </div>
 
-<h3>11. A regra mais importante</h3>
+<h3><b>11</b>A regra mais importante</h3>
 <p><mark>Não invente uma jornada porque você precisa de conteúdo.</mark> Olhe para o que já está acontecendo.</p>
 <ul><li>O que você está tentando?</li><li>O que está difícil?</li><li>O que você está construindo?</li><li>Que número você quer mudar?</li><li>Que pergunta ainda não sabe responder?</li><li>O que deu errado esta semana?</li><li>O que alguém pediu para você?</li><li>O que você aprendeu e aplicou?</li></ul>
 <p>É daí que nasce a série.</p>
 <aside class="margem">nenhuma isca nasce sem o post pedir</aside>
 
-<h3>12. O meu combinado</h3>
+<h3><b>12</b>O meu combinado</h3>
 <p>Eu vou abrir os testes, os números, as coisas que funcionarem, as coisas que morrerem, as mudanças de rota, os bastidores, e o papel que a IA tiver de verdade nesse processo.</p>
 <p class="solta">Sem fingir que eu já sei a resposta.</p>
     <a class="proximo" href="#cap2" data-ir="2"><span>Próximo capítulo</span><b>Eu achei que tinha assuntos demais. Na verdade, eu tinha camadas diferentes.</b><i>Ler o capítulo 2 &rarr;</i></a>
