@@ -305,6 +305,7 @@ HTML = f"""<!doctype html>
 :root{{
   --papel:#F7F4EE; --papel-2:#FFFDF8; --tinta:#2B2522; --tinta-2:#5C534E; --tinta-3:#8A8078;
   --margem:#E6DCCD; --mag:#8B083F; --acesa:#E2307A; --vinho:#2E0A1A; --pessego:#FCEADF;
+  --folha:#EBE4D7;
   --caneta:rgba(226,48,122,.24);
   --disp:"Advercase","Playfair Display",Georgia,serif; --txt:"Poppins","Segoe UI",Arial,sans-serif;
   --mao:"Homemade Apple",cursive;
@@ -339,17 +340,28 @@ h1{{font:400 clamp(29px,5.4vw,46px)/1.1 var(--disp);letter-spacing:-.015em;margi
 .placar .viva .n s{{text-decoration:none;font-size:.6em;vertical-align:.14em;margin-left:1px}}
 .placar .r{{font:600 9.5px/1.3 var(--txt);letter-spacing:.12em;text-transform:uppercase;color:var(--tinta-3);margin-top:7px}}
 
-/* ---------- porta ---------- */
-.porta{{padding-block:clamp(26px,4vw,44px)}}
+/* ---------- porta ----------
+   Ela nao e o diario: e uma ficha colada por cima dele, e so acontece uma vez. Por isso
+   folha mais escura que o papel do texto, fio magenta em cima e etiqueta dizendo isso. */
+.porta{{background:var(--folha);border-top:3px solid var(--mag);border-bottom:1px solid var(--margem);
+  padding-block:clamp(24px,4vw,38px) clamp(28px,4.5vw,46px);
+  box-shadow:inset 0 10px 18px -16px rgba(43,37,34,.35)}}
+.so-uma{{display:inline-block;background:var(--mag);color:#fff;border-radius:7px;padding:6px 11px;
+  font:600 10.5px/1 var(--txt);letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px}}
+.porta input{{background:var(--papel-2);border:1px solid var(--margem);border-radius:10px;padding:14px 16px}}
+.porta input:focus{{border-color:var(--mag)}}
 .pergunta{{display:none}}
 .pergunta.ativa{{display:block;animation:sobe .35s ease}}
 @keyframes sobe{{from{{opacity:0;transform:translateY(8px)}}to{{opacity:1;transform:none}}}}
 .pergunta h2{{font:400 clamp(24px,3.8vw,34px)/1.2 var(--disp)}}
 .pergunta .ajuda{{color:var(--tinta-3);margin-top:10px;font-size:16px}}
-.pergunta input{{width:100%;margin-top:18px;font:400 20px/1.5 var(--txt);color:var(--tinta);background:transparent;border:0;border-bottom:2px solid var(--margem);padding:8px 2px}}
-.pergunta input:focus{{outline:0;border-bottom-color:var(--mag)}}
+.pergunta input{{width:100%;margin-top:14px;font:400 18px/1.5 var(--txt);color:var(--tinta)}}
+.pergunta input:focus{{outline:0}}
 .caminho{{display:block;width:100%;text-align:left;margin-top:10px;cursor:pointer;background:var(--papel-2);border:1px solid var(--margem);border-radius:14px;padding:17px 18px;font:500 16.5px/1.35 var(--txt);color:var(--tinta)}}
 .caminho:hover,.caminho:focus-visible{{border-color:var(--mag);background:#fff}}
+.caminho.escolhida{{border-color:var(--mag);background:#fff}}
+#outra-campo{{display:none}}
+#outra-campo.aberto{{display:block}}
 .sim-nao{{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}}
 .sim-nao button{{flex:1 1 130px;cursor:pointer;border-radius:999px;padding:16px 20px;font:600 16px/1 var(--txt)}}
 .sim{{background:var(--mag);color:#fff;border:0}}
@@ -478,6 +490,7 @@ footer .wrap{{padding-block:18px 42px;display:flex;flex-wrap:wrap;gap:8px 20px;j
 </div></header>
 
 <section class="porta faixa" id="porta"><div class="wrap">
+  <span class="so-uma">só uma vez</span>
   <p class="passo-conta" id="conta">Pergunta 1 de 5</p>
 
   <div class="pergunta ativa" data-passo="1">
@@ -509,6 +522,11 @@ footer .wrap{{padding-block:18px 42px;display:flex;flex-wrap:wrap;gap:8px 20px;j
     <h2>E me conta: qual desses é você hoje?</h2>
     <p class="ajuda">Escolhe o que estiver mais perto. É isso que vai me dizer o que construir depois.</p>
 {PASSOS_PORTA}
+      <button class="caminho" type="button" id="bt-outra">Outra coisa, eu escrevo</button>
+      <div id="outra-campo">
+        <input id="q-outra" placeholder="o que você quer acompanhar comigo">
+        <button class="avancar" type="button" id="bt-outra-ok">Continuar</button>
+      </div>
     <div class="erro"></div>
   </div>
 
@@ -618,9 +636,20 @@ passos.forEach((p,n)=>{{
     mostrar(n+1);
   }});
 }});
-document.querySelectorAll(".caminho").forEach(b=>b.addEventListener("click",()=>{{
+document.querySelectorAll(".caminho[data-v]").forEach(b=>b.addEventListener("click",()=>{{
   resp.caminho=b.dataset.v; mostrar(4);
 }}));
+// "outra coisa": ela escreve com as palavras dela, e e isso que fica guardado
+const btOutra=document.getElementById("bt-outra"), campoOutra=document.getElementById("outra-campo");
+btOutra.addEventListener("click",()=>{{
+  btOutra.classList.add("escolhida"); campoOutra.classList.add("aberto");
+  document.getElementById("q-outra").focus();
+}});
+document.getElementById("bt-outra-ok").addEventListener("click",()=>{{
+  const v=document.getElementById("q-outra").value.trim();
+  if(v.length<3)return erro(3,"Escreve em poucas palavras o que você quer acompanhar.");
+  erro(3,""); resp.caminho=v; mostrar(4);
+}});
 document.querySelectorAll("[data-aceite]").forEach(b=>b.addEventListener("click",async ()=>{{
   const aceite=b.dataset.aceite==="sim"; erro(4,"");
   b.disabled=true; const antes=b.textContent; b.textContent="Abrindo...";
@@ -630,7 +659,7 @@ document.querySelectorAll("[data-aceite]").forEach(b=>b.addEventListener("click"
   const PREVIA=!/dlestudio\\.com\\.br$/.test(location.hostname);
   let r=null;try{{r=await fetch(FN,{{method:"POST",headers:{{"content-type":"application/json"}},body:JSON.stringify(d)}})}}catch(e){{}}
   if(!(r&&r.ok)&&!PREVIA){{b.disabled=false;b.textContent=antes;return erro(4,"Não consegui salvar agora. Tenta de novo em alguns segundos.")}}
-  resp.eco=ECO[resp.caminho]||"";
+  resp.eco=ECO[resp.caminho]||"outra coisa";
   try{{localStorage.setItem("dl_diario_eco",resp.eco)}}catch(e){{}}
   document.querySelector("#porta .wrap").innerHTML='<h2 style="font:400 clamp(24px,3.8vw,34px)/1.2 var(--disp)">pronto, agora é só ler</h2>';
   setTimeout(()=>{{liberar();const t=document.querySelector(".nav").offsetTop;window.scrollTo({{top:t,behavior:"smooth"}})}},700);
