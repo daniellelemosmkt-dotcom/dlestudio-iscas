@@ -34,6 +34,7 @@ que tem gerador de outra pessoa.
 | `/materiais/` | Materiais da Imersão Modo Automático | quem fez a imersão |
 | `/biblioteca/` | A biblioteca, uma porta por material, com gerador `montar.py` | público |
 | `/imersao/` | Claude do Zero, para iniciantes | público |
+| `/claude-do-zero/` `/criar-robos/` `/social-media/` | Páginas de venda do Claude do Zero, variações A, B e C do teste de anúncio (mesmo checkout, `utm_content` A, B, C) | público, tráfego pago |
 | `/diario/` | MAPA 20K, a edição viva | público |
 | `/mapa/` | aviso de que o Diário mudou de endereço | público |
 | `/grade/` | Grade viva, @daanylemos | interno |
