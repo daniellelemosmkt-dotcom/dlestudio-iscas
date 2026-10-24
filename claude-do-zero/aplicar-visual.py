@@ -104,23 +104,26 @@ CSS = """
 #antes{padding-top:clamp(34px,4.5vw,56px)}
 """
 
+# O titulo de cada card e o que a pessoa GANHA, nao o nome da aula. Ninguem deseja assistir
+# uma aula de boas-vindas; todo mundo deseja parar de bater no limite e ter alguem
+# respondendo no WhatsApp. O minuto fica pequeno, como prova de que e rapido.
 AULAS = [
-    (1, "Boas-vindas", "2 min",
-     "como o minicurso funciona e aonde você chega no fim: uma secretária de IA trabalhando no seu WhatsApp."),
-    (2, "Planos, limites e modelos", "8 min",
-     "qual plano assinar, como funciona o limite de uso e qual modelo usar em cada tarefa."),
-    (3, "Projetos e o seu cérebro", "12 min",
-     "você monta o “cérebro”: os documentos que ensinam ao Claude quem você é, o que vende e como fala."),
-    (4, "Conectores, plugins e skills", "15 min",
-     "como ligar o Claude no Gmail, na Agenda, no Drive e nas outras, e a diferença entre plugin e skill."),
-    (5, "Claude Code e artefatos", "12 min",
-     "quando usar o Claude Code, como pedir o seu plugin e como criar telas e propostas com link."),
-    (6, "O seu WhatsApp ligado", "4 min",
-     "os 10 passos para o Claude falar com você no seu próprio número de WhatsApp."),
-    (7, "Rotinas, tarefas e agentes", "5 min",
-     "as quatro rotinas da sua secretária, como programar cada uma e o que é um agente."),
-    (8, "O meu hub", "6 min",
-     "um tour pela plataforma que eu criei com o Claude Code para a minha equipe."),
+    (1, "Aonde isso chega", "2 min",
+     "uma secretária de IA trabalhando no seu WhatsApp. Em dois minutos você vê o destino."),
+    (2, "Pare de bater no limite", "8 min",
+     "qual plano assinar, qual modelo usar em cada coisa e dois truques para o seu limite render muito mais."),
+    (3, "Nunca mais explique quem você é", "12 min",
+     "você monta o cérebro uma vez e ele passa a lembrar o que você vende, para quem e como você fala."),
+    (4, "Ele mexe no seu Gmail, na Agenda e no Drive", "15 min",
+     "como ligar o Claude nas ferramentas que você já abre todo dia, sem escrever uma linha de código."),
+    (5, "Peça uma tela e receba o link pronto", "12 min",
+     "propostas, páginas e ferramentas que você manda para a cliente no mesmo dia."),
+    (6, "O Claude no seu próprio número", "4 min",
+     "dez passos e ele começa a te responder no WhatsApp, como qualquer pessoa da sua equipe."),
+    (7, "Ele trabalha enquanto você dorme", "5 min",
+     "bom dia, plantão, fechamento e arrumação rodando sozinhos, no horário que você escolher."),
+    (8, "A plataforma que eu criei para a minha equipe", "6 min",
+     "o tour completo por dentro, para você copiar a ideia no seu negócio."),
 ]
 
 CARTOES = "\n".join(
@@ -128,20 +131,20 @@ CARTOES = "\n".join(
         <img src="aulas/a{n}.webp" width="560" height="315" loading="lazy" decoding="async"
              alt="Um momento da aula {n}: {titulo}">
         <div class="corpo">
-          <span class="num">{'Bônus' if n == 8 else f'Aula {n}'} · {tempo}</span>
+          <span class="num">{tempo}</span>
           <h3>{titulo}</h3>
           <p>{frase}</p>
         </div>
       </article>""" for n, titulo, tempo, frase in AULAS)
 
 BLOCO_AULAS = f"""
-<!-- AS AULAS POR DENTRO -->
+<!-- O QUE VOCE SAI SABENDO -->
 <section class="secao aulas escuro brilho faixa" id="aulas">
   <div class="wrap">
     <div class="cabeca">
-      <p class="eyebrow">O que tem dentro</p>
-      <h2 class="tit">Sete aulas e um bônus, <em>1h03 no total</em></h2>
-      <p class="arraste">Arraste para o lado e veja o que você vai assistir.</p>
+      <p class="eyebrow">O que você sai sabendo</p>
+      <h2 class="tit">Domine o Claude <em>em menos de um dia</em></h2>
+      <p class="arraste">A aula mais longa tem 15 minutos. Dá para fazer todas numa tarde.</p>
     </div>
     <div class="trilho">
 {CARTOES}
@@ -201,10 +204,16 @@ if "telas/carrossel.webp" in html:
 # 1. o CSS novo, antes de fechar o style
 html = html.replace("</style>", CSS + "</style>", 1)
 
-# 2. a pilula em cima do titulo
-antes_h1 = "      <h1>Aprenda do zero"
-assert antes_h1 in html, "nao achei o titulo"
-html = html.replace(antes_h1, '      <p class="pilula">Minicurso + imersão gravada</p>\n' + antes_h1, 1)
+# 2. a pilula e um titulo que fala do ganho, nao do formato.
+#    "Aprenda a usar a ferramenta" descreve o curso; "coloque ele para fazer a parte chata"
+#    e o que a pessoa quer. A dor ja esta na frase de baixo, entao o titulo fica no desejo.
+H1_VELHO = ('      <h1>Aprenda do zero a usar o Claude para '
+            '<span class="acesa">criar conteúdos</span></h1>')
+H1_NOVO = ('      <p class="pilula">Para quem nunca abriu o Claude</p>\n'
+           '      <h1>Coloque o Claude para fazer a '
+           '<span class="acesa">parte chata</span> do seu dia</h1>')
+assert H1_VELHO in html, "nao achei o titulo"
+html = html.replace(H1_VELHO, H1_NOVO, 1)
 
 # 3. os tres pilares e o segundo botao, logo abaixo da promessa
 PILARES = """      <div class="pilares">
