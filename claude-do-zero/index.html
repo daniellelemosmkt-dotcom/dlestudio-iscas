@@ -167,13 +167,54 @@ footer .wrap{border-top:1px solid var(--linha-esc);padding-block:22px 90px;displ
 .barra p{font-size:14px;line-height:1.3}
 @media (min-width:900px){.barra{display:none}}
 @media (prefers-reduced-motion:reduce){.barra,.faq summary::after{transition:none}}
+
+/* ---------- TELAS REAIS ---------- */
+/* print grande, reto e nitido: sem fita, sem inclinacao, sem veu, sem moldura de celular */
+.tela{margin:0}
+.tela img{display:block;width:100%;height:auto;border-radius:16px;border:1px solid var(--linha);
+  background:#fff;box-shadow:0 30px 70px rgba(41,41,41,.16)}
+.escuro .tela img{border-color:var(--linha-esc);box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.tela figcaption{margin-top:16px;font-size:16px;line-height:1.5;color:var(--suave)}
+.escuro .tela figcaption{color:var(--suave-esc)}
+.telao{padding-block:clamp(40px,6vw,72px)}
+.telao .wrap{max-width:860px;text-align:center}
+.telao .eyebrow{margin-bottom:22px}
+.telao .tela figcaption{font-size:17px;max-width:34em;margin-inline:auto}
+
+.galeria{display:grid;gap:clamp(22px,3vw,34px);grid-template-columns:1fr;margin-top:44px}
+@media (min-width:820px){.galeria{grid-template-columns:1fr 1fr}}
+.galeria>figure{min-width:0}
+
+/* icones oficiais das marcas, encostados na tela que fala delas */
+.marcas{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:14px}
+.marcas svg{width:22px;height:22px;fill:var(--suave);opacity:.8;flex:0 0 auto}
+.escuro .marcas svg{fill:var(--pessego);opacity:.75}
+
+/* ---------- FOTO NO TOPO ---------- */
+.topo-grid{display:grid;gap:clamp(26px,4vw,52px);grid-template-columns:1fr;align-items:center}
+@media (min-width:900px){.topo-grid{grid-template-columns:1.15fr .85fr}}
+@media (min-width:900px){
+  .topo-grid .topo-txt{text-align:left;margin:0}
+  .topo-grid .lead{margin-inline:0}
+  .topo-grid .cta{align-items:flex-start}
+}
+.topo-foto{position:relative;width:100%;max-width:420px;margin:0 auto;aspect-ratio:4/5;
+  border-radius:24px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.45);background:var(--noite-2)}
+.topo-foto img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+/* no celular o rosto vem antes do titulo: e a primeira coisa que a pessoa ve */
+@media (max-width:899px){
+  .topo-grid{display:flex;flex-direction:column}
+  .topo-foto{order:-1;max-width:208px;aspect-ratio:1/1;border-radius:50%;
+    box-shadow:0 18px 44px rgba(0,0,0,.5),0 0 0 4px rgba(226,48,122,.25)}
+  .topo-grid .topo-txt{margin-top:26px}
+}
 </style>
 </head>
 <body>
 
 <!-- TOPO -->
 <header class="topo escuro faixa">
-  <div class="wrap">
+  <div class="wrap topo-grid">
     <div class="topo-txt">
       <h1>Aprenda do zero a usar o Claude para <span class="acesa">criar conteúdos</span></h1>
       <p class="lead">Você já abriu uma IA, pediu dez ideias de post e recebeu dez frases que não davam para publicar. <b>O problema não era a ferramenta. Era que ninguém te mostrou como ela funciona de verdade.</b></p>
@@ -182,8 +223,28 @@ footer .wrap{border-top:1px solid var(--linha-esc);padding-block:22px 90px;displ
         <span class="nota-cta"><b class="parcela-mini">Acesso por 1 ano</b> · 12x de R$ 19,96</span>
       </div>
     </div>
+    <div class="topo-foto">
+      <img src="dani-topo.jpg" width="787" height="1400" fetchpriority="high" decoding="async"
+           alt="Danielle Lemos olhando para a câmera, em casa, na frente da estante de livros">
+    </div>
   </div>
 </header>
+
+<!-- A TELA QUE PROVA -->
+<section class="secao telao faixa">
+  <div class="wrap">
+    <p class="eyebrow">Uma conversa de verdade</p>
+    <figure class="tela">
+      <picture>
+        <!-- no celular a conversa inteira fica ilegivel, entao vai so o pedaco que prova -->
+        <source media="(max-width:700px)" srcset="telas/carrossel-celular.webp" width="660" height="265">
+        <img src="telas/carrossel.webp" width="892" height="710" loading="eager" decoding="async"
+             alt="Conversa real no Claude: ele executa os comandos, monta os nove cards do carrossel e sobe para a grade">
+      </picture>
+      <figcaption>Eu pedi o post do dia. Ele montou os nove cards, escreveu a legenda e subiu tudo para a grade.</figcaption>
+    </figure>
+  </div>
+</section>
 
 <!-- ANTES E DEPOIS -->
 <section class="secao faixa" id="antes">
@@ -223,6 +284,30 @@ footer .wrap{border-top:1px solid var(--linha-esc);padding-block:22px 90px;displ
       <div>Deixar tarefas rodando sozinhas no horário que você escolher.</div>
     </div>
   </div>
+
+    <div class="galeria">
+      <figure class="tela">
+        <img src="telas/aba-nova.webp" width="853" height="412" loading="lazy" decoding="async"
+             alt="Menu de mais dentro da conversa do Claude, com habilidades, conectores, sistema de design e plugins">
+        <figcaption>Tudo começa aqui dentro, no botão de mais da conversa.</figcaption>
+      </figure>
+      <figure class="tela">
+        <img src="telas/descobrir.webp" width="1049" height="823" loading="lazy" decoding="async"
+             alt="Lista de conectores que o Claude oferece: Google Drive, Gmail, Google Agenda, Canva, Notion, Figma, Slack e outros">
+        <figcaption>As ferramentas que dá para ligar nele, sem código nenhum.</figcaption>
+      </figure>
+      <figure class="tela">
+        <img src="telas/conectores.webp" width="1069" height="840" loading="lazy" decoding="async"
+             alt="Tela de conectores do Claude com Canva, Gmail, Google Drive, Google Agenda e Notion ligados na conta da Dani">
+        <figcaption>As minhas, ligadas. Ele lê e escreve nelas quando eu peço.
+        <div class="marcas"><svg viewBox="0 0 24 24" role="img" aria-label="Claude"><title>Claude</title><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg><svg viewBox="0 0 24 24" role="img" aria-label="Canva"><title>Canva</title><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zM6.962 7.68c.754 0 1.337.549 1.405 1.2.069.583-.171 1.097-.822 1.406-.343.171-.48.172-.549.069-.034-.069 0-.137.069-.206.617-.514.617-.926.548-1.508-.034-.378-.308-.618-.583-.618-1.2 0-2.914 2.674-2.674 4.629.103.754.549 1.646 1.509 1.646.308 0 .65-.103.96-.24.5-.264.799-.47 1.097-.8-.073-.885.704-2.046 1.851-2.046.515 0 .926.205.96.583.068.514-.377.582-.514.582s-.378-.034-.378-.17c-.034-.138.309-.07.275-.378-.035-.206-.24-.274-.446-.274-.72 0-1.131.994-1.029 1.611.035.275.172.549.447.549.205 0 .514-.31.617-.755.068-.308.343-.514.583-.514.102 0 .17.034.205.171v.138c-.034.137-.137.548-.102.651 0 .069.034.171.17.171.092 0 .436-.18.777-.459.117-.59.253-1.298.253-1.357.034-.24.137-.48.617-.48.103 0 .171.034.205.171v.138l-.136.617c.445-.583 1.097-.994 1.508-.994.172 0 .309.102.309.274 0 .103 0 .274-.069.446-.137.377-.309.96-.412 1.474 0 .137.035.274.207.274.171 0 .685-.206 1.096-.754l.007-.004c-.002-.068-.007-.134-.007-.202 0-.411.035-.754.104-.994.068-.274.411-.514.617-.514.103 0 .205.069.205.171 0 .035 0 .103-.034.137-.137.446-.24.857-.24 1.269 0 .24.034.582.102.788 0 .034.035.069.07.069.068 0 .548-.445.89-1.028-.308-.206-.48-.549-.48-.96 0-.72.446-1.097.858-1.097.343 0 .617.24.617.72 0 .308-.103.65-.274.96h.102a.77.77 0 0 0 .584-.24.293.293 0 0 1 .134-.117c.335-.425.83-.74 1.41-.74.48 0 .924.205.959.582.068.515-.378.618-.515.618l-.002-.002c-.138 0-.377-.035-.377-.172 0-.137.309-.068.274-.376-.034-.206-.24-.275-.446-.275-.686 0-1.13.891-1.028 1.611.034.275.171.583.445.583.206 0 .515-.308.652-.754.068-.274.343-.514.583-.514.103 0 .17.034.205.171 0 .069 0 .206-.137.652-.17.308-.171.48-.137.617.034.274.171.48.309.583.034.034.068.102.068.102 0 .069-.034.138-.137.138-.034 0-.068 0-.103-.035-.514-.205-.72-.548-.789-.891-.205.24-.445.377-.72.377-.445 0-.89-.411-.96-.926a1.609 1.609 0 0 1 .075-.649c-.203.13-.422.203-.623.203h-.17c-.447.652-.927 1.098-1.27 1.303a.896.896 0 0 1-.377.104c-.068 0-.171-.035-.205-.104-.095-.152-.156-.392-.193-.667-.481.527-1.145.805-1.453.805-.343 0-.548-.206-.582-.55v-.376c.102-.754.377-1.2.377-1.337a.074.074 0 0 0-.069-.07c-.24 0-1.028.824-1.166 1.373l-.103.445c-.068.309-.377.515-.582.515-.103 0-.172-.035-.206-.172v-.137l.046-.233c-.435.31-.87.508-1.075.508-.308 0-.48-.172-.514-.412-.206.274-.445.412-.754.412-.352 0-.696-.24-.862-.593-.244.275-.523.553-.852.764-.48.309-1.028.549-1.68.549-.582 0-1.097-.309-1.371-.583-.412-.377-.651-.96-.686-1.509-.205-1.68.823-3.84 2.4-4.8.378-.205.755-.343 1.132-.343zm9.77 3.291c-.104 0-.172.172-.172.343 0 .274.137.583.309.755a1.74 1.74 0 0 0 .102-.583c0-.343-.137-.515-.24-.515z"/></svg><svg viewBox="0 0 24 24" role="img" aria-label="Google Drive"><title>Google Drive</title><path d="M12.01 1.485c-2.082 0-3.754.02-3.743.047.01.02 1.708 3.001 3.774 6.62l3.76 6.574h3.76c2.081 0 3.753-.02 3.742-.047-.005-.02-1.708-3.001-3.775-6.62l-3.76-6.574zm-4.76 1.73a789.828 789.861 0 0 0-3.63 6.319L0 15.868l1.89 3.298 1.885 3.297 3.62-6.335 3.618-6.33-1.88-3.287C8.1 4.704 7.255 3.22 7.25 3.214zm2.259 12.653-.203.348c-.114.198-.96 1.672-1.88 3.287a423.93 423.948 0 0 1-1.698 2.97c-.01.026 3.24.042 7.222.042h7.244l1.796-3.157c.992-1.734 1.85-3.23 1.906-3.323l.104-.167h-7.249z"/></svg><svg viewBox="0 0 24 24" role="img" aria-label="Gmail"><title>Gmail</title><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg><svg viewBox="0 0 24 24" role="img" aria-label="Notion"><title>Notion</title><path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.139c-.093-.514.28-.887.747-.933zM1.936 1.035l13.31-.98c1.634-.14 2.055-.047 3.082.7l4.249 2.986c.7.513.934.653.934 1.213v16.378c0 1.026-.373 1.634-1.68 1.726l-15.458.934c-.98.047-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.96V2.667c0-.839.374-1.54 1.447-1.632z"/></svg><svg viewBox="0 0 24 24" role="img" aria-label="Instagram"><title>Instagram</title><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></div></figcaption>
+      </figure>
+      <figure class="tela">
+        <img src="telas/plugins.webp" width="1074" height="859" loading="lazy" decoding="async"
+             alt="Tela de plugins e habilidades salvas no Claude">
+        <figcaption>O que funcionou uma vez fica salvo e você reusa quando quiser.</figcaption>
+      </figure>
+    </div>
 </section>
 
 <!-- PARA QUEM E -->
