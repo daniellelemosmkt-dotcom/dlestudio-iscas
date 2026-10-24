@@ -16,7 +16,7 @@
 :root{
   --papel:#F7F4EE; --papel-2:#FFFDF8; --tinta:#2B2522; --tinta-2:#5C534E; --tinta-3:#8A8078;
   --margem:#E6DCCD; --mag:#8B083F; --acesa:#E2307A; --vinho:#2E0A1A; --pessego:#FCEADF;
-  --folha:#EBE4D7;
+  --folha:#5F052B;
   --caneta:rgba(226,48,122,.24);
   --disp:"Advercase","Playfair Display",Georgia,serif; --txt:"Poppins","Segoe UI",Arial,sans-serif;
   --mao:"Homemade Apple",cursive;
@@ -53,33 +53,37 @@ h1{font:400 clamp(29px,5.4vw,46px)/1.1 var(--disp);letter-spacing:-.015em;margin
 
 /* ---------- porta ----------
    Ela nao e o diario: e uma ficha colada por cima dele, e so acontece uma vez. Por isso
-   folha mais escura que o papel do texto, fio magenta em cima e etiqueta dizendo isso. */
-.porta{background:var(--folha);border-top:3px solid var(--mag);border-bottom:1px solid var(--margem);
-  padding-block:clamp(24px,4vw,38px) clamp(28px,4.5vw,46px);
-  box-shadow:inset 0 10px 18px -16px rgba(43,37,34,.35)}
-.so-uma{display:inline-block;background:var(--mag);color:#fff;border-radius:7px;padding:6px 11px;
+   magenta escuro com texto branco, que e o maior contraste possivel com o papel. */
+.porta{background:var(--folha);color:#fff;
+  padding-block:clamp(26px,4.5vw,42px) clamp(30px,5vw,50px)}
+.so-uma{display:inline-block;background:#fff;color:var(--folha);border-radius:7px;padding:6px 11px;
   font:600 10.5px/1 var(--txt);letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px}
-.porta input{background:var(--papel-2);border:1px solid var(--margem);border-radius:10px;padding:14px 16px}
-.porta input:focus{border-color:var(--mag)}
+.porta input{background:#fff;color:var(--tinta);border:1px solid rgba(255,255,255,.35);border-radius:10px;padding:14px 16px}
+.porta input::placeholder{color:var(--tinta-3)}
 .pergunta{display:none}
 .pergunta.ativa{display:block;animation:sobe .35s ease}
 @keyframes sobe{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.pergunta h2{font:400 clamp(24px,3.8vw,34px)/1.2 var(--disp)}
-.pergunta .ajuda{color:var(--tinta-3);margin-top:10px;font-size:16px}
-.pergunta input{width:100%;margin-top:14px;font:400 18px/1.5 var(--txt);color:var(--tinta)}
-.pergunta input:focus{outline:0}
-.caminho{display:block;width:100%;text-align:left;margin-top:10px;cursor:pointer;background:var(--papel-2);border:1px solid var(--margem);border-radius:14px;padding:17px 18px;font:500 16.5px/1.35 var(--txt);color:var(--tinta)}
-.caminho:hover,.caminho:focus-visible{border-color:var(--mag);background:#fff}
-.caminho.escolhida{border-color:var(--mag);background:#fff}
-#outra-campo{display:none}
-#outra-campo.aberto{display:block}
+.pergunta h2{font:400 clamp(24px,3.8vw,34px)/1.2 var(--disp);color:#fff}
+.pergunta .ajuda{color:rgba(255,255,255,.72);margin-top:10px;font-size:16px}
+.pergunta input{width:100%;margin-top:14px;font:400 18px/1.5 var(--txt)}
+.pergunta input:focus{outline:0;box-shadow:0 0 0 3px rgba(255,255,255,.45)}
+.caminho{display:block;width:100%;text-align:left;margin-top:10px;cursor:pointer;background:#fff;
+  border:1px solid rgba(255,255,255,.35);border-radius:14px;padding:17px 18px;font:500 16.5px/1.35 var(--txt);color:var(--tinta)}
+.caminho:hover,.caminho:focus-visible{box-shadow:0 0 0 3px rgba(255,255,255,.45)}
+/* "outra coisa" ja nasce com a linha aberta: a pessoa escreve direto */
+.outra{margin-top:10px;background:#fff;border-radius:14px;padding:15px 18px 17px}
+.outra label{display:block;font:500 16.5px/1.35 var(--txt);color:var(--tinta)}
+.outra input{width:100%;margin-top:8px;background:transparent;border:0;border-bottom:1.5px solid var(--margem);
+  border-radius:0;padding:7px 2px;font:400 17px/1.5 var(--txt);color:var(--tinta)}
+.outra input:focus{outline:0;box-shadow:none;border-bottom-color:var(--mag)}
 .sim-nao{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
 .sim-nao button{flex:1 1 130px;cursor:pointer;border-radius:999px;padding:16px 20px;font:600 16px/1 var(--txt)}
-.sim{background:var(--mag);color:#fff;border:0}
-.nao{background:transparent;color:var(--tinta-2);border:1px solid var(--margem)}
-.avancar{margin-top:20px;cursor:pointer;background:var(--mag);color:#fff;border:0;border-radius:999px;padding:16px 30px;font:600 16px/1 var(--txt)}
-.erro{color:var(--mag);font-size:14.5px;margin-top:10px;min-height:1em}
-.passo-conta{font:600 11px/1 var(--txt);letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-3);margin-bottom:14px}
+.sim{background:#fff;color:var(--folha);border:0}
+.nao{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.5)}
+.avancar{margin-top:20px;cursor:pointer;background:#fff;color:var(--folha);border:0;border-radius:999px;padding:16px 30px;font:600 16px/1 var(--txt)}
+.avancar.some{display:none}
+.erro{color:#FFC9DD;font-size:14.5px;margin-top:10px;min-height:1em}
+.passo-conta{font:600 11px/1 var(--txt);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:14px}
 
 /* ---------- navegação ---------- */
 .trancado{display:none}
@@ -231,17 +235,16 @@ footer .wrap{padding-block:18px 42px;display:flex;flex-wrap:wrap;gap:8px 20px;ju
 
   <div class="pergunta" data-passo="4">
     <h2>E me conta: qual desses é você hoje?</h2>
-    <p class="ajuda">Escolhe o que estiver mais perto. É isso que vai me dizer o que construir depois.</p>
       <button class="caminho" type="button" data-v="Quero colocar a IA para trabalhar por mim">Quero colocar a IA para trabalhar por mim</button>
       <button class="caminho" type="button" data-v="Quero fazer o meu perfil crescer">Quero fazer o meu perfil crescer</button>
       <button class="caminho" type="button" data-v="Quero que o meu conteúdo venda">Quero que o meu conteúdo venda</button>
       <button class="caminho" type="button" data-v="Sou social media e quero organizar a operação">Sou social media e quero organizar a operação</button>
       <button class="caminho" type="button" data-v="Por enquanto só quero acompanhar">Por enquanto só quero acompanhar</button>
-      <button class="caminho" type="button" id="bt-outra">Outra coisa, eu escrevo</button>
-      <div id="outra-campo">
-        <input id="q-outra" placeholder="o que você quer acompanhar comigo">
-        <button class="avancar" type="button" id="bt-outra-ok">Continuar</button>
+      <div class="outra">
+        <label for="q-outra">Outra coisa</label>
+        <input id="q-outra" placeholder="escreve aqui">
       </div>
+      <button class="avancar some" type="button" id="bt-outra-ok">Continuar</button>
     <div class="erro"></div>
   </div>
 
@@ -546,16 +549,13 @@ passos.forEach((p,n)=>{
 document.querySelectorAll(".caminho[data-v]").forEach(b=>b.addEventListener("click",()=>{
   resp.caminho=b.dataset.v; mostrar(4);
 }));
-// "outra coisa": ela escreve com as palavras dela, e e isso que fica guardado
-const btOutra=document.getElementById("bt-outra"), campoOutra=document.getElementById("outra-campo");
-btOutra.addEventListener("click",()=>{
-  btOutra.classList.add("escolhida"); campoOutra.classList.add("aberto");
-  document.getElementById("q-outra").focus();
-});
-document.getElementById("bt-outra-ok").addEventListener("click",()=>{
-  const v=document.getElementById("q-outra").value.trim();
-  if(v.length<3)return erro(3,"Escreve em poucas palavras o que você quer acompanhar.");
-  erro(3,""); resp.caminho=v; mostrar(4);
+// "outra coisa": a linha ja esta aberta; o Continuar so aparece quando ela escreve algo
+const campoOutra=document.getElementById("q-outra"), okOutra=document.getElementById("bt-outra-ok");
+const valeOutra=()=>campoOutra.value.trim().length>=3;
+campoOutra.addEventListener("input",()=>okOutra.classList.toggle("some",!valeOutra()));
+campoOutra.addEventListener("keydown",ev=>{if(ev.key==="Enter"&&valeOutra()){ev.preventDefault();okOutra.click()}});
+okOutra.addEventListener("click",()=>{
+  if(!valeOutra())return; resp.caminho=campoOutra.value.trim(); mostrar(4);
 });
 document.querySelectorAll("[data-aceite]").forEach(b=>b.addEventListener("click",async ()=>{
   const aceite=b.dataset.aceite==="sim"; erro(4,"");
@@ -568,7 +568,7 @@ document.querySelectorAll("[data-aceite]").forEach(b=>b.addEventListener("click"
   if(!(r&&r.ok)&&!PREVIA){b.disabled=false;b.textContent=antes;return erro(4,"Não consegui salvar agora. Tenta de novo em alguns segundos.")}
   resp.eco=ECO[resp.caminho]||"outra coisa";
   try{localStorage.setItem("dl_diario_eco",resp.eco)}catch(e){}
-  document.querySelector("#porta .wrap").innerHTML='<h2 style="font:400 clamp(24px,3.8vw,34px)/1.2 var(--disp)">pronto, agora é só ler</h2>';
+  document.querySelector("#porta .wrap").innerHTML='<h2 style="font:400 clamp(24px,3.8vw,34px)/1.2 var(--disp);color:#fff">pronto, agora é só ler</h2>';
   setTimeout(()=>{liberar();const t=document.querySelector(".nav").offsetTop;window.scrollTo({top:t,behavior:"smooth"})},700);
 }));
 
