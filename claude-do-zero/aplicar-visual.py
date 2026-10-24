@@ -56,24 +56,29 @@ CSS = """
 .marcas svg{width:22px;height:22px;fill:var(--suave);opacity:.8;flex:0 0 auto}
 .escuro .marcas svg{fill:var(--pessego);opacity:.75}
 
-/* ---------- FOTO NO TOPO ---------- */
-.topo-grid{display:grid;gap:clamp(26px,4vw,52px);grid-template-columns:1fr;align-items:center}
-@media (min-width:900px){.topo-grid{grid-template-columns:1.15fr .85fr}}
-@media (min-width:900px){
-  .topo-grid .topo-txt{text-align:left;margin:0}
-  .topo-grid .lead{margin-inline:0}
-  .topo-grid .cta{align-items:flex-start}
-}
-.topo-foto{position:relative;width:100%;max-width:420px;margin:0 auto;aspect-ratio:4/5;
-  border-radius:24px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.45);background:var(--noite-2)}
-.topo-foto img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
-/* no celular o rosto vem antes do titulo: e a primeira coisa que a pessoa ve */
-@media (max-width:899px){
-  .topo-grid{display:flex;flex-direction:column}
-  .topo-foto{order:-1;max-width:208px;aspect-ratio:1/1;border-radius:50%;
-    box-shadow:0 18px 44px rgba(0,0,0,.5),0 0 0 4px rgba(226,48,122,.25)}
-  .topo-grid .topo-txt{margin-top:26px}
-}
+/* ---------- O LEQUE DO TOPO ----------
+   Telas reais do Claude trabalhando, em leque, pegando por tras do comecinho da primeira
+   linha do titulo. Nenhuma delas e post da Dani nem de cliente: sao pedidos genericos
+   feitos na hora (legenda de loja de roupa, semana de uma cafeteria, card de post). */
+.palco{position:relative}
+.palco .topo-txt{text-align:left;max-width:880px;margin:0;padding-top:clamp(116px,19vw,178px)}
+.palco .lead{margin-inline:0}
+.palco .cta{align-items:flex-start}
+.leque{position:absolute;top:-6px;left:0;z-index:0;display:flex;align-items:flex-start;
+  pointer-events:none;user-select:none}
+.leque img{width:clamp(112px,17vw,208px);height:auto;display:block;background:#fff;
+  border-radius:12px;border:1px solid rgba(252,234,223,.18);box-shadow:0 26px 60px rgba(0,0,0,.62)}
+.leque img:nth-child(1){transform:rotate(-11deg)}
+.leque img:nth-child(2){transform:rotate(-2deg) translateY(18px);margin-left:clamp(-78px,-6.5vw,-44px)}
+.leque img:nth-child(3){transform:rotate(9deg) translateY(2px);margin-left:clamp(-78px,-6.5vw,-44px);
+  width:clamp(88px,13vw,162px)}
+/* o titulo passa por cima do canto das telas, entao ganha um halo escuro para nao sumir */
+.palco h1{position:relative;z-index:1;text-shadow:0 2px 22px rgba(22,14,17,.85),0 0 40px rgba(22,14,17,.6)}
+.palco .lead,.palco .cta{position:relative;z-index:1}
+
+/* ---------- SEM BURACO ENTRE AS SECOES ---------- */
+.telao{padding-block:clamp(40px,6vw,72px) 0}
+#antes{padding-top:clamp(34px,4.5vw,56px)}
 """
 
 HERO = """
@@ -127,24 +132,17 @@ if "telas/carrossel.webp" in html:
 # 1. o CSS novo, antes de fechar o style
 html = html.replace("</style>", CSS + "</style>", 1)
 
-# 2. foto dela no topo, ao lado do titulo
+# 2. o leque de telas atras do titulo
 antes_topo = '  <div class="wrap">\n    <div class="topo-txt">'
-depois_topo = '  <div class="wrap topo-grid">\n    <div class="topo-txt">'
+depois_topo = """  <div class="wrap palco">
+    <div class="leque" aria-hidden="true">
+      <img src="telas/leque-1.webp" alt="" fetchpriority="high" decoding="async">
+      <img src="telas/leque-2.webp" alt="" fetchpriority="high" decoding="async">
+      <img src="telas/leque-3.webp" alt="" fetchpriority="high" decoding="async">
+    </div>
+    <div class="topo-txt">"""
 assert antes_topo in html, "nao achei a abertura do topo"
 html = html.replace(antes_topo, depois_topo, 1)
-
-fecha_topo = """    </div>
-  </div>
-</header>"""
-novo_fecha = """    </div>
-    <div class="topo-foto">
-      <img src="dani-topo.jpg" width="787" height="1400" fetchpriority="high" decoding="async"
-           alt="Danielle Lemos olhando para a câmera, em casa, na frente da estante de livros">
-    </div>
-  </div>
-</header>"""
-assert fecha_topo in html, "nao achei o fechamento do topo"
-html = html.replace(fecha_topo, novo_fecha, 1)
 
 # 3. a tela grande logo depois do topo
 html = html.replace("</header>\n", "</header>\n" + HERO, 1)
