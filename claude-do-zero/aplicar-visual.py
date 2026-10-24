@@ -56,29 +56,98 @@ CSS = """
 .marcas svg{width:22px;height:22px;fill:var(--suave);opacity:.8;flex:0 0 auto}
 .escuro .marcas svg{fill:var(--pessego);opacity:.75}
 
-/* ---------- O LEQUE DO TOPO ----------
-   Telas reais do Claude trabalhando, em leque, pegando por tras do comecinho da primeira
-   linha do titulo. Nenhuma delas e post da Dani nem de cliente: sao pedidos genericos
-   feitos na hora (legenda de loja de roupa, semana de uma cafeteria, card de post). */
-.palco{position:relative}
-.palco .topo-txt{text-align:left;max-width:880px;margin:0;padding-top:clamp(116px,19vw,178px)}
-.palco .lead{margin-inline:0}
-.palco .cta{align-items:flex-start}
-.leque{position:absolute;top:-6px;left:0;z-index:0;display:flex;align-items:flex-start;
-  pointer-events:none;user-select:none}
-.leque img{width:clamp(112px,17vw,208px);height:auto;display:block;background:#fff;
-  border-radius:12px;border:1px solid rgba(252,234,223,.18);box-shadow:0 26px 60px rgba(0,0,0,.62)}
-.leque img:nth-child(1){transform:rotate(-11deg)}
-.leque img:nth-child(2){transform:rotate(-2deg) translateY(18px);margin-left:clamp(-78px,-6.5vw,-44px)}
-.leque img:nth-child(3){transform:rotate(9deg) translateY(2px);margin-left:clamp(-78px,-6.5vw,-44px);
-  width:clamp(88px,13vw,162px)}
-/* o titulo passa por cima do canto das telas, entao ganha um halo escuro para nao sumir */
-.palco h1{position:relative;z-index:1;text-shadow:0 2px 22px rgba(22,14,17,.85),0 0 40px rgba(22,14,17,.6)}
-.palco .lead,.palco .cta{position:relative;z-index:1}
+/* ---------- TOPO ----------
+   Mecanismo copiado da pagina do Clube Divos da IA, que a Dani mandou estudar: pilula
+   pequena, promessa em linguagem de gente, tres pilares em quadradinho e DOIS botoes, o de
+   comprar e o de espiar as aulas. A aparencia continua a dela: fundo escuro, Advercase e
+   magenta. Print de ferramenta nao entra aqui: nao e o produto e nao gera desejo. */
+.pilula{display:inline-block;border:1px solid rgba(226,48,122,.45);border-radius:999px;
+  padding:9px 18px;font:600 12px/1 var(--txt);letter-spacing:.13em;text-transform:uppercase;
+  color:var(--acesa);background:rgba(226,48,122,.08);margin-bottom:22px}
+.pilares{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.6vw,18px);
+  max-width:760px;margin:clamp(30px,4vw,42px) auto 0}
+.pilares>div{background:var(--noite-2);border:1px solid var(--linha-esc);border-radius:18px;
+  padding:clamp(16px,2.2vw,24px) clamp(10px,1.6vw,20px);text-align:center;min-width:0}
+.pilares i{display:block;font:400 clamp(26px,3.6vw,38px)/1 var(--disp);font-style:normal;color:var(--acesa)}
+.pilares b{display:block;font:600 clamp(13px,1.7vw,16px)/1.2 var(--txt);margin-top:8px;color:var(--branco)}
+.pilares span{display:block;font-size:clamp(12.5px,1.5vw,14.5px);line-height:1.4;color:var(--suave-esc);margin-top:7px}
+.botao.vazado{background:transparent;color:var(--pessego);border:1px solid rgba(252,234,223,.38);box-shadow:none}
+.botao.vazado:hover{border-color:var(--acesa);background:rgba(226,48,122,.1)}
+
+/* ---------- AS AULAS POR DENTRO ----------
+   E o bloco que vende: o produto vira um produto, com capa, nome, numero e duracao, e da
+   para arrastar e espiar. Cada capa e um quadro do proprio video da aula. */
+.aulas{padding-block:clamp(56px,8vw,92px)}
+.aulas .cabeca{text-align:center;max-width:700px;margin:0 auto}
+.aulas .arraste{color:var(--suave);font-size:16px;margin-top:14px}
+.escuro .aulas .arraste{color:var(--suave-esc)}
+.trilho{display:flex;gap:clamp(14px,2vw,22px);overflow-x:auto;scroll-snap-type:x mandatory;
+  margin-top:clamp(30px,4vw,44px);padding:4px 0 22px;
+  scrollbar-width:thin;scrollbar-color:rgba(226,48,122,.5) transparent}
+.trilho::-webkit-scrollbar{height:6px}
+.trilho::-webkit-scrollbar-thumb{background:rgba(226,48,122,.5);border-radius:99px}
+.aula{flex:0 0 clamp(228px,66vw,286px);scroll-snap-align:start;background:var(--branco);
+  border:1px solid var(--linha);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.escuro .aula{background:var(--noite-2);border-color:var(--linha-esc)}
+.aula img{width:100%;height:auto;display:block;border-bottom:1px solid var(--linha)}
+.escuro .aula img{border-bottom-color:var(--linha-esc)}
+.aula .corpo{padding:16px 18px 20px}
+.aula .num{font:600 11px/1 var(--txt);letter-spacing:.14em;text-transform:uppercase;color:var(--mag)}
+.escuro .aula .num{color:var(--acesa)}
+.aula h3{font:400 clamp(20px,2.4vw,24px)/1.14 var(--disp);margin-top:9px}
+.escuro .aula h3{color:var(--branco)}
+.aula p{font-size:15px;line-height:1.5;color:var(--suave);margin-top:9px}
+.escuro .aula p{color:var(--pessego)}
 
 /* ---------- SEM BURACO ENTRE AS SECOES ---------- */
 .telao{padding-block:clamp(40px,6vw,72px) 0}
 #antes{padding-top:clamp(34px,4.5vw,56px)}
+"""
+
+AULAS = [
+    (1, "Boas-vindas", "2 min",
+     "como o minicurso funciona e aonde você chega no fim: uma secretária de IA trabalhando no seu WhatsApp."),
+    (2, "Planos, limites e modelos", "8 min",
+     "qual plano assinar, como funciona o limite de uso e qual modelo usar em cada tarefa."),
+    (3, "Projetos e o seu cérebro", "12 min",
+     "você monta o “cérebro”: os documentos que ensinam ao Claude quem você é, o que vende e como fala."),
+    (4, "Conectores, plugins e skills", "15 min",
+     "como ligar o Claude no Gmail, na Agenda, no Drive e nas outras, e a diferença entre plugin e skill."),
+    (5, "Claude Code e artefatos", "12 min",
+     "quando usar o Claude Code, como pedir o seu plugin e como criar telas e propostas com link."),
+    (6, "O seu WhatsApp ligado", "4 min",
+     "os 10 passos para o Claude falar com você no seu próprio número de WhatsApp."),
+    (7, "Rotinas, tarefas e agentes", "5 min",
+     "as quatro rotinas da sua secretária, como programar cada uma e o que é um agente."),
+    (8, "O meu hub", "6 min",
+     "um tour pela plataforma que eu criei com o Claude Code para a minha equipe."),
+]
+
+CARTOES = "\n".join(
+    f"""      <article class="aula">
+        <img src="aulas/a{n}.webp" width="560" height="315" loading="lazy" decoding="async"
+             alt="Um momento da aula {n}: {titulo}">
+        <div class="corpo">
+          <span class="num">{'Bônus' if n == 8 else f'Aula {n}'} · {tempo}</span>
+          <h3>{titulo}</h3>
+          <p>{frase}</p>
+        </div>
+      </article>""" for n, titulo, tempo, frase in AULAS)
+
+BLOCO_AULAS = f"""
+<!-- AS AULAS POR DENTRO -->
+<section class="secao aulas escuro brilho faixa" id="aulas">
+  <div class="wrap">
+    <div class="cabeca">
+      <p class="eyebrow">O que tem dentro</p>
+      <h2 class="tit">Sete aulas e um bônus, <em>1h03 no total</em></h2>
+      <p class="arraste">Arraste para o lado e veja o que você vai assistir.</p>
+    </div>
+    <div class="trilho">
+{CARTOES}
+    </div>
+  </div>
+</section>
 """
 
 HERO = """
@@ -132,22 +201,32 @@ if "telas/carrossel.webp" in html:
 # 1. o CSS novo, antes de fechar o style
 html = html.replace("</style>", CSS + "</style>", 1)
 
-# 2. o leque de telas atras do titulo
-antes_topo = '  <div class="wrap">\n    <div class="topo-txt">'
-depois_topo = """  <div class="wrap palco">
-    <div class="leque" aria-hidden="true">
-      <img src="telas/leque-1.webp" alt="" fetchpriority="high" decoding="async">
-      <img src="telas/leque-2.webp" alt="" fetchpriority="high" decoding="async">
-      <img src="telas/leque-3.webp" alt="" fetchpriority="high" decoding="async">
-    </div>
-    <div class="topo-txt">"""
-assert antes_topo in html, "nao achei a abertura do topo"
-html = html.replace(antes_topo, depois_topo, 1)
+# 2. a pilula em cima do titulo
+antes_h1 = "      <h1>Aprenda do zero"
+assert antes_h1 in html, "nao achei o titulo"
+html = html.replace(antes_h1, '      <p class="pilula">Minicurso + imersão gravada</p>\n' + antes_h1, 1)
 
-# 3. a tela grande logo depois do topo
-html = html.replace("</header>\n", "</header>\n" + HERO, 1)
+# 3. os tres pilares e o segundo botao, logo abaixo da promessa
+PILARES = """      <div class="pilares">
+        <div><i>01</i><b>Contexto</b><span>ele sabe quem você é</span></div>
+        <div><i>02</i><b>Conteúdo</b><span>volta na sua voz</span></div>
+        <div><i>03</i><b>Conexões</b><span>ligado no que você já usa</span></div>
+      </div>
+"""
+marca_cta = '      <div class="cta">\n'
+assert marca_cta in html, "nao achei o bloco de botoes do topo"
+html = html.replace(marca_cta, PILARES + marca_cta, 1)
 
-# 4. a galeria de telas dentro de "o que voce vai saber fazer"
+antes_nota = '        <span class="nota-cta">'
+novo_nota = ('        <a class="botao vazado" href="#aulas">Ver as aulas por dentro</a>\n'
+             '        <span class="nota-cta">')
+assert antes_nota in html, "nao achei a nota do botao"
+html = html.replace(antes_nota, novo_nota, 1)
+
+# 4. as aulas por dentro logo depois do topo, e so entao a tela grande, como prova
+html = html.replace("</header>\n", "</header>\n" + BLOCO_AULAS + HERO, 1)
+
+# 5. a galeria de telas dentro de "o que voce vai saber fazer"
 marca = """      <div>Deixar tarefas rodando sozinhas no horário que você escolher.</div>
     </div>
   </div>
