@@ -119,9 +119,11 @@ CSS = """
   width:22px;height:22px;display:grid;place-items:center;font-size:12px;line-height:1;margin-top:3px}
 
 /* o selo do Claude encostado na palavra, sem comer letra nenhuma */
-.com-selo{white-space:nowrap}
-.selo-claude{display:inline-block;width:.52em;height:.52em;vertical-align:.26em;
-  margin:0 .04em 0 .10em;transform:rotate(-14deg)}
+/* o selo entra ATRAS do C, pegando so a beirada: a letra passa por cima dele */
+.com-selo{position:relative;display:inline-block;isolation:isolate;white-space:nowrap}
+.com-selo .palavra{position:relative;z-index:1}
+.selo-claude{position:absolute;z-index:0;left:-.38em;top:.10em;
+  width:.60em;height:.60em;transform:rotate(-16deg)}
 /* as linhas do titulo estavam se tocando, o Q batia no F da linha de baixo */
 .topo h1{line-height:1.08}
 .topo .lead{margin-top:30px}
@@ -235,8 +237,9 @@ html = html.replace("</style>", CSS + "</style>", 1)
 H1_VELHO = ('      <h1>Aprenda do zero a usar o Claude para '
             '<span class="acesa">criar conteúdos</span></h1>')
 H1_NOVO = ('      <p class="pilula">Para quem nunca abriu o Claude</p>\n'
-           '      <h1>Domine o <span class="com-selo">Claude<img class="selo-claude" src="telas/selo-claude.png"'
-           ' width="600" height="600" alt="" aria-hidden="true"></span> e coloque ele para fazer'
+           '      <h1>Domine o <span class="com-selo"><img class="selo-claude"'
+           ' src="telas/selo-claude.png" width="600" height="600" alt="" aria-hidden="true">'
+           '<span class="palavra">Claude</span></span> e coloque ele para fazer'
            ' os seus <span class="acesa">conteúdos</span></h1>')
 assert H1_VELHO in html, "nao achei o titulo"
 html = html.replace(H1_VELHO, H1_NOVO, 1)
