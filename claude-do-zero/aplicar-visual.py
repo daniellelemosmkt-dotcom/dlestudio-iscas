@@ -77,7 +77,9 @@ CSS = """
 /* ---------- AS AULAS POR DENTRO ----------
    E o bloco que vende: o produto vira um produto, com capa, nome, numero e duracao, e da
    para arrastar e espiar. Cada capa e um quadro do proprio video da aula. */
-.aulas{padding-block:clamp(56px,8vw,92px)}
+/* o topo entrega direto nas aulas: sem respiro duplo no meio do escuro */
+.topo{padding-bottom:clamp(30px,4vw,48px)}
+.aulas{padding-block:clamp(30px,4vw,48px) clamp(56px,8vw,92px)}
 .aulas .cabeca{text-align:center;max-width:700px;margin:0 auto}
 .aulas .arraste{color:var(--suave);font-size:16px;margin-top:14px}
 .escuro .aulas .arraste{color:var(--suave-esc)}
