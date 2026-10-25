@@ -147,7 +147,7 @@ AULAS = [
 
 CARTOES = "\n".join(
     f"""      <article class="aula">
-        <img src="aulas/capa-{n}.webp" width="1200" height="750" loading="lazy" decoding="async"
+        <img src="aulas/capa-{n}.webp" width="1080" height="1350" loading="lazy" decoding="async"
              alt="Capa da aula {n}: {titulo}">
         <div class="corpo">
           <p>{frase}</p>

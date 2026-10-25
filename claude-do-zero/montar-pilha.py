@@ -16,18 +16,18 @@ CAPAS = AQUI / "aulas"
 SAIDA = AQUI / "telas" / "pilha.png"
 
 MAGENTA = (226, 48, 122, 255)
-LARGURA, ALTURA = 1500, 950
+LARGURA, ALTURA = 1500, 1200
 
 # (arquivo, largura da peca, centro x, centro y, giro em graus) — a 1 fica no meio e maior
 PECAS = [
-    ("capa-3.webp", 380, 300, 250, -9),
-    ("capa-5.webp", 380, 790, 190, 5),
-    ("capa-7.webp", 360, 1210, 270, 11),
-    ("capa-2.webp", 400, 230, 640, -6),
-    ("capa-1.webp", 620, 740, 560, -2),
-    ("capa-4.webp", 380, 1255, 650, 8),
-    ("capa-6.webp", 330, 440, 840, -12),
-    ("capa-8.webp", 350, 1020, 860, 7),
+    ("capa-3.webp", 250, 250, 330, -8),
+    ("capa-5.webp", 250, 540, 230, 4),
+    ("capa-7.webp", 240, 840, 300, 10),
+    ("capa-2.webp", 250, 1140, 380, -5),
+    ("capa-1.webp", 330, 700, 620, -2),
+    ("capa-4.webp", 250, 1180, 760, 7),
+    ("capa-6.webp", 240, 300, 760, -11),
+    ("capa-8.webp", 240, 930, 880, 6),
 ]
 NUMEROS = [3, 5, 7, 2, 1, 4, 6, 8]
 

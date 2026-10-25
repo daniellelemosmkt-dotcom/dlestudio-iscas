@@ -1,57 +1,57 @@
-"""Desenha as capas das aulas: uma por tema, no design system dela, com imagem real.
+"""Desenha as capas das aulas: foto dela sangrando na capa inteira e o titulo por cima.
 
-A Dani vetou duas coisas antes: o nome de aula como titulo (tem que ser uma acao que a
-pessoa imagina fazendo) e a capa sendo so texto (tem que ser visual). Entao cada capa tem:
+A Dani mandou tres correcoes ate aqui, nesta ordem:
+  1. o titulo nao pode ser nome de aula, tem que ser uma acao que a pessoa imagina fazendo;
+  2. a capa nao pode ser so texto;
+  3. e a capa NAO e um print da aula numa moldura: a capa inteira e visual, foto dela
+     ocupando tudo, com o texto em cima, como nas capas de carrossel que ela mandou.
 
-  * pastilha magenta com o numero da aula;
-  * a acao em Advercase grande, do lado esquerdo;
-  * UMA TELA DE VERDADE da propria aula, encaixada do lado direito, torta e com sombra;
-  * nas aulas de ferramenta, os icones reais recortados da propria tela de conectores dela;
-  * filete magenta, tempo e assinatura no rodape.
-
-Entradas: os quadros em frames/ (tirados dos videos das aulas) e telas/descobrir.webp,
-de onde saem os icones de verdade do Google Drive, Gmail, Canva e Notion.
+Por isso aqui: foto dela cortada em 4:5 ocupando a capa toda, titulo em duas partes
+(Poppins em cima, Advercase embaixo, que e a manchete padrao dela), a assinatura pequena e
+o tempo da aula. Sem veu e sem degrade sobre a foto, que ela veta: o texto vai na area lisa
+que cada foto tem, e ganha sombra propria para nao sumir.
 
 Saida: aulas/capa-1.webp ... capa-8.webp
 """
 import io
-import random
 from pathlib import Path
 
 from fontTools.ttLib import TTFont
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
+
+try:
+    import pillow_heif
+    pillow_heif.register_heif_opener()
+except ImportError:
+    pass
 
 AQUI = Path(__file__).resolve().parent
 ASSETS = Path("G:/Meu Drive/DANIELLE   PROJETOS/PRODUTOS DL ESTÚDIO/04 KIT E PLUGINS/_paginas/assets")
-FRAMES = Path("C:/Users/Micro/AppData/Local/Temp/claude/G--Meu-Drive-DANIELLE---PROJETOS-REDES-SOCIAIS---DANIELLE-LEMOS/2d521f0d-aa7d-472c-a4e3-26eedfd0f682/scratchpad/frames")
 DESTINO = AQUI / "aulas"
 
-L, A = 1200, 750
-GELO = (244, 242, 238)
-TINTA = (32, 26, 29)
-MAGENTA = (139, 8, 63)
+L, A = 1080, 1350
+CREME = (252, 246, 240)
+ESCURO = (28, 20, 24)
 ACESA = (226, 48, 122)
-SUAVE = (120, 110, 114)
 
-# (numero, titulo, tempo, quadro da aula, mostra os icones das ferramentas?)
+# numero, linha em Poppins, linha em Advercase, tempo, foto, onde o texto vai, se a area e clara
 CAPAS = [
-    (1, "Conheça a sua\nfuncionária\nde IA", "2 min", "a1.jpg", False),
-    (2, "Que plano\ndo Claude\nassinar", "8 min", "a2.jpg", False),
-    (3, "Crie o seu\nclone no\nClaude", "12 min", "a3.jpg", False),
-    (4, "Ligue o Claude\nno seu Gmail\ne no Drive", "15 min", "a4.jpg", True),
-    (5, "Peça uma\npágina e\nreceba o link", "12 min", "a5.jpg", False),
-    (6, "Coloque o\nClaude no seu\nWhatsApp", "4 min", "a6.jpg", False),
-    (7, "Crie robôs que\ntrabalham\nsozinhos", "5 min", "a7.jpg", False),
-    (8, "Espie a\nplataforma da\nminha equipe", "6 min", "a8.jpg", False),
+    (1, "conheça a sua", "funcionária de IA", "2 min"),
+    (2, "que plano do Claude", "assinar?", "8 min"),
+    (3, "crie o seu", "clone no Claude", "12 min"),
+    (4, "ligue o Claude no seu", "Gmail e no Drive", "15 min"),
+    (5, "peça uma página", "e receba o link", "12 min"),
+    (6, "coloque o Claude", "no seu WhatsApp", "4 min"),
+    (7, "crie robôs que", "trabalham sozinhos", "5 min"),
+    (8, "espie a plataforma", "da minha equipe", "6 min"),
 ]
 
-# recortes dos icones reais dentro de telas/descobrir.webp (1049x823)
-ICONES = [(238, 182), (636, 182), (238, 299), (636, 299), (636, 416)]
-LADO_ICONE = 48
+# preenchido por montar-capas-fotos.py: numero -> (caminho, "cima"|"baixo", "claro"|"escuro", foco_y)
+FOTOS = {}
+exec((AQUI / "capas-fotos.py").read_text(encoding="utf-8"))
 
 
-def fonte_advercase(tamanho):
-    """Pillow nao le woff2, entao a fonte e convertida para ttf na memoria."""
+def advercase(tamanho):
     f = TTFont(ASSETS / "Advercase-Regular.woff2")
     buf = io.BytesIO()
     f.flavor = None
@@ -61,7 +61,7 @@ def fonte_advercase(tamanho):
 
 
 def poppins(tamanho):
-    for nome in ("poppinsb.ttf", "Poppins-SemiBold.ttf", "segoeuib.ttf", "arialbd.ttf"):
+    for nome in ("poppinsb.ttf", "Poppins-Bold.ttf", "Poppins-SemiBold.ttf", "segoeuib.ttf"):
         try:
             return ImageFont.truetype(nome, tamanho)
         except OSError:
@@ -69,78 +69,76 @@ def poppins(tamanho):
     return ImageFont.load_default()
 
 
-def cantos(img, raio):
-    mascara = Image.new("L", img.size, 0)
-    ImageDraw.Draw(mascara).rounded_rectangle([0, 0, img.width - 1, img.height - 1],
-                                              radius=raio, fill=255)
-    img.putalpha(mascara)
-    return img
+def fundo(caminho, foco_y, foco_x):
+    """A foto cortada em 4:5, ocupando a capa inteira, com o rosto no lugar certo.
+
+    O estudio de 2023 e 2024 e cinza-lilas, frio. A regra dela pede luz quente, entao a
+    foto leva um aquecimento leve: isso e tratamento de foto, nao veu por cima dela.
+    """
+    img = ImageOps.exif_transpose(Image.open(caminho)).convert("RGB")
+    escala = max(L / img.width, A / img.height)
+    img = img.resize((round(img.width * escala), round(img.height * escala)), Image.LANCZOS)
+    x = max(0, min(img.width - L, round(img.width * foco_x - L / 2)))
+    y = max(0, min(img.height - A, round(img.height * foco_y - A / 2)))
+    corte = img.crop((x, y, x + L, y + A))
+
+    r, g, b = corte.split()
+    r = r.point(lambda v: min(255, int(v * 1.045 + 4)))
+    b = b.point(lambda v: max(0, int(v * 0.965)))
+    return Image.merge("RGB", (r, g, b))
 
 
-def tela_inclinada(caminho, largura, giro):
-    """O quadro da aula com moldura branca, canto arredondado e sombra."""
-    img = Image.open(caminho).convert("RGB")
-    altura = round(largura * img.height / img.width)
-    img = img.resize((largura, altura), Image.LANCZOS)
-
-    m = 9
-    com_moldura = Image.new("RGBA", (largura + m * 2, altura + m * 2), (255, 255, 255, 255))
-    com_moldura.paste(img, (m, m))
-    com_moldura = cantos(com_moldura, 16)
-
-    girada = com_moldura.rotate(giro, expand=True, resample=Image.BICUBIC)
-    folga = 40
-    tela = Image.new("RGBA", (girada.width + folga * 2, girada.height + folga * 2), (0, 0, 0, 0))
-    sombra = Image.new("RGBA", tela.size, (0, 0, 0, 0))
-    sombra.paste(Image.new("RGBA", girada.size, (40, 24, 32, 120)), (folga, folga + 12), girada)
-    tela.alpha_composite(sombra.filter(ImageFilter.GaussianBlur(14)))
-    tela.alpha_composite(girada, (folga, folga))
-    return tela
+def cabe(texto, fonte, largura, desenho):
+    return desenho.textlength(texto, font=fonte) <= largura
 
 
-def icones_reais():
-    """Os icones das ferramentas, recortados da tela de conectores de verdade dela."""
-    fonte = Image.open(AQUI / "telas" / "descobrir.webp").convert("RGBA")
-    return [fonte.crop((x, y, x + LADO_ICONE, y + LADO_ICONE)) for x, y in ICONES]
+def maior_que_cabe(texto, criar_fonte, limite, desenho, teto):
+    tamanho = teto
+    while tamanho > 28 and not cabe(texto, criar_fonte(tamanho), limite, desenho):
+        tamanho -= 2
+    return criar_fonte(tamanho)
 
 
-for numero, titulo, tempo, quadro, com_icones in CAPAS:
-    capa = Image.new("RGB", (L, A), GELO)
-    manchinha = Image.new("RGB", (L, A), GELO)
-    ImageDraw.Draw(manchinha).ellipse([L - 560, -320, L + 260, 400], fill=(250, 232, 240))
-    capa = Image.blend(capa, manchinha, 0.85)
+def escrever(d, xy, texto, fonte, cor, ancora, halo):
+    """Texto com sombra propria. Nao e veu sobre a foto: so o texto ganha contorno suave."""
+    x, y = xy
+    for dx, dy in ((0, 3), (0, -2), (3, 0), (-3, 0), (0, 7)):
+        d.text((x + dx, y + dy), texto, font=fonte, fill=halo, anchor=ancora)
+    d.text((x, y), texto, font=fonte, fill=cor, anchor=ancora)
 
-    random.seed(4)
-    ruido = Image.effect_noise((L, A), 24).convert("L")
-    capa = Image.blend(capa, Image.merge("RGB", (ruido, ruido, ruido)), 0.07).convert("RGBA")
 
-    # a tela da aula entra primeiro, do lado direito
-    giro = -4 if numero % 2 else 4
-    tela = tela_inclinada(FRAMES / quadro, 470, giro)
-    capa.alpha_composite(tela, (L - tela.width + 54, (A - tela.height) // 2 - 10))
+for numero, linha_sans, linha_serif, tempo in CAPAS:
+    caminho, posicao, tom, foco_y, foco_x = FOTOS[numero]
+    capa = fundo(caminho, foco_y, foco_x)
 
+    # o halo segue o tom da area: area clara pede texto escuro, area escura pede texto claro
+    cor = ESCURO if tom == "claro" else CREME
+    halo = (255, 255, 255, 0) if tom == "claro" else (0, 0, 0)
+    halo = (250, 248, 246) if tom == "claro" else (18, 12, 15)
+
+    base = Image.new("RGB", (L, A))
+    base.paste(capa)
+    capa = base
     d = ImageDraw.Draw(capa)
-    margem = 74
 
-    rotulo = "BÔNUS" if numero == 8 else f"AULA {numero}"
-    fr = poppins(26)
-    larg = d.textlength(rotulo, font=fr)
-    d.rounded_rectangle([margem, margem, margem + larg + 56, margem + 56], radius=28, fill=MAGENTA)
-    d.text((margem + 28 + larg / 2, margem + 28), rotulo, font=fr, fill=(255, 255, 255), anchor="mm")
+    margem = 76
+    limite = L - margem * 2
+    f_sans = maior_que_cabe(linha_sans, poppins, limite, d, 92)
+    f_serif = maior_que_cabe(linha_serif, advercase, limite, d, 124)
 
-    ft = fonte_advercase(72)
-    d.multiline_text((margem, 262), titulo, font=ft, fill=TINTA, spacing=12, anchor="la")
+    if posicao == "cima":
+        y_assin, y1 = 96, 164
+    else:
+        y1 = A - 300 - f_serif.size
+        y_assin = y1 - 74
 
-    if com_icones:
-        x = margem
-        for icone in icones_reais():
-            capa.alpha_composite(icone, (x, A - 232))
-            x += LADO_ICONE + 16
+    escrever(d, (margem, y_assin), "Dani Lemos  //  Claude do Zero", poppins(26), cor, "la", halo)
+    escrever(d, (margem, y1), linha_sans, f_sans, cor, "la", halo)
+    escrever(d, (margem, y1 + f_sans.size + 18), linha_serif, f_serif, cor, "la", halo)
 
-    d.rectangle([margem, A - 136, margem + 86, A - 130], fill=ACESA)
-    d.text((margem, A - 100), tempo, font=poppins(28), fill=SUAVE, anchor="la")
-    d.text((L - margem, A - 100), "Claude do Zero", font=poppins(26), fill=SUAVE, anchor="ra")
+    rotulo = "bônus" if numero == 8 else f"aula {numero}"
+    escrever(d, (margem, A - 96), f"{rotulo}  ·  {tempo}", poppins(30), ACESA, "ls", halo)
 
     saida = DESTINO / f"capa-{numero}.webp"
-    capa.convert("RGB").save(saida, "WEBP", quality=88, method=6)
-    print(f"capa-{numero} {saida.stat().st_size // 1024} KB  {titulo.replace(chr(10), ' ')}")
+    capa.save(saida, "WEBP", quality=86, method=6)
+    print(f"capa-{numero} {saida.stat().st_size // 1024} KB  {linha_sans} {linha_serif}")
