@@ -2,8 +2,8 @@
 
 E o mecanismo da pagina da Maria Wendt que a Dani mandou adaptar: um monte de material
 empilhado, numerado, para a pessoa ver de uma vez que e MUITA coisa. A diferenca e que aqui
-nao tem mockup inventado: cada peca da pilha e um quadro de verdade de uma aula do
-minicurso, o mesmo que ja esta nos cards mais abaixo.
+nao tem mockup inventado: cada peca da pilha e a capa de uma aula de verdade,
+a mesma que aparece nos cards mais abaixo.
 
 Saida: telas/pilha.png (fundo transparente, para cair em qualquer cor de secao).
 """
@@ -20,14 +20,14 @@ LARGURA, ALTURA = 1500, 950
 
 # (arquivo, largura da peca, centro x, centro y, giro em graus) — a 1 fica no meio e maior
 PECAS = [
-    ("a3.webp", 380, 300, 250, -9),
-    ("a5.webp", 380, 790, 190, 5),
-    ("a7.webp", 360, 1210, 270, 11),
-    ("a2.webp", 400, 230, 640, -6),
-    ("a1.webp", 620, 740, 560, -2),
-    ("a4.webp", 380, 1255, 650, 8),
-    ("a6.webp", 330, 440, 840, -12),
-    ("a8.webp", 350, 1020, 860, 7),
+    ("capa-3.webp", 380, 300, 250, -9),
+    ("capa-5.webp", 380, 790, 190, 5),
+    ("capa-7.webp", 360, 1210, 270, 11),
+    ("capa-2.webp", 400, 230, 640, -6),
+    ("capa-1.webp", 620, 740, 560, -2),
+    ("capa-4.webp", 380, 1255, 650, 8),
+    ("capa-6.webp", 330, 440, 840, -12),
+    ("capa-8.webp", 350, 1020, 860, 7),
 ]
 NUMEROS = [3, 5, 7, 2, 1, 4, 6, 8]
 
@@ -73,18 +73,6 @@ pilha = Image.new("RGBA", (LARGURA, ALTURA), (0, 0, 0, 0))
 for (arquivo, largura, cx, cy, giro), numero in zip(PECAS, NUMEROS):
     p = com_sombra(peca(CAPAS / arquivo, largura), giro)
     pilha.alpha_composite(p, (cx - p.width // 2, cy - p.height // 2))
-
-# as bolinhas numeradas vao por cima de tudo, no canto de cima de cada peca
-desenho = ImageDraw.Draw(pilha)
-f = fonte(40)
-for (arquivo, largura, cx, cy, giro), numero in zip(PECAS, NUMEROS):
-    raio = 38 if numero == 1 else 30
-    bx = cx - largura // 2 + round(math.cos(math.radians(giro)) * 10)
-    by = cy - round(largura * 0.28) - 10
-    desenho.ellipse([bx - raio, by - raio, bx + raio, by + raio], fill=MAGENTA,
-                    outline=(255, 255, 255, 255), width=4)
-    desenho.text((bx, by + 1), str(numero), font=fonte(raio + 6), fill=(255, 255, 255, 255),
-                 anchor="mm")
 
 pilha = pilha.crop(pilha.getbbox())
 pilha.thumbnail((1400, 1400), Image.LANCZOS)

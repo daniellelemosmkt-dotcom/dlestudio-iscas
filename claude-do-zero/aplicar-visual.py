@@ -69,7 +69,7 @@ CSS = """
 .pilares>div{background:var(--noite-2);border:1px solid var(--linha-esc);border-radius:18px;
   padding:clamp(16px,2.2vw,24px) clamp(10px,1.6vw,20px);text-align:center;min-width:0}
 .pilares i{display:block;font:400 clamp(26px,3.6vw,38px)/1 var(--disp);font-style:normal;color:var(--acesa)}
-.pilares b{display:block;font:600 clamp(13px,1.7vw,16px)/1.2 var(--txt);margin-top:8px;color:var(--branco)}
+.pilares b{display:block;font:600 clamp(13px,1.6vw,16px)/1.28 var(--txt);margin-top:10px;color:var(--branco)}
 .pilares span{display:block;font-size:clamp(12.5px,1.5vw,14.5px);line-height:1.4;color:var(--suave-esc);margin-top:7px}
 .botao.vazado{background:transparent;color:var(--pessego);border:1px solid rgba(252,234,223,.38);box-shadow:none}
 .botao.vazado:hover{border-color:var(--acesa);background:rgba(226,48,122,.1)}
@@ -91,12 +91,12 @@ CSS = """
 .escuro .aula{background:var(--noite-2);border-color:var(--linha-esc)}
 .aula img{width:100%;height:auto;display:block;border-bottom:1px solid var(--linha)}
 .escuro .aula img{border-bottom-color:var(--linha-esc)}
-.aula .corpo{padding:16px 18px 20px}
+.aula .corpo{padding:15px 18px 19px}
 .aula .num{font:600 11px/1 var(--txt);letter-spacing:.14em;text-transform:uppercase;color:var(--mag)}
 .escuro .aula .num{color:var(--acesa)}
 .aula h3{font:400 clamp(20px,2.4vw,24px)/1.14 var(--disp);margin-top:9px}
 .escuro .aula h3{color:var(--branco)}
-.aula p{font-size:15px;line-height:1.5;color:var(--suave);margin-top:9px}
+.aula p{font-size:15.5px;line-height:1.5;color:var(--suave);margin:0}
 .escuro .aula p{color:var(--pessego)}
 
 /* ---------- A PILHA DO PRODUTO ----------
@@ -121,35 +121,33 @@ CSS = """
 #antes{padding-top:clamp(34px,4.5vw,56px)}
 """
 
-# O titulo de cada card e o que a pessoa GANHA, nao o nome da aula. Ninguem deseja assistir
-# uma aula de boas-vindas; todo mundo deseja parar de bater no limite e ter alguem
-# respondendo no WhatsApp. O minuto fica pequeno, como prova de que e rapido.
+# Cada card e uma ACAO que a pessoa vai conseguir fazer, no jeito que ela pensa:
+# "que plano assinar", "crie o seu clone". Nome de aula e categoria nao vendem nada.
+# O minuto fica pequeno, so como prova de que e rapido.
 AULAS = [
-    (1, "Aonde isso chega", "2 min",
-     "uma secretária de IA trabalhando no seu WhatsApp. Em dois minutos você vê o destino."),
-    (2, "Pare de bater no limite", "8 min",
-     "qual plano assinar, qual modelo usar em cada coisa e dois truques para o seu limite render muito mais."),
-    (3, "Nunca mais explique quem você é", "12 min",
-     "você monta o cérebro uma vez e ele passa a lembrar o que você vende, para quem e como você fala."),
-    (4, "Ele mexe no seu Gmail, na Agenda e no Drive", "15 min",
-     "como ligar o Claude nas ferramentas que você já abre todo dia, sem escrever uma linha de código."),
-    (5, "Peça uma tela e receba o link pronto", "12 min",
-     "propostas, páginas e ferramentas que você manda para a cliente no mesmo dia."),
-    (6, "O Claude no seu próprio número", "4 min",
-     "dez passos e ele começa a te responder no WhatsApp, como qualquer pessoa da sua equipe."),
-    (7, "Ele trabalha enquanto você dorme", "5 min",
-     "bom dia, plantão, fechamento e arrumação rodando sozinhos, no horário que você escolher."),
-    (8, "A plataforma que eu criei para a minha equipe", "6 min",
-     "o tour completo por dentro, para você copiar a ideia no seu negócio."),
+    (1, "Conheça a sua funcionária de IA", "2 min",
+     "em dois minutos você vê o que vai ter no fim: alguém respondendo por você no WhatsApp."),
+    (2, "Que plano do Claude assinar", "8 min",
+     "qual plano vale, qual modelo usar em cada coisa e dois truques para o limite render muito mais."),
+    (3, "Crie o seu clone no Claude", "12 min",
+     "ele aprende o que você vende, para quem e como você fala. E nunca mais esquece."),
+    (4, "Ligue o Claude no seu Gmail e no Drive", "15 min",
+     "ele passa a ler e escrever nas ferramentas que você já abre todo dia, sem uma linha de código."),
+    (5, "Peça uma página e receba o link", "12 min",
+     "proposta, página ou ferramenta pronta para você mandar para a cliente no mesmo dia."),
+    (6, "Coloque o Claude no seu WhatsApp", "4 min",
+     "dez passos e ele começa a te responder no seu próprio número."),
+    (7, "Crie robôs que trabalham sozinhos", "5 min",
+     "bom dia, plantão, fechamento e arrumação acontecendo no horário que você escolher."),
+    (8, "Espie a plataforma da minha equipe", "6 min",
+     "o tour por dentro do que eu construí com o Claude, para você copiar a ideia."),
 ]
 
 CARTOES = "\n".join(
     f"""      <article class="aula">
-        <img src="aulas/a{n}.webp" width="560" height="315" loading="lazy" decoding="async"
-             alt="Um momento da aula {n}: {titulo}">
+        <img src="aulas/capa-{n}.webp" width="1200" height="750" loading="lazy" decoding="async"
+             alt="Capa da aula {n}: {titulo}">
         <div class="corpo">
-          <span class="num">{tempo}</span>
-          <h3>{titulo}</h3>
           <p>{frase}</p>
         </div>
       </article>""" for n, titulo, tempo, frase in AULAS)
@@ -235,12 +233,12 @@ html = html.replace(H1_VELHO, H1_NOVO, 1)
 # 3. a pilha do produto, os tres pilares e o segundo botao, logo abaixo da promessa
 PILARES = """      <div class="pilha">
         <img src="telas/pilha.png" width="1400" height="860" fetchpriority="high" decoding="async"
-             alt="As oito aulas do minicurso, uma ao lado da outra">
+             alt="As capas das oito aulas do minicurso, empilhadas">
       </div>
       <div class="pilares">
-        <div><i>01</i><b>Contexto</b><span>ele sabe quem você é</span></div>
-        <div><i>02</i><b>Conteúdo</b><span>volta na sua voz</span></div>
-        <div><i>03</i><b>Conexões</b><span>ligado no que você já usa</span></div>
+        <div><i>01</i><b>Ensine o Claude quem você é</b></div>
+        <div><i>02</i><b>Peça para ele escrever os seus conteúdos</b></div>
+        <div><i>03</i><b>Crie robôs que fazem o trabalho</b></div>
       </div>
 """
 marca_cta = '      <div class="cta">\n'
