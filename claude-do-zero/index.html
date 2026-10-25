@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
@@ -252,6 +252,14 @@ footer .wrap{border-top:1px solid var(--linha-esc);padding-block:22px 90px;displ
 .saber-lista div::before{content:"✓";color:#fff;background:var(--mag);border-radius:50%;
   width:22px;height:22px;display:grid;place-items:center;font-size:12px;line-height:1;margin-top:3px}
 
+/* o selo do Claude encostado na palavra, sem comer letra nenhuma */
+.com-selo{white-space:nowrap}
+.selo-claude{display:inline-block;width:.52em;height:.52em;vertical-align:.26em;
+  margin:0 .04em 0 .10em;transform:rotate(-14deg)}
+/* as linhas do titulo estavam se tocando, o Q batia no F da linha de baixo */
+.topo h1{line-height:1.08}
+.topo .lead{margin-top:30px}
+
 /* ---------- SEM BURACO ENTRE AS SECOES ---------- */
 .telao{padding-block:clamp(40px,6vw,72px) 0}
 #antes{padding-top:clamp(34px,4.5vw,56px)}
@@ -264,8 +272,8 @@ footer .wrap{border-top:1px solid var(--linha-esc);padding-block:22px 90px;displ
   <div class="wrap">
     <div class="topo-txt">
       <p class="pilula">Para quem nunca abriu o Claude</p>
-      <h1>Coloque o Claude para fazer a <span class="acesa">parte chata</span> do seu dia</h1>
-      <p class="lead">Você já abriu uma IA, pediu dez ideias de post e recebeu dez frases que não davam para publicar. <b>O problema não era a ferramenta. Era que ninguém te mostrou como ela funciona de verdade.</b></p>
+      <h1>Domine o <span class="com-selo">Claude<img class="selo-claude" src="telas/selo-claude.png" width="600" height="600" alt="" aria-hidden="true"></span> e coloque ele para fazer os seus <span class="acesa">conteúdos</span></h1>
+      <p class="lead">Pare de usar o Claude como se fosse o ChatGPT e coloque ele para trabalhar por você.<br><b>O Claude pode ser o seu funcionário 24 horas.</b></p>
       <div class="pilha">
         <img src="telas/pilha.png" width="1400" height="860" fetchpriority="high" decoding="async"
              alt="As capas das oito aulas do minicurso, empilhadas">
@@ -276,8 +284,7 @@ footer .wrap{border-top:1px solid var(--linha-esc);padding-block:22px 90px;displ
         <div><i>03</i><b>Crie robôs que fazem o trabalho</b></div>
       </div>
       <div class="cta">
-        <a class="botao" href="https://chk.eduzz.com/lniykl57?utm_source=meta&amp;utm_medium=cpc&amp;utm_campaign=claude-do-zero&amp;utm_content=A">Quero começar do zero <span class="seta">→</span></a>
-        <a class="botao vazado" href="#aulas">Ver as aulas por dentro</a>
+        <a class="botao" href="https://chk.eduzz.com/lniykl57?utm_source=meta&amp;utm_medium=cpc&amp;utm_campaign=claude-do-zero&amp;utm_content=A">Quero dominar o Claude <span class="seta">→</span></a>
         <span class="nota-cta"><b class="parcela-mini">Acesso por 1 ano</b> · 12x de R$ 19,96</span>
       </div>
     </div>

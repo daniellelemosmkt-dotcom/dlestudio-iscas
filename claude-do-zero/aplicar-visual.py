@@ -118,6 +118,14 @@ CSS = """
 .saber-lista div::before{content:"✓";color:#fff;background:var(--mag);border-radius:50%;
   width:22px;height:22px;display:grid;place-items:center;font-size:12px;line-height:1;margin-top:3px}
 
+/* o selo do Claude encostado na palavra, sem comer letra nenhuma */
+.com-selo{white-space:nowrap}
+.selo-claude{display:inline-block;width:.52em;height:.52em;vertical-align:.26em;
+  margin:0 .04em 0 .10em;transform:rotate(-14deg)}
+/* as linhas do titulo estavam se tocando, o Q batia no F da linha de baixo */
+.topo h1{line-height:1.08}
+.topo .lead{margin-top:30px}
+
 /* ---------- SEM BURACO ENTRE AS SECOES ---------- */
 .telao{padding-block:clamp(40px,6vw,72px) 0}
 #antes{padding-top:clamp(34px,4.5vw,56px)}
@@ -227,10 +235,20 @@ html = html.replace("</style>", CSS + "</style>", 1)
 H1_VELHO = ('      <h1>Aprenda do zero a usar o Claude para '
             '<span class="acesa">criar conteúdos</span></h1>')
 H1_NOVO = ('      <p class="pilula">Para quem nunca abriu o Claude</p>\n'
-           '      <h1>Coloque o Claude para fazer a '
-           '<span class="acesa">parte chata</span> do seu dia</h1>')
+           '      <h1>Domine o <span class="com-selo">Claude<img class="selo-claude" src="telas/selo-claude.png"'
+           ' width="600" height="600" alt="" aria-hidden="true"></span> e coloque ele para fazer'
+           ' os seus <span class="acesa">conteúdos</span></h1>')
 assert H1_VELHO in html, "nao achei o titulo"
 html = html.replace(H1_VELHO, H1_NOVO, 1)
+
+# 2b. o subtexto, ditado por ela
+LEAD_VELHO = ('<p class="lead">Você já abriu uma IA, pediu dez ideias de post e recebeu dez '
+              'frases que não davam para publicar. <b>O problema não era a ferramenta. Era que '
+              'ninguém te mostrou como ela funciona de verdade.</b></p>')
+LEAD_NOVO = ('<p class="lead">Pare de usar o Claude como se fosse o ChatGPT e coloque ele para '
+             'trabalhar por você.<br><b>O Claude pode ser o seu funcionário 24 horas.</b></p>')
+assert LEAD_VELHO in html, "nao achei o subtexto do topo"
+html = html.replace(LEAD_VELHO, LEAD_NOVO, 1)
 
 # 3. a pilha do produto, os tres pilares e o segundo botao, logo abaixo da promessa
 PILARES = """      <div class="pilha">
@@ -247,11 +265,9 @@ marca_cta = '      <div class="cta">\n'
 assert marca_cta in html, "nao achei o bloco de botoes do topo"
 html = html.replace(marca_cta, PILARES + marca_cta, 1)
 
-antes_nota = '        <span class="nota-cta">'
-novo_nota = ('        <a class="botao vazado" href="#aulas">Ver as aulas por dentro</a>\n'
-             '        <span class="nota-cta">')
-assert antes_nota in html, "nao achei a nota do botao"
-html = html.replace(antes_nota, novo_nota, 1)
+# o botao de espiar as aulas sai: ela quer um caminho so no topo
+assert "Quero começar do zero " in html, "nao achei o botao do topo"
+html = html.replace("Quero começar do zero ", "Quero dominar o Claude ", 1)
 
 # 3b. a soma de valores no bloco da oferta: cada item marcado como incluido.
 #     O unico preco avulso que existe de verdade e o da imersao, que foi vendida a R$ 97.
