@@ -99,6 +99,23 @@ CSS = """
 .aula p{font-size:15px;line-height:1.5;color:var(--suave);margin-top:9px}
 .escuro .aula p{color:var(--pessego)}
 
+/* ---------- A PILHA DO PRODUTO ----------
+   Mecanismo da pagina da Maria Wendt: a pessoa ve de uma vez que e muita coisa. A diferenca
+   e que aqui nao tem mockup inventado, cada peca e um quadro real de uma aula. */
+.pilha{margin:clamp(26px,4vw,40px) auto 0;max-width:720px}
+.pilha img{width:100%;height:auto;display:block}
+
+/* soma de valores: cada item com a etiqueta de incluido, como na referencia */
+.itens .incluso{display:inline-block;font:600 10px/1 var(--txt);letter-spacing:.1em;
+  text-transform:uppercase;color:#1F7A4D;background:#D8F3E3;border-radius:999px;
+  padding:5px 9px;margin-left:8px;vertical-align:2px;white-space:nowrap}
+.itens s{color:var(--suave-esc);margin-left:8px;font-size:14px;white-space:nowrap}
+.ancora{margin-top:14px;font-size:14.5px;color:var(--suave-esc);text-align:center}
+
+/* lista de ganhos com visto, em vez de bolinha */
+.saber-lista div::before{content:"✓";color:#fff;background:var(--mag);border-radius:50%;
+  width:22px;height:22px;display:grid;place-items:center;font-size:12px;line-height:1;margin-top:3px}
+
 /* ---------- SEM BURACO ENTRE AS SECOES ---------- */
 .telao{padding-block:clamp(40px,6vw,72px) 0}
 #antes{padding-top:clamp(34px,4.5vw,56px)}
@@ -215,8 +232,12 @@ H1_NOVO = ('      <p class="pilula">Para quem nunca abriu o Claude</p>\n'
 assert H1_VELHO in html, "nao achei o titulo"
 html = html.replace(H1_VELHO, H1_NOVO, 1)
 
-# 3. os tres pilares e o segundo botao, logo abaixo da promessa
-PILARES = """      <div class="pilares">
+# 3. a pilha do produto, os tres pilares e o segundo botao, logo abaixo da promessa
+PILARES = """      <div class="pilha">
+        <img src="telas/pilha.png" width="1400" height="860" fetchpriority="high" decoding="async"
+             alt="As oito aulas do minicurso, uma ao lado da outra">
+      </div>
+      <div class="pilares">
         <div><i>01</i><b>Contexto</b><span>ele sabe quem você é</span></div>
         <div><i>02</i><b>Conteúdo</b><span>volta na sua voz</span></div>
         <div><i>03</i><b>Conexões</b><span>ligado no que você já usa</span></div>
@@ -231,6 +252,32 @@ novo_nota = ('        <a class="botao vazado" href="#aulas">Ver as aulas por den
              '        <span class="nota-cta">')
 assert antes_nota in html, "nao achei a nota do botao"
 html = html.replace(antes_nota, novo_nota, 1)
+
+# 3b. a soma de valores no bloco da oferta: cada item marcado como incluido.
+#     O unico preco avulso que existe de verdade e o da imersao, que foi vendida a R$ 97.
+#     Nao invento preco para os outros itens: numero inventado numa pagina de venda queima.
+INCLUSO = '<em class="incluso">incluído</em>'
+TROCAS = [
+    ("<b>O Minicurso Modo Automático</b>, com 8 aulas.</div>",
+     f"<b>O Minicurso Modo Automático</b>, com 8 aulas. {INCLUSO}</div>"),
+    ("A gravação da imersão do dia 10 de outubro, uma tarde inteira montando do zero.</div>",
+     "A gravação da imersão do dia 10 de outubro, uma tarde inteira montando do zero. "
+     f"<s>R$ 97</s>{INCLUSO}</div>"),
+    ("Os prompts e materiais prontos.</div>", f"Os prompts e materiais prontos. {INCLUSO}</div>"),
+    ("Tudo que eu gravar durante o seu ano de acesso.</div>",
+     f"Tudo que eu gravar durante o seu ano de acesso. {INCLUSO}</div>"),
+    ("A aula de agendar posts, de 8 minutos.</div>",
+     f"A aula de agendar posts, de 8 minutos. {INCLUSO}</div>"),
+]
+for velho, novo in TROCAS:
+    assert velho in html, f"nao achei o item da oferta: {velho[:40]}"
+    html = html.replace(velho, novo, 1)
+
+ANCORA = ('        <span class="parc">ou R$ 193 à vista. <span class="parc-mes">'
+          'Menos de R$ 20 por mês.</span></span>')
+assert ANCORA in html, "nao achei a linha de parcela"
+html = html.replace(ANCORA, ANCORA + '\n        <p class="ancora">Só a imersão de quatro horas '
+                    'foi vendida sozinha por R$ 97. Aqui ela vem junto com todo o resto.</p>', 1)
 
 # 4. as aulas por dentro logo depois do topo, e so entao a tela grande, como prova
 html = html.replace("</header>\n", "</header>\n" + BLOCO_AULAS + HERO, 1)

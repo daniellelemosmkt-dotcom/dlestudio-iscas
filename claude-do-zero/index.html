@@ -233,6 +233,23 @@ footer .wrap{border-top:1px solid var(--linha-esc);padding-block:22px 90px;displ
 .aula p{font-size:15px;line-height:1.5;color:var(--suave);margin-top:9px}
 .escuro .aula p{color:var(--pessego)}
 
+/* ---------- A PILHA DO PRODUTO ----------
+   Mecanismo da pagina da Maria Wendt: a pessoa ve de uma vez que e muita coisa. A diferenca
+   e que aqui nao tem mockup inventado, cada peca e um quadro real de uma aula. */
+.pilha{margin:clamp(26px,4vw,40px) auto 0;max-width:720px}
+.pilha img{width:100%;height:auto;display:block}
+
+/* soma de valores: cada item com a etiqueta de incluido, como na referencia */
+.itens .incluso{display:inline-block;font:600 10px/1 var(--txt);letter-spacing:.1em;
+  text-transform:uppercase;color:#1F7A4D;background:#D8F3E3;border-radius:999px;
+  padding:5px 9px;margin-left:8px;vertical-align:2px;white-space:nowrap}
+.itens s{color:var(--suave-esc);margin-left:8px;font-size:14px;white-space:nowrap}
+.ancora{margin-top:14px;font-size:14.5px;color:var(--suave-esc);text-align:center}
+
+/* lista de ganhos com visto, em vez de bolinha */
+.saber-lista div::before{content:"✓";color:#fff;background:var(--mag);border-radius:50%;
+  width:22px;height:22px;display:grid;place-items:center;font-size:12px;line-height:1;margin-top:3px}
+
 /* ---------- SEM BURACO ENTRE AS SECOES ---------- */
 .telao{padding-block:clamp(40px,6vw,72px) 0}
 #antes{padding-top:clamp(34px,4.5vw,56px)}
@@ -247,6 +264,10 @@ footer .wrap{border-top:1px solid var(--linha-esc);padding-block:22px 90px;displ
       <p class="pilula">Para quem nunca abriu o Claude</p>
       <h1>Coloque o Claude para fazer a <span class="acesa">parte chata</span> do seu dia</h1>
       <p class="lead">Você já abriu uma IA, pediu dez ideias de post e recebeu dez frases que não davam para publicar. <b>O problema não era a ferramenta. Era que ninguém te mostrou como ela funciona de verdade.</b></p>
+      <div class="pilha">
+        <img src="telas/pilha.png" width="1400" height="860" fetchpriority="high" decoding="async"
+             alt="As oito aulas do minicurso, uma ao lado da outra">
+      </div>
       <div class="pilares">
         <div><i>01</i><b>Contexto</b><span>ele sabe quem você é</span></div>
         <div><i>02</i><b>Conteúdo</b><span>volta na sua voz</span></div>
@@ -458,17 +479,18 @@ footer .wrap{border-top:1px solid var(--linha-esc);padding-block:22px 90px;displ
     </div>
     <div class="oferta">
       <ul class="itens">
-        <li><div><b>O Minicurso Modo Automático</b>, com 8 aulas.</div></li>
-        <li><div>A gravação da imersão do dia 10 de outubro, uma tarde inteira montando do zero.</div></li>
-        <li><div>Os prompts e materiais prontos.</div></li>
-        <li><div>Tudo que eu gravar durante o seu ano de acesso.</div></li>
-        <li><div><span class="bonus">Bônus</span>A aula de agendar posts, de 8 minutos.</div></li>
+        <li><div><b>O Minicurso Modo Automático</b>, com 8 aulas. <em class="incluso">incluído</em></div></li>
+        <li><div>A gravação da imersão do dia 10 de outubro, uma tarde inteira montando do zero. <s>R$ 97</s><em class="incluso">incluído</em></div></li>
+        <li><div>Os prompts e materiais prontos. <em class="incluso">incluído</em></div></li>
+        <li><div>Tudo que eu gravar durante o seu ano de acesso. <em class="incluso">incluído</em></div></li>
+        <li><div><span class="bonus">Bônus</span>A aula de agendar posts, de 8 minutos. <em class="incluso">incluído</em></div></li>
       </ul>
       <div class="caixa">
         <span class="de">Acesso por 1 ano</span>
         <span class="parc-topo">12x de</span>
         <div class="preco"><small>R$</small>19,96</div>
         <span class="parc">ou R$ 193 à vista. <span class="parc-mes">Menos de R$ 20 por mês.</span></span>
+        <p class="ancora">Só a imersão de quatro horas foi vendida sozinha por R$ 97. Aqui ela vem junto com todo o resto.</p>
         <a class="botao" href="https://chk.eduzz.com/lniykl57?utm_source=meta&amp;utm_medium=cpc&amp;utm_campaign=claude-do-zero&amp;utm_content=A">QUERO COMEÇAR <span class="seta">→</span></a>
       </div>
     </div>
