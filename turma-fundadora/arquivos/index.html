@@ -1,0 +1,1296 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meu Funcionário</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"Advercase";src:url(fontes/Advercase-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Advercase";src:url(fontes/Advercase-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+:root{
+  --noite:#160E11; --noite2:#241A1E; --gelo:#F4F2EE; --branco:#FBFAF8; --graf:#292929;
+  --mag:#8B083F; --acesa:#E2307A; --pessego:#FCEADF; --linha:#E2DAD3; --suave:#6B6266;
+  --verde:#1E8E3E; --areia:#8A5A12;
+  --disp:"Advercase","Playfair Display",Georgia,serif;
+  --txt:"Poppins","Segoe UI",Arial,sans-serif;
+  --sombra:0 14px 32px rgba(41,41,41,.07);
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--gelo);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--gelo);color:var(--graf);font:400 15.5px/1.6 var(--txt);-webkit-font-smoothing:antialiased}
+p{margin:0}
+b{font-weight:600}
+a{color:var(--mag)}
+:focus-visible{outline:3px solid var(--mag);outline-offset:3px;border-radius:6px}
+h1,h2,h3{margin:0;font-family:var(--disp);font-weight:400;text-wrap:balance}
+code{font:500 .88em ui-monospace,Consolas,monospace;background:var(--pessego);color:var(--mag);border-radius:5px;padding:2px 6px}
+
+/* ===== esqueleto ===== */
+.app{display:grid;grid-template-columns:258px 1fr;min-height:100vh}
+
+/* menu */
+.menu{background:var(--noite);color:#fff;padding:22px 16px 40px;display:flex;flex-direction:column;gap:22px;
+  position:sticky;top:0;height:100vh;overflow-y:auto}
+.menu .marca{display:flex;flex-direction:column;gap:3px;padding:0 10px}
+.menu .marca b{font:400 23px/1.1 var(--disp)}
+.menu .marca small{font:600 10.5px var(--txt);letter-spacing:.16em;text-transform:uppercase;color:var(--acesa)}
+.menu .quem{padding:0 10px;font-size:13px;color:#A9989E;border-top:1px solid #33262B;padding-top:14px}
+.menu .quem b{color:#fff;display:block;font-size:14.5px}
+.grupo{display:flex;flex-direction:column;gap:3px}
+.grupo .rot{font:600 10.5px var(--txt);letter-spacing:.16em;text-transform:uppercase;color:#7D6C72;padding:0 10px 6px}
+.menu button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;cursor:pointer;
+  color:#D9C9CF;font:500 14.5px var(--txt);padding:10px;border-radius:11px}
+.menu button:hover{background:#2A1F24;color:#fff}
+.menu button.at{background:var(--mag);color:#fff;font-weight:600}
+.menu button .ic{width:18px;height:18px;flex:none;opacity:.9}
+.menu button.sub{padding-left:28px;font-size:13.5px}
+
+/* conteúdo */
+.tela{display:none;padding:34px 34px 70px;max-width:1120px}
+.tela.on{display:block}
+.cab{display:flex;flex-direction:column;gap:9px;margin-bottom:26px;max-width:62ch}
+.cab .eb{font:600 11.5px var(--txt);letter-spacing:.15em;text-transform:uppercase;color:var(--mag)}
+.cab h2{font-size:clamp(30px,4.2vw,44px);line-height:1.02}
+.cab p{color:var(--suave)}
+
+.cartao{background:var(--branco);border:1px solid var(--linha);border-radius:20px;box-shadow:var(--sombra);padding:22px;display:flex;flex-direction:column;gap:13px;margin-bottom:16px;min-width:0}
+.cartao h3{font-size:21px}
+.grade{display:grid;gap:16px;margin-bottom:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+.grade .cartao{margin-bottom:0}
+.cartao ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+li,p{overflow-wrap:break-word}
+
+.tag{display:inline-block;background:var(--pessego);color:var(--mag);font:600 11px var(--txt);letter-spacing:.05em;text-transform:uppercase;padding:6px 11px;border-radius:999px;white-space:nowrap}
+.tag.esc{background:var(--graf);color:#fff}
+.tag.ok{background:#E4F1E8;color:var(--verde)}
+.tag.esp{background:#FAEFDA;color:var(--areia)}
+.tag.nao{background:#F7E4E8;color:#A4122F}
+.tags{display:flex;flex-wrap:wrap;gap:7px}
+
+/* estado vazio que ensina */
+.vazio{background:var(--branco);border:1px dashed #CDBFB6;border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:14px}
+.vazio h3{font-size:22px}
+.vazio p{color:var(--suave)}
+.pedido{background:var(--noite);color:#F4F2EE;border-radius:14px;padding:15px 17px;display:flex;flex-direction:column;gap:11px}
+.pedido-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.pedido-top b{font:600 11.5px var(--txt);letter-spacing:.12em;text-transform:uppercase;color:var(--acesa)}
+.pedido pre{margin:0;white-space:pre-wrap;font:400 14px/1.6 var(--txt)}
+.copiar{flex:none;font:600 13px var(--txt);background:var(--acesa);color:#fff;border:0;border-radius:999px;padding:9px 16px;cursor:pointer;min-height:38px}
+.copiar:hover{background:#C91F65}
+.onde{font-size:13.5px;color:var(--suave)}
+
+/* números */
+.numeros{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(192px,1fr));margin-bottom:16px}
+.num{background:var(--branco);border:1px solid var(--linha);border-radius:18px;padding:18px 20px;box-shadow:var(--sombra);min-width:0}
+.num .v{font:400 clamp(25px,2.6vw,34px)/1.05 var(--disp);display:block;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.num .r{font:600 11px var(--txt);letter-spacing:.12em;text-transform:uppercase;color:var(--suave)}
+.num.destaque{background:var(--noite);border-color:var(--noite);color:#fff}
+.num.destaque .r{color:#A9989E}
+
+/* kanban */
+.quadro{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(238px,1fr);gap:14px;overflow-x:auto;padding-bottom:10px}
+.coluna{background:#EFEBE6;border-radius:18px;padding:13px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.coluna .ct{display:flex;justify-content:space-between;align-items:center;font:600 12.5px var(--txt);color:var(--suave);padding:0 4px}
+.coluna .ct i{font-style:normal;background:#fff;border-radius:999px;padding:2px 9px;font-size:11.5px}
+.ficha{background:#fff;border:1px solid var(--linha);border-radius:14px;padding:13px;cursor:pointer;text-align:left;width:100%;font:inherit;color:inherit;display:flex;flex-direction:column;gap:5px}
+.ficha:hover{border-color:var(--mag)}
+.ficha b{font-size:15px}
+.ficha small{color:var(--suave);font-size:12.5px}
+.ficha .val{font:600 13.5px var(--txt);color:var(--mag)}
+
+/* perfil do instagram */
+.perfil{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:start}
+.bolinha{width:132px;height:132px;border-radius:50%;background:#EFEBE6;border:3px solid #fff;outline:2px solid var(--linha);
+  display:grid;place-items:center;color:#B5A8AD;font-size:12.5px;text-align:center;overflow:hidden}
+.bolinha img{width:100%;height:100%;object-fit:cover}
+.perfil .dir{display:flex;flex-direction:column;gap:13px;min-width:0}
+.perfil .user{font:400 27px/1 var(--disp)}
+.contagem{display:flex;gap:26px;flex-wrap:wrap;font-size:14.5px}
+.contagem b{font-weight:600}
+.bio{white-space:pre-wrap;font-size:14.5px;line-height:1.5}
+.destaques{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px}
+.destaques .destaque{display:flex;flex-direction:column;align-items:center;gap:6px;width:74px}
+.destaques .destaque .circ{width:62px;height:62px;border-radius:50%;background:#EFEBE6;border:1px solid var(--linha);overflow:hidden}
+.destaques .destaque .circ img{width:100%;height:100%;object-fit:cover}
+.destaques .destaque small{font-size:11.5px;text-align:center;color:var(--suave);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:74px}
+.gradeig{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;max-width:520px}
+.gradeig .q{aspect-ratio:1;background:#EFEBE6;border:1px solid var(--linha);position:relative;overflow:hidden;cursor:pointer}
+.gradeig .q img{width:100%;height:100%;object-fit:cover;display:block}
+.gradeig .q .vz{position:absolute;inset:0;display:grid;place-items:center;color:#C3B6BB;font-size:11px}
+.gradeig .q .et{position:absolute;top:6px;right:7px;font-size:10px;background:rgba(22,14,17,.72);color:#fff;border-radius:4px;padding:2px 6px}
+@media (max-width:560px){.perfil{grid-template-columns:1fr}.bolinha{width:96px;height:96px}}
+
+/* grade de conteúdos */
+.conteudos{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(192px,1fr))}
+.ct-item{background:var(--branco);border:1px solid var(--linha);border-radius:16px;overflow:hidden;cursor:pointer;text-align:left;font:inherit;color:inherit;padding:0;display:flex;flex-direction:column}
+.ct-item:hover{border-color:var(--mag)}
+.ct-previa{aspect-ratio:1;background:#EFEBE6;display:grid;place-items:center;overflow:hidden;position:relative}
+.ct-previa img,.ct-previa video{width:100%;height:100%;object-fit:cover}
+.ct-previa .so-texto{padding:15px;font-size:13px;line-height:1.5;color:var(--graf);overflow:hidden;display:block;width:100%;height:100%}
+.ct-pe{padding:11px 13px;display:flex;flex-direction:column;gap:6px}
+.ct-pe b{font-size:14px}
+.ct-pe .meta{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:11.5px;color:var(--suave)}
+
+/* ficha aberta */
+dialog{border:0;border-radius:22px;padding:0;max-width:620px;width:calc(100% - 32px);background:var(--branco);box-shadow:0 30px 70px rgba(22,14,17,.3)}
+dialog::backdrop{background:rgba(22,14,17,.55)}
+.jan{padding:24px;display:flex;flex-direction:column;gap:15px;max-height:85vh;overflow-y:auto}
+.jan h3{font-size:25px}
+.jan .fechar{position:absolute;top:14px;right:16px;background:none;border:0;font-size:26px;line-height:1;cursor:pointer;color:var(--suave)}
+.linhas{display:flex;flex-direction:column;gap:9px}
+.linha{display:grid;grid-template-columns:142px 1fr;gap:12px;font-size:14.5px;padding-bottom:9px;border-bottom:1px solid var(--linha)}
+.linha:last-child{border-bottom:0}
+.linha .r{font:600 11px var(--txt);letter-spacing:.1em;text-transform:uppercase;color:var(--suave);padding-top:3px}
+@media (max-width:520px){.linha{grid-template-columns:1fr;gap:3px}}
+.porque{background:var(--pessego);border-radius:14px;padding:15px 17px;display:flex;flex-direction:column;gap:7px}
+.porque .r{font:600 11px var(--txt);letter-spacing:.1em;text-transform:uppercase;color:var(--mag)}
+.carrossel{position:relative;background:#EFEBE6;border-radius:14px;overflow:hidden;aspect-ratio:4/5;display:grid;place-items:center}
+.carrossel img{width:100%;height:100%;object-fit:contain;background:#EFEBE6}
+.carrossel video{width:100%;height:100%;object-fit:contain;background:#000}
+.seta{position:absolute;top:50%;transform:translateY(-50%);background:rgba(251,250,248,.94);border:1px solid var(--linha);border-radius:50%;width:38px;height:38px;cursor:pointer;font-size:17px;line-height:1;display:grid;place-items:center}
+.seta.e{left:10px}.seta.d{right:10px}
+.pontos{display:flex;gap:6px;justify-content:center}
+.pontos i{width:7px;height:7px;border-radius:50%;background:var(--linha)}
+.pontos i.on{background:var(--mag)}
+.decisao{display:flex;gap:10px;flex-wrap:wrap}
+.bt{font:600 14.5px var(--txt);border-radius:12px;padding:13px 19px;cursor:pointer;border:1px solid var(--linha);background:var(--branco);color:var(--graf);min-height:48px}
+.bt.sim{background:var(--mag);border-color:var(--mag);color:#fff}
+.bt.sim:hover{background:#73063A}
+.bt:hover{border-color:#CDBFB6}
+.marcado{font-size:13.5px;color:var(--verde);font-weight:600}
+.marcado.nao{color:#A4122F}
+
+/* gráfico */
+.gr{width:100%;height:auto;display:block}
+.legenda-gr{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--suave)}
+.legenda-gr span{display:flex;align-items:center;gap:6px}
+.legenda-gr i{width:11px;height:11px;border-radius:3px;display:inline-block}
+
+/* barra do celular */
+.abrir-menu{display:none}
+@media (max-width:860px){
+  .app{grid-template-columns:1fr}
+  .menu{position:fixed;inset:0 auto 0 0;width:258px;transform:translateX(-100%);transition:transform .22s;z-index:50;height:100dvh}
+  body.menu-on .menu{transform:none}
+  body.menu-on::after{content:"";position:fixed;inset:0;background:rgba(22,14,17,.5);z-index:40}
+  .abrir-menu{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:30;width:100%;background:var(--noite);color:#fff;
+    border:0;padding:14px 16px;font:600 15px var(--txt);cursor:pointer}
+  .tela{padding:22px 16px 60px}
+}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01s!important}}
+
+/* ===== Meu WhatsApp ao vivo (só aparece com o ajudante ligado) ===== */
+.duas{display:grid;grid-template-columns:320px 1fr;gap:16px;align-items:start;margin-bottom:16px}
+@media (max-width:980px){.duas{grid-template-columns:1fr}}
+.conversas{max-height:520px;overflow:auto;display:flex;flex-direction:column;gap:2px;margin:0 -8px}
+.cv{display:flex;gap:11px;align-items:center;width:100%;text-align:left;background:none;border:0;border-radius:14px;padding:11px 12px;cursor:pointer;font:inherit;color:inherit}
+.cv:hover{background:var(--gelo)}
+.cv[aria-current="true"]{background:var(--pessego)}
+.cv .foto{width:40px;height:40px;border-radius:50%;flex:none;background:var(--linha) center/cover no-repeat;display:grid;place-items:center;font:600 14px var(--txt);color:var(--suave)}
+.cv .tx{min-width:0;flex:1}
+.cv .tx b{display:block;font-weight:600;font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cv .tx span{display:block;font-size:13px;color:var(--suave);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cv .bolha{flex:none;background:var(--mag);color:#fff;font:600 11px var(--txt);border-radius:999px;padding:3px 8px}
+.fala{display:flex;flex-direction:column;gap:9px;max-height:420px;overflow:auto;padding:4px}
+.msg{max-width:76%;padding:10px 14px;border-radius:16px;font-size:14.5px;white-space:pre-wrap;overflow-wrap:anywhere}
+.msg.dela{background:var(--gelo);border:1px solid var(--linha);border-bottom-left-radius:5px}
+.msg.minha{background:var(--noite);color:#F4F2EE;align-self:flex-end;border-bottom-right-radius:5px}
+.msg small{display:block;margin-top:5px;font-size:11px;opacity:.65}
+.resposta-zap{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--linha);padding-top:14px}
+.resposta-zap textarea{width:100%;min-height:84px;resize:vertical;font:400 15px var(--txt);color:var(--graf);background:var(--gelo);border:1px solid var(--linha);border-radius:14px;padding:12px 14px}
+.resposta-zap textarea:focus{outline:2px solid var(--mag);outline-offset:1px}
+.pe{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.aviso{font-size:13.5px;color:var(--areia)}
+.erro{background:#F7E4E8;color:#A4122F;border-radius:14px;padding:13px 16px;font-size:14.5px}
+.nada{color:var(--suave);font-size:14px;padding:18px 4px}
+</style>
+</head>
+<body>
+
+<button class="abrir-menu" id="abrirMenu" type="button">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  Meu Funcionário
+</button>
+
+<div class="app">
+
+  <nav class="menu" id="menu">
+    <div class="marca">
+      <small>DL Estúdio</small>
+      <b>Meu Funcionário</b>
+    </div>
+
+    <div class="grupo">
+      <button data-tela="hoje" class="at">Hoje</button>
+    </div>
+
+    <div class="grupo">
+      <p class="rot">Vendas</p>
+      <button data-tela="leads">Meus leads</button>
+      <button data-tela="resultados" class="sub">Meus resultados</button>
+    </div>
+
+    <div class="grupo">
+      <p class="rot">Presença</p>
+      <button data-tela="redes">Minhas redes</button>
+      <button data-tela="instagram" class="sub">Meu Instagram</button>
+      <button data-tela="planejamento" class="sub">Meu planejamento</button>
+      <button data-tela="conteudos" class="sub">Conteúdos para aprovar</button>
+    </div>
+
+    <div class="grupo">
+      <p class="rot">Rotina</p>
+      <button data-tela="whatsapp">Meu WhatsApp</button>
+      <button data-tela="dia" class="sub">Meu dia</button>
+    </div>
+
+    <div class="grupo">
+      <p class="rot">A minha base</p>
+      <button data-tela="negocio">Meu negócio</button>
+      <button data-tela="marca">Minha marca</button>
+      <button data-tela="cerebro">Meu cérebro</button>
+    </div>
+
+    <p class="quem" id="quem"><b>Sem dono ainda</b>Peça ao Claude para preencher o seu negócio.</p>
+  </nav>
+
+  <main id="main">
+    <section class="tela on" id="t-hoje"></section>
+    <section class="tela" id="t-leads"></section>
+    <section class="tela" id="t-resultados"></section>
+    <section class="tela" id="t-redes"></section>
+    <section class="tela" id="t-instagram"></section>
+    <section class="tela" id="t-planejamento"></section>
+    <section class="tela" id="t-conteudos"></section>
+    <section class="tela" id="t-whatsapp"></section>
+    <section class="tela" id="t-dia"></section>
+    <section class="tela" id="t-negocio"></section>
+    <section class="tela" id="t-marca"></section>
+    <section class="tela" id="t-cerebro"></section>
+  </main>
+</div>
+
+<dialog id="janela"><button class="fechar" type="button" aria-label="Fechar">&times;</button><div class="jan" id="janConteudo"></div></dialog>
+
+<script>window.DADOS = {};</script>
+<script src="dados/negocio.js"></script>
+<script src="dados/marca.js"></script>
+<script src="dados/leads.js"></script>
+<script src="dados/redes.js"></script>
+<script src="dados/instagram.js"></script>
+<script src="dados/planejamento.js"></script>
+<script src="dados/conteudos.js"></script>
+<script src="dados/dia.js"></script>
+<script src="dados/whatsapp.js"></script>
+<script src="dados/cerebro.js"></script>
+<script src="dados/resultados.js"></script>
+<script>
+"use strict";
+const D = window.DADOS;
+
+/* Se algum arquivo da pasta dados não carregar, a tela continua de pé e mostra o estado vazio. */
+D.negocio = D.negocio || {};
+D.marca = D.marca || {};
+D.leads = D.leads || {};
+D.leads.colunas = D.leads.colunas || [
+  {id: "novo", nome: "Chegou agora"}, {id: "conversa", nome: "Conversando"},
+  {id: "proposta", nome: "Proposta enviada"}, {id: "fechado", nome: "Fechou"}, {id: "perdido", nome: "Não foi"}];
+D.leads.fichas = D.leads.fichas || [];
+D.redes = D.redes || {};
+D.redes.disponiveis = D.redes.disponiveis || ["instagram", "facebook", "tiktok", "linkedin", "youtube"];
+D.redes.minhas = D.redes.minhas || [];
+D.instagram = D.instagram || {};
+D.planejamento = D.planejamento || {};
+D.conteudos = D.conteudos || {};
+D.conteudos.itens = D.conteudos.itens || [];
+D.dia = D.dia || {};
+D.cerebro = D.cerebro || {};
+D.resultados = D.resultados || {};
+D.whatsapp = D.whatsapp || {};
+
+/* ===== ajudantes ===== */
+const e = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const vazio = v => !v || (Array.isArray(v) && !v.length) || (typeof v === "string" && !v.trim());
+const tem = v => !vazio(v);
+const reais = n => "R$ " + (Number(n) || 0).toLocaleString("pt-BR", {minimumFractionDigits: 0, maximumFractionDigits: 0});
+const dataBr = s => { if (!s) return ""; const p = String(s).slice(0,10).split("-"); return p.length === 3 ? p[2] + "/" + p[1] : s; };
+const hoje = () => new Date().toISOString().slice(0,10);
+
+function cab(eb, titulo, texto){
+  return '<div class="cab"><p class="eb">' + e(eb) + '</p><h2>' + e(titulo) + '</h2><p>' + e(texto) + '</p></div>';
+}
+function pedido(rotulo, texto){
+  return '<div class="pedido"><div class="pedido-top"><b>' + e(rotulo) + '</b>' +
+    '<button class="copiar" type="button">Copiar o pedido</button></div><pre>' + e(texto) + '</pre></div>';
+}
+function telaVazia(titulo, explicacao, rotulo, texto, arquivo){
+  return '<div class="vazio"><h3>' + e(titulo) + '</h3><p>' + e(explicacao) + '</p>' +
+    pedido(rotulo, texto) +
+    '<p class="onde">Ele grava a resposta em <code>' + e(arquivo) + '</code>. Depois é só recarregar esta página.</p></div>';
+}
+function linha(rotulo, valor){
+  return tem(valor) ? '<div class="linha"><span class="r">' + e(rotulo) + '</span><span>' + e(valor) + '</span></div>' : "";
+}
+function lista(itens){
+  return '<ul>' + itens.map(i => '<li>' + e(i) + '</li>').join("") + '</ul>';
+}
+
+/* gráfico de linha simples */
+function grafLinha(pontos, rotuloY){
+  if (pontos.length < 2) return "";
+  const L = 60, R = 14, T = 16, B = 30, W = 720, H = 240;
+  const vals = pontos.map(p => Number(p.v) || 0);
+  const max = Math.max.apply(null, vals), min = Math.min.apply(null, vals);
+  const alto = max === min ? max + 1 : max, baixo = max === min ? Math.max(0, min - 1) : min;
+  const x = i => L + i * (W - L - R) / (pontos.length - 1);
+  const y = v => T + (alto - v) * (H - T - B) / (alto - baixo || 1);
+  const d = pontos.map((p, i) => (i ? "L" : "M") + x(i).toFixed(1) + " " + y(Number(p.v) || 0).toFixed(1)).join(" ");
+  const area = d + " L" + x(pontos.length - 1).toFixed(1) + " " + (H - B) + " L" + L + " " + (H - B) + " Z";
+  let g = '<svg class="gr" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + e(rotuloY) + '">';
+  [0, .5, 1].forEach(f => {
+    const v = baixo + (alto - baixo) * (1 - f), yy = y(v);
+    g += '<line x1="' + L + '" y1="' + yy.toFixed(1) + '" x2="' + (W - R) + '" y2="' + yy.toFixed(1) + '" stroke="#E2DAD3" stroke-width="1"/>';
+    g += '<text x="' + (L - 10) + '" y="' + (yy + 4).toFixed(1) + '" text-anchor="end" font-family="Poppins,sans-serif" font-size="12" fill="#6B6266">' + Math.round(v).toLocaleString("pt-BR") + '</text>';
+  });
+  g += '<path d="' + area + '" fill="#8B083F" fill-opacity=".08"/>';
+  g += '<path d="' + d + '" fill="none" stroke="#8B083F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>';
+  pontos.forEach((p, i) => { g += '<circle cx="' + x(i).toFixed(1) + '" cy="' + y(Number(p.v) || 0).toFixed(1) + '" r="4" fill="#8B083F"/>'; });
+  const passo = Math.ceil(pontos.length / 6);
+  pontos.forEach((p, i) => {
+    if (i % passo && i !== pontos.length - 1) return;
+    g += '<text x="' + x(i).toFixed(1) + '" y="' + (H - 9) + '" text-anchor="middle" font-family="Poppins,sans-serif" font-size="12" fill="#6B6266">' + e(p.r) + '</text>';
+  });
+  return g + '</svg>';
+}
+
+/* gráfico de barras */
+function grafBarras(itens){
+  if (!itens.length) return "";
+  const L = 70, R = 14, T = 16, B = 34, W = 720, H = 250;
+  const max = Math.max.apply(null, itens.map(i => Number(i.v) || 0)) || 1;
+  const faixa = (W - L - R) / itens.length, larg = Math.min(74, faixa * .58);
+  let g = '<svg class="gr" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Resultados por mês">';
+  [0, .5, 1].forEach(f => {
+    const v = max * (1 - f), yy = T + f * (H - T - B);
+    g += '<line x1="' + L + '" y1="' + yy.toFixed(1) + '" x2="' + (W - R) + '" y2="' + yy.toFixed(1) + '" stroke="#E2DAD3" stroke-width="1"/>';
+    g += '<text x="' + (L - 10) + '" y="' + (yy + 4).toFixed(1) + '" text-anchor="end" font-family="Poppins,sans-serif" font-size="12" fill="#6B6266">' + Math.round(v).toLocaleString("pt-BR") + '</text>';
+  });
+  itens.forEach((it, i) => {
+    const h = (Number(it.v) || 0) / max * (H - T - B);
+    const cx = L + faixa * i + faixa / 2;
+    g += '<rect x="' + (cx - larg / 2).toFixed(1) + '" y="' + (H - B - h).toFixed(1) + '" width="' + larg.toFixed(1) + '" height="' + Math.max(h, 1).toFixed(1) + '" rx="7" fill="' + (it.cor || "#8B083F") + '"/>';
+    g += '<text x="' + cx.toFixed(1) + '" y="' + (H - 13) + '" text-anchor="middle" font-family="Poppins,sans-serif" font-size="12" fill="#6B6266">' + e(it.r) + '</text>';
+  });
+  return g + '</svg>';
+}
+
+/* ===== o que a aluna marcou, guardado no navegador ===== */
+function marcas(){ try { return JSON.parse(localStorage.getItem("mf_decisoes") || "{}"); } catch (x) { return {}; } }
+function marcar(id, valor){ const m = marcas(); m[id] = valor; try { localStorage.setItem("mf_decisoes", JSON.stringify(m)); } catch (x) {} }
+
+/* ===== HOJE ===== */
+function telaHoje(){
+  const leads = (D.leads.fichas || []);
+  const esperando = (D.conteudos.itens || []).filter(c => (marcas()[c.id] || c.status) === "esperando");
+  const tarefas = (D.dia.tarefas || []).filter(t => t.status !== "feita");
+  const emNegociacao = leads.filter(l => l.coluna === "conversa" || l.coluna === "proposta");
+  const fechados = leads.filter(l => l.coluna === "fechado");
+  const feitos = (D.dia.oQueOFuncionarioFez || []).slice(-6).reverse();
+  const zap = D.whatsapp || {};
+  const noZap = zap.ligado ? (zap.esperando || []) : [];
+  const nada = !leads.length && !(D.conteudos.itens || []).length && !(D.dia.tarefas || []).length && !zap.ligado;
+
+  let h = cab("Bom te ver", "Hoje", "O que está esperando por você agora. Esta tela se monta sozinha a partir das outras.");
+
+  if (nada) {
+    h += telaVazia(
+      "O seu funcionário ainda não começou",
+      "Esta tela fica cheia quando as outras forem preenchidas. O primeiro passo é ele conhecer você: sem isso, qualquer coisa que ele escrever é chute.",
+      "O primeiro pedido, cole na aba Code",
+      "Você é o meu funcionário e esta pasta é o nosso sistema. Vamos começar pelo começo: me conhecer.\n\nFaça assim:\n1. Leia o arquivo CLAUDE.md desta pasta antes de qualquer coisa.\n2. Me faça UMA pergunta por vez, curta, em português simples, e espere a minha resposta antes da próxima. Comece por: o que eu faço, para quem, o que eu vendo e quanto custa, como a venda acontece hoje, e o que eu nunca faço.\n3. A cada resposta minha, escreva você o texto no meu lugar, com as minhas palavras, e me mostre para eu dizer sim ou corrigir.\n4. Quando terminarmos, grave tudo em dados/negocio.js, respeitando os campos que já estão lá, e me avise para eu recarregar a tela.\n\nNão me deixe nada para preencher sozinha. Se faltar informação, pergunte, não invente. Nunca escreva senha, chave ou token em nenhum arquivo.",
+      "dados/negocio.js");
+    return h;
+  }
+
+  h += '<div class="numeros">' +
+    (zap.ligado ? '<div class="num destaque"><span class="v">' + noZap.length + '</span><span class="r">no seu WhatsApp</span></div>' : "") +
+    '<div class="num' + (zap.ligado ? "" : " destaque") + '"><span class="v">' + esperando.length + '</span><span class="r">esperando o seu sim</span></div>' +
+    '<div class="num"><span class="v">' + emNegociacao.length + '</span><span class="r">leads em conversa</span></div>' +
+    '<div class="num"><span class="v">' + tarefas.length + '</span><span class="r">tarefas abertas</span></div>' +
+    '<div class="num"><span class="v">' + reais(fechados.reduce((s, l) => s + (Number(l.valor) || 0), 0)) + '</span><span class="r">já fechado</span></div>' +
+    '</div>';
+
+  if (zap.ligado && noZap.length) {
+    const ordem = {alta: 0, media: 1, baixa: 2};
+    h += '<div class="cartao"><div class="tags"><span class="tag ok">WhatsApp ligado</span>' +
+      (tem(zap.olhadoEm) ? '<span class="tag" style="background:#EFEBE6;color:#6B6266">olhado em ' + e(zap.olhadoEm) + '</span>' : "") + '</div>' +
+      '<h3>No seu WhatsApp, agora</h3><div class="linhas">' +
+      noZap.slice().sort((a, b) => (ordem[a.urgencia] || 1) - (ordem[b.urgencia] || 1)).slice(0, 5)
+        .map(x => '<div class="linha"><span class="r">' + e(x.quem) + '</span><span><b>' + e(x.oQuePediu) + '</b>' +
+          (tem(x.esperaOQue) ? '<br><span class="onde">espera: ' + e(x.esperaOQue) + '</span>' : "") + '</span></div>').join("") +
+      '</div>' + (noZap.length > 5 ? '<p class="onde">E mais ' + (noZap.length - 5) + '. A lista inteira está em Meu WhatsApp.</p>' : "") + '</div>';
+  }
+
+  h += '<div class="grade g2">';
+
+  h += '<div class="cartao"><h3>Esperando você responder</h3>';
+  const atrasados = leads.filter(l => l.quando && l.quando <= hoje() && l.coluna !== "fechado" && l.coluna !== "perdido");
+  if (atrasados.length) {
+    h += '<ul>' + atrasados.map(l => '<li><b>' + e(l.nome) + '</b>: ' + e(l.proximoPasso || "sem próximo passo escrito") + '</li>').join("") + '</ul>';
+  } else {
+    h += '<p class="onde">Nenhum lead com prazo vencido. Quando algum passar da data, ele aparece aqui.</p>';
+  }
+  h += '</div>';
+
+  h += '<div class="cartao"><h3>O que o seu funcionário fez</h3>';
+  if (feitos.length) {
+    h += '<ul>' + feitos.map(f => '<li>' + e(dataBr(f.quando)) + ': ' + e(f.oQue) + '</li>').join("") + '</ul>';
+  } else {
+    h += '<p class="onde">Nada registrado ainda. Peça ao Claude para anotar aqui tudo o que ele fizer por você, e esta lista vira a prova de que ele está trabalhando.</p>';
+  }
+  h += '</div></div>';
+
+  if (tem(D.planejamento.esperandoVoce)) {
+    h += '<div class="cartao"><h3>Travado até você decidir</h3><ul>' +
+      D.planejamento.esperandoVoce.map(x => '<li><b>' + e(x.oQue) + '</b>: ' + e(x.decisaoQueFalta) + '</li>').join("") + '</ul></div>';
+  }
+  return h;
+}
+
+/* ===== LEADS ===== */
+function telaLeads(){
+  const fichas = D.leads.fichas || [];
+  let h = cab("Vendas", "Meus leads", "Cada pessoa que demonstrou interesse, e em que pé está. Clique numa ficha para ver tudo.");
+  h += '<div id="zapLeads"></div>';
+
+  if (!fichas.length) {
+    return h + telaVazia(
+      "Nenhum lead cadastrado",
+      "Você pode cadastrar conversando, e isso já vale a pena hoje. Quando o WhatsApp e o Instagram estiverem ligados, nas semanas 2 e 3, ele traz as pessoas novas sozinho.",
+      "Cadastrar um lead conversando",
+      "Vamos cadastrar os meus leads no sistema. Conduza você e não me deixe nada para preencher.\n\n1. Me faça UMA pergunta por vez e espere a resposta: quem é a pessoa, por onde ela falou comigo, o que ela quer, quanto vale essa venda e em que pé está a conversa.\n2. Pergunte também qual é o PRÓXIMO PASSO que depende de mim, e para quando.\n3. Escreva você a ficha e me mostre antes de gravar.\n4. Grave em dados/leads.js, no formato que já está lá, e me pergunte se eu quero cadastrar mais um.\n5. No fim, me diga quem eu devo responder primeiro e por quê.\n\nSe faltar informação, pergunte, não invente.",
+      "dados/leads.js");
+  }
+
+  h += '<div class="quadro">';
+  (D.leads.colunas || []).forEach(col => {
+    const dela = fichas.filter(f => f.coluna === col.id);
+    h += '<div class="coluna"><div class="ct"><span>' + e(col.nome) + '</span><i>' + dela.length + '</i></div>';
+    dela.forEach(f => {
+      h += '<button class="ficha" data-lead="' + e(f.id) + '"><b>' + e(f.nome) + '</b>' +
+        (tem(f.interesse) ? '<small>' + e(f.interesse) + '</small>' : "") +
+        (Number(f.valor) ? '<span class="val">' + reais(f.valor) + '</span>' : "") +
+        (tem(f.quando) ? '<small>próximo passo: ' + e(dataBr(f.quando)) + '</small>' : "") + '</button>';
+    });
+    h += '</div>';
+  });
+  h += '</div>';
+  h += '<div class="cartao" style="margin-top:18px"><h3>Mover uma ficha de coluna</h3>' +
+    '<p class="onde">Quem move é o seu funcionário, para o arquivo e a tela não se perderem um do outro.</p>' +
+    pedido("Pedido", "Move o lead [diga o nome] para a coluna [diga qual] em dados/leads.js, atualiza a data do último contato para hoje e escreve qual é o meu próximo passo com essa pessoa.") + '</div>';
+  return h;
+}
+
+/* ===== RESULTADOS ===== */
+function telaResultados(){
+  const fichas = D.leads.fichas || [];
+  const R = D.resultados;
+  const soma = id => fichas.filter(f => f.coluna === id).reduce((s, f) => s + (Number(f.valor) || 0), 0);
+  const conta = id => fichas.filter(f => f.coluna === id).length;
+  const fechado = soma("fechado"), negociando = soma("conversa") + soma("proposta"), perdido = soma("perdido");
+  const recorrente = (R.recorrente || []).reduce((s, r) => s + (Number(r.valor) || 0), 0);
+  const nada = !fichas.length && !(R.meses || []).length && !(R.recorrente || []).length;
+
+  let h = cab("Vendas", "Meus resultados", "O dinheiro, lido a partir dos seus leads. Você não digita nada aqui duas vezes.");
+
+  if (nada) {
+    return h + telaVazia(
+      "Ainda não tem número para somar",
+      "Esta tela soma sozinha o que está nos seus leads. Cadastre os leads primeiro, e o que entra todo mês por contrato.",
+      "Montar os meus resultados",
+      "Vamos preencher os meus resultados. Conduza você.\n\n1. Primeiro, olhe o que já está em dados/leads.js e me diga o que dá para calcular sem me perguntar nada.\n2. Depois me faça UMA pergunta por vez: quanto eu quero faturar por mês, o que eu já recebo todo mês por contrato, de quem, e quando cada contrato vence.\n3. Se eu tiver meses anteriores para registrar, pergunte um mês por vez.\n4. Grave em dados/resultados.js e me mostre, em três frases, o que os meus números estão dizendo. Seja honesto, não me elogie à toa.\n\nNão invente número nenhum. O que eu não disser, deixe vazio.",
+      "dados/resultados.js");
+  }
+
+  h += '<div class="numeros">' +
+    '<div class="num destaque"><span class="v">' + reais(fechado) + '</span><span class="r">fechado</span></div>' +
+    '<div class="num"><span class="v">' + reais(negociando) + '</span><span class="r">em negociação</span></div>' +
+    '<div class="num"><span class="v">' + reais(recorrente) + '</span><span class="r">todo mês, por contrato</span></div>' +
+    '<div class="num"><span class="v">' + reais(perdido) + '</span><span class="r">perdido</span></div>' +
+    '</div>';
+
+  const barras = [
+    {r: "Fechado", v: fechado, cor: "#1E8E3E"},
+    {r: "Negociando", v: negociando, cor: "#8B083F"},
+    {r: "Perdido", v: perdido, cor: "#C3B6BB"}
+  ].filter(b => b.v > 0);
+  if (barras.length) {
+    h += '<div class="cartao"><h3>Onde o seu dinheiro está</h3>' + grafBarras(barras) +
+      '<p class="onde">' + conta("fechado") + ' fechados, ' + (conta("conversa") + conta("proposta")) + ' em conversa, ' + conta("perdido") + ' perdidos.</p></div>';
+  }
+
+  if (tem(R.meses)) {
+    h += '<div class="cartao"><h3>Mês a mês</h3>' +
+      grafBarras(R.meses.map(m => ({r: String(m.mes).slice(5) + "/" + String(m.mes).slice(2,4), v: Number(m.faturado) || 0}))) + '</div>';
+  }
+
+  if (Number(R.metaMensal) > 0) {
+    const falta = Math.max(0, Number(R.metaMensal) - fechado - recorrente);
+    h += '<div class="cartao"><h3>A sua meta do mês</h3>' +
+      '<p>Meta de <b>' + reais(R.metaMensal) + '</b>. Falta <b>' + reais(falta) + '</b>.</p>' +
+      (negociando > 0 ? '<p class="onde">Você tem ' + reais(negociando) + ' em negociação. Se fechar tudo, bate a meta' + (negociando >= falta ? "." : " pela metade.") + '</p>' : "") + '</div>';
+  }
+
+  if (tem(R.recorrente)) {
+    h += '<div class="cartao"><h3>O que entra todo mês</h3><div class="linhas">' +
+      R.recorrente.map(r => '<div class="linha"><span class="r">' + e(r.cliente) + '</span><span>' + reais(r.valor) +
+        (tem(r.venceEm) ? " · vence em " + e(dataBr(r.venceEm)) : "") + (tem(r.oQueEntrego) ? "<br>" + e(r.oQueEntrego) : "") + '</span></div>').join("") +
+      '</div></div>';
+  }
+
+  if (tem(R.leitura && R.leitura.emUmaFrase)) {
+    h += '<div class="cartao"><h3>O que o Claude leu nos seus números</h3><p>' + e(R.leitura.emUmaFrase) + '</p>' +
+      (tem(R.leitura.oQueMudar) ? lista(R.leitura.oQueMudar) : "") + '</div>';
+  }
+  return h;
+}
+
+/* ===== REDES ===== */
+function telaRedes(){
+  const nomes = {instagram: "Instagram", facebook: "Facebook", tiktok: "TikTok", linkedin: "LinkedIn", youtube: "YouTube"};
+  const minhas = D.redes.minhas || [];
+  let h = cab("Presença", "Minhas redes", "As redes que você usa de verdade, como elas estão hoje.");
+
+  if (!minhas.length) {
+    h += telaVazia(
+      "Nenhuma rede cadastrada",
+      "Cadastre só as que você usa. As outras aparecem apagadas aqui embaixo, para você ligar quando quiser.",
+      "Cadastrar as minhas redes",
+      "Vamos cadastrar as minhas redes sociais. Conduza você e escreva tudo no meu lugar.\n\n1. Me pergunte, uma por vez, quais destas eu uso de verdade: Instagram, Facebook, TikTok, LinkedIn, YouTube. Não pergunte pelas que eu já disser que não uso.\n2. Para cada rede que eu usar, me pergunte: qual é o meu @, quantos seguidores eu tenho hoje, e peça para eu colar a minha bio exatamente como ela está.\n3. Me pergunte qual é a rede mais importante para o meu negócio e marque ela como principal.\n4. Grave em dados/redes.js e me diga, em duas frases, se faz sentido eu estar em todas essas ou se eu deveria largar alguma.\n\nSe eu não souber um número, deixe zero em vez de inventar.",
+      "dados/redes.js");
+  } else {
+    h += '<div class="grade g2">';
+    minhas.forEach(r => {
+      h += '<div class="cartao"><div class="tags"><span class="tag esc">' + e(nomes[r.rede] || r.rede) + '</span>' +
+        (r.principal ? '<span class="tag">principal</span>' : "") + '</div>' +
+        '<div class="perfil" style="gap:16px;grid-template-columns:auto 1fr">' +
+        '<div class="bolinha" style="width:70px;height:70px">' + (tem(r.foto) ? '<img src="' + e(r.foto) + '" alt="">' : '<span>sem foto</span>') + '</div>' +
+        '<div class="dir"><b style="font-size:17px">@' + e(r.usuario) + '</b>' +
+        (Number(r.seguidores) ? '<span>' + Number(r.seguidores).toLocaleString("pt-BR") + ' seguidores</span>' : "") + '</div></div>' +
+        (tem(r.bio) ? '<p class="bio">' + e(r.bio) + '</p>' : '<p class="onde">Sem bio cadastrada.</p>') +
+        (tem(r.link) ? '<p><a href="' + e(r.link) + '" target="_blank" rel="noopener">' + e(r.link) + '</a></p>' : "") +
+        '</div>';
+    });
+    h += '</div>';
+  }
+
+  const faltam = (D.redes.disponiveis || []).filter(x => !minhas.some(m => m.rede === x));
+  if (faltam.length) {
+    h += '<div class="cartao"><h3>Redes que você ainda não ligou</h3><div class="tags">' +
+      faltam.map(f => '<span class="tag" style="background:#EFEBE6;color:#6B6266">' + e(nomes[f] || f) + '</span>').join("") + '</div>' +
+      '<p class="onde">Ligar uma rede não é obrigação. Só ligue a que você vai alimentar.</p></div>';
+  }
+  return h;
+}
+
+/* ===== INSTAGRAM ===== */
+function telaInstagram(){
+  const I = D.instagram, p = I.perfil || {};
+  let h = cab("Presença", "Meu Instagram", "O seu perfil como ele está hoje, e o que o Claude viu nele.");
+
+  if (vazio(p.usuario)) {
+    return h + telaVazia(
+      "O seu perfil ainda está em branco",
+      "Hoje você preenche contando, e já dá para o Claude diagnosticar. Na semana 2, com o conector ligado, ele puxa foto, bio, destaques e posts sozinho.",
+      "Preencher o meu perfil",
+      "Vamos preencher o meu Instagram no sistema. Conduza você, do começo ao fim.\n\n1. Me peça o meu @ e espere.\n2. Me peça para colar a minha bio exatamente como ela está, com as quebras de linha, e o link que está nela.\n3. Me pergunte, um número por vez: seguidores, seguindo e publicações.\n4. Me pergunte os nomes dos meus destaques, na ordem em que aparecem.\n5. Grave tudo em dados/instagram.js.\n6. Depois, com o que você já sabe do meu negócio, escreva o diagnóstico: o que está bom, o que está atrapalhando, e no máximo TRÊS coisas para fazer agora, na ordem. Grave no campo diagnostico.\n\nSeja honesto no diagnóstico. Se a minha bio não diz o que eu faço, diga isso com todas as letras.",
+      "dados/instagram.js");
+  }
+
+  if (tem(I.crescimento) && I.crescimento.length > 1) {
+    const pontos = I.crescimento.map(c => ({r: dataBr(c.data), v: Number(c.seguidores) || 0}));
+    const ini = pontos[0].v, fim = pontos[pontos.length - 1].v, dif = fim - ini;
+    h += '<div class="cartao"><h3>Como você cresceu</h3>' + grafLinha(pontos, "Seguidores ao longo do tempo") +
+      '<p class="onde">' + (dif >= 0 ? "Mais " : "Menos ") + Math.abs(dif).toLocaleString("pt-BR") +
+      ' seguidores desde ' + pontos[0].r + '.</p></div>';
+  } else {
+    h += '<div class="cartao"><h3>Como você cresceu</h3>' +
+      '<p class="onde">O gráfico precisa de pelo menos duas medições. Peça ao Claude para anotar os seus seguidores hoje, e de novo toda semana.</p>' +
+      pedido("Pedido", "Anota em dados/instagram.js, no campo crescimento, quantos seguidores eu tenho hoje. Toda vez que eu pedir, acrescente um ponto novo em vez de trocar o que já está lá.") + '</div>';
+  }
+
+  if (tem(I.diagnostico && I.diagnostico.emUmaFrase)) {
+    const g = I.diagnostico;
+    h += '<div class="cartao"><div class="tags"><span class="tag">Diagnóstico do Claude</span>' +
+      (tem(g.atualizadoEm) ? '<span class="tag" style="background:#EFEBE6;color:#6B6266">' + e(dataBr(g.atualizadoEm)) + '</span>' : "") + '</div>' +
+      '<h3>' + e(g.emUmaFrase) + '</h3>' +
+      (tem(g.oQueFazerAgora) ? '<div class="porque"><span class="r">Faça nesta ordem</span>' + lista(g.oQueFazerAgora) + '</div>' : "") +
+      '<div class="grade g2" style="margin:0">' +
+      (tem(g.oQueEstaBom) ? '<div><b>O que está bom</b>' + lista(g.oQueEstaBom) + '</div>' : "") +
+      (tem(g.oQueEstaAtrapalhando) ? '<div><b>O que está atrapalhando</b>' + lista(g.oQueEstaAtrapalhando) + '</div>' : "") +
+      '</div></div>';
+  }
+
+  h += '<div class="cartao"><h3>Meu perfil hoje</h3><div class="perfil">' +
+    '<div class="bolinha">' + (tem(p.foto) ? '<img src="' + e(p.foto) + '" alt="Foto do perfil">' : '<span>sem foto<br>cadastrada</span>') + '</div>' +
+    '<div class="dir"><span class="user">@' + e(p.usuario) + '</span>' +
+    '<div class="contagem">' +
+      '<span><b>' + (Number(p.publicacoes) || 0).toLocaleString("pt-BR") + '</b> publicações</span>' +
+      '<span><b>' + (Number(p.seguidores) || 0).toLocaleString("pt-BR") + '</b> seguidores</span>' +
+      '<span><b>' + (Number(p.seguindo) || 0).toLocaleString("pt-BR") + '</b> seguindo</span>' +
+    '</div>' +
+    (tem(p.nome) ? '<b>' + e(p.nome) + '</b>' : "") +
+    (tem(p.bio) ? '<p class="bio">' + e(p.bio) + '</p>' : '<p class="onde">Sem bio cadastrada.</p>') +
+    (tem(p.link) ? '<p><a href="' + e(p.link) + '" target="_blank" rel="noopener">' + e(p.link) + '</a></p>' : "") +
+    '</div></div>';
+
+  if (tem(I.destaques)) {
+    h += '<div class="destaques">' + I.destaques.map(d =>
+      '<div class="destaque"><div class="circ">' + (tem(d.capa) ? '<img src="' + e(d.capa) + '" alt="">' : "") + '</div><small>' + e(d.nome) + '</small></div>').join("") + '</div>';
+  }
+  h += '</div>';
+
+  h += '<div class="cartao"><h3>A minha grade</h3>';
+  const grade = I.grade || [];
+  if (grade.length) {
+    h += '<div class="gradeig">' + grade.map((g, i) =>
+      '<div class="q" data-post="' + i + '">' + (tem(g.capa) ? '<img src="' + e(g.capa) + '" alt="">' : '<span class="vz">sem imagem</span>') +
+      (g.tipo && g.tipo !== "foto" ? '<span class="et">' + e(g.tipo) + '</span>' : "") + '</div>').join("") + '</div>';
+  } else {
+    h += '<div class="gradeig">' + Array.from({length: 9}).map(() => '<div class="q"><span class="vz">vazio</span></div>').join("") + '</div>' +
+      '<p class="onde">A grade mostra os seus últimos posts, de três em três, do jeito que quem entra no seu perfil vê.</p>' +
+      pedido("Pedido", "Me pergunte, um por vez, quais foram os meus últimos 9 posts: o tipo (foto, carrossel ou reel), a data e as primeiras palavras da legenda. Grave em dados/instagram.js, no campo grade, do mais novo para o mais antigo. Depois me diga se a minha grade conta uma história ou se está solta.");
+  }
+  h += '</div>';
+  return h;
+}
+
+/* ===== PLANEJAMENTO ===== */
+function telaPlanejamento(){
+  const P = D.planejamento, m = P.meta || {};
+  let h = cab("Presença", "Meu planejamento", "A sua meta, e o caminho que o Claude montou até ela.");
+
+  if (vazio(m.oQue)) {
+    return h + telaVazia(
+      "Sem meta, não tem plano",
+      "Esta é a tela que transforma vontade em ação com data. O Claude só consegue montar o caminho depois que você disser aonde quer chegar.",
+      "Montar o meu planejamento",
+      "Vamos montar o meu planejamento. Leia antes o meu negócio em dados/negocio.js e o meu Instagram em dados/instagram.js. Conduza você.\n\n1. Me faça UMA pergunta por vez: o que eu quero alcançar, qual número diz que eu cheguei lá, até quando, e o que muda na minha vida quando acontecer.\n2. Com isso, escreva você a estratégia, em texto corrido e simples, sem palavra de marketing que eu não uso.\n3. Monte a lista de ações, e em cada uma diga claramente quem faz: você, eu, ou nós duas. Ponha prazo em todas.\n4. Diga quantos posts por semana de cada tipo, e por que esse tipo serve para a minha meta.\n5. Separe o que trava enquanto eu não decidir, e grave no campo esperandoVoce.\n6. Grave tudo em dados/planejamento.js.\n\nSeja realista com o meu tempo. Me pergunte quantas horas por semana eu tenho antes de montar a lista.",
+      "dados/planejamento.js");
+  }
+
+  h += '<div class="cartao"><div class="tags"><span class="tag">A minha meta</span>' +
+    (tem(m.ate) ? '<span class="tag esc">até ' + e(dataBr(m.ate)) + '</span>' : "") + '</div>' +
+    '<h3>' + e(m.oQue) + '</h3>' +
+    (tem(m.numero) ? '<p><b>O número que diz que cheguei lá:</b> ' + e(m.numero) + '</p>' : "") +
+    (tem(m.porQue) ? '<div class="porque"><span class="r">Por que isso importa</span><p>' + e(m.porQue) + '</p></div>' : "") + '</div>';
+
+  if (tem(P.estrategia)) h += '<div class="cartao"><h3>A estratégia</h3><p>' + e(P.estrategia) + '</p></div>';
+
+  if (tem(P.acoes)) {
+    const dele = P.acoes.filter(a => a.quemFaz === "claude"), meu = P.acoes.filter(a => a.quemFaz === "voce"), juntas = P.acoes.filter(a => a.quemFaz === "juntas");
+    const bloco = (titulo, arr) => arr.length ? '<div class="cartao"><h3>' + titulo + '</h3><div class="linhas">' +
+      arr.map(a => '<div class="linha"><span class="r">' + e(a.status || "aberta") + (tem(a.prazo) ? "<br>" + e(dataBr(a.prazo)) : "") + '</span><span><b>' + e(a.acao) + '</b>' +
+      (tem(a.porQue) ? '<br><span class="onde">' + e(a.porQue) + '</span>' : "") + '</span></div>').join("") + '</div></div>' : "";
+    h += '<div class="grade g2">' + bloco("O funcionário faz", dele) + bloco("Só você pode fazer", meu) + '</div>' + bloco("Vocês duas", juntas);
+  }
+
+  if (tem(P.tiposDePost)) {
+    h += '<div class="cartao"><h3>Os tipos de post, e para que serve cada um</h3><div class="linhas">' +
+      P.tiposDePost.map(t => '<div class="linha"><span class="r">' + e(t.tipo) + (Number(t.quantosPorSemana) ? "<br>" + t.quantosPorSemana + "x por semana" : "") + '</span><span>' + e(t.paraQue) + '</span></div>').join("") +
+      '</div></div>';
+  }
+
+  if (tem(P.iscas)) {
+    h += '<div class="cartao"><h3>As minhas iscas</h3><div class="linhas">' +
+      P.iscas.map(i => '<div class="linha"><span class="r">' + e(i.isca) + '</span><span>' + e(i.oQuePromete) + (tem(i.paraQuem) ? '<br><span class="onde">para ' + e(i.paraQuem) + '</span>' : "") + '</span></div>').join("") +
+      '</div></div>';
+  }
+  return h;
+}
+
+/* ===== CONTEÚDOS ===== */
+function telaConteudos(){
+  const itens = D.conteudos.itens || [];
+  const m = marcas();
+  let h = cab("Presença", "Conteúdos para aprovar", "O que o seu funcionário preparou. Clique para ler a legenda e decidir.");
+
+  if (!itens.length) {
+    return h + telaVazia(
+      "Nada esperando a sua aprovação",
+      "Regra desta casa: todo conteúdo chega com o motivo de existir escrito. Se o Claude não souber dizer o que aquilo faz pela sua meta, ele não põe na grade.",
+      "Pedir a primeira leva de conteúdos",
+      "Escreva os conteúdos da próxima semana para eu aprovar. Antes de começar, leia dados/negocio.js, dados/marca.js e dados/planejamento.js, e use o meu tom de voz, não o seu.\n\nPara cada conteúdo, escreva:\n1. Um título curto, para eu reconhecer na grade.\n2. O tipo: só texto, estático, carrossel ou reel.\n3. A data em que ele vai ao ar.\n4. A legenda inteira, pronta para publicar.\n5. Por que esse conteúdo é estratégico, ligando com a minha meta.\n6. O que eu quero que a pessoa faça depois de ver.\n7. Para qual parte do meu público ele é.\n\nGrave em dados/conteudos.js com status esperando. Comece me perguntando quantos conteúdos eu quero por semana e se tem alguma data ou assunto que não pode faltar. Uma pergunta por vez.",
+      "dados/conteudos.js");
+  }
+
+  const estado = c => m[c.id] || c.status || "esperando";
+  const rotulos = {esperando: ["esp", "Esperando"], aprovado: ["ok", "Quero usar"], recusado: ["nao", "Não gostei"], publicado: ["esc", "Publicado"]};
+
+  h += '<div class="conteudos">' + itens.map(c => {
+    const st = estado(c), r = rotulos[st] || rotulos.esperando;
+    const capa = (c.arquivos && c.arquivos[0]) || "";
+    let previa;
+    if (c.tipo === "reel" && tem(c.video)) previa = '<video src="' + e(c.video) + '" muted preload="metadata"></video>';
+    else if (tem(capa)) previa = '<img src="' + e(capa) + '" alt="">';
+    else previa = '<span class="so-texto">' + e(String(c.legenda || "").slice(0, 190)) + '</span>';
+    return '<button class="ct-item" data-conteudo="' + e(c.id) + '"><div class="ct-previa">' + previa + '</div>' +
+      '<div class="ct-pe"><b>' + e(c.titulo) + '</b><div class="meta"><span>' + e(dataBr(c.data)) + '</span>' +
+      '<span class="tag ' + r[0] + '">' + r[1] + '</span></div></div></button>';
+  }).join("") + '</div>';
+
+  h += '<div class="cartao" style="margin-top:18px"><h3>Depois de decidir</h3>' +
+    '<p class="onde">O que você marcar fica guardado neste navegador. Para o seu funcionário saber, peça para ele gravar.</p>' +
+    pedido("Pedido", "Eu marquei os conteúdos na tela. Me pergunte, um por vez, o que eu decidi em cada um que ainda está como esperando, e grave o status em dados/conteudos.js. Quando eu disser que não gostei de algum, pergunte o motivo, anote no campo oQueEuAchei, e reescreva aquele conteúdo levando o meu motivo em conta.") + '</div>';
+  return h;
+}
+
+/* ===== WHATSAPP =====
+   A tela tem duas partes:
+   1. o quadro ao vivo, que vem do seu WhatsApp agora, pelas suas etiquetas;
+   2. o resumo que o seu funcionário guardou em dados/whatsapp.js. */
+function telaWhatsapp(){
+  const W = D.whatsapp;
+  let h = cab("Rotina", "Meu WhatsApp", "As suas conversas de verdade, organizadas pelas etiquetas que você já usa. A tela se atualiza sozinha.");
+  h += '<div id="zapVivo"></div>';
+
+  if (tem(W.esperando)) {
+    const ordem = {alta: 0, media: 1, baixa: 2};
+    const lista = W.esperando.slice().sort((a, b) => (ordem[a.urgencia] || 1) - (ordem[b.urgencia] || 1));
+    h += '<div class="cartao"><h3>O que o seu funcionário anotou</h3>' +
+      '<p class="onde">Isto é o resumo que ele guardou da última vez que olhou' + (tem(W.olhadoEm) ? ", em " + e(W.olhadoEm) : "") + '.</p>' +
+      '<div class="linhas">' +
+      lista.map(x => '<div class="linha"><span class="r">' + e(x.quem) + (tem(x.quando) ? "<br>" + e(dataBr(x.quando)) : "") + '</span><span><b>' + e(x.oQuePediu) + '</b>' +
+        (tem(x.esperaOQue) ? '<br><span class="onde">espera: ' + e(x.esperaOQue) + '</span>' : "") + '</span></div>').join("") +
+      '</div>' +
+      pedido("Responder todo mundo de uma vez", "Escreva a resposta de cada pessoa que está esperando em dados/whatsapp.js, no meu tom, usando o meu negócio em dados/negocio.js. Me mostre todas antes de mandar qualquer coisa e espere eu dizer quais podem ir. Nunca envie sem o meu ok.") +
+      '</div>';
+  }
+
+  if (tem(W.prometido)) {
+    h += '<div class="cartao"><h3>O que você prometeu</h3><div class="linhas">' +
+      W.prometido.map(x => '<div class="linha"><span class="r">' + e(x.paraQuem) + (tem(x.ate) ? "<br>até " + e(dataBr(x.ate)) : "") + '</span><span>' + e(x.oQuePrometi) + '</span></div>').join("") +
+      '</div></div>';
+  }
+
+  h += '<div class="cartao"><h3>As rotinas dele</h3>';
+  if (tem(W.rotinas)) {
+    h += '<div class="linhas">' + W.rotinas.map(r => '<div class="linha"><span class="r">' + (r.ligada === false ? "desligada" : "ligada") + '</span><span><b>' + e(r.rotina) + '</b>' +
+      (tem(r.quando) ? '<br><span class="onde">' + e(r.quando) + '</span>' : "") + '</span></div>').join("") + '</div>';
+  } else {
+    h += '<p class="onde">O quadro acima se atualiza sozinho. As rotinas são outra coisa: são as tarefas que ele faz no horário combinado, mesmo com a tela fechada. São quatro, e cada uma você testa antes de programar: o bom dia, o plantão, o fechamento do dia e a arrumação da semana. Os pedidos prontos estão na Biblioteca.</p>';
+  }
+  h += '</div>';
+  return h;
+}
+
+/* ===== WHATSAPP AO VIVO =====
+   Esta parte conversa com o ajudante (meu-whatsapp.py) que roda na sua máquina.
+   É ele quem guarda a sua chave e fala com o WhatsApp. A chave nunca chega até aqui.
+   Sem o ajudante ligado, o painel continua funcionando igual, só sem as conversas. */
+
+const ZAP = {ligado: false, final: "", colunas: [], conversas: [], tipo: "pessoas", aberta: null, enviando: false, relogio: null};
+const ZAP_NOVAS = "__novas__";
+
+const zapHora = ms => !ms ? "" : new Date(Number(ms)).toLocaleString("pt-BR", {day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit"});
+const zapInicial = n => (n || "?").trim().charAt(0).toUpperCase();
+
+async function zapPedir(caminho, corpo){
+  const r = await fetch(caminho, corpo ? {
+    method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(corpo)
+  } : undefined);
+  return r.json();
+}
+
+/* em que coluna esta conversa está: a primeira etiqueta dela que virou coluna */
+function zapColunaDe(c){
+  const et = c.etiquetas || [];
+  const achou = ZAP.colunas.find(col => et.indexOf(col.id) >= 0);
+  return achou ? achou.id : ZAP_NOVAS;
+}
+
+function zapQuadro(){
+  const colunas = [{id: ZAP_NOVAS, nome: "Novas conversas"}].concat(ZAP.colunas);
+  return '<div class="quadro">' + colunas.map(col => {
+    const dela = ZAP.conversas.filter(c => zapColunaDe(c) === col.id);
+    return '<div class="coluna"><div class="ct"><span>' + e(col.nome) + '</span><i>' + dela.length + '</i></div>' +
+      (dela.length ? dela.map(c =>
+        '<button class="ficha" data-zap="' + e(c.id) + '">' +
+          '<b>' + e(c.nome) + '</b>' +
+          '<small>' + e((c.ultimaMensagem || "sem texto").slice(0, 70)) + '</small>' +
+          (c.naoLidas ? '<span class="val">' + c.naoLidas + (c.naoLidas > 1 ? " não lidas" : " não lida") + '</span>' : "") +
+          (c.quando ? '<small>' + e(zapHora(c.quando)) + '</small>' : "") +
+        '</button>').join("") : '<p class="nada">vazia</p>') +
+      '</div>';
+  }).join("") + '</div>';
+}
+
+function zapPintar(){
+  const alvo = document.getElementById("zapVivo");
+  if (!alvo) return;
+  const esperando = ZAP.conversas.filter(c => c.naoLidas > 0).length;
+  const naoLidas = ZAP.conversas.reduce((s, c) => s + c.naoLidas, 0);
+
+  alvo.innerHTML =
+    '<div class="cartao"><div class="tags"><span class="tag ok">ao vivo</span>' +
+      (ZAP.final ? '<span class="tag esc">número final ' + e(ZAP.final) + '</span>' : "") +
+      '<span class="tag" id="zapPessoas" role="button" tabindex="0">só pessoas</span>' +
+      '<span class="tag esc" id="zapTodas" role="button" tabindex="0">com grupos</span></div>' +
+      '<p class="onde">O quadro se atualiza sozinho a cada 30 segundos. As colunas são as etiquetas do seu WhatsApp: ' +
+      'quando você move uma conversa aqui, a etiqueta muda lá também. A sua chave fica no whatsapp.json, na sua máquina.</p></div>' +
+    '<div class="numeros">' +
+      '<div class="num destaque"><span class="v">' + esperando + '</span><span class="r">conversas esperando</span></div>' +
+      '<div class="num"><span class="v">' + naoLidas + '</span><span class="r">mensagens não lidas</span></div>' +
+      '<div class="num"><span class="v">' + ZAP.conversas.length + '</span><span class="r">conversas recentes</span></div>' +
+    '</div>' +
+    zapQuadro() +
+    (ZAP.colunas.length ? "" :
+      '<div class="cartao" style="margin-top:16px"><h3>Você ainda não tem etiquetas no WhatsApp</h3>' +
+      '<p>As colunas deste quadro são as etiquetas do seu WhatsApp Business. Crie as suas lá (por exemplo Lead, Reunião marcada, Cliente), ' +
+      'coloque em algumas conversas, e elas viram colunas aqui sozinhas.</p>' +
+      '<p class="onde">No celular: WhatsApp Business › Conversas › segure a conversa › Etiquetar.</p></div>');
+
+  zapPintarFiltro();
+}
+
+function zapPintarFiltro(){
+  const a = document.getElementById("zapPessoas"), b = document.getElementById("zapTodas");
+  if (!a || !b) return;
+  a.className = ZAP.tipo === "pessoas" ? "tag" : "tag esc";
+  b.className = ZAP.tipo === "todas" ? "tag" : "tag esc";
+}
+
+function zapSemAjudante(){
+  const alvo = document.getElementById("zapVivo");
+  if (alvo) alvo.innerHTML = '<div class="cartao"><h3>Ligue o seu WhatsApp nesta tela</h3>' +
+    '<p>Com o ajudante ligado, as suas conversas de verdade aparecem aqui dentro, organizadas pelas suas etiquetas, e você responde por aqui mesmo. ' +
+    'Ele roda na sua máquina e é quem guarda a sua chave.</p>' +
+    pedido("Pedido", "Liga o meu WhatsApp na tela: rode o meu-whatsapp.py desta pasta e me diga o endereço para eu abrir.") +
+    '<p class="onde">Se preferir fazer à mão: abra esta pasta no terminal, rode <b>python meu-whatsapp.py</b> e abra o endereço que aparecer. ' +
+    'Abrir o painel com dois cliques não mostra as conversas, porque sem o ajudante a tela não tem de onde ler.</p></div>';
+  const leads = document.getElementById("zapLeads");
+  if (leads) leads.innerHTML = "";
+}
+
+function zapAviso(texto){
+  const alvo = document.getElementById("zapVivo");
+  if (alvo) alvo.innerHTML = '<div class="cartao"><h3>Falta um passo para as conversas aparecerem</h3>' +
+    '<div class="erro">' + e(texto) + '</div>' +
+    '<p class="onde">O passo a passo do whatsapp.json está na sua biblioteca, na Parte 4.</p></div>';
+}
+
+async function zapComecar(){
+  if (!document.getElementById("zapVivo") && !document.getElementById("zapLeads")) return;
+  let st;
+  try { st = await zapPedir("api/estado"); }
+  catch (x) { ZAP.ligado = false; return zapSemAjudante(); }
+
+  if (st.erro){ ZAP.ligado = false; return zapAviso(st.erro); }
+  if (!st.ligado){
+    ZAP.ligado = false;
+    const alvo = document.getElementById("zapVivo");
+    if (alvo) alvo.innerHTML = '<div class="cartao"><div class="tags"><span class="tag nao">desconectado</span></div>' +
+      '<h3>O seu número caiu da ligação</h3><p>A sua instância existe, mas o WhatsApp não está conectado nela agora. ' +
+      'Entre no painel da uazapi e leia o QR Code de novo, com o celular.</p></div>';
+    return;
+  }
+
+  ZAP.ligado = true;
+  ZAP.final = st.finalDoNumero || "";
+  try {
+    const et = await zapPedir("api/etiquetas");
+    ZAP.colunas = et.etiquetas || [];
+  } catch (x) { ZAP.colunas = []; }
+
+  await zapCarregar();
+  if (!ZAP.relogio) ZAP.relogio = setInterval(zapRelogio, 30000);
+}
+
+async function zapCarregar(){
+  const r = await zapPedir("api/conversas?tipo=" + ZAP.tipo);
+  if (r.erro) return zapAviso(r.erro);
+  ZAP.conversas = r.conversas || [];
+  zapPintar();
+  zapPintarLeads();
+}
+
+/* o relógio: enquanto a janela estiver aberta, ele não mexe na tela, para não atrapalhar */
+async function zapRelogio(){
+  if (!ZAP.ligado) return;
+  if (janela && janela.open) return;
+  if (document.hidden) return;
+  try { await zapCarregar(); } catch (x) {}
+}
+
+async function zapAbrir(id){
+  ZAP.aberta = id;
+  const c = ZAP.conversas.find(x => x.id === id) || {nome: "conversa"};
+  const colAtual = zapColunaDe(c);
+  const mover = [{id: ZAP_NOVAS, nome: "sem etiqueta"}].concat(ZAP.colunas)
+    .filter(col => col.id !== colAtual)
+    .map(col => '<button class="bt" data-mover="' + e(col.id) + '">' + e(col.nome) + '</button>').join("");
+
+  abrir('<h3>' + e(c.nome) + '</h3>' +
+    '<div class="tags">' + (c.grupo ? '<span class="tag">grupo</span>' : "") +
+      '<span class="tag esc">' + e(colAtual === ZAP_NOVAS ? "sem etiqueta" : (ZAP.colunas.find(x => x.id === colAtual) || {}).nome || "") + '</span></div>' +
+    '<div class="fala" id="zapFala"><p class="nada">Lendo as mensagens...</p></div>' +
+    '<div class="resposta-zap"><textarea id="zapTexto" placeholder="Escreva a sua resposta..."></textarea>' +
+      '<div class="pe"><button class="bt sim" id="zapEnviar">Enviar para ' + e(String(c.nome).split(" ")[0]) + '</button>' +
+      '<span class="aviso" id="zapAviso">Ela sai do seu número, como se você tivesse digitado no celular.</span></div></div>' +
+    (ZAP.colunas.length ? '<div class="porque"><span class="r">Mover para</span><div class="pe" style="margin-top:8px">' + mover + '</div></div>' : ""));
+
+  const r = await zapPedir("api/mensagens?chatid=" + encodeURIComponent(id));
+  const fala = document.getElementById("zapFala");
+  if (!fala) return;
+  if (r.erro){ fala.innerHTML = '<div class="erro">' + e(r.erro) + '</div>'; return; }
+  const msgs = (r.mensagens || []).filter(m => m.texto);
+  fala.innerHTML = msgs.length ? msgs.map(m =>
+    '<div class="msg ' + (m.minha ? "minha" : "dela") + '">' + e(m.texto) + '<small>' + e(zapHora(m.quando)) + '</small></div>').join("")
+    : '<p class="nada">O ajudante só enxerga as mensagens que chegaram depois que você ligou o seu número. As antigas continuam no seu celular. A caixa de resposta aqui embaixo funciona do mesmo jeito.</p>';
+  fala.scrollTop = fala.scrollHeight;
+}
+
+async function zapEnviarResposta(){
+  if (ZAP.enviando) return;
+  const campo = document.getElementById("zapTexto"), aviso = document.getElementById("zapAviso"), bt = document.getElementById("zapEnviar");
+  const texto = (campo.value || "").trim();
+  if (!texto){ aviso.textContent = "Escreva a resposta antes de enviar."; return; }
+
+  ZAP.enviando = true; bt.disabled = true; aviso.textContent = "Enviando...";
+  const r = await zapPedir("api/responder", {chatid: ZAP.aberta, texto: texto});
+  ZAP.enviando = false; bt.disabled = false;
+
+  if (r.erro){ aviso.textContent = r.erro; return; }
+  campo.value = "";
+  aviso.textContent = "Enviada. Já está no celular da pessoa.";
+  setTimeout(() => zapAbrir(ZAP.aberta), 1200);
+}
+
+async function zapMover(para){
+  const c = ZAP.conversas.find(x => x.id === ZAP.aberta);
+  if (!c) return;
+  const atual = zapColunaDe(c);
+  const r = await zapPedir("api/mover", {
+    chatid: ZAP.aberta,
+    tirar: atual === ZAP_NOVAS ? "" : atual,
+    por: para === ZAP_NOVAS ? "" : para
+  });
+  if (r.erro){
+    const aviso = document.getElementById("zapAviso");
+    if (aviso) aviso.textContent = r.erro;
+    return;
+  }
+  c.etiquetas = para === ZAP_NOVAS ? [] : [para];
+  zapPintar();
+  zapPintarLeads();
+  janela.close();
+}
+
+/* as conversas que estão marcadas como lead aparecem também na tela de vendas */
+function zapPintarLeads(){
+  const alvo = document.getElementById("zapLeads");
+  if (!alvo) return;
+  if (!ZAP.ligado){ alvo.innerHTML = ""; return; }
+
+  const colLead = ZAP.colunas.find(col => /lead|interess|or[çc]ament|propost/i.test(col.nome));
+  const dela = colLead ? ZAP.conversas.filter(c => (c.etiquetas || []).indexOf(colLead.id) >= 0) : [];
+
+  if (!colLead){
+    alvo.innerHTML = '<div class="cartao"><h3>Do seu WhatsApp</h3>' +
+      '<p class="onde">Marque com a etiqueta <b>Lead</b>, no seu WhatsApp, quem está pedindo orçamento. Essas conversas aparecem aqui sozinhas, ' +
+      'e você responde sem sair do painel.</p></div>';
+    return;
+  }
+
+  alvo.innerHTML = '<div class="cartao"><h3>Do seu WhatsApp, agora</h3>' +
+    '<div class="tags"><span class="tag ok">ao vivo</span><span class="tag esc">' + e(colLead.nome) + '</span></div>' +
+    (dela.length ? '<div class="quadro" style="grid-template-columns:repeat(auto-fill,minmax(230px,1fr))">' +
+      dela.map(c => '<button class="ficha" data-zap="' + e(c.id) + '"><b>' + e(c.nome) + '</b>' +
+        '<small>' + e((c.ultimaMensagem || "sem texto").slice(0, 70)) + '</small>' +
+        (c.naoLidas ? '<span class="val">' + c.naoLidas + " esperando" + '</span>' : "") + '</button>').join("") + '</div>'
+      : '<p class="onde">Ninguém com essa etiqueta agora.</p>') + '</div>';
+}
+
+document.addEventListener("click", ev => {
+  const cv = ev.target.closest("[data-zap]");
+  if (cv) return zapAbrir(cv.dataset.zap);
+  const mv = ev.target.closest("[data-mover]");
+  if (mv) return zapMover(mv.dataset.mover);
+  if (ev.target.id === "zapEnviar") return zapEnviarResposta();
+  if (ev.target.id === "zapPessoas" || ev.target.id === "zapTodas"){
+    ZAP.tipo = ev.target.id === "zapPessoas" ? "pessoas" : "todas";
+    zapPintarFiltro();
+    zapCarregar();
+  }
+});
+
+/* ===== DIA ===== */
+function telaDia(){
+  const t = D.dia.tarefas || [], a = D.dia.agenda || [];
+  let h = cab("Rotina", "Meu dia", "As suas tarefas e os seus compromissos, num lugar só.");
+
+  if (!t.length && !a.length) {
+    return h + telaVazia(
+      "O seu dia ainda está vazio",
+      "Comece pelas tarefas, que funcionam hoje mesmo. A agenda enche sozinha na semana 2, quando o Google Agenda estiver ligado.",
+      "Montar o meu dia",
+      "Vamos montar o meu dia. Conduza você e escreva tudo no meu lugar.\n\n1. Me pergunte o que está aberto no meu trabalho hoje. Vá anotando uma coisa por vez, e só pare quando eu disser que acabou.\n2. Em cada tarefa, me pergunte para quando ela é e quanto tempo eu acho que leva.\n3. Olhe os meus leads em dados/leads.js e me avise se tiver alguém esperando resposta que eu esqueci de citar.\n4. Grave em dados/dia.js.\n5. No fim, me diga em que ordem fazer, e por quê. Se tiver coisa demais para um dia só, diga isso e me ajude a cortar.\n\nNão encha o meu dia. Prefira três coisas feitas a dez começadas.",
+      "dados/dia.js");
+  }
+
+  if (a.length) {
+    h += '<div class="cartao"><h3>Compromissos</h3><div class="linhas">' +
+      a.map(c => '<div class="linha"><span class="r">' + e(dataBr(c.dia)) + (tem(c.hora) ? "<br>" + e(c.hora) : "") + '</span><span><b>' + e(c.titulo) + '</b>' +
+      (tem(c.comQuem) ? '<br>com ' + e(c.comQuem) : "") + (tem(c.onde) ? '<br><span class="onde">' + e(c.onde) + '</span>' : "") + '</span></div>').join("") +
+      '</div></div>';
+  }
+
+  if (t.length) {
+    const abertas = t.filter(x => x.status !== "feita"), feitas = t.filter(x => x.status === "feita");
+    h += '<div class="cartao"><h3>Tarefas</h3><div class="linhas">' +
+      abertas.map(x => '<div class="linha"><span class="r">' + e(x.status || "aberta") + (tem(x.quando) ? "<br>" + e(dataBr(x.quando)) : "") + '</span><span><b>' + e(x.o) + '</b>' +
+      (tem(x.quanto) ? '<br><span class="onde">' + e(x.quanto) + '</span>' : "") + '</span></div>').join("") + '</div>' +
+      (feitas.length ? '<p class="onde">' + feitas.length + ' já feitas.</p>' : "") + '</div>';
+  }
+  return h;
+}
+
+/* ===== NEGÓCIO ===== */
+function telaNegocio(){
+  const N = D.negocio;
+  let h = cab("A minha base", "Meu negócio", "Quem você atende, o que você vende e como. É daqui que ele tira tudo o que escreve.");
+
+  if (vazio(N.oQueFaz)) {
+    return h + telaVazia(
+      "Ele ainda não sabe quem você é",
+      "Esta é a primeira tela a preencher. Enquanto ela estiver vazia, tudo o que ele escrever para você é chute bonito.",
+      "Preencher o meu negócio",
+      "Vamos preencher o meu negócio. Conduza você, do começo ao fim, e não me deixe nada para escrever sozinha.\n\n1. Me faça UMA pergunta por vez, curta, e espere a minha resposta antes da próxima: o que eu faço, para quem, que problema eu resolvo na fala do cliente, o que eu vendo e por quanto, como a venda acontece hoje, o que o cliente diz quando não compra, e o que eu nunca faço.\n2. A cada resposta, escreva você o texto no meu lugar, com as minhas palavras, e me mostre para eu dizer sim ou corrigir.\n3. Se eu responder curto demais, pergunte mais uma coisa antes de escrever.\n4. Grave em dados/negocio.js.\n5. No fim, me diga em três frases o que ficou claro e o que ainda está confuso no meu negócio.\n\nNão invente público nem oferta que eu não citei.",
+      "dados/negocio.js");
+  }
+
+  h += '<div class="cartao"><h3>' + e(N.nome || "O meu negócio") + '</h3><p>' + e(N.oQueFaz) + '</p></div>';
+
+  if (tem(N.publico)) {
+    h += '<div class="cartao"><h3>Para quem eu trabalho</h3><div class="linhas">' +
+      N.publico.map(p => '<div class="linha"><span class="r">' + e(p.quem) + '</span><span>' + e(p.oQuePrecisa) +
+      (tem(p.ondeEsta) ? '<br><span class="onde">' + e(p.ondeEsta) + '</span>' : "") + '</span></div>').join("") + '</div></div>';
+  }
+  if (tem(N.ofertas)) {
+    h += '<div class="cartao"><h3>O que eu vendo</h3><div class="linhas">' +
+      N.ofertas.map(o => '<div class="linha"><span class="r">' + e(o.nome) + (tem(o.preco) ? "<br>" + e(o.preco) : "") + '</span><span>' + e(o.oQueEntrega) +
+      (tem(o.prazo) ? '<br><span class="onde">' + e(o.prazo) + '</span>' : "") + '</span></div>').join("") + '</div></div>';
+  }
+  h += '<div class="grade g2">';
+  if (tem(N.problemasQueResolve)) h += '<div class="cartao"><h3>Problemas que eu resolvo</h3>' + lista(N.problemasQueResolve) + '</div>';
+  if (tem(N.oQueNaoFaz)) h += '<div class="cartao"><h3>O que eu não faço</h3>' + lista(N.oQueNaoFaz) + '</div>';
+  if (tem(N.regrasDeVenda)) h += '<div class="cartao"><h3>As minhas regras de venda</h3>' + lista(N.regrasDeVenda) + '</div>';
+  h += '</div>';
+  if (tem(N.comoVende)) h += '<div class="cartao"><h3>Como a venda acontece</h3><p>' + e(N.comoVende) + '</p></div>';
+  if (tem(N.objecoesComuns)) {
+    h += '<div class="cartao"><h3>O que eles dizem, e o que eu respondo</h3><div class="linhas">' +
+      N.objecoesComuns.map(o => '<div class="linha"><span class="r">' + e(o.objecao) + '</span><span>' + e(o.resposta) + '</span></div>').join("") + '</div></div>';
+  }
+  return h;
+}
+
+/* ===== MARCA ===== */
+function telaMarca(){
+  const M = D.marca, tv = M.tomDeVoz || {};
+  let h = cab("A minha base", "Minha marca", "As cores, as fontes e o jeito de falar. Ele consulta isto antes de escrever ou desenhar.");
+
+  if (!tem(M.cores) && vazio(tv.comoFalo)) {
+    return h + telaVazia(
+      "A sua marca ainda não está escrita",
+      "Mesmo sem designer você tem marca: tem cor que você usa, jeito de falar e coisa que você não aceita. É isso que vai aqui.",
+      "Montar a minha marca",
+      "Vamos escrever a minha marca. Conduza você e escreva tudo no meu lugar.\n\n1. Me faça UMA pergunta por vez: que cores eu já uso, que fontes, como eu falo com o meu cliente, que palavras eu uso sempre, que palavras eu nunca uso, e o que não pode aparecer na minha arte nem no meu texto.\n2. Se eu disser que não tenho cor nem fonte definidas, não me deixe sem nada: proponha uma paleta e duas fontes que combinem com o meu negócio, me mostre e pergunte se eu gosto.\n3. Me peça dois ou três perfis que eu acho bonitos e pergunte o que eu gosto em cada um.\n4. Grave em dados/marca.js, com o código hexadecimal de cada cor.\n5. No fim, escreva uma frase que resuma o meu jeito de falar, para eu colar em qualquer lugar.\n\nNão use palavra de designer sem explicar na mesma frase.",
+      "dados/marca.js");
+  }
+
+  if (tem(M.cores)) {
+    h += '<div class="cartao"><h3>As minhas cores</h3><div class="grade g3" style="margin:0">' +
+      M.cores.map(c => '<div style="display:flex;gap:12px;align-items:center">' +
+        '<span style="width:48px;height:48px;border-radius:12px;border:1px solid var(--linha);flex:none;background:' + e(c.hex) + '"></span>' +
+        '<span><b>' + e(c.nome) + '</b><br><span class="onde">' + e(c.hex) + (tem(c.onde) ? " · " + e(c.onde) : "") + '</span></span></div>').join("") +
+      '</div></div>';
+  }
+  if (tem(M.fontes && (M.fontes.titulo || M.fontes.texto))) {
+    h += '<div class="cartao"><h3>As minhas fontes</h3><div class="linhas">' +
+      linha("Título", M.fontes.titulo) + linha("Texto", M.fontes.texto) + '</div></div>';
+  }
+  if (tem(tv.comoFalo) || tem(tv.palavrasQueUso)) {
+    h += '<div class="cartao"><h3>O meu jeito de falar</h3>' +
+      (tem(tv.comoFalo) ? '<p>' + e(tv.comoFalo) + '</p>' : "") +
+      '<div class="grade g2" style="margin:0">' +
+      (tem(tv.palavrasQueUso) ? '<div><b>Palavras que eu uso</b>' + lista(tv.palavrasQueUso) + '</div>' : "") +
+      (tem(tv.palavrasQueNuncaUso) ? '<div><b>Palavras que eu nunca uso</b>' + lista(tv.palavrasQueNuncaUso) + '</div>' : "") +
+      '</div>' + (tem(tv.comoNuncaFalo) ? '<div class="porque"><span class="r">Como eu nunca falo</span><p>' + e(tv.comoNuncaFalo) + '</p></div>' : "") + '</div>';
+  }
+  h += '<div class="grade g2">';
+  if (tem(M.oQueNaoPode)) h += '<div class="cartao"><h3>O que não pode</h3>' + lista(M.oQueNaoPode) + '</div>';
+  if (tem(M.referencias)) {
+    h += '<div class="cartao"><h3>Referências que eu gosto</h3><div class="linhas">' +
+      M.referencias.map(r => '<div class="linha"><span class="r">' + e(r.referencia) + '</span><span>' + e(r.oQueGosto) + '</span></div>').join("") + '</div></div>';
+  }
+  h += '</div>';
+  if (tem(M.arquivos)) {
+    h += '<div class="cartao"><h3>Onde estão os meus arquivos</h3><div class="linhas">' +
+      M.arquivos.map(a => '<div class="linha"><span class="r">' + e(a.oQue) + '</span><span><code>' + e(a.caminho) + '</code></span></div>').join("") + '</div></div>';
+  }
+  return h;
+}
+
+/* ===== CÉREBRO ===== */
+function telaCerebro(){
+  const C = D.cerebro;
+  const temAlgo = tem(C.ideias) || tem(C.plugins) || tem(C.skills) || tem(C.conectores) || tem(C.aprendizados) || tem(C.oQueEuCriei);
+  let h = cab("A minha base", "Meu cérebro", "As suas ideias, e tudo o que você já ensinou ao Claude.");
+
+  if (!temAlgo) {
+    return h + telaVazia(
+      "O seu cérebro está vazio",
+      "Duas coisas moram aqui: as ideias que você teria perdido, e a lista do que você instalou, para você não esquecer o que já tem.",
+      "Começar o meu cérebro",
+      "Vamos começar o meu cérebro. Conduza você.\n\n1. Primeiro, olhe no meu Claude quais plugins, skills e conectores eu já tenho ligados. Liste para mim e pergunte, um por vez, para que eu uso cada um e se eu uso mesmo.\n2. Grave essa lista em dados/cerebro.js.\n3. Depois me pergunte se eu tenho alguma ideia solta rodando na cabeça, dessas que eu nunca anoto. Vá guardando uma por vez, até eu dizer que acabou.\n4. Em cada ideia, me pergunte se ela vira post, isca, produto ou processo.\n5. A partir de agora, toda vez que eu disser que tive uma ideia, guarde aqui sem eu precisar pedir.\n\nNão invente plugin que eu não tenho. Se não conseguir ver a minha lista, me peça um print.",
+      "dados/cerebro.js");
+  }
+
+  if (tem(C.ideias)) {
+    h += '<div class="cartao"><h3>As minhas ideias</h3><div class="linhas">' +
+      C.ideias.map(i => '<div class="linha"><span class="r">' + e(i.status || "guardada") + (tem(i.quando) ? "<br>" + e(dataBr(i.quando)) : "") + '</span><span>' + e(i.ideia) +
+      (tem(i.viraOQue) ? '<br><span class="onde">vira ' + e(i.viraOQue) + '</span>' : "") + '</span></div>').join("") + '</div></div>';
+  }
+
+  const biblio = (titulo, arr, campos) => arr && arr.length ? '<div class="cartao"><h3>' + titulo + '</h3><div class="linhas">' +
+    arr.map(x => '<div class="linha"><span class="r">' + e(x[campos[0]]) + '</span><span>' + e(x[campos[1]]) +
+      (campos[2] && tem(x[campos[2]]) ? '<br><span class="onde">' + e(x[campos[2]]) + '</span>' : "") + '</span></div>').join("") + '</div></div>' : "";
+
+  h += biblio("A minha biblioteca de plugins", C.plugins, ["nome", "paraQueServe", "uso"]);
+  h += biblio("As minhas skills", C.skills, ["nome", "paraQueServe", "deOndeVeio"]);
+  h += biblio("Os meus conectores", C.conectores, ["conector", "oQueEleVe", "ligadoEm"]);
+  h += biblio("O que eu criei", C.oQueEuCriei, ["nome", "oQueFaz", "criadoEm"]);
+
+  if (tem(C.aprendizados)) {
+    h += '<div class="cartao"><h3>O que eu não quero esquecer</h3><div class="linhas">' +
+      C.aprendizados.map(a => '<div class="linha"><span class="r">' + e(a.oQue) + '</span><span>' + e(a.porQueImporta) + '</span></div>').join("") + '</div></div>';
+  }
+  return h;
+}
+
+/* ===== janelas ===== */
+const janela = document.getElementById("janela"), janConteudo = document.getElementById("janConteudo");
+function abrir(html){ janConteudo.innerHTML = html; if (janela.showModal) janela.showModal(); }
+janela.querySelector(".fechar").addEventListener("click", () => janela.close());
+janela.addEventListener("click", ev => { if (ev.target === janela) janela.close(); });
+
+function abrirLead(id){
+  const l = (D.leads.fichas || []).find(f => String(f.id) === String(id));
+  if (!l) return;
+  const col = (D.leads.colunas || []).find(c => c.id === l.coluna);
+  abrir('<h3>' + e(l.nome) + '</h3>' +
+    '<div class="tags"><span class="tag esc">' + e(col ? col.nome : l.coluna) + '</span>' +
+    (Number(l.valor) ? '<span class="tag">' + reais(l.valor) + '</span>' : "") + '</div>' +
+    '<div class="linhas">' +
+      linha("Contato", l.contato) + linha("Veio de", l.origem) + linha("Quer", l.interesse) +
+      linha("Último contato", dataBr(l.ultimoContato)) + linha("Notas", l.notas) +
+    '</div>' +
+    (tem(l.proximoPasso) ? '<div class="porque"><span class="r">O seu próximo passo' + (tem(l.quando) ? ", até " + e(dataBr(l.quando)) : "") + '</span><p>' + e(l.proximoPasso) + '</p></div>' : "") +
+    pedido("Continuar esta conversa", "Me ajude com o lead " + (l.nome || "") + ". Leia a ficha dele em dados/leads.js, leia o meu negócio em dados/negocio.js, e escreva a próxima mensagem que eu mando para essa pessoa, no meu tom. Antes de escrever, me pergunte o que aconteceu desde o último contato."));
+}
+
+function abrirConteudo(id){
+  const c = (D.conteudos.itens || []).find(x => String(x.id) === String(id));
+  if (!c) return;
+  const arq = c.arquivos || [];
+  let visual = "";
+  if (c.tipo === "reel" && tem(c.video)) {
+    visual = '<div class="carrossel"><video src="' + e(c.video) + '" controls playsinline></video></div>';
+  } else if (arq.length) {
+    visual = '<div class="carrossel" id="car"><img id="carImg" src="' + e(arq[0]) + '" alt="">' +
+      (arq.length > 1 ? '<button class="seta e" type="button" data-passo="-1" aria-label="Anterior">&#8249;</button>' +
+        '<button class="seta d" type="button" data-passo="1" aria-label="Próximo">&#8250;</button>' : "") + '</div>' +
+      (arq.length > 1 ? '<div class="pontos" id="pontos">' + arq.map((x, i) => '<i class="' + (i ? "" : "on") + '"></i>').join("") + '</div>' : "");
+  }
+  const st = marcas()[c.id] || c.status || "esperando";
+  abrir('<h3>' + e(c.titulo) + '</h3>' +
+    '<div class="tags"><span class="tag esc">' + e(c.tipo) + '</span><span class="tag">' + e(dataBr(c.data)) + '</span>' +
+    (tem(c.paraQuem) ? '<span class="tag">' + e(c.paraQuem) + '</span>' : "") + '</div>' +
+    visual +
+    (tem(c.porQueEstrategico) || tem(c.objetivo) ?
+      '<div class="porque"><span class="r">Por que este conteúdo existe</span>' +
+      (tem(c.porQueEstrategico) ? '<p>' + e(c.porQueEstrategico) + '</p>' : "") +
+      (tem(c.objetivo) ? '<p><b>O que eu quero que a pessoa faça:</b> ' + e(c.objetivo) + '</p>' : "") + '</div>' : "") +
+    (tem(c.legenda) ? '<div><b>A legenda</b><p class="bio" style="margin-top:8px">' + e(c.legenda) + '</p></div>' : "") +
+    '<div class="decisao"><button class="bt sim" type="button" data-decidir="aprovado" data-id="' + e(c.id) + '">Quero usar</button>' +
+    '<button class="bt" type="button" data-decidir="recusado" data-id="' + e(c.id) + '">Não gostei</button>' +
+    '<span class="marcado' + (st === "recusado" ? " nao" : "") + '" id="marcado">' +
+    (st === "aprovado" ? "Você marcou: quero usar" : st === "recusado" ? "Você marcou: não gostei" : "") + '</span></div>');
+
+  let i = 0;
+  janConteudo.querySelectorAll(".seta").forEach(b => b.addEventListener("click", () => {
+    i = (i + Number(b.dataset.passo) + arq.length) % arq.length;
+    janConteudo.querySelector("#carImg").src = arq[i];
+    janConteudo.querySelectorAll("#pontos i").forEach((p, k) => p.classList.toggle("on", k === i));
+  }));
+  janConteudo.querySelectorAll("[data-decidir]").forEach(b => b.addEventListener("click", () => {
+    marcar(b.dataset.id, b.dataset.decidir);
+    const mk = janConteudo.querySelector("#marcado");
+    mk.textContent = b.dataset.decidir === "aprovado" ? "Você marcou: quero usar" : "Você marcou: não gostei";
+    mk.classList.toggle("nao", b.dataset.decidir === "recusado");
+    desenhar("conteudos");
+  }));
+}
+
+/* ===== montar ===== */
+const telas = {hoje: telaHoje, leads: telaLeads, resultados: telaResultados, redes: telaRedes, instagram: telaInstagram,
+  planejamento: telaPlanejamento, conteudos: telaConteudos, whatsapp: telaWhatsapp, dia: telaDia, negocio: telaNegocio, marca: telaMarca, cerebro: telaCerebro};
+
+function desenhar(nome){
+  const alvo = document.getElementById("t-" + nome);
+  if (!alvo) return;
+  try { alvo.innerHTML = telas[nome](); } catch (x) {
+    alvo.innerHTML = '<div class="vazio"><h3>Deu erro ao montar esta tela</h3><p>Algum arquivo de dados ficou com um erro de escrita. Peça ao Claude: "A tela ' + e(nome) + ' deu erro, confere os arquivos da pasta dados e conserta."</p><p class="onde">' + e(x.message) + '</p></div>';
+  }
+  alvo.querySelectorAll("[data-lead]").forEach(b => b.addEventListener("click", () => abrirLead(b.dataset.lead)));
+  alvo.querySelectorAll("[data-conteudo]").forEach(b => b.addEventListener("click", () => abrirConteudo(b.dataset.conteudo)));
+  if (nome === "whatsapp" || nome === "leads") { try { zapComecar(); } catch (x) {} }
+}
+
+function ir(nome){
+  document.querySelectorAll(".tela").forEach(t => t.classList.toggle("on", t.id === "t-" + nome));
+  document.querySelectorAll(".menu button").forEach(b => b.classList.toggle("at", b.dataset.tela === nome));
+  document.body.classList.remove("menu-on");
+  window.scrollTo(0, 0);
+  try { localStorage.setItem("mf_tela", nome); } catch (x) {}
+}
+
+document.querySelectorAll(".menu button").forEach(b => b.addEventListener("click", () => ir(b.dataset.tela)));
+document.getElementById("abrirMenu").addEventListener("click", () => document.body.classList.toggle("menu-on"));
+
+document.addEventListener("click", ev => {
+  const b = ev.target.closest(".copiar");
+  if (!b) return;
+  const pre = b.closest(".pedido").querySelector("pre");
+  const rotulo = b.textContent;
+  const ok = () => { b.textContent = "Copiado"; setTimeout(() => b.textContent = rotulo, 1800); };
+  const sel = () => { const r = document.createRange(); r.selectNodeContents(pre); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "Selecionado"; };
+  try { navigator.clipboard.writeText(pre.innerText).then(ok, sel); } catch (x) { sel(); }
+});
+
+Object.keys(telas).forEach(desenhar);
+
+if (tem(D.negocio.nome) || tem(D.negocio.oQueFaz)) {
+  document.getElementById("quem").innerHTML = "<b>" + e(D.negocio.nome || "O meu negócio") + "</b>" + e(D.negocio.oQueFaz || "");
+}
+let inicial = "hoje";
+try { const g = localStorage.getItem("mf_tela"); if (g && telas[g]) inicial = g; } catch (x) {}
+ir(inicial);
+</script>
+</body>
+</html>

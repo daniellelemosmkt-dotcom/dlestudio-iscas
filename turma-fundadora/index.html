@@ -433,9 +433,19 @@ section[id]{scroll-margin-top:64px}
   .solo .dupla > :not(.palco){overflow:hidden}
   .solo .dupla::after{content:"";display:block;clear:both}
 }
+
+/* barra das aulas: o mesmo endereço, navegando de aula em aula */
+.aulasbar{background:#160E11;display:flex;gap:7px;align-items:center;justify-content:center;flex-wrap:wrap;padding:11px 16px;position:relative;z-index:60}
+.aulasbar span{color:#A9989E;font:600 11px/1 Poppins,sans-serif;letter-spacing:.14em;text-transform:uppercase;margin-right:5px}
+.aulasbar a{color:#E6D3B8;text-decoration:none;font:600 14px/1 Poppins,sans-serif;padding:9px 14px;border-radius:999px;white-space:nowrap}
+.aulasbar a:hover{background:#2A1F23}
+.aulasbar a.at{background:#8B083F;color:#fff}
+@media (max-width:560px){.aulasbar span{width:100%;text-align:center;margin:0 0 2px}}
 </style>
 </head>
 <body>
+<nav class="aulasbar" aria-label="As aulas da turma"><span>Turma Fundadora</span><a href="index.html" class="at">Biblioteca</a><a href="aula-2.html">Aula 2 · 27/10</a></nav>
+
 <nav class="abas" aria-label="Partes da pagina"><a href="#comece">Comece aqui</a><a href="#sistema">1 &middot; Sistema</a><a href="#cerebro">2 &middot; C&eacute;rebro</a><a href="#oficiais">3 &middot; Plugins oficiais</a><a href="#whatsapp">4 &middot; WhatsApp</a><a href="#secretaria">5 &middot; Secret&aacute;ria</a><a href="#plugins">6 &middot; Seus plugins</a><a href="#conectores">7 &middot; Conectores</a><a href="#mais">8 &middot; Mais poder</a><a href="#diadia">9 &middot; Dia a dia</a><a href="#mundo">10 &middot; GitHub e seguran&ccedil;a</a><a href="#prompts">11 &middot; Prompts</a><a href="#glossario">12 &middot; Gloss&aacute;rio</a></nav>
 <header class="hero">
 <div class="wrap hero-in"><p class="eb">Modo Automático · Turma Fundadora</p><h1>A sua <mark>biblioteca</mark></h1>
