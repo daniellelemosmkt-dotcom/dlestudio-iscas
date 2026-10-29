@@ -441,10 +441,26 @@ section[id]{scroll-margin-top:64px}
 .aulasbar a:hover{background:#2A1F23}
 .aulasbar a.at{background:#8B083F;color:#fff}
 @media (max-width:560px){.aulasbar span{width:100%;text-align:center;margin:0 0 2px}}
+
+/* as gravacoes, no topo: o lugar unico de assistir as aulas */
+.gravs{background:#160E11;padding:0 16px 22px;position:relative;z-index:59}
+.gravs-in{max-width:1060px;margin:0 auto}
+.gravs h2{color:#F4F2EE;font:700 17px/1.3 Poppins,sans-serif;margin:0 0 3px}
+.gravs .gravs-sub{color:#A9989E;font:400 13px/1.5 Poppins,sans-serif;margin:0 0 13px}
+.gravs-lista{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:10px}
+.grav{display:flex;align-items:center;gap:12px;background:#241A1E;border:1px solid #3A2C31;border-radius:12px;padding:13px 15px;text-decoration:none;transition:border-color .15s,background .15s}
+.grav:hover{background:#2E2227;border-color:#8B083F}
+.grav .play{flex:none;width:34px;height:34px;border-radius:50%;background:#8B083F;display:flex;align-items:center;justify-content:center}
+.grav .play::after{content:"";border-left:10px solid #fff;border-top:6px solid transparent;border-bottom:6px solid transparent;margin-left:3px}
+.grav b{display:block;color:#F4F2EE;font:700 14px/1.3 Poppins,sans-serif}
+.grav span{display:block;color:#A9989E;font:400 12px/1.4 Poppins,sans-serif;margin-top:2px}
+.grav em{display:block;color:#E2307A;font:600 11px/1 Poppins,sans-serif;font-style:normal;letter-spacing:.08em;text-transform:uppercase;margin-top:5px}
 </style>
 </head>
 <body>
 <nav class="aulasbar" aria-label="As aulas da turma"><span>Turma Fundadora</span><a href="index.html" class="at">Biblioteca</a><a href="aula-2.html">Aula 2 · 27/10</a></nav>
+<section class="gravs" aria-label="As grava&ccedil;&otilde;es das aulas"><div class="gravs-in"><h2>Assistir as aulas</h2><p class="gravs-sub">Clique e aperte o play. Toda semana a aula nova entra aqui.</p><div class="gravs-lista"><a class="grav" href="https://drive.google.com/file/d/14Lwcrl2SkdRhtxSAfWR-Zc-jMvPlNYaD/view" target="_blank" rel="noopener"><span class="play"></span><span><b>Aula 1</b><span>Onde o poder j&aacute; est&aacute; pronto</span><em>20/10</em></span></a><a class="grav" href="https://drive.google.com/file/d/1sp7ni3JXGzjf8beJ75JgNw-19tMJIR_m/view" target="_blank" rel="noopener"><span class="play"></span><span><b>Aula 2</b><span>O seu funcion&aacute;rio ganha cara, olhos e m&atilde;os</span><em>27/10</em></span></a></div></div></section>
+
 
 <nav class="abas" aria-label="Partes da pagina"><a href="#comece">Comece aqui</a><a href="#sistema">1 &middot; Sistema</a><a href="#cerebro">2 &middot; C&eacute;rebro</a><a href="#oficiais">3 &middot; Plugins oficiais</a><a href="#whatsapp">4 &middot; WhatsApp</a><a href="#secretaria">5 &middot; Secret&aacute;ria</a><a href="#plugins">6 &middot; Seus plugins</a><a href="#conectores">7 &middot; Conectores</a><a href="#mais">8 &middot; Mais poder</a><a href="#diadia">9 &middot; Dia a dia</a><a href="#mundo">10 &middot; GitHub e seguran&ccedil;a</a><a href="#prompts">11 &middot; Prompts</a><a href="#glossario">12 &middot; Gloss&aacute;rio</a></nav>
 <header class="hero">
