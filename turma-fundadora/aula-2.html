@@ -475,11 +475,17 @@ section[id]{scroll-margin-top:64px}
 .grav b{display:block;color:#F4F2EE;font:700 14px/1.3 Poppins,sans-serif}
 .grav span{display:block;color:#A9989E;font:400 12px/1.4 Poppins,sans-serif;margin-top:2px}
 .grav em{display:block;color:#E2307A;font:600 11px/1 Poppins,sans-serif;font-style:normal;letter-spacing:.08em;text-transform:uppercase;margin-top:5px}
+
+/* o cartao da aula que ainda nao tem gravacao */
+.grav.esperando{opacity:.62;cursor:default}
+.grav.esperando:hover{background:#241A1E;border-color:#3A2C31}
+.grav.esperando .play{background:#3A2C31}
+.grav.esperando .play::after{border-left-color:#A9989E}
 </style>
 </head>
 <body>
 <nav class="aulasbar" aria-label="As aulas da turma"><span>Turma Fundadora</span><a href="index.html">Biblioteca</a><a href="aula-2.html" class="at">Aula 2 · 27/10</a><a href="aula-3.html">Aula 3 · 03/11</a></nav>
-<section class="gravs" aria-label="As grava&ccedil;&otilde;es das aulas"><div class="gravs-in"><h2>Assistir as aulas</h2><p class="gravs-sub">Clique e aperte o play. Toda semana a aula nova entra aqui.</p><div class="gravs-lista"><a class="grav" href="https://drive.google.com/file/d/14Lwcrl2SkdRhtxSAfWR-Zc-jMvPlNYaD/view" target="_blank" rel="noopener"><span class="play"></span><span><b>Aula 1</b><span>Onde o poder j&aacute; est&aacute; pronto</span><em>20/10</em></span></a><a class="grav" href="https://drive.google.com/file/d/1sp7ni3JXGzjf8beJ75JgNw-19tMJIR_m/view" target="_blank" rel="noopener"><span class="play"></span><span><b>Aula 2</b><span>O seu funcion&aacute;rio ganha cara, olhos e m&atilde;os</span><em>27/10</em></span></a></div></div></section>
+<section class="gravs" aria-label="As grava&ccedil;&otilde;es das aulas"><div class="gravs-in"><h2>Assistir as aulas</h2><p class="gravs-sub">Clique e aperte o play. Toda semana a aula nova entra aqui.</p><div class="gravs-lista"><a class="grav" href="https://drive.google.com/file/d/14Lwcrl2SkdRhtxSAfWR-Zc-jMvPlNYaD/view" target="_blank" rel="noopener"><span class="play"></span><span><b>Aula 1</b><span>Onde o poder j&aacute; est&aacute; pronto</span><em>20/10</em></span></a><a class="grav" href="https://drive.google.com/file/d/1sp7ni3JXGzjf8beJ75JgNw-19tMJIR_m/view" target="_blank" rel="noopener"><span class="play"></span><span><b>Aula 2</b><span>O seu funcion&aacute;rio ganha cara, olhos e m&atilde;os</span><em>27/10</em></span></a><span class="grav esperando" aria-disabled="true"><span class="play"></span><span><b>Aula 3</b><span>O seu funcion&aacute;rio entra nas suas redes</span><em>03/11 &middot; no ar logo depois da aula</em></span></span></div></div></section>
 
 
 <header class="hero"><div class="wrap hero-in"><p class="eb">Aula 2</p><h1>Modo <mark>Automático</mark></h1>
