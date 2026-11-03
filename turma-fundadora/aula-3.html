@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aula 3 | Modo Automático</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1E1C1D">
+<link rel="icon" href="../img/selo-dl-magenta.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Homemade+Apple&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"Advercase";src:url(../grade/fontes/Advercase-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+:root{color-scheme:light;--mag:#8B083F;--gelo:#FFFFFF;--graf:#292929;--suave:#6B6266;--linha:#E7E7EA;--papel:#FFFFFF;--areia:#E6D3B8;--noite:#1E1C1D}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--gelo);color:var(--graf);font:400 16px/1.6 Poppins,"Segoe UI",Arial,sans-serif}
+img{max-width:100%}
+b{font-weight:600}
+svg,img{flex:none}
+.wrap{max-width:820px;margin:0 auto;padding:0 16px;position:relative}
+.faixa{position:relative;padding:72px 0 80px}
+.faixa.curta{padding:44px 0 48px}
+.clara{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .17 0 0 0 0 .14 0 0 0 .11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),#FFFFFF}
+.escura{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .17 0 0 0 0 .14 0 0 0 .11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(rgba(24,22,23,.55),rgba(24,22,23,.7)),url(../materiais/img/fundo-escuro.webp) center/cover fixed,var(--noite);color:#F4F0EA}
+#prompts.escura{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .17 0 0 0 0 .14 0 0 0 .11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(rgba(24,22,23,.5),rgba(24,22,23,.72)),url(../materiais/img/fundo-escuro2.webp) center/cover fixed,var(--noite)}
+@media (max-width:820px){.escura,#prompts.escura{background-attachment:scroll}}
+/* ícones reais em azulejo */
+.tile,.i-tile,.abre-tile,.dl-tile,.f-tile,.gr-tile,.gl-tile,.m-tile{display:inline-flex;align-items:center;justify-content:center;gap:4px;background:#fff;border-radius:8px;box-shadow:0 1px 1px rgba(41,41,41,.08),0 6px 14px rgba(41,41,41,.12);flex:none}
+.escuro{background:#2B2627}
+.uz-chip{display:inline-block;background:#0B1A33;color:#fff;font-weight:700;letter-spacing:.02em;border-radius:5px;padding:3px 6px;line-height:1.2}
+/* topo */
+.hero{position:relative;overflow:hidden;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .17 0 0 0 0 .14 0 0 0 .11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),#F1F1F1;min-height:560px;display:flex;align-items:center}
+.hero-foto{position:absolute;right:0;top:0;height:100%;width:54%;object-fit:cover;object-position:50% 18%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 22%);mask-image:linear-gradient(90deg,transparent 0,#000 22%)}
+.hero-in{width:100%;padding-top:64px;padding-bottom:64px}
+.hero-in>*{max-width:400px}
+.eb{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--mag);margin:0}
+h1{font-family:Advercase,Georgia,serif;font-weight:700;font-size:clamp(3rem,12vw,5rem);line-height:.95;margin:.6rem 0 1.1rem}
+h1 mark{background:var(--mag);color:#fff;padding:0 .12em .04em;border-radius:4px}
+.lead{font-size:1.06rem;margin:0;color:#3D393A}
+@media (max-width:700px){.hero{display:block;min-height:0}.hero-foto{position:relative;width:100%;height:420px;-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent);mask-image:linear-gradient(180deg,#000 70%,transparent)}.hero-in{padding-top:0;padding-bottom:48px;margin-top:-40px}}
+.faixa-eb{margin:0 0 16px;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:#C9BEB8}
+.indice{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.indice a{position:relative;display:flex;flex-direction:column;gap:2px;background:var(--papel);color:var(--graf);text-decoration:none;border-radius:6px;padding:16px 16px 18px;min-height:178px;box-shadow:0 1px 2px rgba(0,0,0,.18),0 14px 30px rgba(0,0,0,.28);transition:transform .2s}
+.indice a:hover{transform:translateY(-3px)}
+.i-tile{width:54px;height:54px;margin-bottom:auto}
+.i-n{font-family:Advercase,Georgia,serif;color:var(--mag);font-size:1rem;margin-top:14px}
+.indice b{font-family:Advercase,Georgia,serif;font-size:1.3rem;line-height:1.08}
+.indice small{color:var(--suave);font-size:.8rem;line-height:1.3;margin-top:4px}
+@media (max-width:760px){.indice{grid-template-columns:1fr 1fr}.indice a:last-child{grid-column:1/-1}}
+a:focus-visible,.cp:focus-visible,.ex:focus-visible,summary:focus-visible{outline:2px solid var(--mag);outline-offset:3px}
+/* mapa */
+.mapa{margin-top:16px;background:var(--papel);color:var(--graf);border-radius:6px;padding:22px 22px 20px;box-shadow:0 1px 2px rgba(0,0,0,.18),0 14px 30px rgba(0,0,0,.28)}
+.mapa-eb{margin:0 0 14px;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--mag)}
+.m-flux{display:flex;align-items:flex-start;gap:10px}
+.m-it{flex:1;display:flex;flex-direction:column;align-items:flex-start;gap:2px;line-height:1.25}
+.m-tile{width:50px;height:50px;margin-bottom:8px}
+.m-it b{font-family:Advercase,Georgia,serif;font-size:1.15rem;font-weight:700} .m-it small{color:var(--suave);font-size:.82rem}
+.m-seta{color:var(--mag);font-size:1.4rem;margin-top:12px}
+.m-dentro{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0 0;padding-top:14px;border-top:1px solid var(--linha)}
+.m-dentro>span{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--suave);margin-right:4px}
+.m-dentro em,.precisa em{font-style:normal;display:inline-flex;align-items:center;gap:6px;font-size:.84rem;font-weight:500;background:#F4F4F6;border-radius:3px;padding:5px 10px}
+.m-nota{margin:14px 0 0;font-size:.92rem;color:#3D393A}
+.m-leva{display:flex;gap:12px;align-items:flex-start;margin:14px 0 0;padding:14px 16px;background:#F4F4F6;border-left:4px solid var(--mag);border-radius:0 4px 4px 0;font-size:.98rem}
+@media (max-width:600px){.m-flux{flex-direction:column}.m-it{flex-direction:row;align-items:center;gap:12px;flex-wrap:wrap}.m-tile{margin:0}.m-it small{flex-basis:100%;padding-left:62px;margin-top:-14px}.m-seta{transform:rotate(90deg);margin:0 0 0 14px}}
+/* abertura de parte */
+.abre{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;border-bottom:1.5px solid currentColor;padding-bottom:22px;margin-bottom:28px}
+.abre-eb{display:flex;align-items:flex-end;gap:14px;margin:0;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;opacity:.75}
+.abre-n{font-family:Advercase,Georgia,serif;font-size:3.6rem;letter-spacing:0;line-height:.78;color:var(--mag);opacity:1}
+.escura .abre-n{color:#E9A9C2}
+.abre h2{font-family:Advercase,Georgia,serif;font-weight:700;font-size:clamp(2.4rem,9vw,3.6rem);line-height:1;margin:.7rem 0 .5rem}
+.abre-sub{margin:0 0 14px;max-width:520px;font-size:1rem;opacity:.85}
+.abre-tile{min-width:96px;height:96px;padding:0 18px;gap:10px;border-radius:10px;transform:translateY(6px) rotate(-3deg);box-shadow:0 2px 3px rgba(0,0,0,.12),0 18px 34px rgba(0,0,0,.22)}
+@media (max-width:520px){.abre-tile{min-width:68px;height:68px;padding:0 12px;align-self:flex-start}.abre-tile svg,.abre-tile img{width:34px;height:34px}}
+.chips{display:flex;flex-wrap:wrap;gap:8px} .chips span{font-size:.8rem;font-weight:500;border:1px solid var(--linha);border-radius:3px;padding:4px 10px;background:var(--papel);color:var(--graf)}
+/* passos */
+.passo,.func,.erros,.como{background:var(--papel);color:var(--graf);border:1px solid var(--linha);border-radius:6px;padding:24px 22px 22px;margin-bottom:16px;box-shadow:0 1px 2px rgba(41,41,41,.08),0 10px 28px rgba(41,41,41,.08)}
+.escura .passo,.escura .erros{box-shadow:0 1px 2px rgba(0,0,0,.25),0 16px 36px rgba(0,0,0,.3)}
+.p-cab{display:flex;align-items:center;gap:14px}
+.p-n{flex:none;width:40px;height:40px;background:var(--mag);border-radius:4px;color:#fff;display:grid;place-items:center;font-family:Advercase,Georgia,serif;font-size:1.2rem;padding-top:2px}
+.passo h3,.func h3,.como h3{font-family:Advercase,Georgia,serif;font-weight:700;font-size:1.45rem;line-height:1.1;margin:0}
+.p-txt{margin:12px 0 0;font-size:1rem}
+.palco{margin-top:18px;border-radius:4px;padding:26px 14px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .17 0 0 0 0 .14 0 0 0 .11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),#EEEEF1;overflow:hidden}
+.palco.solto{background:none;padding:6px 0 4px}
+.escala{width:460px;margin:0 auto;transform-origin:top left} .escala>.tl-zap,.escala>.tl-cel{margin:0 auto}
+.mini{margin:14px 0 0;padding:0;list-style:none;counter-reset:m;display:grid;gap:8px}
+.mini li{counter-increment:m;position:relative;padding-left:32px;font-size:.96rem}
+.mini li::before{content:counter(m);position:absolute;left:0;top:2px;width:22px;height:22px;border:1.5px solid var(--mag);color:var(--mag);border-radius:3px;display:grid;place-items:center;font:700 .72rem Poppins,sans-serif}
+.onde{display:flex;gap:12px;align-items:center;margin-top:14px;padding:12px 14px;border:1px dashed #D6D6DB;border-radius:4px;background:#FAFAFB}
+.onde p{margin:0;font-size:.95rem}
+/* como funciona */
+.como-g{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.como-g div{background:#F4F4F6;border-radius:4px;padding:14px}
+.como-g span{display:inline-grid;place-items:center;width:28px;height:28px;background:var(--mag);color:#fff;border-radius:4px;font-family:Advercase,Georgia,serif;margin-bottom:6px}
+.como-g b{display:block;font-family:Advercase,Georgia,serif;font-size:1.15rem} .como-g p{margin:4px 0 0;font-size:.9rem;color:#3D393A}
+.como-n{margin:12px 0 0;font-size:.88rem;color:var(--suave)}
+@media (max-width:600px){.como-g{grid-template-columns:1fr}}
+/* prompt */
+.pr{background:#262324;color:#F4F0EA;border-radius:6px;padding:14px 16px 16px;margin-top:16px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+.pr-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #3E3A3B}
+.pr-top div{display:flex;flex-direction:column;line-height:1.3}
+.pr-top b{font-size:.92rem;color:#fff} .pr-top span{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:#E9A9C2;margin-top:3px}
+.cp{flex:none;font:600 .84rem Poppins,sans-serif;background:var(--mag);color:#fff;border:0;border-radius:4px;padding:8px 18px;cursor:pointer;min-height:40px}
+.cp:hover{background:#A10A4A}
+.pr pre{margin:0;white-space:pre-wrap;font:400 .94rem/1.62 Poppins,sans-serif} .pr pre i{font-style:normal;color:var(--areia);border-bottom:1px dashed rgba(230,211,184,.6)}
+.pr pre i.ok{color:#fff;border-bottom-color:#E9A9C2}
+.exs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:16px}
+.exs span{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--suave);margin-right:4px}
+.ex{font:500 .86rem Poppins,sans-serif;background:var(--papel);color:var(--graf);border:1px solid #D6D6DB;border-radius:4px;padding:7px 12px;cursor:pointer}
+.ex:hover,.ex.on{border-color:var(--mag);color:var(--mag)}
+/* avisos */
+.av{display:flex;gap:12px;align-items:center;background:#F4F4F6;border-radius:4px;padding:12px 16px;margin-top:12px;color:var(--graf)}
+.av p{margin:0;font-size:.95rem} .av b{color:var(--mag)}
+.av.forte{background:var(--papel);border-left:4px solid var(--mag);margin-bottom:18px;box-shadow:0 10px 28px rgba(0,0,0,.25)}
+/* downloads */
+.dls{display:grid;gap:10px;margin-top:16px}
+.dl{display:flex;align-items:center;gap:14px;background:#F7F7F9;border:1px solid var(--linha);border-radius:6px;padding:12px 14px;text-decoration:none;color:var(--graf);transition:border-color .2s,transform .2s}
+.dl:hover{border-color:var(--graf);transform:translateY(-1px)}
+.dl-tile{width:54px;height:54px}
+.dl-tx{flex:1;display:flex;flex-direction:column;line-height:1.3} .dl-tx b{font-size:1.04rem} .dl-tx small{color:var(--suave);font-size:.84rem}
+.dl-bt{flex:none;background:var(--mag);color:#fff;font-weight:600;font-size:.84rem;border-radius:4px;padding:8px 14px}
+/* rotinas */
+.func{padding:26px 22px 10px}
+.f-top{display:flex;gap:16px;align-items:center}
+.f-tile{min-width:68px;height:68px;padding:0 12px;gap:8px}
+.f-hora{display:inline-block;background:var(--graf);color:var(--gelo);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;border-radius:3px;padding:4px 9px;margin-bottom:6px}
+.f-faz{margin:6px 0 0;color:#3D393A}
+.precisa{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0 6px;padding:12px 0;border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+.precisa>span{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--suave);margin-right:4px}
+.ets{display:grid}
+.et{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:18px 0;border-bottom:1px dashed var(--linha)}
+.et:last-child{border-bottom:0}
+.et-n{width:34px;height:34px;border:1.5px solid var(--mag);color:var(--mag);border-radius:4px;display:grid;place-items:center;font-family:Advercase,Georgia,serif;font-size:1.05rem;padding-top:2px}
+.et-c{min-width:0} .et-c h4{font-family:Advercase,Georgia,serif;font-size:1.2rem;margin:4px 0 0;line-height:1.1} .et-c p{margin:8px 0 0}
+.et-c .palco{margin-top:10px}
+@media (max-width:520px){.et{grid-template-columns:1fr;gap:8px}}
+/* erros */
+.erros h3{font-family:Advercase,Georgia,serif;font-size:1.45rem;margin:0 0 8px}
+.er{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:4px 18px;padding:13px 0;border-top:1px solid var(--linha)} .er span{font-size:.95rem;color:#3D393A}
+@media (max-width:520px){.er{grid-template-columns:1fr}}
+/* biblioteca */
+.lib{display:grid;gap:10px}
+.gr{background:var(--papel);color:var(--graf);border-radius:6px;box-shadow:0 14px 30px rgba(0,0,0,.25)}
+.gr summary{display:flex;align-items:center;gap:14px;padding:12px 16px;cursor:pointer;list-style:none} .gr summary::-webkit-details-marker{display:none}
+.gr-tile{width:42px;height:42px} .gr summary b{font-family:Advercase,Georgia,serif;font-size:1.25rem;font-weight:700} .gr summary small{margin-left:auto;color:var(--suave);font-size:.82rem}
+.gr summary::after{content:"+";width:30px;height:30px;background:var(--mag);border-radius:4px;color:#fff;display:grid;place-items:center;font-weight:600;flex:none}
+.gr[open] summary::after{content:"–"} .gr-in{padding:0 14px 16px}
+/* glossário */
+.glos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gl{display:flex;gap:14px;align-items:center;background:var(--papel);border:1px solid var(--linha);border-radius:6px;padding:14px 16px;box-shadow:0 1px 2px rgba(41,41,41,.06),0 8px 22px rgba(41,41,41,.06)}
+.gl-tile{width:50px;height:50px}
+.gl-tile.multi{gap:2px;flex-wrap:wrap;align-content:center;padding:4px}
+.gl b{display:block;font-size:1rem;line-height:1.25} .gl p{margin:3px 0 0;font-size:.87rem;line-height:1.45;color:var(--suave)}
+@media (max-width:600px){.glos{grid-template-columns:1fr}}
+footer{text-align:center;font-size:.84rem;color:#CFC6C0} footer p{margin:0}
+.ass{display:block;font-family:"Homemade Apple",cursive;font-size:2rem;line-height:1.5;color:#fff;margin-bottom:6px}
+/* kit e qual usar */
+.kit{margin-top:12px;background:var(--papel);color:var(--graf);border-radius:6px;padding:20px 22px;box-shadow:0 1px 2px rgba(0,0,0,.18),0 14px 30px rgba(0,0,0,.28)}
+.kit-g{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.kit-g div{display:flex;flex-direction:column;gap:6px}
+.kit-g b{font-family:Advercase,Georgia,serif;font-size:1.1rem;margin-bottom:4px}
+.kit-g a{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid var(--linha);border-radius:4px;text-decoration:none;color:var(--graf);font-size:.94rem;font-weight:500}
+.kit-g a:hover{border-color:var(--mag);color:var(--mag)}
+@media (max-width:600px){.kit-g{grid-template-columns:1fr}}
+.qual{background:var(--papel);color:var(--graf);border-radius:6px;padding:24px 22px;margin-bottom:16px;box-shadow:0 16px 36px rgba(0,0,0,.3)}
+.qual h3{font-family:Advercase,Georgia,serif;font-size:1.45rem;margin:0}
+.qual-g{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.qual-g>div{border:1px solid var(--linha);border-radius:4px;padding:16px;display:flex;flex-direction:column;gap:4px}
+.qual-g>div.dest{border-color:var(--mag);box-shadow:inset 0 0 0 1px var(--mag)}
+.q-tile{width:44px;height:44px;margin-bottom:8px}
+.qual-g b{font-family:Advercase,Georgia,serif;font-size:1.25rem} .qual-g em{font-style:normal;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--mag)}
+.qual-g p{margin:6px 0 0;font-size:.92rem} .qual-g small{margin-top:auto;padding-top:8px;color:var(--suave);font-size:.82rem}
+@media (max-width:700px){.qual-g{grid-template-columns:1fr}}
+.seg{display:inline-block;font-family:Segoe UI,Arial,sans-serif;font-size:12px;background:#ECE8E1;border-radius:6px;padding:3px 8px;margin-left:8px;color:#2b2a27}.seg.off{background:none;color:#8a857a}
+.cw-bt.preto{background:#1f1e1b;color:#fff}
+.menu-ad{align-self:flex-end;background:#fff;border:1px solid #DAD6CC;border-radius:8px;padding:8px 12px;font-size:14px;box-shadow:0 8px 20px rgba(0,0,0,.12);outline:3px solid #8B083F;outline-offset:2px}
+.okv{color:#2E7D32;font-weight:700} .pers{font-size:11px;background:#ECE8E1;border-radius:5px;padding:2px 7px;color:#6b675e}
+.modal-ad{padding:20px 24px;display:flex;flex-direction:column;gap:8px;background:#FAF9F5}
+.modal-ad small{color:#8a857a;font-size:12px}
+.campos{display:grid;grid-template-columns:1fr 1.6fr;gap:8px;margin-top:10px}
+.campos span{display:flex;flex-direction:column;background:#F4F4F6;border:1px solid var(--linha);border-radius:4px;padding:8px 12px;font-family:Consolas,monospace;font-size:.92rem;word-break:break-all}
+.campos small{font-family:Poppins,sans-serif;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--suave);font-weight:600}
+@media (max-width:520px){.campos{grid-template-columns:1fr}}
+.kit-n{font-size:.82rem;color:var(--suave);margin-top:4px}
+.rot-r{font-size:13px;margin-top:6px}
+.rad{border:1px solid #DAD6CC;border-radius:8px;padding:7px 10px;font-size:13px;background:#fff;position:relative;padding-left:28px}
+.rad::before{content:"";position:absolute;left:9px;top:50%;width:11px;height:11px;margin-top:-6px;border:1.5px solid #8a857a;border-radius:50%}
+.rad.on::before{border:4px solid #1f1e1b}
+.rad em{font-style:normal;font-size:11px;background:#E3F2E5;color:#2E7D32;border-radius:5px;padding:1px 6px;margin-left:6px}
+.vinc{padding:40px 24px;display:flex;flex-direction:column;align-items:center;gap:8px;background:#FAF9F5;text-align:center}
+.vinc small{color:#8a857a;font-size:12px} .vinc p{margin:0;font-size:15px}
+.ap{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:22px;background:#fff;font-family:Segoe UI,Arial,sans-serif;font-size:14px;color:#222}
+.ap-col{grid-template-columns:1fr;gap:8px}
+.ap-logo{font-size:18px} .ap-t{font-size:20px;font-weight:700;margin:10px 0 4px} .ap small{color:#666;font-size:12px}
+.ap-card{border:1px solid #e3e3e3;border-radius:8px;overflow:hidden} .ap-h{padding:10px 12px;border-bottom:1px solid #eee;font-weight:600}
+.ap-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid #eee;border-radius:6px}
+.ap-card .ap-row{border:0;border-bottom:1px solid #eee;border-radius:0;justify-content:flex-start}
+.ap-av{width:26px;height:26px;border-radius:50%;background:#8B083F;color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700}
+.ap-row div{display:flex;flex-direction:column}
+.ap-tabs{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:#666;border-bottom:1px solid #eee;padding-bottom:6px} .ap-tabs .on{color:#111;font-weight:700}
+.tk-mask{font-family:Consolas,monospace;color:#3b5bdb;letter-spacing:1px} .ap-ic{color:#666} .ap-rev{color:#c92a2a;border:1px solid #f1b0b0;border-radius:6px;padding:4px 8px;font-size:12px}
+.trad{display:inline-block;font-family:Poppins,sans-serif;font-size:11px;font-weight:600;background:#8B083F;color:#fff;border-radius:4px;padding:1px 7px;margin-left:6px;vertical-align:middle}
+.cp-login{padding:26px 60px;display:flex;flex-direction:column;gap:9px;background:#fff}
+.dic{margin-top:14px;border:1px dashed #D6D6DB;border-radius:4px;padding:12px 14px}
+.dic b{font-family:Advercase,Georgia,serif;font-size:1.05rem}
+.dic-g{display:grid;grid-template-columns:repeat(3,1fr);gap:6px 14px;margin-top:8px}
+.dic-g span{font-size:.86rem} .dic-g i{font-style:normal;font-weight:700;color:var(--mag);margin-right:6px}
+@media (max-width:600px){.dic-g{grid-template-columns:1fr 1fr}}
+.hd{display:grid;grid-template-columns:1fr 1.5fr;gap:8px}
+/* telas novas */
+.np{padding:0 0 16px;font-size:15px}
+.np-menu{display:flex;gap:16px;padding:7px 14px;font-size:13px;color:#555;border-bottom:1px solid #E5E0D8}
+.np-txt{margin:0;padding:14px 18px;font:15px/1.6 Consolas,monospace;color:#222;background:#fff;border-bottom:1px solid #E5E0D8}
+.np-salvar{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 16px 0;align-items:end}
+.np-salvar div{display:flex;flex-direction:column;gap:4px} .np-salvar small{color:#8a857a;font-size:12px} .np-salvar .cw-bt{justify-self:start;margin:0}
+.cw-in.inst{font-size:14px;line-height:1.5;color:#3a3833}
+.arqs{display:flex;flex-wrap:wrap;gap:8px} .arqs span{background:#fff;border:1px solid #DAD6CC;border-radius:7px;padding:6px 10px;font-size:14px;font-weight:600}
+.fls{display:flex;flex-direction:column;gap:8px} .fls span{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #E3DFD5;border-radius:8px;padding:8px 12px;font-size:15px}
+.tl-zap.eu .tz-topo{background:#F0F2F5;color:#111}
+.tz-av{width:34px;height:34px;border-radius:50%;background:#8B083F;color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700}
+.tz-topo small{display:block;margin:0;font-weight:400;opacity:.7;font-size:12px}
+.tl-zap.eu .tz-fundo{background:#EFEAE2;display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.tz-b{background:#D9FDD3;border-radius:10px;border-top-right-radius:3px;padding:9px 12px 6px;font-size:15px;line-height:1.45;color:#111;max-width:92%;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.tz-b .sec{color:#8B083F} .tz-b .tz-hora{display:block;text-align:right;font-size:11px;color:#667781;margin-top:3px}
+
+.abas{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;gap:6px;overflow-x:auto;padding:10px 16px;background:rgba(30,28,29,.94);backdrop-filter:blur(8px);transform:translateY(-110%);transition:transform .25s;scrollbar-width:none}
+.abas.on{transform:none} .abas::-webkit-scrollbar{display:none}
+.abas a{flex:0 0 auto;color:#E6D3B8;text-decoration:none;font:600 14px/1 Poppins,sans-serif;padding:9px 14px;border-radius:999px;white-space:nowrap}
+.abas a.at{background:#8B083F;color:#fff}
+section[id]{scroll-margin-top:64px}
+.curta{padding:48px 0 52px}
+.comece{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:start}
+.comece ol{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:10px;font-size:1.02rem}
+.comece a{color:#8B083F;font-weight:600}
+.custos{display:flex;flex-direction:column;gap:8px;padding:20px 22px;border-radius:8px;background:#1E1C1D;color:#fff}
+.custos b{color:#E6D3B8;font-family:Advercase,Georgia,serif;font-size:1.2rem} .custos span{font-size:.95rem}
+@media (max-width:760px){.comece{grid-template-columns:1fr}}
+
+/* ---- telas recriadas ---- */
+.tl { zoom: 1.12; border-radius: 8px; overflow: hidden; box-shadow: 0 18px 40px rgba(41,41,41,.14); border: 1px solid #d9d2cc; font-family: "Segoe UI", Arial, sans-serif }
+.tl-barra { display: flex; align-items: center; gap: 7px; padding: 11px 14px; background: #ECE8E3 }
+.tl-barra i { width: 11px; height: 11px; border-radius: 50%; background: #CFC6BF }
+.tl-url { margin-left: 12px; flex: 1; background: #FBFAF8; border-radius: 8px; padding: 5px 12px; font-size: 15px; color: #6B6266 }
+.tl-nota { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--suave); margin: 10px 2px 0; text-align: right }
+.alvo { outline: 3px solid #8B083F !important; outline-offset: 3px; position: relative }
+.alvo2 { box-shadow: 0 0 0 3px #8B083F !important }
+.risco { position: relative; opacity: .6 }
+.risco::after { content: "não é este"; position: absolute; right: 10px; top: -12px; background: var(--mag); color: #fff; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 3px }
+/* uazapiGO */
+.escura .tl-corpo { background: #0B1A33; color: #E6ECF5 }
+.uz { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 11px }
+.uz-top { display: flex; justify-content: space-between; align-items: center; font-size: 22px }
+.uz-on { font-size: 14px; color: #3DDC84; background: rgba(61,220,132,.12); padding: 4px 10px; border-radius: 999px }
+.uz-campo { display: grid; grid-template-columns: 110px 1fr auto; align-items: center; gap: 10px; background: #12264A; border: 1px solid #1F3A66; border-radius: 10px; padding: 9px 12px; font-size: 15px }
+.uz-campo small { color: #8FA3C2 } .uz-campo span { font-family: Consolas, monospace; color: #fff } .uz-campo em { font-style: normal; color: #8FA3C2 }
+.uz-bts { display: flex; flex-wrap: wrap; gap: 7px }
+.ub { font-size: 13px; padding: 6px 10px; border-radius: 8px; background: #17305A; border: 1px solid #24467D; color: #CFE0FA }
+.ub.azul { background: #2563EB; border-color: #2563EB; color: #fff; font-weight: 700; margin-left: auto }
+.uz-h { font-size: 19px; font-weight: 700; margin: 4px 0 0 }
+.uz-inst { display: flex; justify-content: space-between; align-items: center; background: #12264A; border: 1px solid #1F3A66; border-radius: 12px; padding: 12px 14px; font-size: 16px }
+.uz-inst > div:first-child { display: flex; flex-direction: column; gap: 4px }
+.uz-inst small { color: #8FA3C2; font-size: 13px } .uz-inst small.liga { color: #3DDC84 }
+.uz-inst .tk { font-family: Consolas, monospace; font-size: 15px; color: #fff; background: #0B1A33; padding: 5px 9px; border-radius: 7px }
+.qr { width: 104px; height: 104px; border-radius: 6px; border: 8px solid #fff; background-color: #fff;
+  background-image: linear-gradient(90deg, transparent 50%, #fff 50%), linear-gradient(transparent 50%, #fff 50%), linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%);
+  background-size: 22px 100%, 100% 18px, 12px 12px }
+.uz-dica { font-size: 15px; color: #8FA3C2; margin: 0 } .uz-dica b { color: #fff }
+.uzs { padding: 34px 30px 40px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center }
+.uzs-logo { font-size: 40px; color: #fff } .uzs-t { margin: 0; color: #8FA3C2; font-size: 18px }
+.uzs-plano { margin-top: 20px; background: #12264A; border: 1px solid #1F3A66; border-radius: 16px; padding: 22px 46px; display: flex; flex-direction: column; gap: 6px; align-items: center }
+.uzs-plano small { color: #8FA3C2; font-size: 15px } .uzs-plano b { font-size: 38px; color: #fff } .uzs-plano span { font-size: 14px; color: #8FA3C2 }
+.uzs-plano .ub { margin: 10px 0 0; font-size: 18px; padding: 9px 30px; color: #fff }
+/* Claude / Cowork */
+.clara .tl-corpo { background: #FAF9F5; color: #2b2a27 }
+.cw { display: grid; grid-template-columns: 170px 1fr; min-height: 380px }
+.cw-lat { background: #F0EEE6; padding: 18px 14px; display: flex; flex-direction: column; gap: 8px; font-size: 15px; color: #6b675e }
+.cw-lat b { color: #2b2a27; font-size: 17px; margin-bottom: 8px } .cw-lat .on { background: #E3DFD3; color: #2b2a27; border-radius: 8px; padding: 6px 10px; margin: 0 -10px }
+.cw-main { padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; font-size: 15px }
+.cw-t { font-family: Georgia, serif; font-size: 24px; margin: 0 0 4px } .cw-main small { color: #8a857a; font-size: 13px }
+.cw-in { background: #fff; border: 1px solid #DAD6CC; border-radius: 9px; padding: 10px 12px; font-size: 16px }
+.cw-bt { align-self: flex-start; background: #C96442; color: #fff; font-weight: 600; border-radius: 9px; padding: 8px 16px; font-size: 15px; margin-top: 6px }
+.cw-bt.fraco { background: #fff; color: #2b2a27; border: 1px solid #DAD6CC; margin: 0 }
+.cw-linha { display: flex; justify-content: space-between; align-items: center } .cw-linha .cw-bt { margin: 0 }
+.cw-card { background: #fff; border: 1px solid #E3DFD5; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 3px; position: relative }
+.cw-card.fraco { opacity: .6 } .cw-card b { font-size: 16px }
+.cw-pill { position: absolute; right: 12px; top: 14px; font-size: 12px; color: #2E7D32; background: #E3F2E5; padding: 3px 9px; border-radius: 999px }
+.cw-con { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid #E3DFD5; border-radius: 12px; padding: 9px 12px }
+.cw-con b { flex: 1; font-size: 16px } .cw-con .cw-bt { margin: 0 } .cw-con .ci { width: 30px; height: 30px; display: grid; place-items: center; font-size: 24px }
+/* chat, celular, WhatsApp e pasta (novas, 08/10) */
+.ch { display: flex; flex-direction: column; gap: 10px; margin-top: 4px }
+.ch-b { display: flex; gap: 8px; align-items: flex-start; font-size: 15px; line-height: 1.45 }
+.ch-b > div { background: #fff; border: 1px solid #E3DFD5; border-radius: 12px; padding: 9px 12px; max-width: 88% }
+.ch-b.eu { justify-content: flex-end } .ch-b.eu > div { background: #EFE9DD; border-color: transparent }
+.ch-av { flex: none; width: 26px; height: 26px; border-radius: 50%; background: #fff; border: 1px solid #E3DFD5; display: grid; place-items: center }
+.mask { background: #2b2a27; color: #2b2a27; border-radius: 4px; padding: 0 4px }
+.cw-arq { align-self: flex-start; background: #fff; border: 1px solid #DAD6CC; border-radius: 9px; padding: 8px 12px; font-size: 15px; font-weight: 600 }
+.px { padding: 22px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; min-height: 220px; align-content: start }
+.px-a { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 14px; padding: 14px 6px; border-radius: 12px; background: #fff; border: 1px solid #E3DFD5 }
+.px-a span { width: 44px; height: 54px; border-radius: 6px; background: var(--mag); color: #fff; font-size: 12px; font-weight: 700; display: grid; place-items: end center; padding-bottom: 8px }
+.tl-zap { width: 420px; max-width: 100%; border-radius: 30px; overflow: hidden; border: 9px solid #232021; box-shadow: 0 18px 40px rgba(41,41,41,.14); font-family: "Segoe UI", Arial, sans-serif }
+.tz-topo { background: #075E54; color: #fff; display: flex; align-items: center; gap: 10px; padding: 12px 14px; font-size: 16px; font-weight: 600 }
+.tz-topo small { margin-left: auto; font-weight: 400; opacity: .8; font-size: 12px }
+.tz-fundo { background: #ECE5DD; padding: 16px 14px 22px; min-height: 150px }
+.tz-msg { background: #fff; border-radius: 12px; border-top-left-radius: 3px; padding: 11px 13px 8px; font-size: 16px; line-height: 1.45; color: #1f1f1f; box-shadow: 0 1px 1px rgba(0,0,0,.08) }
+.tz-msg b { color: var(--mag) } .tz-hora { display: block; text-align: right; font-size: 12px; color: #8a8a8a; margin-top: 4px }
+.tl-cel { width: 330px; max-width: 100%; border-radius: 34px; overflow: hidden; border: 9px solid #232021; box-shadow: 0 18px 40px rgba(41,41,41,.14); background: #fff; font-family: "Segoe UI", Arial, sans-serif }
+.cel-topo { background: #fff; border-bottom: 1px solid #eee; padding: 14px 16px; font-size: 17px; font-weight: 600; color: #111 }
+.cel-corpo { padding: 22px 20px 26px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; color: #333; font-size: 15px }
+.cel-corpo p { margin: 0 } .cel-ilu { font-size: 46px } .cel-corpo small { color: #777; font-size: 13px }
+.cel-bt { background: #25D366; color: #fff; font-weight: 700; border-radius: 999px; padding: 10px 22px; font-size: 15px }
+
+.escala .tl{zoom:1} .escala .cw{grid-template-columns:118px 1fr;min-height:0} .escala .cw-lat{padding:14px 10px;font-size:13px} .escala .cw-main{padding:16px} .escala .uz-campo{grid-template-columns:86px 1fr auto;font-size:14px} .escala .px{grid-template-columns:repeat(3,1fr)}
+@media (min-width:700px){.escala{width:600px} .escala .cw{grid-template-columns:160px 1fr}}
+
+.escala .tl{zoom:1} .escala .cw{grid-template-columns:118px 1fr;min-height:0} .escala .cw-lat{padding:14px 10px;font-size:13px} .escala .cw-main{padding:16px} .escala .uz-campo{grid-template-columns:86px 1fr auto;font-size:14px} .escala .px{grid-template-columns:repeat(3,1fr)}
+@media (min-width:700px){.escala{width:600px} .escala .cw{grid-template-columns:160px 1fr}}
+
+/* === biblioteca das alunas: capa sem foto, feita para elas === */
+.hero{position:relative;overflow:hidden;min-height:0;display:block;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(160deg,#1E1C1D 0%,#2A1A22 58%,#3A1424 100%);
+  color:#F4F0EA;border-bottom:4px solid var(--mag)}
+.hero-foto{display:none}
+.hero-in{width:100%;padding-top:54px;padding-bottom:46px}
+.hero-in>*{max-width:none}
+.hero .eb{color:#E9A9C2}
+.hero h1{color:#fff}
+.hero h1 mark{background:var(--mag);color:#fff}
+.hero .lead{color:#D9C9CF;max-width:40em}
+.hero-selos{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.hero-selos span{font:600 12.5px Poppins,sans-serif;border:1px solid rgba(244,240,234,.28);color:#E6D3B8;border-radius:999px;padding:7px 14px}
+.hero-selos span.viva{background:var(--mag);border-color:var(--mag);color:#fff}
+@media (max-width:700px){.hero{display:block}.hero-in{padding-top:40px;padding-bottom:36px}}
+
+/* navegação por área, logo abaixo da capa */
+.areas-topo{background:#171516;padding:26px 0 30px}
+.areas-topo .areas-eb{font:600 12px Poppins,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#E9A9C2;margin:0 0 4px}
+.areas-topo h2{font-family:Advercase,Georgia,serif;font-weight:400;color:#fff;font-size:clamp(26px,4.4vw,38px);margin:0 0 18px;line-height:1.05}
+.indice{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:10px}
+.indice a{min-height:0;padding:15px 15px 17px}
+.indice b{font-size:1.18rem}
+@media (max-width:760px){.indice{grid-template-columns:1fr 1fr}.indice a:last-child{grid-column:auto}}
+@media (max-width:420px){.indice{grid-template-columns:1fr}}
+/* a barra de áreas fica visível desde o começo */
+.abas{transform:none}
+
+
+/* === no computador, cada parte flui em duas colunas, para não virar um bloco só === */
+@media (min-width:1040px){
+  .faixa .passos-cols{columns:auto}
+  .faixa .passos-cols > *{margin:0 0 20px;display:block;width:100%}
+  /* o que é largo demais ocupa a largura inteira, fora das colunas */
+  .faixa .largo{columns:1;margin-bottom:20px}
+  .wrap{max-width:1180px}
+  .abre{max-width:none}
+  .abre-sub{max-width:52em}
+}
+@media (min-width:1040px) and (max-width:1300px){.faixa .passos-cols{column-gap:16px}}
+/* texto não fica com linha longa demais no computador */
+.p-txt{max-width:62em}
+.abre-tx{max-width:62em}
+
+
+/* === no computador, a tela fica ao lado do texto que a explica === */
+@media (min-width:1040px){
+  .faixa .passos-cols > .amplo{overflow:hidden}
+  .amplo .dupla{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:0 28px;align-items:start;margin:0 0 22px}
+  .amplo .dupla > .palco{grid-column:2;grid-row:1 / span 60;margin:0;align-self:start}
+  .amplo .dupla > :not(.palco){grid-column:1}
+  .amplo .dupla > :not(.palco):first-child{margin-top:0}
+}
+
+/* === tabela de comandos: codigo, o que faz, precisa ligar, para que serve === */
+.tab{width:100%;border-collapse:collapse;margin:12px 0 4px;font-size:.93rem}
+.tab th{text-align:left;font:600 .64rem/1.3 Poppins,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--suave);padding:0 14px 9px 0;border-bottom:1px solid var(--linha)}
+.tab td{padding:13px 14px 13px 0;border-bottom:1px solid var(--linha);vertical-align:top;line-height:1.5}
+.tab tr:last-child td{border-bottom:0}
+.tab code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.84rem;background:#F1EFEA;border:1px solid var(--linha);border-radius:4px;padding:3px 8px;display:inline-block;white-space:nowrap}
+.escura .tab code{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:#F4F0EA}
+.lig{display:inline-block;font:600 .74rem/1.4 Poppins,sans-serif;border-radius:999px;padding:4px 10px;white-space:nowrap}
+.lig.nao{background:#E8F1EB;color:#226344}
+.lig.sim{background:#FCEADF;color:#8B083F}
+.escura .lig.nao{background:rgba(120,200,160,.16);color:#A9E0C4}
+.escura .lig.sim{background:rgba(226,48,122,.2);color:#F3A9C8}
+.tab-t{font-family:Advercase,Georgia,serif;font-size:1.12rem;margin:26px 0 0}
+.tab-s{font-size:.9rem;color:var(--suave);margin:3px 0 0}
+@media (max-width:860px){
+  .tab,.tab tbody,.tab tr,.tab td{display:block;width:100%}
+  .tab thead{display:none}
+  .tab tr{border-bottom:1px solid var(--linha);padding:14px 0}
+  .tab tr:last-child{border-bottom:0}
+  .tab td{border:0;padding:4px 0}
+  .tab td::before{content:attr(data-r);display:block;font:600 .6rem/1 Poppins,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--suave);margin-bottom:4px}
+  .tab td:first-child::before{display:none}
+}
+
+/* === listas de titulo + explicacao: cada uma na sua linha, nao coladas === */
+.erros > div{display:grid;gap:5px;padding:13px 0;border-bottom:1px dashed var(--linha)}
+.erros > div:first-of-type{padding-top:2px}
+.erros > div:last-child{border-bottom:0;padding-bottom:2px}
+.erros > div > b{font-size:1rem;line-height:1.3}
+.erros > div > span{display:block;color:var(--suave);line-height:1.55;font-size:.95rem}
+.escura .erros > div > span{color:#6B6266}
+
+.cpx{font:600 .72rem/1 Poppins,sans-serif;letter-spacing:.06em;text-transform:uppercase;background:var(--mag);color:#fff;border:0;border-radius:999px;padding:6px 12px;cursor:pointer;margin-left:6px;vertical-align:middle}
+.cpx:hover{background:#A50B4C}
+.cpx.ok{background:#226344}
+.tab td a{color:var(--mag);text-decoration:none}
+.tab td a:hover{text-decoration:underline}
+
+/* === o caminho das 12 partes === */
+.caminho{display:grid;gap:0}
+.cam-eb{font:600 .68rem/1 Poppins,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--mag);margin:0 0 6px}
+.cam-tx{margin:0 0 14px;font-size:1rem;max-width:56em}
+.cam{display:grid;grid-template-columns:46px 1fr auto;gap:16px;align-items:center;padding:14px 10px 14px 0;border-top:1px solid var(--linha);text-decoration:none;color:inherit;transition:background .15s}
+.cam:last-child{border-bottom:1px solid var(--linha)}
+.cam:hover{background:rgba(139,8,63,.05)}
+.cam-n{width:38px;height:38px;border-radius:4px;background:var(--mag);color:#fff;display:grid;place-items:center;font-family:Advercase,Georgia,serif;font-size:1.05rem;padding-top:2px}
+.cam-c{min-width:0;display:block}
+.cam-c b{display:block;font-size:1.04rem;line-height:1.25}
+.cam-c small{display:block;color:var(--suave);font-size:.9rem;line-height:1.45;margin-top:3px}
+.cam-q{font:600 .68rem/1 Poppins,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--suave);white-space:nowrap;border:1px solid var(--linha);border-radius:999px;padding:7px 11px}
+@media (max-width:720px){.cam{grid-template-columns:38px 1fr;gap:12px}.cam-q{grid-column:2;justify-self:start;margin-top:4px}}
+
+/* o caminho ocupa a largura toda; o resumo vira faixa embaixo */
+.comece{display:block}
+.comece .custos{margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px 24px}
+.comece .custos b{grid-column:1/-1}
+
+/* uma tela so: o texto contorna a tela, sem deixar buraco na esquerda */
+@media (min-width:1040px){
+  .solo .dupla{display:block}
+  .solo .dupla > .palco{float:right;width:44%;margin:0 0 16px 28px}
+  .solo .dupla > :not(.palco){overflow:hidden}
+  .solo .dupla::after{content:"";display:block;clear:both}
+}
+
+/* aula 2 */
+.sec-ind .cam-q{min-width:76px;text-align:center}
+.passo p,.passo li,.nota p,.erros p{overflow-wrap:break-word}
+.passo code,.nota code,.erros code,.m-leva code,.av code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.86em;background:#F1EFEA;border:1px solid var(--linha);border-radius:4px;padding:1px 6px;overflow-wrap:anywhere}
+.tab code{white-space:normal;overflow-wrap:anywhere}
+.ul{margin:12px 0 0;padding-left:22px;display:grid;gap:6px}
+.ul li{font-size:.98rem}
+.url{margin:14px 0 0;padding:12px 14px;background:#F1EFEA;border:1px solid var(--linha);border-radius:4px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.86rem;overflow-wrap:anywhere}
+.sub{font-family:Advercase,Georgia,serif;font-weight:700;font-size:1.3rem;line-height:1.1;margin:0 0 4px}
+.nota{background:var(--papel);color:var(--graf);border:1px solid var(--linha);border-radius:6px;padding:22px 22px 18px;margin-bottom:16px;box-shadow:0 1px 2px rgba(41,41,41,.08),0 10px 28px rgba(41,41,41,.08)}
+.nota p{margin:10px 0 0}
+.m-leva{margin:0 0 20px;color:var(--graf);background:#fff}
+.dl-tile{font:700 .8rem Poppins,sans-serif;color:var(--mag)}
+.dl-bt{white-space:nowrap}
+.volta{display:inline-block;margin-top:14px;color:#fff;font-weight:600;text-decoration:underline;text-underline-offset:4px}
+.erros h3{font-family:Advercase,Georgia,serif;font-weight:700;font-size:1.45rem;line-height:1.1;margin:0 0 10px}
+.erros p{margin:8px 0 0}
+.erros .pr{margin-bottom:6px}
+@media (max-width:520px){.dl{flex-wrap:wrap}.dl-bt{margin-left:68px}}
+
+/* barra das aulas: o mesmo endereço, navegando de aula em aula */
+.aulasbar{background:#160E11;display:flex;gap:7px;align-items:center;justify-content:center;flex-wrap:wrap;padding:11px 16px;position:relative;z-index:60}
+.aulasbar span{color:#A9989E;font:600 11px/1 Poppins,sans-serif;letter-spacing:.14em;text-transform:uppercase;margin-right:5px}
+.aulasbar a{color:#E6D3B8;text-decoration:none;font:600 14px/1 Poppins,sans-serif;padding:9px 14px;border-radius:999px;white-space:nowrap}
+.aulasbar a:hover{background:#2A1F23}
+.aulasbar a.at{background:#8B083F;color:#fff}
+@media (max-width:560px){.aulasbar span{width:100%;text-align:center;margin:0 0 2px}}
+
+/* as gravacoes, no topo: o lugar unico de assistir as aulas */
+.gravs{background:#160E11;padding:0 16px 22px;position:relative;z-index:59}
+.gravs-in{max-width:1060px;margin:0 auto}
+.gravs h2{color:#F4F2EE;font:700 17px/1.3 Poppins,sans-serif;margin:0 0 3px}
+.gravs .gravs-sub{color:#A9989E;font:400 13px/1.5 Poppins,sans-serif;margin:0 0 13px}
+.gravs-lista{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:10px}
+.grav{display:flex;align-items:center;gap:12px;background:#241A1E;border:1px solid #3A2C31;border-radius:12px;padding:13px 15px;text-decoration:none;transition:border-color .15s,background .15s}
+.grav:hover{background:#2E2227;border-color:#8B083F}
+.grav .play{flex:none;width:34px;height:34px;border-radius:50%;background:#8B083F;display:flex;align-items:center;justify-content:center}
+.grav .play::after{content:"";border-left:10px solid #fff;border-top:6px solid transparent;border-bottom:6px solid transparent;margin-left:3px}
+.grav b{display:block;color:#F4F2EE;font:700 14px/1.3 Poppins,sans-serif}
+.grav span{display:block;color:#A9989E;font:400 12px/1.4 Poppins,sans-serif;margin-top:2px}
+.grav em{display:block;color:#E2307A;font:600 11px/1 Poppins,sans-serif;font-style:normal;letter-spacing:.08em;text-transform:uppercase;margin-top:5px}
+</style>
+</head>
+<body>
+<nav class="aulasbar" aria-label="As aulas da turma"><span>Turma Fundadora</span><a href="index.html">Biblioteca</a><a href="aula-2.html">Aula 2 · 27/10</a><a href="aula-3.html" class="at">Aula 3 · 03/11</a></nav>
+<section class="gravs" aria-label="As grava&ccedil;&otilde;es das aulas"><div class="gravs-in"><h2>Assistir as aulas</h2><p class="gravs-sub">Clique e aperte o play. Toda semana a aula nova entra aqui.</p><div class="gravs-lista"><a class="grav" href="https://drive.google.com/file/d/14Lwcrl2SkdRhtxSAfWR-Zc-jMvPlNYaD/view" target="_blank" rel="noopener"><span class="play"></span><span><b>Aula 1</b><span>Onde o poder j&aacute; est&aacute; pronto</span><em>20/10</em></span></a><a class="grav" href="https://drive.google.com/file/d/1sp7ni3JXGzjf8beJ75JgNw-19tMJIR_m/view" target="_blank" rel="noopener"><span class="play"></span><span><b>Aula 2</b><span>O seu funcion&aacute;rio ganha cara, olhos e m&atilde;os</span><em>27/10</em></span></a></div></div></section>
+
+
+<header class="hero"><div class="wrap hero-in"><p class="eb">Aula 3</p><h1>Modo <mark>Automático</mark></h1><p class="lead"><b>O seu funcionário entra nas suas redes.</b> Hoje o Claude passa a enxergar o seu Instagram, entende o seu gosto, monta o seu mês de conteúdo e entrega os primeiros posts prontos, com a sua cara.</p><p class="lead" style="margin-top:12px"><b>O que você sai tendo:</b> as contas ligadas, o painel mostrando o seu perfil de verdade, o seu design em pé, o calendário do mês inteiro na tela para aprovar, os primeiros posts com arte, duas varreduras rodando sozinhas duas vezes por semana e a sua página de bio no ar.</p><div class="hero-selos"><span class="viva">Turma Fundadora</span><span>10 blocos</span><span>200 min</span></div></div></header>
+<section class="faixa curta clara"><div class="wrap"><p class="cam-eb">Índice da aula</p><p class="cam-tx">Clique no bloco para ir direto a ele.</p><nav class="caminho sec-ind" aria-label="Blocos da aula"><a class="cam" href="#ligacoes"><span class="cam-n">1</span><span class="cam-c"><b>As ligações</b><small>O Claude com acesso ao que ele precisa para trabalhar as suas redes.</small></span><span class="cam-q">25 min</span></a><a class="cam" href="#painel"><span class="cam-n">2</span><span class="cam-c"><b>O painel acende</b><small>As telas "Minhas redes" e "Meu Instagram" com o seu perfil de verdade.</small></span><span class="cam-q">20 min</span></a><a class="cam" href="#gosto"><span class="cam-n">3</span><span class="cam-c"><b>O seu gosto e o seu nicho</b><small>O Claude sabendo do que você gosta e o que ele deve ficar vigiando.</small></span><span class="cam-q">20 min</span></a><a class="cam" href="#design"><span class="cam-n">4</span><span class="cam-c"><b>O seu design em quinze minutos</b><small>O seu padrão visual em pé e o primeiro card pronto.</small></span><span class="cam-q">25 min</span></a><a class="cam" href="#calendario"><span class="cam-n">5</span><span class="cam-c"><b>O calendário do mês</b><small>O mês inteiro na tela, dia a dia, para aprovar.</small></span><span class="cam-q">30 min</span></a><a class="cam" href="#posts"><span class="cam-n">6</span><span class="cam-c"><b>Os primeiros posts prontos</b><small>Conteúdo com legenda e arte, esperando o seu sim.</small></span><span class="cam-q">20 min</span></a><a class="cam" href="#varreduras"><span class="cam-n">7</span><span class="cam-c"><b>As duas varreduras que rodam sozinhas</b><small>Ideias chegando sem você pedir, duas vezes por semana cada uma.</small></span><span class="cam-q">15 min</span></a><a class="cam" href="#bio"><span class="cam-n">8</span><span class="cam-c"><b>A sua página de bio</b><small>Uma página sua, no ar, para pôr no link do perfil.</small></span><span class="cam-q">25 min</span></a><a class="cam" href="#contatos"><span class="cam-n">9</span><span class="cam-c"><b>Quem comentou vira contato</b><small>As pessoas que demonstraram interesse de verdade, na sua tela de leads, com a mensagem pronta.</small></span><span class="cam-q">10 min</span></a><a class="cam" href="#imagens"><span class="cam-n">10</span><span class="cam-c"><b>As imagens que você não tem</b><small>Imagem feita sob medida para a sua página e para os seus posts.</small></span><span class="cam-q">10 min</span></a></nav></div></section>
+<section id="ligacoes" class="faixa clara"><div class="wrap"><div class="abre"><div><p class="abre-eb"><span class="abre-n">01</span><span>25 min</span></p><h2>As ligações</h2></div></div><p class="m-leva"><span><b>O que entrega:</b> o Claude com acesso ao que ele precisa para trabalhar as suas redes.</span></p><div class="nota"><p style="margin-top:0">São três ligações e uma atualização, nesta ordem.</p></div><article class="passo"><div class="p-cab"><span class="p-n">1</span><h3>O Metricool</h3></div><p class="p-txt">É ele que traz os números do seu perfil e é por ele que o post é agendado. O clique a clique está na Parte 7 da biblioteca. Plano sem custo serve, com 20 agendamentos por mês.</p><p>Depois de ligar, cole na aba Code:</p><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Cole no Claude</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>Confira se o Metricool está ligado aqui no Claude e me diga, em uma frase, quais redes ele enxerga na minha conta. Não publique nada e não mude nada.</pre></div></article><article class="passo"><div class="p-cab"><span class="p-n">2</span><h3>O Apify</h3></div><p class="p-txt">É o leitor do que é público. Com ele o Claude lê posts, carrosséis, fotos, Reels, comentários e hashtags do Instagram e do TikTok, sem usar a sua conta e sem fazer login em lugar nenhum.</p><p>Crie a conta em apify.com, sem cartão, e ligue o conector como está na Parte 7.</p><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Cole no Claude</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>Confira se o Apify está ligado aqui no Claude. Procure o ator apify/instagram-post-scraper e me diga em uma frase o que ele faz. Não rode nada ainda.</pre></div></article><article class="passo"><div class="p-cab"><span class="p-n">3</span><h3>O plugin de design</h3></div><p class="p-txt">Na aba Code, digite:</p><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Digite na aba Code</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>/plugin install frontend-design@claude-plugins-official</pre></div><p>Ele é quem faz a sua página da bio não ter cara de modelo pronto. Se o marketplace não aparecer, rode antes <code>/plugin marketplace add anthropics/claude-plugins-official</code>.</p></article><article class="passo"><div class="p-cab"><span class="p-n">4</span><h3>As skills novas do seu funcionário</h3></div><p class="p-txt">Os dois plugins que você já instalou ganharam skills hoje. Atualize:</p><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Digite na aba Code</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>/plugin update funcionario-presenca</pre></div><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Digite na aba Code</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>/plugin update funcionario-conteudo</pre></div><p>Chegaram quatro: <code>calendario-do-mes</code>, <code>radar-referencias</code>, <code>radar-trends</code> e <code>oportunidades-de-contato</code>.</p></article><div class="nota"><h3 class="sub">Por que conector, e não pedir ao Claude para abrir o Instagram no navegador</h3><p>Esta é a pergunta que todo mundo faz, e a resposta tem quatro partes.</p><p><b>O conector devolve número, o navegador devolve desenho.</b> Pelo conector, o Claude recebe os dados organizados e grava direto no arquivo que vira a sua tela. Pelo navegador, ele precisa ler a página como quem lê uma revista: erra número, não vê o que está dentro de menu e quebra toda vez que o Instagram muda o layout.</p><p><b>Rotina só existe com conector.</b> A varredura de duas vezes por semana roda sozinha, de madrugada, sem ninguém. Pelo navegador, ela só roda com o computador ligado, o navegador aberto, você logada e ninguém mexendo. Uma janela fechada derruba tudo.</p><p><b>O risco é a sua conta.</b> O Instagram trata navegação automática como comportamento suspeito, e quem paga é a conta de quem fez. O Apify lê o que é público, de fora, sem a sua conta. O Metricool é parceiro oficial da Meta.</p><p><b>E o navegador tem o lugar dele:</b> coisa pontual e visual, uma vez só. Ver como o feed ficou, olhar um post específico, mexer em algo que não tem conector. Serve para a mão, não para a rotina.</p></div></div></section><section id="painel" class="faixa escura"><div class="wrap"><div class="abre"><div><p class="abre-eb"><span class="abre-n">02</span><span>20 min</span></p><h2>O painel acende</h2></div></div><p class="m-leva"><span><b>O que entrega:</b> as telas "Minhas redes" e "Meu Instagram" com o seu perfil de verdade.</span></p><div class="nota"><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Cole no Claude</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>Use a skill ler-instagram. Leia o meu perfil do Instagram pelo Metricool e preencha os arquivos dados/instagram.js e dados/redes.js da pasta meu-funcionario. Quero ver o perfil, a grade dos meus posts com curtidas, comentários e alcance, a evolução de seguidores e os posts que estão agendados. Se algum dado não vier, deixe em branco e me diga qual faltou, sem inventar nada.</pre></div><p>Aperte F5 no painel.</p><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Cole no Claude</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>Use a skill diagnostico. Com o que está em dados/instagram.js, escreva o diagnóstico do meu perfil: uma frase que resume como ele está, o que está bom, o que está atrapalhando e no máximo 3 coisas para eu fazer agora. Em português simples, sem termo técnico. Salve no campo diagnostico com a data de hoje.</pre></div></div><article class="erros"><h3>O que costuma dar errado</h3><p><b>Conta pessoal não devolve número nenhum, precisa ser profissional.</b></p><p>Ligar o Metricool no Claude não liga o seu Instagram dentro do Metricool: são duas ligações.</p></article><div class="nota"><h3 class="sub">O direct</h3><p>Mensagem de direct não entra no painel hoje, e é melhor saber por quê. Pelo caminho oficial da Meta, cada uma teria que criar conta de desenvolvedor, criar um aplicativo e renovar uma chave a cada 60 dias. O Metricool tem caixa de entrada no site dele, mas não entrega as mensagens para fora.</p><p>O que entra no lugar, e resolve a mesma dor, é o Bloco 9: quem comentou nos seus posts vira contato com a mensagem pronta para você mandar.</p></div></div></section><section id="gosto" class="faixa clara"><div class="wrap"><div class="abre"><div><p class="abre-eb"><span class="abre-n">03</span><span>20 min</span></p><h2>O seu gosto e o seu nicho</h2></div></div><p class="m-leva"><span><b>O que entrega:</b> o Claude sabendo do que você gosta e o que ele deve ficar vigiando.</span></p><div class="nota"><p style="margin-top:0">Escolha de dois a três perfis que você admira, de conteúdo ou de visual. Não precisa ser concorrente.</p><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Cole no Claude</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>Vou te dar as minhas referências. Para cada uma eu digo o @ e o que me agrada nela. Guarde isso em dados/marca.js, no campo referencias, com as minhas palavras, e me devolva em uma frase o que elas têm em comum, porque isso é o meu gosto.
+
+1. @ ___ , eu gosto porque ___
+2. @ ___ , eu gosto porque ___
+3. @ ___ , eu gosto porque ___</pre></div><p>Depois, as palavras do seu nicho. De três a quatro, as que alguém digitaria para encontrar o que você faz.</p><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Cole no Claude</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>Estas são as palavras do meu nicho: ___, ___, ___. Guarde em dados/negocio.js, no campo palavrasDoNicho. São elas que o radar vai vigiar duas vezes por semana.</pre></div></div><div class="nota"><p style="margin-top:0"><b>Para quem ainda não vende nada:</b> vale igual. As referências são de quem você quer parecer, e as palavras são do assunto que você domina.</p></div></div></section><section id="design" class="faixa escura"><div class="wrap"><div class="abre"><div><p class="abre-eb"><span class="abre-n">04</span><span>25 min</span></p><h2>O seu design em quinze minutos</h2></div></div><p class="m-leva"><span><b>O que entrega:</b> o seu padrão visual em pé e o primeiro card pronto.</span></p><div class="nota"><p style="margin-top:0">Design system é só isto: suas cores, suas fontes, o estilo das suas fotos e o que você não quer ver. Escrito uma vez, usado sempre.</p><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Cole no Claude</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>Vamos montar o meu design. Me pergunte uma coisa por vez e espere a minha resposta: as minhas cores, as minhas fontes, o estilo das minhas fotos e o que eu não quero ver nas minhas artes nunca. Grave em dados/marca.js. Se eu não souber alguma, me dê duas opções e deixe eu escolher.</pre></div></div><div class="nota"><p style="margin-top:0">Agora o primeiro card. Existem dois moldes, e eles servem para coisas diferentes: o <b>carrossel</b>, quando o conteúdo é o texto, e o <b>nativo</b>, quando a foto é o conteúdo, com a foto ocupando o card inteiro e o texto branco de contorno preto por cima, como o Instagram escreve.</p><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Cole no Claude</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>Use a skill arte-na-minha-marca. Personalize os dois moldes com as minhas cores e fontes e me mostre um card de exemplo de cada um, para eu dizer se está com a minha cara.</pre></div></div><div class="nota"><p style="margin-top:0"><b>A regra:</b> o texto tem que caber e o contraste tem que existir. Se a foto é clara, o texto escuro. Se está difícil de ler na primeira olhada, está errado.</p></div></div></section><section id="calendario" class="faixa clara"><div class="wrap"><div class="abre"><div><p class="abre-eb"><span class="abre-n">05</span><span>30 min</span></p><h2>O calendário do mês</h2></div></div><p class="m-leva"><span><b>O que entrega:</b> o mês inteiro na tela, dia a dia, para aprovar.</span></p><div class="nota"><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Cole no Claude</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>Use a skill calendario-do-mes. Monte o meu calendário do mês inteiro, com feed, Reels e stories, pensando em crescer e vender. Antes de escrever os posts, me mostre a lógica de cada semana para eu aprovar.</pre></div><p>Ele vai perguntar quantos dias por semana você consegue postar de verdade. Responda a verdade, não o que você gostaria. Calendário que não cabe na sua semana vira culpa, não conteúdo.</p></div><div class="nota"><p style="margin-top:0"><b>A regra da casa:</b> todo post chega com o motivo de existir escrito. Se não tiver o motivo, ele não entra na grade.</p><p>Aperte F5 e veja o mês na tela "Conteúdos para aprovar".</p></div></div></section><section id="posts" class="faixa escura"><div class="wrap"><div class="abre"><div><p class="abre-eb"><span class="abre-n">06</span><span>20 min</span></p><h2>Os primeiros posts prontos</h2></div></div><p class="m-leva"><span><b>O que entrega:</b> conteúdo com legenda e arte, esperando o seu sim.</span></p><div class="nota"><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Cole no Claude</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>Use a skill conteudo-da-semana. Escreva os conteúdos desta semana a partir do calendário, no meu tom, e ponha para eu aprovar.</pre></div><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Cole no Claude</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>Use a skill arte-na-minha-marca. Gere a arte dos conteúdos que eu aprovei, escolhendo o molde nativo quando a foto for o conteúdo e o molde de carrossel quando o texto for.</pre></div></div><div class="nota"><p style="margin-top:0">Aprovou e quer no ar?</p><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Cole no Claude</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>Use a skill agendar. Agende no Metricool só o que eu aprovei, nos melhores horários do meu perfil, e me mostre a lista antes de confirmar.</pre></div></div></div></section><section id="varreduras" class="faixa clara"><div class="wrap"><div class="abre"><div><p class="abre-eb"><span class="abre-n">07</span><span>15 min</span></p><h2>As duas varreduras que rodam sozinhas</h2></div></div><p class="m-leva"><span><b>O que entrega:</b> ideias chegando sem você pedir, duas vezes por semana cada uma.</span></p><div class="nota"><p style="margin-top:0">A primeira olha os seus perfis de referência e acha os posts que fugiram da média daquele perfil, o que inclui carrossel e foto, não só vídeo. A segunda procura pelas suas palavras do nicho o que está crescendo no Instagram e no TikTok. As duas chegam com a adaptação para a sua marca já escrita.</p><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Cole no Claude</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>Use a skill radar-referencias e rode uma vez agora, para eu ver o que vem. Use no máximo 20 posts por perfil e no máximo 5 perfis.</pre></div><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Cole no Claude</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>Use a skill radar-trends e rode uma vez agora, com as minhas palavras do nicho. Deixe desligado tudo que for transcrição de vídeo, download e comentário dentro do ator do TikTok.</pre></div></div><div class="nota"><p style="margin-top:0">Gostou do que veio? Programe:</p><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Cole no Claude</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>Transforme o radar-referencias numa tarefa programada para terça e sexta às 7h, e o radar-trends para segunda e quinta às 7h. Nos dois, grave o resultado e me mande um resumo de cinco linhas.</pre></div></div><div class="nota"><h3 class="sub">O crédito do Apify, e como não queimar</h3><p>O plano sem custo dá cinco dólares de uso por mês. Isso rende, por exemplo, cinco perfis com vinte posts cada toda semana, mais uma hashtag e uns duzentos comentários. Dá folga, se você respeitar duas coisas.</p><p><b>Sempre dê um limite.</b> "No máximo 20 posts por perfil" precisa estar no pedido. Sem limite, o Claude pode pedir quinhentos posts e acabar com o mês numa rodada.</p><p><b>Deixe os extras desligados.</b> Transcrição de vídeo custa quase vinte vezes o preço de um post. Download de vídeo e "detalhes da conta" também pesam. Nada disso é necessário para achar ideia boa.</p><p><b>Qual ator pedir para cada coisa:</b> <code>apify/instagram-post-scraper</code> para os posts de um perfil, com carrossel e foto. <code>apify/instagram-scraper</code> para hashtag, busca e comentários. <code>clockworks/tiktok-scraper</code> para perfil, hashtag e busca no TikTok. <code>apidojo/instagram-comments-scraper</code> para comentários, que é o mais barato de todos.</p><p>Você não precisa instalar ator nenhum. Basta dizer o nome dele no pedido.</p></div></div></section><section id="bio" class="faixa escura"><div class="wrap"><div class="abre"><div><p class="abre-eb"><span class="abre-n">08</span><span>25 min</span></p><h2>A sua página de bio</h2></div></div><p class="m-leva"><span><b>O que entrega:</b> uma página sua, no ar, para pôr no link do perfil.</span></p><div class="nota"><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Cole no Claude</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>Use o plugin frontend-design. Crie a minha página de bio, num arquivo index.html dentro de uma pasta nova chamada bio. Ela precisa ter: um botão grande de WhatsApp com o meu número, uma história curta da minha marca dizendo o que eu resolvo e para quem, a resposta das três objeções que mais me aparecem antes de alguém comprar, e os meus links.
+
+Use as minhas cores e fontes de dados/marca.js. Antes de começar, me pergunte o que você precisar saber, uma coisa por vez. Eu quero ver a página antes de qualquer coisa ir para a internet.</pre></div><p>Tem referência de visual que você gosta, do Pinterest ou de outro site? Mande o endereço ou o print junto, que ele usa como inspiração.</p><p>Para pôr no ar, o caminho é o mesmo da parte de site da biblioteca.</p></div></div></section><section id="contatos" class="faixa clara"><div class="wrap"><div class="abre"><div><p class="abre-eb"><span class="abre-n">09</span><span>10 min</span></p><h2>Quem comentou vira contato</h2></div></div><p class="m-leva"><span><b>O que entrega:</b> as pessoas que demonstraram interesse de verdade, na sua tela de leads, com a mensagem pronta.</span></p><div class="nota"><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Cole no Claude</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>Use a skill oportunidades-de-contato. Leia os comentários dos meus últimos 5 posts, separe quem comentou com interesse real de quem só elogiou, e crie uma ficha para cada oportunidade na tela dos meus leads, com uma mensagem de direct pronta citando o que a pessoa comentou.</pre></div><p>Aperte F5 e abra "Meus leads". Leia cada mensagem antes de mandar: ela é um rascunho para você ajustar, não um robô falando no seu lugar. Quem manda é você, sempre.</p></div><div class="nota"><p style="margin-top:0">Quer todo dia?</p><div class="pr"><div class="pr-top"><div><b>Prompt para copiar</b><span>Cole no Claude</span></div><button class="cp" type="button">Copiar prompt</button></div><pre>Transforme isso numa tarefa programada para todo dia de manhã, às 8h.</pre></div></div></div></section><section id="imagens" class="faixa escura"><div class="wrap"><div class="abre"><div><p class="abre-eb"><span class="abre-n">10</span><span>10 min</span></p><h2>As imagens que você não tem</h2></div></div><p class="m-leva"><span><b>O que entrega:</b> imagem feita sob medida para a sua página e para os seus posts.</span></p><div class="nota"><p style="margin-top:0">Nem sempre existe a foto certa. Quando não existe, ela se cria.</p><p>O Higgsfield gera imagem e vídeo a partir de uma descrição. Serve para o fundo da sua página de bio, para a cena que ilustra um post e para o que você precisaria contratar um fotógrafo para ter.</p><p>A regra é a mesma de sempre: a imagem precisa ter a ver com o que está escrito, e precisa parecer da sua marca. Imagem bonita que não conversa com o texto empobrece o post.</p></div></div></section><section id="desafio" class="faixa clara"><div class="wrap"><div class="abre"><div><p class="abre-eb"><span>Até sexta, no grupo</span></p><h2>O desafio da semana</h2></div></div><div class="nota"><ol class="mini"><li>O print do seu painel na tela "Meu Instagram", com o seu perfil de verdade dentro.</li><li>O print do seu calendário do mês na tela "Conteúdos para aprovar".</li><li>O link da sua página de bio, ou o print do primeiro card que o Claude fez com a sua cara.</li></ol></div></div></section>
+<footer class="faixa escura curta"><div class="wrap"><span class="ass">Dani</span><p>Dani Lemos · @daanylemos<br>Material das alunas da Turma Fundadora · Modo Automático</p><a class="volta" href="index.html">voltar para a biblioteca</a></div></footer>
+<script>
+document.querySelectorAll('.cp').forEach(function(b){b.addEventListener('click',function(){
+  var pre=b.closest('.pr').querySelector('pre');
+  var ok=function(){b.textContent='Copiado ✓';setTimeout(function(){b.textContent='Copiar prompt'},1600)};
+  var sel=function(){var r=document.createRange();r.selectNodeContents(pre);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selecionado, use Ctrl+C'};
+  try{navigator.clipboard.writeText(pre.innerText).then(ok,sel)}catch(e){sel()}
+})});
+</script>
+</body></html>
