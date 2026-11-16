@@ -31,6 +31,7 @@ que tem gerador de outra pessoa.
 |---|---|---|
 | `/` | DL Estúdio, a porta da frente | público |
 | `/turma-fundadora/` | Biblioteca da Turma Fundadora, 12 partes | alunas do Modo Automático, R$ 552 |
+| `/acompanhamento/` | Área de membros do acompanhamento individual de 4 semanas. Uma página só, com e-mail e senha: cada aluna entra e vê a área dela. O conteúdo NÃO fica aqui, fica no Supabase (`dlestudio.acomp_alunas.conteudo`), e a página lê pela função `public.dlestudio_acomp_area()`. Mudar o conteúdo de uma aluna é um UPDATE no banco, sem publicar nada. | alunas do acompanhamento individual |
 | `/materiais/` | Materiais da Imersão Modo Automático | quem fez a imersão |
 | `/biblioteca/` | A biblioteca, uma porta por material, com gerador `montar.py` | público |
 | `/imersao/` | Claude do Zero, para iniciantes | público |
